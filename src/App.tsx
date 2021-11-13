@@ -7,14 +7,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello Vite + React!</p>
+        <p>Hello Vite + React11!</p>
         <p>
           <button type="button" className={styles.button} onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
+            count is1: {count}
           </button>
         </p>
         <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
+          Edit <code>App.tsx1111</code> and save to test HMR updates.
         </p>
       </header>
     </div>
