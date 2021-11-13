@@ -28,7 +28,7 @@
     }
   },
   "scripts": {
-    "dev": "concurrently -k \"npm run dev:react\" \"tsc -w ./electron/main.ts\"",
+    "dev": "concurrently -k \"npm run dev:react\" \"tsc -w ./electron/main.ts ./electron/scripts/preload.ts\"",
     "dev:electron": "cross-env NODE_ENV=development nodemon --exec \"electron ./electron/main.js\"",
     "dev:react": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js",
     "build:react": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",

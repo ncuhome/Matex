@@ -3,20 +3,24 @@ exports.__esModule = true;
 var electron_1 = require("electron");
 var path = require("path");
 var mainWindow;
+require('electron-reload');
 var isDev = process.env.NODE_ENV === 'development';
+console.log('运行平台', process.cwd());
+console.log('根路径', __dirname);
 if (isDev) {
     require('electron-debug')();
 }
-require('electron-reload');
 function createWindow() {
     mainWindow = new electron_1.BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1024,
+        height: 688,
         frame: true,
+        icon: path.resolve(__dirname, 'assets/icon/icon.png'),
         backgroundColor: 'red',
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: false,
+            preload: path.join(__dirname, 'scripts/preload.js')
         }
     });
     if (isDev) {
