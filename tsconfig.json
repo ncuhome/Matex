@@ -16,7 +16,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "outDir": "release/build",
-    "noEmit": true
+    "noEmit": true,
+    "resolveJsonModule": true
   },
   "include": ["./src","electron"],
   "exclude": ["release"]
