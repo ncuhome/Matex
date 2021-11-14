@@ -14,7 +14,7 @@ module.exports = merge(common, {
   devServer: {
     hot: true,
     compress: true,
-    port: 3000,
+    port: 5000,
     open: false,
     client: {
       logging: 'info',

@@ -2,4 +2,6 @@
 dist
 build
 node_modules
+electron/dev
+release
 
