@@ -1,6 +1,7 @@
 .idea
 dist
 build
+dev
 node_modules
 electron/dev
 release
