@@ -7,7 +7,9 @@ const Home: React.FC<any> = () => {
   return (
     <div className={styles.rootCon}>
       <div className={styles.header} />
-      <div className={styles.sideBar} />
+      <div className={styles.sideBar}>
+        <SideBar />
+      </div>
       <div className={styles.body} />
       {/*<Header />*/}
       {/*<SideBar />*/}
