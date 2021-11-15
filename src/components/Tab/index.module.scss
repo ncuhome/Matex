@@ -1,13 +1,27 @@
 
+.activeStyle{
+  background-color: #898AFF;
+  color: white;
+}
+
+
 .tab{
-  width: 100%;
-  line-height: 3rem;
+  line-height: 2.8rem;
   text-align: center;
-  margin: 10px;
+  border-radius: 8px;
   border-bottom: transparent 1px solid;
   cursor: pointer;
+  color: #9294F5;
+  margin: 10px 20px;
+  font-size: 15px;
 }
 
 .tab:hover{
   border-bottom: #9294F5 1px solid;
+  @extend .activeStyle;
+  background-color: #BCBDFF;
+}
+
+.tab.active{
+  @extend .activeStyle
 }

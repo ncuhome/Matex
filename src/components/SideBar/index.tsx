@@ -6,10 +6,11 @@ import { tabItems } from './tabItems';
 const SideBar = () => {
   return (
     <div className={styles.sideBar}>
-      {tabItems.map(({ route, text }) => {
+      <div />
+      {tabItems.map(({ route, text }, index) => {
         return (
           <Fragment key={text}>
-            <Tab text={text} route={route} />
+            <Tab text={text} route={route} active={index === 2} />
           </Fragment>
         );
       })}

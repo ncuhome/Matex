@@ -1,6 +1,7 @@
 export interface TabProps {
   text: string;
-  route?: string;
+  route: string;
+  active?: boolean;
 }
 
 export const tabItems: TabProps[] = [
