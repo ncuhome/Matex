@@ -1,5 +1,6 @@
 
 {
   "chrome": "94",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "node": "14"
 }

@@ -5,7 +5,7 @@ const Login: React.FC<any> = (props: any) => {
   const navigate = useNavigate();
   const login = () => {
     localStorage.setItem('login', 'true');
-    navigate('/m', { replace: true });
+    navigate('/', { replace: true });
   };
   return (
     <>
