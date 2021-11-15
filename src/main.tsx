@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { VechaiProvider } from '@vechaiui/react';
-import { HashRouter } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
+import { HashRouter, BrowserRouter } from 'react-router-dom';
+
+const isDev = process.env.NODE_ENV === 'development';
 
 ReactDOM.render(
-  <HashRouter>
-    <VechaiProvider>
+  renderRoot(
+    <ChakraProvider resetCSS={false}>
       <App />
-      111
-    </VechaiProvider>
-  </HashRouter>,
+    </ChakraProvider>
+  ),
   document.getElementById('root')
 );
+
+function renderRoot(child: React.ReactNode) {
+  if (isDev) {
+    return <BrowserRouter>{child}</BrowserRouter>;
+  } else {
+    return <HashRouter>{child}</HashRouter>;
+  }
+}

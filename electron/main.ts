@@ -12,7 +12,9 @@ async function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
-    frame: true,
+    // frame: false,
+    transparent: true,
+    titleBarStyle: 'hidden',
     icon: `${__dirname}/assets/icon/general@2x.png`,
     webPreferences: {
       nodeIntegration: true,

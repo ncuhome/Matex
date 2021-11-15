@@ -1,13 +1,18 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import styles from './index.module.scss';
+import SideBar from '../../components/SideBar';
+import Header from '../../components/Header';
 
-const Home: React.FC<any> = (props: any) => {
-  console.log('home');
+const Home: React.FC<any> = () => {
   return (
-    <>
-      <div>home</div>
-      <Outlet />
-    </>
+    <div className={styles.rootCon}>
+      <div className={styles.header} />
+      <div className={styles.sideBar} />
+      <div className={styles.body} />
+      {/*<Header />*/}
+      {/*<SideBar />*/}
+      {/*<div />*/}
+    </div>
   );
 };
 
