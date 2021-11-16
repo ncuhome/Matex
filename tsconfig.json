@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
-    "module": "es6",
+    "module": "commonjs",
     "lib": ["dom", "es2017","ESNext"],
     "allowJs": true,
     "jsx": "react-jsx",

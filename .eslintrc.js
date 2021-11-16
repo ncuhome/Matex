@@ -12,6 +12,7 @@ module.exports = {
   'plugins': ['@typescript-eslint','react'],
   'rules': {
     'no-var': 'error',// 不能使用var声明变量
+    'no-unused-vars':0,
     'no-extra-semi': 'error',
     '@typescript-eslint/indent': ['error', 2],
     'import/extensions': 'off',

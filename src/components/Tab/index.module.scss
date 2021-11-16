@@ -17,9 +17,8 @@
 }
 
 .tab:hover{
-  border-bottom: #9294F5 1px solid;
   @extend .activeStyle;
-  background-color: #BCBDFF;
+  background-color: #D2E6FD;
 }
 
 .tab.active{

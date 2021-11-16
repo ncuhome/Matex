@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
 import { HashRouter, BrowserRouter } from 'react-router-dom';
+import './globle.scss';
 
 const isDev = process.env.NODE_ENV === 'development';
 
