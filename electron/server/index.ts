@@ -1,17 +1,30 @@
 import { myEmitter } from '../utils/EventEmiter';
 import { MockData } from '../../src/pages/Mock';
 import { saveByRedis } from '../scripts/redis';
-// import shell from 'shelljs';
+import shell from 'shelljs';
 import execa from 'execa';
-// shell.config.execPath = '/usr/local/bin/node';
+import * as signale from 'signale';
+
+shell.config.execPath = '/usr/local/bin/node';
 
 const startServer = (scriptPath: string) => {
   let exist = false;
   try {
     myEmitter.on<MockData>('ulisten', async (mockData) => {
-      console.log('scriptPath====', scriptPath);
       await saveByRedis(mockData);
-      await closeServer();
+      try {
+        const res = await execa.command('cat /Users/liqingdong/.pm2/pids/index-0.pid');
+        if (res) {
+          exist = true;
+        }
+        signale.debug(res.stdout);
+      } catch (e) {
+        exist = false;
+        console.log('startServer发生错误:', e);
+      }
+      if (exist) {
+        await closeServer();
+      }
       exist = false;
       const cmd = `pm2 start ${scriptPath} --name index --time`;
       setTimeout(async () => {
@@ -20,7 +33,7 @@ const startServer = (scriptPath: string) => {
       }, 1000);
     });
   } catch (e) {
-    console.log('发生错误:', e);
+    console.log('startServer发生错误:', e);
   }
 };
 
@@ -29,7 +42,7 @@ const closeServer = async () => {
     await execa.command('pm2 stop index');
     await execa.command('pm2 stop all');
   } catch (e) {
-    console.log('发生错误:', e);
+    console.log('closeServer发生错误:', e);
   }
 };
 

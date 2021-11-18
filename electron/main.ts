@@ -1,12 +1,12 @@
-import { app, BrowserWindow, Notification, ipcMain } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import { startServer, closeServer } from './server';
 let mainWindow: BrowserWindow | null;
-
+import * as signale from 'signale';
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
 const scriptPath = path.resolve(process.cwd(), './electron/shell/index.js');
-console.log('根路径=>', __dirname);
+signale.note('根路径=>' + __dirname);
 
 async function createWindow() {
   mainWindow = new BrowserWindow({
@@ -20,13 +20,13 @@ async function createWindow() {
     }
   });
   const url = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..')}/render/index.html`;
-
   await mainWindow.loadURL(url);
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 }
+
 //避免多实例
 if (!gotTheLock) {
   app.quit();
@@ -55,8 +55,13 @@ app.whenReady().then(async () => {
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
 });
+//
+// app.on('will-quit', async (e: Electron.Event) => {
+//   await closeServer();
+//   console.log('退出时间will-quit', e.timeStamp);
+// });
 
-app.on('will-quit', async (e: Electron.Event) => {
+app.on('before-quit', async (e: Electron.Event) => {
   await closeServer();
-  console.log('退出时间', e.timeStamp);
+  console.log('退出时间before-quit', e.timeStamp);
 });
