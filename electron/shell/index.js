@@ -1,23 +1,40 @@
 #!/usr/bin/env node
+const shell = require('shelljs');
+const { createClient } = require('redis');
 const fastify = require('fastify')({
   logger: true
 });
-// 加载框架并新建实例
-try {
-  // 声明路由
-  fastify.get('/fast', function (request, reply) {
-    reply.send({ hello: 'world' });
+const version = shell.exec('node --version', { silent: true }).stdout;
+console.log('node 版本' + version);
+
+const getRedisData = async () => {
+  const config = {
+    url: 'redis://127.0.0.1:6379',
+    database: 0
+  };
+
+  const client = createClient(config);
+
+  client.on('error', (err) => console.log('Redis客户端错误', err));
+
+  await client.connect();
+  const port = await client.get('port');
+  const route = await client.get('route');
+  const data = await client.get('data');
+  console.log(port, route, data);
+
+  fastify.get(route, function (request, reply) {
+    reply.send(data);
   });
 
-  // 启动服务！
-  fastify.listen(6000, function (err, address) {
+  fastify.listen(port, function (err, address) {
     if (err) {
       fastify.log.error(err);
       process.exit(1);
     }
-    process.send('我是子进程');
+    console.log('拿到数据', { route, port, data });
     fastify.log.info(`server listening on ${address}`);
   });
-} catch (e) {
-  console.log(e);
-}
+};
+
+getRedisData();

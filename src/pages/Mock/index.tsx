@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Button, Flex, Input } from '@chakra-ui/react';
+import { Button, Flex, Input, Textarea, Center } from '@chakra-ui/react';
 import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
+import styles from './index.module.scss';
 
 export interface MockData {
   port: string;
@@ -23,10 +24,12 @@ const Mock = () => {
 
   const handleClick = async () => {
     const { ipcRenderer } = require('electron');
+    console.log({ port, route, data });
+
     ipcRenderer.send(ipcName, { port, route, data });
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, type: string) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: string) => {
     const value = e.target.value;
     if (type === 'port') {
       setPort(value);
@@ -38,16 +41,31 @@ const Mock = () => {
   };
 
   return (
-    <>
-      <Flex bg="white" w="100%" p={4} h={100} color="white">
-        <Input placeholder={'端口'} onChange={(e) => handleChange(e, 'port')} />
-        <Input placeholder={'接口路由'} onChange={(e) => handleChange(e, 'route')} />
-        <Input placeholder={'接口数据'} onChange={(e) => handleChange(e, 'data')} />
+    <div className={styles.mockCon}>
+      <div className={styles.header}>
+        <Input value={`http:localhost:${port}`} className={styles.addressText} readOnly />
+        <div className={styles.saveBtn}>保存</div>
+      </div>
+      <Flex flexDirection={'column'}>
+        <Flex bg="white" h={100} mt={6} color="white">
+          <Input mr={5} placeholder={'监听端口'} onChange={(e) => handleChange(e, 'port')} />
+          <Input mr={5} placeholder={'接口路由'} onChange={(e) => handleChange(e, 'route')} />
+        </Flex>
+        <div>
+          <Textarea
+            placeholder="json返回值"
+            resize={'none'}
+            style={{ height: 200 }}
+            onChange={(e) => handleChange(e, 'data')}
+          />
+        </div>
       </Flex>
-      <Button bg={'blue'} color={'white'} onClick={handleClick}>
-        生成
-      </Button>
-    </>
+      <Center>
+        <div className={styles.startBtn} onClick={handleClick}>
+          启动
+        </div>
+      </Center>
+    </div>
   );
 };
 

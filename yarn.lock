@@ -1784,6 +1784,26 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@node-redis/client@^1.0.0-rc.0":
+  version "1.0.0-rc.0"
+  resolved "https://registry.npmmirror.com/@node-redis/client/download/@node-redis/client-1.0.0-rc.0.tgz?cache=0&sync_timestamp=1637048187934&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40node-redis%2Fclient%2Fdownload%2F%40node-redis%2Fclient-1.0.0-rc.0.tgz#0061273d3fceadba1d9ee983ee295373b9227dda"
+  integrity sha512-+DHbQ5rObps7WW3rMsOFG/4JfpPZQ6EqPHRlRUNOBtwE3sadYqpLTJMSRHDFjRFjhgwnIbvmbN/V6TnB14lCAw==
+  dependencies:
+    cluster-key-slot "1.1.0"
+    generic-pool "3.8.2"
+    redis-parser "3.0.0"
+    yallist "4.0.0"
+
+"@node-redis/json@^1.0.0-rc.0":
+  version "1.0.0-rc.0"
+  resolved "https://registry.npmmirror.com/@node-redis/json/download/@node-redis/json-1.0.0-rc.0.tgz?cache=0&sync_timestamp=1637048293100&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40node-redis%2Fjson%2Fdownload%2F%40node-redis%2Fjson-1.0.0-rc.0.tgz#6df8b01254bc4422cfc0efbed59754da2a217a2d"
+  integrity sha512-bSLHcDWZKGvLIq8YjpkZJNy8FnNQSZNlYwNSvnUIDV+NInhWcY3e0i0xkBbGevrXscNUzPMZCUDMW9/SI/57sQ==
+
+"@node-redis/search@^1.0.0-rc.0":
+  version "1.0.0-rc.0"
+  resolved "https://registry.npmmirror.com/@node-redis/search/download/@node-redis/search-1.0.0-rc.0.tgz?cache=0&sync_timestamp=1637048322925&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40node-redis%2Fsearch%2Fdownload%2F%40node-redis%2Fsearch-1.0.0-rc.0.tgz#eaecde314dd36dab6cabc1546187829d448afcb8"
+  integrity sha512-FEVsL18GXmYh4Figh7aGW/xyP3b7TXiE2d4/dLasK8szinmHz3oYyXFh1H5opz9oqBkwZsoPWkQMgXxsRUnNRA==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.nlark.com/@nodelib/fs.scandir/download/@nodelib/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -2015,7 +2035,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/glob@^7.1.1":
+"@types/glob@*", "@types/glob@^7.1.1":
   version "7.2.0"
   resolved "https://registry.npmmirror.com/@types/glob/download/@types/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"
   integrity sha1-vBtb86qS8lvV3TnzXFc2G9zlsus=
@@ -2136,6 +2156,14 @@
   version "0.16.2"
   resolved "https://registry.nlark.com/@types/scheduler/download/@types/scheduler-0.16.2.tgz?cache=0&sync_timestamp=1629709152024&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fscheduler%2Fdownload%2F%40types%2Fscheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
   integrity sha1-GmL4lSVyPd4kuhsBsJK/XfitTTk=
+
+"@types/shelljs@^0.8.9":
+  version "0.8.9"
+  resolved "https://registry.npmmirror.com/@types/shelljs/download/@types/shelljs-0.8.9.tgz#45dd8501aa9882976ca3610517dac3831c2fbbf4"
+  integrity sha1-Rd2FAaqYgpdso2EFF9rDgxwvu/Q=
+  dependencies:
+    "@types/glob" "*"
+    "@types/node" "*"
 
 "@types/verror@^1.10.3":
   version "1.10.5"
@@ -3440,6 +3468,11 @@ clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/clsx/download/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha1-mLMTT5q73yOyZjSRrOE8XAOnMYg=
+
+cluster-key-slot@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/cluster-key-slot/download/cluster-key-slot-1.1.0.tgz#30474b2a981fb12172695833052bc0d01336d10d"
+  integrity sha1-MEdLKpgfsSFyaVgzBSvA0BM20Q0=
 
 coa@^2.0.2:
   version "2.0.2"
@@ -5407,6 +5440,11 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
+generic-pool@3.8.2:
+  version "3.8.2"
+  resolved "https://registry.nlark.com/generic-pool/download/generic-pool-3.8.2.tgz#aab4f280adb522fdfbdc5e5b64d718d3683f04e9"
+  integrity sha1-qrTygK21Iv373F5bZNcY02g/BOk=
+
 generify@^4.0.0:
   version "4.2.0"
   resolved "https://registry.npmmirror.com/generify/download/generify-4.2.0.tgz#19416c3e956a5ec3c6f205ddeaf261e1f258a97b"
@@ -6066,6 +6104,11 @@ internal-slot@^1.0.3:
     get-intrinsic "^1.1.0"
     has "^1.0.3"
     side-channel "^1.0.4"
+
+interpret@^1.0.0:
+  version "1.4.0"
+  resolved "https://registry.nlark.com/interpret/download/interpret-1.4.0.tgz#665ab8bc4da27a774a40584e812e3e0fa45b1a1e"
+  integrity sha1-Zlq4vE2iendKQFhOgS4+D6RbGh4=
 
 invariant@^2.2.4:
   version "2.2.4"
@@ -9050,12 +9093,40 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
+rechoir@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.nlark.com/rechoir/download/rechoir-0.6.2.tgz?cache=0&sync_timestamp=1627101702123&other_urls=https%3A%2F%2Fregistry.nlark.com%2Frechoir%2Fdownload%2Frechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
+  integrity sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=
+  dependencies:
+    resolve "^1.1.6"
+
 redeyed@~2.1.0:
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/redeyed/download/redeyed-2.1.1.tgz#8984b5815d99cb220469c99eeeffe38913e6cc0b"
   integrity sha1-iYS1gV2ZyyIEacme7v/jiRPmzAs=
   dependencies:
     esprima "~4.0.0"
+
+redis-errors@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/redis-errors/download/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
+  integrity sha1-62LSrbFeTq9GEMBK/hUpOEJQq60=
+
+redis-parser@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.nlark.com/redis-parser/download/redis-parser-3.0.0.tgz#b66d828cdcafe6b4b8a428a7def4c6bcac31c8b4"
+  integrity sha1-tm2CjNyv5rS4pCin3vTGvKwxyLQ=
+  dependencies:
+    redis-errors "^1.0.0"
+
+redis@^4.0.0-rc.4:
+  version "4.0.0-rc.4"
+  resolved "https://registry.npmmirror.com/redis/download/redis-4.0.0-rc.4.tgz?cache=0&sync_timestamp=1637048462549&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fredis%2Fdownload%2Fredis-4.0.0-rc.4.tgz#c8cb3625f564e4de3770841feb33329565fd9136"
+  integrity sha512-rcYOxvURG1kNg9t+BIY9PLDQh1JH0ZtJJxCQ8FwWSZXJ6TSWmk1VLXWkgzpNj/NAqN0nGdzjVPB4+1lFvOAO3w==
+  dependencies:
+    "@node-redis/client" "^1.0.0-rc.0"
+    "@node-redis/json" "^1.0.0-rc.0"
+    "@node-redis/search" "^1.0.0-rc.0"
 
 regenerate-unicode-properties@^9.0.0:
   version "9.0.0"
@@ -9242,7 +9313,7 @@ resolve-url@^0.2.1:
   resolved "https://registry.npmmirror.com/resolve-url/download/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve@^1.1.5, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.20.0, resolve@^1.4.0:
+resolve@^1.1.5, resolve@^1.1.6, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.20.0, resolve@^1.4.0:
   version "1.20.0"
   resolved "https://registry.npmmirror.com/resolve/download/resolve-1.20.0.tgz#629a013fb3f70755d6f0b7935cc1c2c5378b1975"
   integrity sha1-YpoBP7P3B1XW8LeTXMHCxTeLGXU=
@@ -9599,6 +9670,15 @@ shebang-regex@^3.0.0:
   version "3.0.0"
   resolved "https://registry.nlark.com/shebang-regex/download/shebang-regex-3.0.0.tgz?cache=0&sync_timestamp=1628896299850&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fshebang-regex%2Fdownload%2Fshebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha1-rhbxZE2HPsrYQ7AwexQzYtTEIXI=
+
+shelljs@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.npm.taobao.org/shelljs/download/shelljs-0.8.4.tgz#de7684feeb767f8716b326078a8a00875890e3c2"
+  integrity sha1-3naE/ut2f4cWsyYHiooAh1iQ48I=
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
 
 side-channel@^1.0.4:
   version "1.0.4"
@@ -10878,7 +10958,7 @@ y18n@^5.0.5:
   resolved "https://registry.npm.taobao.org/y18n/download/y18n-5.0.8.tgz?cache=0&sync_timestamp=1617822642544&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fy18n%2Fdownload%2Fy18n-5.0.8.tgz#7f4934d0f7ca8c56f95314939ddcd2dd91ce1d55"
   integrity sha1-f0k00PfKjFb5UxSTndzS3ZHOHVU=
 
-yallist@^4.0.0:
+yallist@4.0.0, yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.nlark.com/yallist/download/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=

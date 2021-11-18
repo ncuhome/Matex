@@ -1,44 +1,24 @@
 import { myEmitter } from '../utils/EventEmiter';
 import { MockData } from '../../src/pages/Mock';
-import execa from 'execa';
-const child_process = require('child_process');
-
+import { saveByRedis } from '../scripts/redis';
+import shell from 'shelljs';
+shell.config.execPath = '/usr/local/bin/node';
 const startFastify = () => {
-  const fastify = require('fastify')({
-    logger: true
-  });
-
+  let exist = false;
   myEmitter.on<MockData>('ulisten', async (mockData) => {
-    console.log(myEmitter.listeners.length);
-    const util = require('util');
+    // const res = shell.exec('pm2 list', { silent: true }).stdout;
 
-    async function lsExample() {
-      const execa = require('execa');
-      const url = '/Users/liqingdong/WebstormProjects/ulisten_music/electron/shell/index.js';
-
-      await execa.command('pm2 stop index');
-      // await exec('pm2 stop index');
-      const cmd = `pm2 start ${url} --name index`;
-      const config = { detached: true, stdio: [0, 1, 2, 'ipc'] };
-      await execa.command(cmd, config);
-      // const subProcess = await exec(cmd, config);
-
-      // subProcess.on('message', (data: any) => {
-      //   console.log('收到消息' + data);
-      // });
-    }
-    await lsExample();
+    await saveByRedis(mockData);
+    const execa = require('execa');
+    const url = '/Users/liqingdong/WebstormProjects/ulisten_music/electron/shell/index.js';
+    await execa.command('pm2 stop index');
+    exist = false;
+    const cmd = `pm2 start ${url} --name index --time`;
+    setTimeout(async () => {
+      await execa.command(cmd);
+      exist = true;
+    }, 1000);
   });
-
-  const listen = () => {
-    fastify.listen(8000, function (err: Error, address: string) {
-      if (err) {
-        fastify.log.error(err);
-        process.exit(1);
-      }
-      fastify.log.info(`开始监听=> ${address}`);
-    });
-  };
 };
 
 export default startFastify;

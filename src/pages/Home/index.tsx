@@ -4,15 +4,6 @@ import SideBar from '../../components/SideBar';
 import Mock from '../Mock';
 
 const Home: React.FC<any> = () => {
-  // useEffect(() => {
-  //   (async () => {
-  //     const startIpc = (await import('../../ipc/index')).default;
-  //     setTimeout(() => {
-  //       startIpc('hello Jack');
-  //     }, 5000);
-  //   })();
-  // }, []);
-
   return (
     <div className={styles.rootCon}>
       <div className={styles.header} />

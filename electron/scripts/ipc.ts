@@ -1,11 +1,8 @@
 import { ipcMain } from 'electron';
 import { myEmitter } from '../utils/EventEmiter';
+import { MockData } from './data';
 
-interface MockData {
-  port: string;
-  route: string;
-  data: string;
-}
+
 const ipcName = 'ulisten';
 
 const startIpc = () => {

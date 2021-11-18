@@ -1,0 +1,63 @@
+
+
+
+.mockCon{
+  margin: 15px;
+  display: block;
+  position: absolute;
+
+  .header{
+    display: flex;
+    align-items: center;
+
+    .addressText{
+      letter-spacing: 2px;
+      font-weight: 200;
+      flex: 1;
+      color:#27997E;
+    }
+
+    .saveBtn{
+      width: 70px;
+      background-color: #9294F5;
+      line-height: 40px;
+      color: white;
+      margin-left: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 2px 3px 5px #C4C9FA;
+      cursor: pointer;
+      user-select: none;
+
+
+      &:hover{
+        background-color: #6365F1;
+      }
+    }
+  }
+
+  .infoCon{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 80px 1fr;
+  }
+
+  .startBtn{
+    line-height: 100px;
+    width: 100px;
+    background-color: #6365F1;
+    color: white;
+    margin:25px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 3px 4px 3px gray;
+    font-size: 20px;
+
+    &:hover{
+      background-color: #567EFF;
+      cursor: pointer;
+      user-select: none;
+
+    }
+  }
+}

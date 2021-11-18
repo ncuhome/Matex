@@ -10,3 +10,7 @@ release
 #electron
 asar
 
+#vscode
+.DS_Store
+.vscode
+
