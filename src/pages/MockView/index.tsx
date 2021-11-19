@@ -2,13 +2,15 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
 import styles from './index.module.scss';
-import { Box, Button, Input, TextField } from '@material-ui/core';
+import { Box, Button, InputAdornment, MenuItem, TextField } from '@material-ui/core';
 
 export interface MockData {
   port: string;
   route: string;
   data: string;
 }
+
+const currencies = ['Plain Text', 'JSON', 'File', 'Form Data'];
 
 const Mock = () => {
   const [port, setPort] = useState('');
@@ -60,23 +62,49 @@ const Mock = () => {
         </Button>
       </div>
       <Box sx={{ display: 'flex' }} flexDirection={'column'}>
-        <Box sx={{ display: 'flex', color: 'white', justifyContent: 'space-around', mb: 2 }}>
-          <TextField
-            sx={{ flexGrow: 1, marginRight: 2 }}
-            variant={'outlined'}
-            label={'监听端口'}
-            color={'secondary'}
-            onChange={(e) => handleChange(e, 'port')}
-          />
-          <TextField
-            sx={{ flexGrow: 1 }}
-            variant={'outlined'}
-            label={'接口路由'}
-            color={'secondary'}
-            onChange={(e) => handleChange(e, 'route')}
-          />
+        <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: 2 }}>
+          <Box sx={{ flexGrow: 1, marginRight: 10 }}>
+            <Box style={{ color: '#6365F1', marginBottom: 10 }}>请求端口:</Box>
+            <TextField
+              fullWidth
+              variant={'outlined'}
+              placeholder={'监听端口'}
+              color={'secondary'}
+              onChange={(e) => handleChange(e, 'port')}
+            />
+          </Box>
+          <Box sx={{ flexGrow: 1, marginRight: 10 }}>
+            <Box style={{ color: '#6365F1', marginBottom: 10 }}>接口路由:</Box>
+            <TextField
+              fullWidth
+              variant={'outlined'}
+              placeholder={'接口路由'}
+              color={'secondary'}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">/</InputAdornment>
+              }}
+              onChange={(e) => handleChange(e, 'route')}
+            />
+          </Box>
+          <Box sx={{ width: 200 }}>
+            <Box style={{ color: '#6365F1', marginBottom: 10 }}>返回类型:</Box>
+            <TextField
+              fullWidth
+              select
+              variant={'outlined'}
+              placeholder={'返回类型'}
+              color={'secondary'}
+              onChange={(e) => handleChange(e, 'data')}
+            >
+              {currencies.map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Box>
         </Box>
-        <div>
+        <Box>
           <TextField
             multiline
             fullWidth
@@ -86,8 +114,9 @@ const Mock = () => {
             sx={{ height: 200 }}
             onChange={(e) => handleChange(e, 'data')}
           />
-        </div>
+        </Box>
       </Box>
+
       <Button sx={{ width: 100 }} variant={'outlined'} onClick={handleClick}>
         启动
       </Button>
