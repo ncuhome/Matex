@@ -46,10 +46,11 @@ const Mock = () => {
         <TextField
           size={'medium'}
           fullWidth
-          color={'success'}
+          color={'secondary'}
           variant={'outlined'}
           InputProps={{
-            readOnly: true
+            readOnly: true,
+            color: 'secondary'
           }}
           value={`http:localhost:${port}`}
           className={styles.addressText}
@@ -59,17 +60,19 @@ const Mock = () => {
         </Button>
       </div>
       <Box sx={{ display: 'flex' }} flexDirection={'column'}>
-        <Box sx={{ display: 'flex', color: 'white', justifyContent: 'space-around', marginBottom: 2 }}>
+        <Box sx={{ display: 'flex', color: 'white', justifyContent: 'space-around', mb: 2 }}>
           <TextField
             sx={{ flexGrow: 1, marginRight: 2 }}
             variant={'outlined'}
             label={'监听端口'}
+            color={'secondary'}
             onChange={(e) => handleChange(e, 'port')}
           />
           <TextField
             sx={{ flexGrow: 1 }}
             variant={'outlined'}
             label={'接口路由'}
+            color={'secondary'}
             onChange={(e) => handleChange(e, 'route')}
           />
         </Box>
@@ -78,13 +81,14 @@ const Mock = () => {
             multiline
             fullWidth
             rows={4}
+            color={'secondary'}
             label="返回数据"
             sx={{ height: 200 }}
             onChange={(e) => handleChange(e, 'data')}
           />
         </div>
       </Box>
-      <Button className={styles.startBtn} onClick={handleClick}>
+      <Button sx={{ width: 100 }} variant={'outlined'} onClick={handleClick}>
         启动
       </Button>
     </div>

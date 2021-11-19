@@ -1,5 +1,5 @@
 import { myEmitter } from '../utils/EventEmiter';
-import { MockData } from '../../src/pages/Mock';
+import { MockData } from '../../src/pages/MockView';
 import { saveByRedis } from '../scripts/redis';
 import shell from 'shelljs';
 import execa from 'execa';
