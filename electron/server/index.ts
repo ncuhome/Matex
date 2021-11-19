@@ -38,10 +38,12 @@ const startServer = (scriptPath: string) => {
 };
 
 const closeServer = async () => {
+  const { stdout } = await execa.command('cat /Users/liqingdong/.pm2/pids/index-0.pid');
   try {
     await execa.command('pm2 stop index');
     await execa.command('pm2 stop all');
   } catch (e) {
+    await execa.command(`kill -9 ${stdout}`);
     console.log('closeServer发生错误:', e);
   }
 };

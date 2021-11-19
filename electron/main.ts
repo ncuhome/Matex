@@ -63,5 +63,6 @@ app.on('window-all-closed', function () {
 
 app.on('before-quit', async (e: Electron.Event) => {
   await closeServer();
+  app.quit();
   console.log('退出时间before-quit', e.timeStamp);
 });
