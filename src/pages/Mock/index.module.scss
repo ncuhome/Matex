@@ -1,20 +1,19 @@
-
-
-
 .mockCon{
-  margin: 15px;
+  padding: 10px;
   display: block;
-  position: absolute;
 
   .header{
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
 
     .addressText{
       letter-spacing: 2px;
-      font-weight: 200;
       flex: 1;
-      color:#27997E;
+      color:blueviolet!important;
+      font-family: system-ui;
+      margin-right: 15px;
     }
 
     .saveBtn{
@@ -22,7 +21,7 @@
       background-color: #9294F5;
       line-height: 40px;
       color: white;
-      margin-left: 15px;
+
       border-radius: 8px;
       text-align: center;
       box-shadow: 2px 3px 5px #C4C9FA;

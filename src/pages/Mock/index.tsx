@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Button, Flex, Input, Textarea, Center } from '@chakra-ui/react';
 import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
 import styles from './index.module.scss';
+import { Box, Button, Input, TextField } from '@material-ui/core';
 
 export interface MockData {
   port: string;
@@ -43,28 +43,50 @@ const Mock = () => {
   return (
     <div className={styles.mockCon}>
       <div className={styles.header}>
-        <Input value={`http:localhost:${port}`} className={styles.addressText} readOnly />
-        <div className={styles.saveBtn}>保存</div>
+        <TextField
+          size={'medium'}
+          fullWidth
+          color={'success'}
+          variant={'outlined'}
+          InputProps={{
+            readOnly: true
+          }}
+          value={`http:localhost:${port}`}
+          className={styles.addressText}
+        />
+        <Button sx={{ height: 50 }} color={'secondary'} variant="outlined" size="large">
+          保存
+        </Button>
       </div>
-      <Flex flexDirection={'column'}>
-        <Flex bg="white" h={100} mt={6} color="white">
-          <Input mr={5} placeholder={'监听端口'} onChange={(e) => handleChange(e, 'port')} />
-          <Input mr={5} placeholder={'接口路由'} onChange={(e) => handleChange(e, 'route')} />
-        </Flex>
+      <Box sx={{ display: 'flex' }} flexDirection={'column'}>
+        <Box sx={{ display: 'flex', color: 'white', justifyContent: 'space-around', marginBottom: 2 }}>
+          <TextField
+            sx={{ flexGrow: 1, marginRight: 2 }}
+            variant={'outlined'}
+            label={'监听端口'}
+            onChange={(e) => handleChange(e, 'port')}
+          />
+          <TextField
+            sx={{ flexGrow: 1 }}
+            variant={'outlined'}
+            label={'接口路由'}
+            onChange={(e) => handleChange(e, 'route')}
+          />
+        </Box>
         <div>
-          <Textarea
-            placeholder="json返回值"
-            resize={'none'}
-            style={{ height: 200 }}
+          <TextField
+            multiline
+            fullWidth
+            rows={4}
+            label="返回数据"
+            sx={{ height: 200 }}
             onChange={(e) => handleChange(e, 'data')}
           />
         </div>
-      </Flex>
-      <Center>
-        <div className={styles.startBtn} onClick={handleClick}>
-          启动
-        </div>
-      </Center>
+      </Box>
+      <Button className={styles.startBtn} onClick={handleClick}>
+        启动
+      </Button>
     </div>
   );
 };
