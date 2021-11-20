@@ -1,6 +1,7 @@
 .mockCon{
   padding: 10px;
-  display: block;
+  display: flex;
+  flex-direction: column;
 
   .header{
     display: flex;

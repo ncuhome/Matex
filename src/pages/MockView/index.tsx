@@ -3,12 +3,10 @@ import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
 import styles from './index.module.scss';
 import { Box, Button, InputAdornment, MenuItem, TextField } from '@material-ui/core';
-// @ts-ignore
-import locale from 'react-json-editor-ajrm/locale/zh-cn';
-import JsonEdit from './JsonEdit';
+import Index from '../../components/JsonEdit';
 import useObject from '../../hooks/useObject';
 import { MockData } from './types';
-import JsonView from './jsonView.mdx';
+import HistoryApiTab from './History';
 
 const currencies = ['Plain Text', 'JSON', 'File', 'Form Data'];
 
@@ -30,19 +28,24 @@ const Mock = () => {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: string) => {
-    const value = e.target.value;
+    const value = e.target.value as any;
     if (type === 'port') {
       setMockInfo({ port: value });
     } else if (type === 'route') {
       setMockInfo({ route: value });
     } else {
-      setMockInfo({ data: value });
+      setMockInfo({ type: value });
     }
   };
   console.log(mockInfo);
 
+  const onChange = (value: any) => {
+    setMockInfo({ data: value.jsObject ?? {} });
+  };
+
   return (
     <div className={styles.mockCon}>
+      <HistoryApiTab />
       <div className={styles.header}>
         <TextField
           size={'medium'}
@@ -105,8 +108,7 @@ const Mock = () => {
           </Box>
         </Box>
         <Box>
-          <JsonEdit />
-          {/*<JsonView components={{ Planet: () => <span style={{ color: 'tomato' }}>{mockInfo.port}</span> }} />*/}
+          <Index onChange={onChange} />
         </Box>
       </Box>
 

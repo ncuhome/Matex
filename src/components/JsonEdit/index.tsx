@@ -3,7 +3,11 @@ import React from 'react';
 import locale from 'react-json-editor-ajrm/locale/zh-cn';
 import JSONInput, { JSONInputProperties } from 'react-json-editor-ajrm';
 
-const JsonEdit = () => {
+interface JsonEditProps {
+  onChange: (value: any) => void;
+}
+
+const Index: React.FC<JsonEditProps> = ({ onChange }) => {
   const style: JSONInputProperties['style'] = {
     contentBox: {
       borderLeft: '1px #C4C4C4 solid'
@@ -39,11 +43,6 @@ const JsonEdit = () => {
     keys_whiteSpace: '#3537ED'
   };
 
-  const onChange = (val: any) => {
-    if (!val.jsObject && val.json === '{') console.log(val);
-    return 1;
-  };
-
   return (
     <JSONInput
       id="a_unique_id"
@@ -58,4 +57,4 @@ const JsonEdit = () => {
   );
 };
 
-export default JsonEdit;
+export default Index;
