@@ -1,14 +1,14 @@
 import React from 'react';
 // @ts-ignore
 import locale from 'react-json-editor-ajrm/locale/zh-cn';
-import JSONInput, { JSONInputProperties } from 'react-json-editor-ajrm';
+import JSONInput from 'react-json-editor-ajrm';
 
 interface JsonEditProps {
   onChange: (value: any) => void;
 }
 
-const Index: React.FC<JsonEditProps> = ({ onChange }) => {
-  const style: JSONInputProperties['style'] = {
+const JsonEdit: React.FC<JsonEditProps> = ({ onChange }) => {
+  const style: any = {
     contentBox: {
       borderLeft: '1px #C4C4C4 solid'
     },
@@ -33,7 +33,7 @@ const Index: React.FC<JsonEditProps> = ({ onChange }) => {
       borderRadius: '50%'
     }
   };
-  const colors: JSONInputProperties['colors'] = {
+  const colors: any = {
     default: '#3537ED',
     background: '#FFF',
     keys: '#F95F26',
@@ -57,4 +57,4 @@ const Index: React.FC<JsonEditProps> = ({ onChange }) => {
   );
 };
 
-export default Index;
+export default JsonEdit;

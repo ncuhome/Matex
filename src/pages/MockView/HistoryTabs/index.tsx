@@ -1,19 +1,19 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Box, Tab, Tabs } from '@material-ui/core';
 import styles from './index.module.scss';
 import AddIcon from '@material-ui/icons/Add';
 import { styled } from '@material-ui/styles';
 
-const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
+const AntTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
   textTransform: 'none',
   minWidth: 0,
   marginRight: 0,
   color: 'rgba(0, 0, 0, 0.85)',
+  borderRadius: 4,
   '&:hover': {
     color: '#D2E6FD',
     opacity: 1,
-    background: '#d1eaff',
-    borderRadius: 4
+    background: '#F8F8F8'
   },
   '&.Mui-selected': {
     color: '#1890ff',
@@ -35,7 +35,7 @@ const HistoryApiTab = () => {
   const LabelText = () => {
     return (
       <Box>
-        <span style={{ marginRight: 5, color: '#FF7F00', fontSize: '13px' }}>Get</span>
+        <span style={{ marginRight: 5, color: '#1F9CF0', fontSize: '13px' }}>Get</span>
         <span style={{ color: '#C4C4C4', fontSize: '12px', textTransform: 'lowercase' }}>
           {'https://baidu.com'}
         </span>

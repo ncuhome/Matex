@@ -1,12 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
 import styles from './index.module.scss';
 import { Box, Button, InputAdornment, MenuItem, TextField } from '@material-ui/core';
-import Index from '../../components/JsonEdit';
+import JsonEdit from '../../components/JsonEdit';
 import useObject from '../../hooks/useObject';
 import { MockData } from './types';
 import HistoryApiTab from './HistoryTabs';
+import AddressBanner from './AddressBanner';
 
 const currencies = ['Plain Text', 'JSON', 'File', 'Form Data'];
 
@@ -46,23 +47,7 @@ const Mock = () => {
   return (
     <div className={styles.mockCon}>
       <HistoryApiTab />
-      <div className={styles.header}>
-        <TextField
-          size={'medium'}
-          fullWidth
-          color={'secondary'}
-          variant={'outlined'}
-          InputProps={{
-            readOnly: true,
-            color: 'secondary'
-          }}
-          value={`http:localhost:${mockInfo.port}`}
-          className={styles.addressText}
-        />
-        <Button sx={{ height: 50 }} color={'secondary'} variant="outlined" size="large">
-          保存
-        </Button>
-      </div>
+      <AddressBanner />
       <Box sx={{ display: 'flex' }} flexDirection={'column'}>
         <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: 2 }}>
           <Box sx={{ flexGrow: 1, marginRight: 10 }}>
@@ -108,7 +93,7 @@ const Mock = () => {
           </Box>
         </Box>
         <Box>
-          <Index onChange={onChange} />
+          <JsonEdit onChange={onChange} />
         </Box>
       </Box>
 
