@@ -9,16 +9,18 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
   minWidth: 0,
   marginRight: 0,
   color: 'rgba(0, 0, 0, 0.85)',
-  borderRadius: 4,
+  borderRadius: 6,
+  border: '1px transparent solid',
   '&:hover': {
-    color: '#D2E6FD',
+    color: '#000',
     opacity: 1,
-    background: '#F8F8F8'
+    background: 'rgba(229,229,229,0.3)'
   },
   '&.Mui-selected': {
-    color: '#1890ff',
+    color: '#FFF',
     fontWeight: 400,
-    background: '#d1eaff'
+    border: '1px #5658FF solid',
+    background: '#BCBDFF'
   },
   '&.Mui-focusVisible': {
     backgroundColor: '#d1eaff'
@@ -35,8 +37,8 @@ const HistoryApiTab = () => {
   const LabelText = () => {
     return (
       <Box>
-        <span style={{ marginRight: 5, color: '#1F9CF0', fontSize: '13px' }}>Get</span>
-        <span style={{ color: '#C4C4C4', fontSize: '12px', textTransform: 'lowercase' }}>
+        <span style={{ marginRight: 5, fontSize: '13px' }}>Get</span>
+        <span style={{ color: '#434200', fontSize: '12px', textTransform: 'lowercase' }}>
           {'https://baidu.com'}
         </span>
       </Box>
@@ -52,7 +54,8 @@ const HistoryApiTab = () => {
         indicatorColor={'secondary'}
         TabIndicatorProps={{
           style: {
-            height: 3,
+            height: 0,
+            margin: 'auto',
             borderRadius: 3
           }
         }}
