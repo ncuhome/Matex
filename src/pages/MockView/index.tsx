@@ -33,7 +33,6 @@ const Mock = () => {
     const value = e.target.value;
     if (type === 'port') {
       setMockInfo({ port: value });
-      // setPort(value);
     } else if (type === 'route') {
       setMockInfo({ route: value });
     } else {
