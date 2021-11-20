@@ -3,19 +3,17 @@ import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
 import styles from './index.module.scss';
 import { Box, Button, InputAdornment, MenuItem, TextField } from '@material-ui/core';
-
-export interface MockData {
-  port: string;
-  route: string;
-  data: string;
-}
+// @ts-ignore
+import locale from 'react-json-editor-ajrm/locale/zh-cn';
+import JsonEdit from './JsonEdit';
+import useObject from '../../hooks/useObject';
+import { MockData } from './types';
+import JsonView from './jsonView.mdx';
 
 const currencies = ['Plain Text', 'JSON', 'File', 'Form Data'];
 
 const Mock = () => {
-  const [port, setPort] = useState('');
-  const [route, setRoute] = useState('');
-  const [data, setData] = useState('');
+  const [mockInfo, setMockInfo] = useObject<MockData>();
 
   useEffect(() => {
     const { ipcRenderer } = require('electron');
@@ -26,21 +24,23 @@ const Mock = () => {
 
   const handleClick = async () => {
     const { ipcRenderer } = require('electron');
-    console.log({ port, route, data });
+    console.log(mockInfo);
 
-    ipcRenderer.send(ipcName, { port, route, data });
+    ipcRenderer.send(ipcName, mockInfo);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: string) => {
     const value = e.target.value;
     if (type === 'port') {
-      setPort(value);
+      setMockInfo({ port: value });
+      // setPort(value);
     } else if (type === 'route') {
-      setRoute(value);
+      setMockInfo({ route: value });
     } else {
-      setData(value);
+      setMockInfo({ data: value });
     }
   };
+  console.log(mockInfo);
 
   return (
     <div className={styles.mockCon}>
@@ -54,7 +54,7 @@ const Mock = () => {
             readOnly: true,
             color: 'secondary'
           }}
-          value={`http:localhost:${port}`}
+          value={`http:localhost:${mockInfo.port}`}
           className={styles.addressText}
         />
         <Button sx={{ height: 50 }} color={'secondary'} variant="outlined" size="large">
@@ -91,6 +91,7 @@ const Mock = () => {
             <TextField
               fullWidth
               select
+              defaultValue={''}
               variant={'outlined'}
               placeholder={'返回类型'}
               color={'secondary'}
@@ -105,15 +106,8 @@ const Mock = () => {
           </Box>
         </Box>
         <Box>
-          <TextField
-            multiline
-            fullWidth
-            rows={4}
-            color={'secondary'}
-            label="返回数据"
-            sx={{ height: 200 }}
-            onChange={(e) => handleChange(e, 'data')}
-          />
+          <JsonEdit />
+          {/*<JsonView components={{ Planet: () => <span style={{ color: 'tomato' }}>{mockInfo.port}</span> }} />*/}
         </Box>
       </Box>
 

@@ -12,7 +12,8 @@ async function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1268,
     height: 768,
-    transparent: true,
+    transparent: false,
+    backgroundColor: '#FFF',
     titleBarStyle: 'hidden',
     webPreferences: {
       nodeIntegration: true,

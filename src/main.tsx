@@ -4,7 +4,6 @@ import App from './App';
 import { HashRouter, BrowserRouter } from 'react-router-dom';
 import './globle.scss';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
 
 const theme = createTheme({
   palette: {
