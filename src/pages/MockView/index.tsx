@@ -6,7 +6,7 @@ import { Box, Button, InputAdornment, MenuItem, TextField } from '@material-ui/c
 import Index from '../../components/JsonEdit';
 import useObject from '../../hooks/useObject';
 import { MockData } from './types';
-import HistoryApiTab from './History';
+import HistoryApiTab from './HistoryTabs';
 
 const currencies = ['Plain Text', 'JSON', 'File', 'Form Data'];
 

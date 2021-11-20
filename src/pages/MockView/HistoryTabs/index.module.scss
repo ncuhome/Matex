@@ -1,0 +1,23 @@
+
+.tabCon{
+  margin-top: 5px;
+  margin-bottom: 10px;
+ display: flex;
+  justify-content: start;
+  align-items: center;
+
+  .addItem{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: #6366F1 2px solid;
+
+    &:hover{
+      background-color: #A1CAFB;
+      cursor: pointer;
+    }
+  }
+}
