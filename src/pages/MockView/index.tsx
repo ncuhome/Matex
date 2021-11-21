@@ -29,20 +29,8 @@ const Mock = () => {
     ipcRenderer.send(ipcName, mockInfo);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: string) => {
-    const value = e.target.value as any;
-    if (type === 'port') {
-      setMockInfo({ port: value });
-    } else if (type === 'route') {
-      setMockInfo({ route: value });
-    } else {
-      setMockInfo({ type: value });
-    }
-  };
-  console.log(mockInfo);
-
-  const onChange = (value: any) => {
-    setMockInfo({ data: value.jsObject ?? {} });
+  const onChange = (e: any) => {
+    console.log(e);
   };
 
   return (
@@ -50,58 +38,7 @@ const Mock = () => {
       <HistoryApiTab />
       <AddressBanner />
       <ApiTable />
-      {/*<Box sx={{ display: 'flex' }} flexDirection={'column'}>*/}
-      {/*  <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: 2 }}>*/}
-      {/*    <Box sx={{ flexGrow: 1, marginRight: 10 }}>*/}
-      {/*      <Box style={{ color: '#6365F1', marginBottom: 10 }}>请求端口:</Box>*/}
-      {/*      <TextField*/}
-      {/*        fullWidth*/}
-      {/*        variant={'outlined'}*/}
-      {/*        placeholder={'监听端口'}*/}
-      {/*        color={'secondary'}*/}
-      {/*        onChange={(e) => handleChange(e, 'port')}*/}
-      {/*      />*/}
-      {/*    </Box>*/}
-      {/*    <Box sx={{ flexGrow: 1, marginRight: 10 }}>*/}
-      {/*      <Box style={{ color: '#6365F1', marginBottom: 10 }}>接口路由:</Box>*/}
-      {/*      <TextField*/}
-      {/*        fullWidth*/}
-      {/*        variant={'outlined'}*/}
-      {/*        placeholder={'接口路由'}*/}
-      {/*        color={'secondary'}*/}
-      {/*        InputProps={{*/}
-      {/*          startAdornment: <InputAdornment position="start">/</InputAdornment>*/}
-      {/*        }}*/}
-      {/*        onChange={(e) => handleChange(e, 'route')}*/}
-      {/*      />*/}
-      {/*    </Box>*/}
-      {/*    <Box sx={{ width: 200 }}>*/}
-      {/*      <Box style={{ color: '#6365F1', marginBottom: 10 }}>返回类型:</Box>*/}
-      {/*      <TextField*/}
-      {/*        fullWidth*/}
-      {/*        select*/}
-      {/*        defaultValue={'JSON'}*/}
-      {/*        variant={'outlined'}*/}
-      {/*        placeholder={'返回类型'}*/}
-      {/*        color={'secondary'}*/}
-      {/*        onChange={(e) => handleChange(e, 'data')}*/}
-      {/*      >*/}
-      {/*        {currencies.map((item) => (*/}
-      {/*          <MenuItem key={item} value={item}>*/}
-      {/*            {item}*/}
-      {/*          </MenuItem>*/}
-      {/*        ))}*/}
-      {/*      </TextField>*/}
-      {/*    </Box>*/}
-      {/*  </Box>*/}
-      {/*  <Box>*/}
-      {/*    <JsonEdit onChange={onChange} />*/}
-      {/*  </Box>*/}
-      {/*</Box>*/}
-
-      <Button sx={{ width: 100 }} variant={'outlined'} onClick={handleClick}>
-        启动
-      </Button>
+      <JsonEdit onChange={onChange} />
     </div>
   );
 };

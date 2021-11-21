@@ -19,4 +19,4 @@ const TableInput: React.FC<TableInputProps> = ({ index, keyType, defaultValue })
   return <input defaultValue={defaultValue} className={styles.input} onBlur={handleBlur} />;
 };
 
-export default TableInput;
+export default React.memo(TableInput);

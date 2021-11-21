@@ -13,8 +13,10 @@ const JsonEdit: React.FC<JsonEditProps> = ({ onChange }) => {
       borderLeft: '1px #C4C4C4 solid'
     },
     container: {
-      borderRadius: 10,
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
       border: '1px #C4C4C4 solid',
+      borderTop: 'none',
       fontSize: 16
     },
     body: {
@@ -50,7 +52,7 @@ const JsonEdit: React.FC<JsonEditProps> = ({ onChange }) => {
       colors={colors}
       style={style}
       waitAfterKeyPress={500}
-      height="300px"
+      height="200px"
       width={'100%'}
       onChange={onChange}
     />
