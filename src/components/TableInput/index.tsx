@@ -12,7 +12,6 @@ const TableInput: React.FC<TableInputProps> = ({ index, keyType, defaultValue })
   const { setApi } = useApiDataStore((state) => state);
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    console.log(e);
     const { value } = e.target;
     setApi(index, keyType, value);
   };

@@ -13,6 +13,7 @@ const ApiTable = () => {
         <div className={styles.headerItem}>路由</div>
         <div className={styles.headerItem}>类型</div>
         <div className={styles.headerItem}>返回值</div>
+        <div className={styles.headerItem}>描述</div>
         <div className={styles.headerItem}>操作</div>
       </div>
       <div className={styles.tableBody}>
