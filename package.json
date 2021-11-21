@@ -98,6 +98,7 @@
     "react-json-editor-ajrm": "^2.5.13",
     "react-router-dom": "^6.0.2",
     "redis": "^4.0.0-rc.4",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "zustand": "^3.6.5"
   }
 }

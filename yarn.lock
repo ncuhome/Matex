@@ -11577,6 +11577,11 @@ yauzl@^2.10.0:
     buffer-crc32 "~0.2.3"
     fd-slicer "~1.1.0"
 
+zustand@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.npmmirror.com/zustand/download/zustand-3.6.5.tgz#42a459397907d6bf0e2375351394733b2f83ee44"
+  integrity sha512-/WfLJuXiEJimt61KGMHebrFBwckkCHGhAgVXTgPQHl6IMzjqm6MREb1OnDSnCRiSmRdhgdFCctceg6tSm79hiw==
+
 zwitch@^2.0.0:
   version "2.0.2"
   resolved "https://registry.npm.taobao.org/zwitch/download/zwitch-2.0.2.tgz?cache=0&sync_timestamp=1617357655901&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fzwitch%2Fdownload%2Fzwitch-2.0.2.tgz#91f8d0e901ffa3d66599756dde7f57b17c95dce1"

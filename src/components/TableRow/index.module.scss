@@ -1,0 +1,26 @@
+
+.tableRow{
+  display: grid;
+  grid-template-columns:100px repeat(4,1fr);
+  align-items: center;
+  align-content: center;
+  margin-bottom: -5px;
+  height: 45px;
+  border-bottom: 1px solid #EDEFF4;
+  padding-top: 3px;
+
+  .tableItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 350;
+    font-size: 15px;
+    border-right: 1px solid #EDEFF4;
+    height: 45px;
+    padding: 0;
+
+    &:last-of-type{
+      border-right: none;
+    }
+  }
+}

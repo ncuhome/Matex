@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styles from './index.module.scss';
+import TableRow from '../../../components/TableRow';
+import { useApiDataStore } from '../../../zustand/store/apiData.store';
 
 const ApiTable = () => {
+  const apiList = useApiDataStore((state) => state.apiList);
+  console.log(apiList[0]);
   return (
     <div className={styles.apiTable}>
       <div className={styles.header}>
@@ -12,11 +16,13 @@ const ApiTable = () => {
         <div className={styles.headerItem}>操作</div>
       </div>
       <div className={styles.tableBody}>
-        <div className={styles.bodyItem}>ID</div>
-        <div className={styles.bodyItem}>路由</div>
-        <div className={styles.bodyItem}>ID</div>
-        <div className={styles.bodyItem}>ID</div>
-        <div className={styles.bodyItem}>ID</div>
+        {apiList.map((item, index) => {
+          return (
+            <Fragment key={item.id}>
+              <TableRow apiData={item} index={index} />
+            </Fragment>
+          );
+        })}
       </div>
     </div>
   );

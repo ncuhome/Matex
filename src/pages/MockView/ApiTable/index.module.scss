@@ -4,6 +4,7 @@
   grid-template-columns:100px repeat(4,1fr);
   align-items: center;
   align-content: center;
+  margin-bottom: -5px;
 }
 
 .gridItem{
@@ -30,6 +31,7 @@
     border-bottom: 1px solid #EDEFF4;
     @extend .gridStyle;
 
+
     .headerItem{
       border-right: 1px solid #EDEFF4;
       height: 50px;
@@ -37,21 +39,14 @@
       text-transform: uppercase;
       font-size: 15px;
       @extend .gridItem;
-    }
 
-    &:last-child{
-      border-right: none;
+      &:last-of-type{
+        border-right: none;
+      }
     }
   }
 
   .tableBody{
-    @extend .gridStyle;
-    height: 45px;
-
-    .bodyItem{
-      @extend .gridItem;
-      font-weight: 350;
-      font-size: 15px;
-    }
+    flex: 1;
   }
 }
