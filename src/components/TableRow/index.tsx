@@ -21,7 +21,13 @@ const TableRow: React.FC<TableRowProps> = ({ index, apiData }) => {
         <TableInput defaultValue={route} index={index} keyType={'route'} />
       </div>
       <div className={styles.tableItem}>
-        <TableInput defaultValue={type} index={index} keyType={'type'} />
+        <div className={styles.select}>
+          <select placeholder={'请选择类型'}>
+            <option value="1">Pure CSS</option>
+            <option value="2">No JS</option>
+            <option value="3">Nice!</option>
+          </select>
+        </div>
       </div>
       <div className={styles.tableItem}>
         {/*<TableInput defaultValue={resData} index={index} keyType={'resData'} />*/}
