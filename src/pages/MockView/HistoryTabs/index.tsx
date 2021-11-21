@@ -8,16 +8,16 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(() => ({
   textTransform: 'none',
   minWidth: 0,
   marginRight: 0,
-  color: 'rgba(0, 0, 0, 0.85)',
+  // color: 'rgba(0, 0, 0, 0.85)',
   borderRadius: 6,
   border: '1px transparent solid',
   '&:hover': {
-    color: '#000',
+    color: '#898AFF',
     opacity: 1,
     background: 'rgba(229,229,229,0.3)'
   },
   '&.Mui-selected': {
-    color: '#FFF',
+    color: '#F84806',
     fontWeight: 400,
     border: '1px #5658FF solid',
     background: '#BCBDFF'

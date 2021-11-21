@@ -78,7 +78,7 @@ const Mock = () => {
             <TextField
               fullWidth
               select
-              defaultValue={''}
+              defaultValue={'JSON'}
               variant={'outlined'}
               placeholder={'返回类型'}
               color={'secondary'}
