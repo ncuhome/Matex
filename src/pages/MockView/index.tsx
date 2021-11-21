@@ -8,6 +8,7 @@ import useObject from '../../hooks/useObject';
 import { MockData } from './types';
 import HistoryApiTab from './HistoryTabs';
 import AddressBanner from './AddressBanner';
+import ApiTable from './ApiTable';
 
 const currencies = ['Plain Text', 'JSON', 'File', 'Form Data'];
 
@@ -48,54 +49,55 @@ const Mock = () => {
     <div className={styles.mockCon}>
       <HistoryApiTab />
       <AddressBanner />
-      <Box sx={{ display: 'flex' }} flexDirection={'column'}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: 2 }}>
-          <Box sx={{ flexGrow: 1, marginRight: 10 }}>
-            <Box style={{ color: '#6365F1', marginBottom: 10 }}>请求端口:</Box>
-            <TextField
-              fullWidth
-              variant={'outlined'}
-              placeholder={'监听端口'}
-              color={'secondary'}
-              onChange={(e) => handleChange(e, 'port')}
-            />
-          </Box>
-          <Box sx={{ flexGrow: 1, marginRight: 10 }}>
-            <Box style={{ color: '#6365F1', marginBottom: 10 }}>接口路由:</Box>
-            <TextField
-              fullWidth
-              variant={'outlined'}
-              placeholder={'接口路由'}
-              color={'secondary'}
-              InputProps={{
-                startAdornment: <InputAdornment position="start">/</InputAdornment>
-              }}
-              onChange={(e) => handleChange(e, 'route')}
-            />
-          </Box>
-          <Box sx={{ width: 200 }}>
-            <Box style={{ color: '#6365F1', marginBottom: 10 }}>返回类型:</Box>
-            <TextField
-              fullWidth
-              select
-              defaultValue={'JSON'}
-              variant={'outlined'}
-              placeholder={'返回类型'}
-              color={'secondary'}
-              onChange={(e) => handleChange(e, 'data')}
-            >
-              {currencies.map((item) => (
-                <MenuItem key={item} value={item}>
-                  {item}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Box>
-        </Box>
-        <Box>
-          <JsonEdit onChange={onChange} />
-        </Box>
-      </Box>
+      <ApiTable />
+      {/*<Box sx={{ display: 'flex' }} flexDirection={'column'}>*/}
+      {/*  <Box sx={{ display: 'flex', justifyContent: 'space-around', mb: 2 }}>*/}
+      {/*    <Box sx={{ flexGrow: 1, marginRight: 10 }}>*/}
+      {/*      <Box style={{ color: '#6365F1', marginBottom: 10 }}>请求端口:</Box>*/}
+      {/*      <TextField*/}
+      {/*        fullWidth*/}
+      {/*        variant={'outlined'}*/}
+      {/*        placeholder={'监听端口'}*/}
+      {/*        color={'secondary'}*/}
+      {/*        onChange={(e) => handleChange(e, 'port')}*/}
+      {/*      />*/}
+      {/*    </Box>*/}
+      {/*    <Box sx={{ flexGrow: 1, marginRight: 10 }}>*/}
+      {/*      <Box style={{ color: '#6365F1', marginBottom: 10 }}>接口路由:</Box>*/}
+      {/*      <TextField*/}
+      {/*        fullWidth*/}
+      {/*        variant={'outlined'}*/}
+      {/*        placeholder={'接口路由'}*/}
+      {/*        color={'secondary'}*/}
+      {/*        InputProps={{*/}
+      {/*          startAdornment: <InputAdornment position="start">/</InputAdornment>*/}
+      {/*        }}*/}
+      {/*        onChange={(e) => handleChange(e, 'route')}*/}
+      {/*      />*/}
+      {/*    </Box>*/}
+      {/*    <Box sx={{ width: 200 }}>*/}
+      {/*      <Box style={{ color: '#6365F1', marginBottom: 10 }}>返回类型:</Box>*/}
+      {/*      <TextField*/}
+      {/*        fullWidth*/}
+      {/*        select*/}
+      {/*        defaultValue={'JSON'}*/}
+      {/*        variant={'outlined'}*/}
+      {/*        placeholder={'返回类型'}*/}
+      {/*        color={'secondary'}*/}
+      {/*        onChange={(e) => handleChange(e, 'data')}*/}
+      {/*      >*/}
+      {/*        {currencies.map((item) => (*/}
+      {/*          <MenuItem key={item} value={item}>*/}
+      {/*            {item}*/}
+      {/*          </MenuItem>*/}
+      {/*        ))}*/}
+      {/*      </TextField>*/}
+      {/*    </Box>*/}
+      {/*  </Box>*/}
+      {/*  <Box>*/}
+      {/*    <JsonEdit onChange={onChange} />*/}
+      {/*  </Box>*/}
+      {/*</Box>*/}
 
       <Button sx={{ width: 100 }} variant={'outlined'} onClick={handleClick}>
         启动
