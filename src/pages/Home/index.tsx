@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './index.module.scss';
 import SideBar from '../../components/SideBar';
 import Mock from '../MockView';
+import Editor from '../../components/MonacoEditor';
 
 const Home: React.FC<any> = () => {
   return (
@@ -11,7 +12,7 @@ const Home: React.FC<any> = () => {
         <SideBar />
       </div>
       <div className={styles.body}>
-        <Mock />
+        <Editor />
       </div>
     </div>
   );

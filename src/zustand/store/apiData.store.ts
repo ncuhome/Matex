@@ -10,7 +10,7 @@ const initData: ApiData = {
   desc: ''
 };
 export const useApiDataStore = create<ApiDataType>((set) => ({
-  apiList: [initData, initData, initData],
+  apiList: [initData, initData, initData, initData],
   setApi: (index, key, value) =>
     set((state) => {
       const tempList: ApiData[] = [...state.apiList];

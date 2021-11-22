@@ -1,3 +1,9 @@
 body,html{
   background-color: transparent !important;
 }
+
+#jsonEdit-warning-box svg{
+    height: 20px;
+    width: 20px;
+  transform: translateY(5px);
+}

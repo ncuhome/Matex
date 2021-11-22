@@ -2,10 +2,9 @@
 .apiTable{
   display: flex;
   border: 1px solid #EDEFF4;
-  min-height: 160px;
-  border-radius: 10px;
+  min-height: 140px;
+  border-radius: 10px 10px 0 0;
   flex-direction: column;
-  margin-bottom: 10px;
 
   .header{
     height: 50px;
@@ -47,7 +46,7 @@
     }
   }
   .tableBody{
-    height: 110px;
+    height: 90px;
     overflow: hidden auto;
   }
 }
@@ -64,6 +63,6 @@
 /*定义滑块 样式*/
 ::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  height: 100px;    /* 滚动条滑块长度 */
+  height: 50px;    /* 滚动条滑块长度 */
   background-color: #ccc;
 }

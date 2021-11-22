@@ -11,7 +11,7 @@ signale.note('根路径=>' + __dirname);
 async function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1268,
-    height: 768,
+    height: 700,
     transparent: false,
     backgroundColor: '#FFF',
     titleBarStyle: 'hidden',
