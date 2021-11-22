@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import styles from './index.module.scss';
 import TableRow from '../../../components/TableRow';
 import { useApiDataStore } from '../../../zustand/store/apiData.store';
+import MonacoEditor from '../../../components/MonacoEditor';
 
 const ApiTable = () => {
   const apiList = useApiDataStore((state) => state.apiList);
@@ -25,6 +26,7 @@ const ApiTable = () => {
           );
         })}
       </div>
+      <MonacoEditor defaultVal={''} language={'json'} />
     </div>
   );
 };

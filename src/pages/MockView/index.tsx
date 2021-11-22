@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
 import styles from './index.module.scss';
@@ -9,12 +9,13 @@ import { MockData } from './types';
 import HistoryApiTab from './HistoryTabs';
 import AddressBanner from './AddressBanner';
 import ApiTable from './ApiTable';
+import MonacoEditor from '../../components/MonacoEditor';
 
 const currencies = ['Plain Text', 'JSON', 'File', 'Form Data'];
 
 const Mock = () => {
   const [mockInfo, setMockInfo] = useObject<MockData>();
-
+  const [focus, setFocus] = useState(true);
   useEffect(() => {
     const { ipcRenderer } = require('electron');
     ipcRenderer.on(`${ipcName}-reply`, (event, arg) => {
@@ -29,8 +30,11 @@ const Mock = () => {
     ipcRenderer.send(ipcName, mockInfo);
   };
 
-  const onChange = (e: any) => {
-    console.log(e);
+  const onBlur = () => {
+    setFocus(false);
+  };
+  const onFocus = () => {
+    setFocus(true);
   };
 
   return (
@@ -38,7 +42,6 @@ const Mock = () => {
       <HistoryApiTab />
       <AddressBanner />
       <ApiTable />
-      <JsonEdit onChange={onChange} />
     </div>
   );
 };
