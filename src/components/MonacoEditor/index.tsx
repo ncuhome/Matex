@@ -1,6 +1,7 @@
 import React, { FC, useRef, useState, useEffect } from 'react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import styles from './index.module.scss';
+import clsx from 'clsx';
 
 interface MonacoEditorProps {
   defaultVal: string;
@@ -11,6 +12,7 @@ interface MonacoEditorProps {
   watchModelMarkers?: (marks: monaco.editor.IMarker[]) => void;
   getValue?: (value: string) => void;
   autoFormat?: boolean;
+  className?: string;
 }
 
 const MonacoEditor: FC<MonacoEditorProps> = ({
@@ -18,6 +20,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   defaultVal = '',
   enabledMinMap = false,
   autoFormat = true,
+  className = '',
   watchModelMarkers = () => {},
   onChange = () => {},
   onBlur = () => {},
@@ -37,13 +40,13 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     });
     monaco.editor.setTheme('my-theme');
   }, []);
-
   useEffect(() => {
     if (monacoEl && !editor) {
       setEditor(
         monaco.editor.create(monacoEl.current!, {
           value: defaultVal,
           language,
+          automaticLayout: true,
           scrollbar: {
             verticalScrollbarSize: 10,
             verticalSliderSize: 12
@@ -55,7 +58,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       );
     }
     return () => editor?.dispose();
-  }, [monacoEl.current]);
+  }, []);
 
   useEffect(() => {
     let model = editor?.getModel();
@@ -68,8 +71,8 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       onBlur();
       autoFormat && editor?.getAction('editor.action.formatDocument').run();
     });
-  }, []);
+  }, [monacoEl.current]);
 
-  return <div className={styles.editor} ref={monacoEl} />;
+  return <div className={clsx([styles.editor, className])} ref={monacoEl} />;
 };
 export default MonacoEditor;

@@ -4,7 +4,6 @@ import { TabProps } from '../SideBar/tabItems';
 import clsx from 'clsx';
 
 const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active }) => {
-  console.log(route);
   return <div className={clsx([styles.tab, active && styles.active])}>{text}</div>;
 };
 
