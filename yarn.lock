@@ -9806,6 +9806,18 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
+rive-js@0.7.33:
+  version "0.7.33"
+  resolved "https://registry.npmmirror.com/rive-js/download/rive-js-0.7.33.tgz#da67b19d5c9c2f9147420d88e45c4cbed48657dd"
+  integrity sha512-u/dqr4XYx1TOo5xtSCN+6YvUKYU88ii6xWP82Xz15O4OqF3GM1Pa4WXx4dEOa6QG6IqbM0JcfsAhae7TjVZf6Q==
+
+rive-react@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.npmmirror.com/rive-react/download/rive-react-0.0.26.tgz#cdd634cca51828da8b76520d12435386215264e0"
+  integrity sha512-4ebd4yksBgVQ2ramMZfQGHHjiMQTlbpN/MqdWCe9eIcHtIFc1aiR2tpnoXNz8+BUJYoyfkjRX3JhtTN3qE3qXw==
+  dependencies:
+    rive-js "0.7.33"
+
 roarr@^2.15.3:
   version "2.15.4"
   resolved "https://registry.npmmirror.com/roarr/download/roarr-2.15.4.tgz#f5fe795b7b838ccfe35dc608e0282b9eba2e7afd"
