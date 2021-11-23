@@ -2,9 +2,9 @@ import * as monaco from 'monaco-editor';
 
 export const suggestions = [
   {
-    label: 'text',
+    label: '$Name',
     kind: monaco.languages.CompletionItemKind.Text,
-    insertText: 'text',
+    insertText: 'lqd1434',
     detail: 'mock'
   }
 ];
