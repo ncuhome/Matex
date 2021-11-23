@@ -1,5 +1,4 @@
 import { myEmitter } from '../utils/EventEmiter';
-import { MockData } from '../../src/pages/MockView';
 import { saveByRedis } from '../scripts/redis';
 import shell from 'shelljs';
 import execa from 'execa';
@@ -10,7 +9,7 @@ shell.config.execPath = '/usr/local/bin/node';
 const startServer = (scriptPath: string) => {
   let exist = false;
   try {
-    myEmitter.on<MockData>('ulisten', async (mockData) => {
+    myEmitter.on<any>('ulisten', async (mockData) => {
       await saveByRedis(mockData);
       try {
         const res = await execa.command('cat /Users/liqingdong/.pm2/pids/index-0.pid');

@@ -1,10 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector: string, text: string) => {
+  const replaceText = (selector, text) => {
+    window.isMain = true;
     const element = document.getElementById(selector);
-    if (element) element.innerText = text;
+    if (element) element.className = 'main';
   };
 
   for (const type of ['chrome', 'node', 'electron']) {
-    replaceText(`${type}-version`, <string>process.versions[type]);
+    replaceText('root', process.versions[type]?.toString());
   }
 });
