@@ -3,6 +3,7 @@ import * as path from 'path';
 import { startServer, closeServer } from './server';
 let mainWindow: BrowserWindow | null;
 import * as signale from 'signale';
+import { await } from 'signale';
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
 const scriptPath = path.resolve(process.cwd(), './electron/shell/index.js');
@@ -28,6 +29,27 @@ async function createWindow() {
   });
 }
 
+async function createLoading() {
+  mainWindow = new BrowserWindow({
+    width: 400,
+    height: 400,
+    transparent: false,
+    frame: false,
+    backgroundColor: '#FFF',
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  });
+  const url = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..')}/render/index.html`;
+  await mainWindow.loadURL(url);
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+}
+
 //避免多实例
 if (!gotTheLock) {
   app.quit();
@@ -40,8 +62,13 @@ if (!gotTheLock) {
   });
 }
 
-app.on('ready', createWindow);
-
+app.on('ready', async () => {
+  await createLoading();
+  setTimeout(async () => {
+    mainWindow?.close();
+    await createWindow();
+  }, 10000);
+});
 app.whenReady().then(async () => {
   try {
     const startIpc = (await import('./scripts/ipc')).default;
