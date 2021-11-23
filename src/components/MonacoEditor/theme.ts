@@ -1,0 +1,33 @@
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+
+export const rules: monaco.editor.ITokenThemeRule[] = [
+  {
+    token: 'number.json',
+    foreground: '#1E9CFC'
+  },
+  {
+    token: 'delimiter.bracket.json',
+    foreground: '#FA6C37'
+  },
+  //冒号
+  {
+    token: 'delimiter.colon.json',
+    foreground: '#090821'
+  },
+  {
+    token: 'delimiter.comma.json',
+    foreground: '#3C878A'
+  },
+  {
+    token: 'string.key.json',
+    foreground: '#AC2B2E'
+  },
+  {
+    token: 'string.value.json',
+    foreground: '#14C929'
+  },
+  {
+    token: 'custom-highlight',
+    foreground: '#FAC901'
+  }
+];

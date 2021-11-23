@@ -3,6 +3,11 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { resizeAble } from './resize';
+import { rules } from './theme';
+import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
+import ProviderResult = languages.ProviderResult;
+import CompletionList = languages.CompletionList;
+import { suggestions } from './suggestions';
 
 interface MonacoEditorProps {
   defaultVal: string;
@@ -43,15 +48,25 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       base: 'vs',
       inherit: true,
       colors: {
-        'editor.lineHighlightBorder': '#00000000'
+        'editor.lineHighlightBorder': '#00000006'
       },
-      rules: []
+      rules
     });
     monaco.editor.setTheme('my-theme');
   }, []);
 
   useEffect(() => {
     setEditor(null);
+    monaco.languages.setMonarchTokensProvider('json', {
+      tokenizer: {
+        root: [[/&ui/, { token: 'custom-highlight' }]]
+      }
+    });
+    monaco.languages.registerCompletionItemProvider('json', {
+      provideCompletionItems: (model, position, context, token) => {
+        return { suggestions: suggestions } as ProviderResult<CompletionList>;
+      }
+    });
     if (monacoEl && !editor) {
       setEditor(
         monaco.editor.create(monacoEl.current!, {
