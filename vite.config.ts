@@ -5,6 +5,7 @@ import { chrome } from './info.json';
 export default defineConfig(async () => {
   return {
     base: './',
+    publicDir: './public',
     plugins: [reactRefresh()],
     build: {
       outDir: './release/build/render',
