@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, MessageChannelMain } from 'electron';
 import * as path from 'path';
 import { startServer, closeServer } from './server';
 let mainWindow: BrowserWindow | null;
@@ -6,62 +6,48 @@ import * as signale from 'signale';
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
 const scriptPath = path.resolve(process.cwd(), './electron/shell/index.js');
-signale.note('根路径=>' + __dirname);
+signale.note('根路径 =>' + __dirname);
 signale.note('process.cwd()=>' + process.cwd());
+
+const { port1, port2 } = new MessageChannelMain();
 
 async function createWindow() {
   mainWindow = new BrowserWindow({
     width: 400,
     height: 400,
     center: true,
-    transparent: false,
-    backgroundColor: '#FFF',
+    frame: false,
+    backgroundColor: '#8787D2',
+    resizable: false,
     titleBarStyle: 'hidden',
     webPreferences: {
-      preload: path.resolve(process.cwd(), './electron/scripts/preload.js'),
+      // preload: path.resolve(process.cwd(), './electron/scripts/preload.js'),
       nodeIntegration: true,
       contextIsolation: false
     }
   });
+  mainWindow.setWindowButtonVisibility(false);
 
   const url = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..')}/render/index.html`;
   await mainWindow.loadURL(url);
+
+  mainWindow.webContents.postMessage('port', null, [port2]);
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
   setTimeout(() => {
+    port1.postMessage({ loading: false });
     mainWindow?.hide();
-    mainWindow?.setSize(1286, 700, false);
+    mainWindow?.setBackgroundColor('#FFF');
+    mainWindow?.setSize(1286, 700, true);
     mainWindow?.center();
-    mainWindow?.show();
-  }, 10000);
+    mainWindow?.setWindowButtonVisibility(true);
+    setTimeout(() => {
+      mainWindow?.show();
+    }, 500);
+  }, 3000);
 }
-
-async function createLoading() {
-  mainWindow = new BrowserWindow({
-    width: 400,
-    height: 400,
-    transparent: false,
-    frame: false,
-    backgroundColor: '#FFF',
-    resizable: false,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  });
-  const url = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..')}/render/index.html`;
-  await mainWindow.loadURL(url);
-  try {
-    mainWindow.on('closed', () => {
-      mainWindow = null;
-    });
-  } catch (e) {
-    signale.error(e);
-  }
-}
-// mainWindow.set
 
 //避免多实例
 if (!gotTheLock) {
@@ -75,14 +61,7 @@ if (!gotTheLock) {
   });
 }
 
-app.on('ready', async () => {
-  await createWindow();
-  // setTimeout(async () => {
-  //   mainWindow?.close();
-  //   await createWindow();
-  //   mainWindow?.webContents.openDevTools();
-  // }, 20000);
-});
+app.on('ready', createWindow);
 
 app.whenReady().then(async () => {
   try {
@@ -99,7 +78,12 @@ app.on('window-all-closed', function () {
 });
 
 app.on('before-quit', async (e: Electron.Event) => {
-  await closeServer();
-  app.quit();
-  console.log('退出时间before-quit', e.timeStamp);
+  try {
+    await closeServer();
+    app.quit();
+    console.log('退出时间before-quit', e.timeStamp);
+  } catch (e) {
+    app.exit();
+    signale.error(e);
+  }
 });
