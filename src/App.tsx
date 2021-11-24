@@ -24,7 +24,7 @@ function App() {
   }, []);
   console.log(loading);
   return (
-    <div style={{ display: show || loading ? 'block' : 'none' }} className={styles.app}>
+    <div style={{ display: show || loading ? 'flex' : 'none' }} className={styles.app}>
       {!loading ? <RouterAuth /> : <Loading />}
     </div>
   );
