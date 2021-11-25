@@ -2,8 +2,6 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { ipcName } from '../../ipc/';
 import { ipcRenderer } from 'electron';
 import styles from './index.module.scss';
-import { Box, Button, InputAdornment, MenuItem, TextField } from '@material-ui/core';
-import JsonEdit from '../../components/JsonEdit';
 import useObject from '../../hooks/useObject';
 import { MockData } from './types';
 import HistoryApiTab from './HistoryTabs';

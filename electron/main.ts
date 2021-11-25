@@ -1,11 +1,11 @@
 import { app, BrowserWindow, MessageChannelMain } from 'electron';
 import * as path from 'path';
-import { startServer, closeServer } from './server';
+import { startServer, closeServer } from './scripts/start_server';
 let mainWindow: BrowserWindow | null;
 import * as signale from 'signale';
+
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
-const scriptPath = path.resolve(process.cwd(), './electron/shell/index.js');
 signale.note('根路径 =>' + __dirname);
 signale.note('process.cwd()=>' + process.cwd());
 
@@ -67,7 +67,7 @@ app.whenReady().then(async () => {
   try {
     const startIpc = (await import('./scripts/ipc')).default;
     startIpc();
-    startServer(scriptPath);
+    startServer();
   } catch (e) {
     signale.error(e);
   }

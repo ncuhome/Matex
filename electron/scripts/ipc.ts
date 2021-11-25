@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
-import { myEmitter } from '../utils/EventEmiter';
 import { MockData } from './data';
+import { myEmitter } from '../utils/EventEmiter';
 
 const ipcName = 'ulisten';
 

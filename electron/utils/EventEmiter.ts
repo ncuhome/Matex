@@ -15,7 +15,7 @@ class MyEventEmitter {
   on<T extends any>(name: string, callback: (data: T) => void) {
     let exist: boolean = false;
     let itemIndex: number = -1;
-    let funcIndex: number = -1;
+    let funcIndex: number;
     this.listeners.forEach((item, index) => {
       if (item.name === name) {
         exist = true;

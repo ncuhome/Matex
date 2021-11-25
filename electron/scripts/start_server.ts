@@ -1,18 +1,19 @@
-import { myEmitter } from '../utils/EventEmiter';
-import { saveByRedis } from '../scripts/redis';
-import shell from 'shelljs';
+import { saveByRedis } from './redis';
 import execa from 'execa';
 import * as signale from 'signale';
+import path from 'path';
+import { myEmitter } from '../utils/EventEmiter';
 
-shell.config.execPath = '/usr/local/bin/node';
+const isDev = process.env.NODE_ENV === 'development';
+const scriptPath = path.resolve(__dirname, isDev ? '../server/app.ts' : '../server/dist/app.js');
 
-const startServer = (scriptPath: string) => {
+const startServer = () => {
   let exist = false;
   try {
     myEmitter.on<any>('ulisten', async (mockData) => {
       await saveByRedis(mockData);
       try {
-        const res = await execa.command('cat /Users/liqingdong/.pm2/pids/index-0.pid');
+        const res = await execa.command('cat /Users/liqingdong/.pm2/pids/app-0.pid');
         if (res) {
           exist = true;
         }
@@ -25,7 +26,7 @@ const startServer = (scriptPath: string) => {
         await closeServer();
       }
       exist = false;
-      const cmd = `pm2 start ${scriptPath} --name index --time`;
+      const cmd = `pm2 start ${scriptPath} --name app --time`;
       setTimeout(async () => {
         await execa.command(cmd);
         exist = true;
@@ -37,9 +38,9 @@ const startServer = (scriptPath: string) => {
 };
 
 const closeServer = async () => {
-  const { stdout } = await execa.command('cat /Users/liqingdong/.pm2/pids/index-0.pid');
+  const { stdout } = await execa.command('cat /Users/liqingdong/.pm2/pids/app-0.pid');
   try {
-    await execa.command('pm2 stop index');
+    await execa.command('pm2 stop app');
   } catch (e) {
     await execa.command(`kill -9 ${stdout}`);
     console.log('closeServer发生错误:', e);

@@ -1,7 +1,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es6",
     "module": "commonjs",
     "lib": ["dom","ESNext"],
     "allowJs": true,
@@ -9,6 +9,9 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "outDir": "release/build",
     "noEmit": true,
