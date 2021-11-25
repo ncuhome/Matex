@@ -7,4 +7,19 @@
   bottom: 0;
   left: 0;
   right: 0;
+
+  .imgCon{
+    flex: 1;
+    position: relative;
+
+    .img{
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 120px;
+      width: 230px;
+      bottom: 100px;
+    }
+  }
 }
