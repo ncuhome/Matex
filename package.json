@@ -13,6 +13,7 @@
   "build": {
     "productName": "ulisten",
     "appId": "org.ulisten.com",
+    "icon": "./electron/assets/icon.png",
     "asar": true,
     "files": [
       "electron",
@@ -20,9 +21,7 @@
       "package.json"
     ],
     "mac": {
-      "target": {
-        "target": "default"
-      },
+      "icon": "./electron/assets/icon/icon.png",
       "hardenedRuntime": true
     },
     "directories": {
@@ -32,12 +31,15 @@
   "scripts": {
     "dev": "concurrently \"vite\" \"npm run remove\" \"npm run dev:electron\" \"npm run watch:electron\"",
     "dev:react": "vite",
+    "dev:server": "cross-env NODE_ENV=development nodemon --ext ts --exec 'ts-node ./electron/server/app.ts'",
     "remove": "rm -R ./electron/dev",
     "dev:electron": "parcel watch ./electron/main.ts --out-dir ./dev --target electron",
     "watch:electron": "wait-on ./dev/main.js && cross-env NODE_ENV=development nodemon --exec \"electron ./dev/main.js\"",
     "test:build": "electron release/build/main/main.js",
     "build": "concurrently \"npm run build:react\" \"npm run build:electron\"",
     "build:react": "tsc && vite build",
+    "build:worker": "rollup ./src/useWorker.ts --file bundle.js --format iife",
+    "build:server": "cross-env NODE_ENV=production parcel build ./electron/server/app.ts --out-dir ./electron/server/dist --target node",
     "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron",
     "serve": "vite preview",
     "package": "cross-env NODE_ENV=production electron-builder build --publish never"
@@ -45,7 +47,9 @@
   "devDependencies": {
     "@rollup/plugin-babel": "^5.3.0",
     "@types/babel__core": "^7.1.16",
+    "@types/body-parser": "^1.19.2",
     "@types/color-string": "^1.5.0",
+    "@types/express": "^4.17.13",
     "@types/history": "^4.7.9",
     "@types/node": "^16.11.7",
     "@types/react": "17.0.21",
@@ -74,33 +78,34 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.4.1",
     "sass": "^1.42.1",
-    "signale": "^1.4.0",
+    "ts-node": "^10.4.0",
     "typescript": "^4.4.4",
     "vite": "^2.6.14",
-    "vite-plugin-mdx": "^3.5.10",
     "wait-on": "^6.0.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.16.3",
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@material-ui/core": "^5.0.0-beta.5",
     "@material-ui/icons": "^5.0.0-beta.5",
     "@material-ui/styles": "^4.11.4",
-    "@mdx-js/mdx": "^2.0.0-rc.2",
-    "@mdx-js/rollup": "^2.0.0-rc.2",
+    "better-sqlite3": "^7.4.5",
+    "body-parser": "^1.19.0",
     "clsx": "^1.1.1",
     "execa": "^5.1.1",
-    "fastify": "^3.24.0",
-    "fastify-cli": "^2.13.0",
+    "express": "^4.17.1",
     "history": "^5.1.0",
     "monaco-editor": "^0.30.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-json-editor-ajrm": "^2.5.13",
     "react-router-dom": "^6.0.2",
     "redis": "^4.0.0-rc.4",
+    "reflect-metadata": "^0.1.13",
     "rive-react": "^0.0.26",
     "shelljs": "^0.8.4",
+    "signale": "^1.4.0",
+    "typeorm": "^0.2.41",
     "zustand": "^3.6.5"
   }
 }
