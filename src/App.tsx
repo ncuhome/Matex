@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './app.module.scss';
 import Loading from './components/Loading';
 import { RouterAuth } from './router';
-const { ipcRenderer } = require('electron');
 function App() {
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     (async () => {
-      // const { ipcRenderer } = require('electron');
+      const { ipcRenderer } = require('electron');
       ipcRenderer.on('port', (e) => {
         const port = e.ports[0];
         port.onmessage = (event) => {

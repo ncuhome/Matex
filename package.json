@@ -13,7 +13,7 @@
   "build": {
     "productName": "ulisten",
     "appId": "org.ulisten.com",
-    "icon": "./electron/assets/icon.png",
+    "icon": "./electron/assets/icon/icon.png",
     "asar": true,
     "files": [
       "electron",

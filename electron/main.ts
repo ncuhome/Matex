@@ -17,9 +17,10 @@ async function createWindow() {
     height: 400,
     center: true,
     frame: false,
-    backgroundColor: '#8787D2',
+    transparent: true,
+    // backgroundColor: '#8787D2',
     resizable: false,
-    titleBarStyle: 'hidden',
+    titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
       // preload: path.resolve(process.cwd(), './electron/scripts/preload.js'),
       nodeIntegration: true,
@@ -39,8 +40,8 @@ async function createWindow() {
   setTimeout(() => {
     port1.postMessage({ loading: false });
     mainWindow?.hide();
-    mainWindow?.setBackgroundColor('#FFF');
-    mainWindow?.setSize(1286, 700, true);
+    // mainWindow?.setBackgroundColor('#FFF');
+    mainWindow?.setSize(1200, 700, true);
     mainWindow?.center();
     mainWindow?.setWindowButtonVisibility(true);
     setTimeout(() => {

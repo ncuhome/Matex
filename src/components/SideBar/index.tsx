@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styles from './index.module.scss';
-import Tab from '../Tab';
+import Tab from '../SideBarTab';
 import { tabItems } from './tabItems';
 
 const SideBar = () => {
