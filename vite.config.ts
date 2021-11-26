@@ -15,11 +15,15 @@ export default defineConfig({
     rollupOptions: {
       output: {
         compact: true,
-        assetFileNames: 'assets.[ext]',
-        chunkFileNames: 'bundle.[name].js',
-        entryFileNames: 'entity.js',
-        manualChunks: {
-          monacoEditor: ['monaco-editor']
+        assetFileNames: 'assets.[name].[ext]',
+        chunkFileNames: 'chunk.[name].js',
+        entryFileNames: 'entry.[name].js',
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          } else {
+            return 'bundle';
+          }
         }
       }
     }
