@@ -1,0 +1,32 @@
+.badge{
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  padding: 6px;
+
+  .inner{
+    width: 100%;
+    line-height: 38px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 15px;
+  }
+}
+
+.get{
+  background-color:#B2D4FE;
+
+  .getInner{
+    background-color:#1F9CF0;
+    color: #FFF;
+  }
+}
+
+.post{
+  background-color:#F6C4E0;
+
+  .postInner{
+    background-color:#FA86A3;
+    color: #FFF;
+  }
+}

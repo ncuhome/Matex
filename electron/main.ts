@@ -19,7 +19,7 @@ async function createWindow() {
     frame: false,
     transparent: true,
     // backgroundColor: '#8787D2',
-    resizable: false,
+    resizable: true,
     titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
       // preload: path.resolve(process.cwd(), './electron/scripts/preload.js'),

@@ -17,7 +17,7 @@ function App() {
             setLoading(false);
             setTimeout(() => {
               setShow(true);
-            }, 100);
+            }, 50);
           }
         };
       });
@@ -30,7 +30,7 @@ function App() {
         setLoading(false);
         setTimeout(() => {
           setShow(true);
-        }, 100);
+        }, 50);
       }
     }, 5000);
   }, []);

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import styles from './index.module.scss';
-import AddIcon from '@material-ui/icons/Add';
 import APIHeader from './Header';
 import APISider from './Side';
 import APIBody from './Body';

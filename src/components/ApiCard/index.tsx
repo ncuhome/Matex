@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './index.module.scss';
+import Badge from '../MethodBadge';
 
 const ApiCard = () => {
-  console.log('render');
   return (
     <div className={styles.apiCard}>
-      111
-      <div />
+      <Badge />
     </div>
   );
 };
