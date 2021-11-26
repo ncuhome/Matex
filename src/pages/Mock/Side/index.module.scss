@@ -1,0 +1,20 @@
+.sider{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+
+  .form{
+    flex: 1;
+    border-radius: 20px;
+    background:var(--card-bg--);
+    margin-bottom: 20px;
+  }
+
+  .card{
+    height: 200px;
+    background:var(--card-bg--);
+    border-radius: 20px;
+  }
+}

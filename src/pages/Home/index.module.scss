@@ -1,6 +1,4 @@
 .rootCon{
-  width: 100vw;
-  height: 100vh;
   position: absolute;
   top:0;
   bottom: 0;
@@ -24,7 +22,7 @@
   grid-row: 2 / 5;
   border-top-right-radius: 50px;
   position: relative;
-  background:var(--card-bg--)
+  background:var(--card-bg--);
 }
 
 .body{
