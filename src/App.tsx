@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './app.module.scss';
-import Loading from './components/Loading';
 import { RouterAuth } from './router';
+import Loading from './components/Loading';
 function App() {
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);

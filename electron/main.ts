@@ -40,13 +40,12 @@ async function createWindow() {
   setTimeout(() => {
     port1.postMessage({ loading: false });
     mainWindow?.hide();
-    // mainWindow?.setBackgroundColor('#FFF');
     mainWindow?.setSize(1200, 700, true);
     mainWindow?.center();
     mainWindow?.setWindowButtonVisibility(true);
     setTimeout(() => {
       mainWindow?.show();
-    }, 500);
+    }, 1000);
   }, 3000);
 }
 

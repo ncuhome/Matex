@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 import AddIcon from '@material-ui/icons/Add';
 import APIHeader from './Header';
 import APISider from './Side';
+import APIBody from './Body';
 
 const MockView = () => {
   const [down, setDown] = useState(false);
@@ -41,7 +42,9 @@ const MockView = () => {
       <div className={styles.side}>
         <APISider />
       </div>
-      <div className={styles.body}>222</div>
+      <div className={styles.body}>
+        <APIBody />
+      </div>
     </div>
   );
 };

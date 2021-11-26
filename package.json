@@ -103,7 +103,6 @@
     "react-router-dom": "^6.0.2",
     "redis": "^4.0.0-rc.4",
     "reflect-metadata": "^0.1.13",
-    "rive-react": "^0.0.26",
     "shelljs": "^0.8.4",
     "signale": "^1.4.0",
     "typeorm": "^0.2.41",

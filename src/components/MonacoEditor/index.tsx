@@ -48,7 +48,14 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       base: 'vs',
       inherit: true,
       colors: {
-        'editor.lineHighlightBorder': '#00000006'
+        'editor.lineHighlightBorder': '#00000000',
+        'editor.background': '#00000000',
+        'scrollbar.shadow': '#00000000',
+        'scrollbarSlider.background': '#00000000',
+        'scrollbarSlider.hoverBackground': '#00000000',
+        'scrollbarSlider.activeBackground': '#00000000',
+        'editorWidget.border': '#00000000',
+        'editorOverviewRuler.border': '#00000000'
       },
       rules
     });
@@ -57,11 +64,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
 
   useEffect(() => {
     setEditor(null);
-    monaco.languages.setMonarchTokensProvider('json', {
-      tokenizer: {
-        root: [[/&ui/, { token: 'custom-highlight' }]]
-      }
-    });
     monaco.languages.registerCompletionItemProvider('json', {
       provideCompletionItems: (model, position, context, token) => {
         return { suggestions: suggestions } as ProviderResult<CompletionList>;

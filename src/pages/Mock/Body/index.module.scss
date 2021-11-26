@@ -1,0 +1,20 @@
+.body{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .idleImg{
+    width: 300px;
+    height: 250px;
+  }
+
+  .title{
+    text-align: center;
+  }
+}
