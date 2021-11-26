@@ -1,16 +1,18 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { useRive, RiveParameters, Fit } from 'rive-react';
+import clsx from 'clsx';
 
 const Loading = () => {
-  const params = {
-    src: './runner_boy.riv',
-    autoplay: true
-  } as RiveParameters;
-  const { RiveComponent, rive } = useRive(params as any);
   return (
-    <div className={styles.loading}>
-      <RiveComponent />
+    <div className={styles.con}>
+      <div className={styles.spinnerBox}>
+        <div className={clsx([styles.blueOrbit, styles.leo])} />
+        <div className={clsx([styles.greenOrbit, styles.leo])} />
+        <div className={clsx([styles.redOrbit, styles.leo])} />
+        <div className={clsx([styles.whiteOrbit, styles.leo, styles.w1])} />
+        <div className={clsx([styles.whiteOrbit, styles.leo, styles.w2])} />
+        <div className={clsx([styles.whiteOrbit, styles.leo, styles.w3])} />
+      </div>
     </div>
   );
 };
