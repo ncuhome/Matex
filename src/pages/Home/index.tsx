@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './index.module.scss';
 import SideBar from '../../components/SideBar';
-import rainbow from '../../assets/icon/rainbow.svg';
-import Mock from '../MockView';
 import Header from '../../components/Header';
+import MockView from '../Mock';
 
 const Home: React.FC<any> = () => {
   return (
@@ -14,7 +13,9 @@ const Home: React.FC<any> = () => {
       <div className={styles.sideBar}>
         <SideBar />
       </div>
-      <div className={styles.body}>{/*<Mock />*/}</div>
+      <div className={styles.body}>
+        <MockView />
+      </div>
     </div>
   );
 };

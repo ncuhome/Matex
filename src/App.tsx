@@ -23,6 +23,17 @@ function App() {
       });
     })();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (loading) {
+        setLoading(false);
+        setTimeout(() => {
+          setShow(true);
+        }, 100);
+      }
+    }, 5000);
+  }, []);
   console.log(loading);
   return (
     <div style={{ display: show || loading ? 'flex' : 'none' }} className={styles.app}>

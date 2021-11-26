@@ -1,0 +1,27 @@
+.con{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+
+  .header{
+    display: flex;
+    flex-direction: row;
+    overflow:auto;
+    width: 100%;
+    user-select:none;
+    -webkit-overflow-scrolling: touch;
+    white-space:nowrap;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+::-webkit-scrollbar{
+  //display: none;
+}

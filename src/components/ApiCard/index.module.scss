@@ -1,0 +1,15 @@
+
+.apiCard{
+  flex: none;
+  flex-shrink: 0;
+  width: 200px;
+  height: 130px;
+  background: var(--card-bg--);
+  border-radius: 15px;
+  -webkit-overflow-scrolling: touch;
+
+
+  &:hover{
+    cursor: pointer;
+  }
+}

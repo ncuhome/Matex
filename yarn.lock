@@ -7,6 +7,14 @@
   resolved "https://registry.nlark.com/7zip-bin/download/7zip-bin-5.1.1.tgz#9274ec7460652f9c632c59addf24efb1684ef876"
   integrity sha1-knTsdGBlL5xjLFmt3yTvsWhO+HY=
 
+"@ahooksjs/use-request@^2.8.13":
+  version "2.8.13"
+  resolved "https://registry.npmmirror.com/@ahooksjs/use-request/download/@ahooksjs/use-request-2.8.13.tgz?cache=0&sync_timestamp=1635254506034&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40ahooksjs%2Fuse-request%2Fdownload%2F%40ahooksjs%2Fuse-request-2.8.13.tgz#5ace53859feb6b4fe9ebcbf2e72982bb9b7db383"
+  integrity sha1-Ws5ThZ/ra0/p68vy5ymCu5t9s4M=
+  dependencies:
+    lodash.debounce "^4.0.8"
+    lodash.throttle "^4.1.1"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.16.0":
   version "7.16.0"
   resolved "https://registry.npmmirror.com/@babel/code-frame/download/@babel/code-frame-7.16.0.tgz?cache=0&sync_timestamp=1635560663383&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40babel%2Fcode-frame%2Fdownload%2F%40babel%2Fcode-frame-7.16.0.tgz#0dfc80309beec8411e65e706461c408b0bb9b431"
@@ -1609,6 +1617,11 @@
   resolved "https://registry.npmmirror.com/@types/http-cache-semantics/download/@types/http-cache-semantics-4.0.1.tgz#0ea7b61496902b95890dc4c3a116b60cb8dae812"
   integrity sha1-Dqe2FJaQK5WJDcTDoRa2DLja6BI=
 
+"@types/js-cookie@^2.2.6":
+  version "2.2.7"
+  resolved "https://registry.npmmirror.com/@types/js-cookie/download/@types/js-cookie-2.2.7.tgz?cache=0&sync_timestamp=1636998131153&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fjs-cookie%2Fdownload%2F%40types%2Fjs-cookie-2.2.7.tgz#226a9e31680835a6188e887f3988e60c04d3f6a3"
+  integrity sha1-ImqeMWgINaYYjoh/OYjmDATT9qM=
+
 "@types/json-schema@^7.0.9":
   version "7.0.9"
   resolved "https://registry.npmmirror.com/@types/json-schema/download/@types/json-schema-7.0.9.tgz?cache=0&sync_timestamp=1637266119442&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fjson-schema%2Fdownload%2F%40types%2Fjson-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
@@ -1949,6 +1962,22 @@ aggregate-error@^3.0.0:
   dependencies:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
+
+ahooks@^2.10.12:
+  version "2.10.12"
+  resolved "https://registry.npmmirror.com/ahooks/download/ahooks-2.10.12.tgz#e8cab653039434279e69569a8342c602b3545dab"
+  integrity sha1-6Mq2UwOUNCeeaVaag0LGArNUXas=
+  dependencies:
+    "@ahooksjs/use-request" "^2.8.13"
+    "@types/js-cookie" "^2.2.6"
+    dayjs "^1.9.1"
+    intersection-observer "^0.7.0"
+    js-cookie "^2.2.1"
+    lodash.debounce "^4.0.8"
+    lodash.isequal "^4.5.0"
+    lodash.throttle "^4.1.1"
+    resize-observer-polyfill "^1.5.1"
+    screenfull "^5.0.0"
 
 ajv-keywords@^3.4.1:
   version "3.5.2"
@@ -3617,6 +3646,11 @@ date-fns@^2.16.1:
   version "2.26.0"
   resolved "https://registry.npmmirror.com/date-fns/download/date-fns-2.26.0.tgz?cache=0&sync_timestamp=1637308994584&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fdate-fns%2Fdownload%2Fdate-fns-2.26.0.tgz#fa45305543c392c4f914e50775fd2a4461e60fbd"
   integrity sha512-VQI812dRi3cusdY/fhoBKvc6l2W8BPWU1FNVnFH9Nttjx4AFBRzfSVb/Eyc7jBT6e9sg1XtAGsYpBQ6c/jygbg==
+
+dayjs@^1.9.1:
+  version "1.10.7"
+  resolved "https://registry.nlark.com/dayjs/download/dayjs-1.10.7.tgz?cache=0&sync_timestamp=1631266519235&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdayjs%2Fdownload%2Fdayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
+  integrity sha1-LPX5Gt0oEWdIRAhmoKHSbzps5Gg=
 
 deasync@^0.1.14:
   version "0.1.24"
@@ -5605,6 +5639,11 @@ interpret@^1.0.0:
   resolved "https://registry.nlark.com/interpret/download/interpret-1.4.0.tgz?cache=0&sync_timestamp=1624607963441&other_urls=https%3A%2F%2Fregistry.nlark.com%2Finterpret%2Fdownload%2Finterpret-1.4.0.tgz#665ab8bc4da27a774a40584e812e3e0fa45b1a1e"
   integrity sha1-Zlq4vE2iendKQFhOgS4+D6RbGh4=
 
+intersection-observer@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npm.taobao.org/intersection-observer/download/intersection-observer-0.7.0.tgz#ee16bee978db53516ead2f0a8154b09b400bbdc9"
+  integrity sha1-7ha+6XjbU1FurS8KgVSwm0ALvck=
+
 ip@^1.1.5:
   version "1.1.5"
   resolved "https://registry.nlark.com/ip/download/ip-1.1.5.tgz?cache=0&sync_timestamp=1624607989560&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fip%2Fdownload%2Fip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
@@ -6028,6 +6067,11 @@ joi@^17.4.0:
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
 
+js-cookie@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.nlark.com/js-cookie/download/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha1-aeEG3F1YBolFYpAqpbrsN0Tpsrg=
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.nlark.com/js-tokens/download/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -6362,6 +6406,11 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.nlark.com/lodash.debounce/download/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npm.taobao.org/lodash.isequal/download/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npm.taobao.org/lodash.memoize/download/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -6376,6 +6425,11 @@ lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.nlark.com/lodash.sortby/download/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+
+lodash.throttle@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npm.taobao.org/lodash.throttle/download/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+  integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
@@ -8702,6 +8756,11 @@ require-directory@^2.1.1:
   resolved "https://registry.nlark.com/require-directory/download/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
 
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.npm.taobao.org/resize-observer-polyfill/download/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha1-DpAg3T0hAkRY1OvSfiPkAmmBBGQ=
+
 resolve-alpn@^1.0.0:
   version "1.2.1"
   resolved "https://registry.nlark.com/resolve-alpn/download/resolve-alpn-1.2.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fresolve-alpn%2Fdownload%2Fresolve-alpn-1.2.1.tgz#b7adbdac3546aaaec20b45e7d8265927072726f9"
@@ -8846,13 +8905,6 @@ rollup@^2.57.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rollup@^2.60.1:
-  version "2.60.1"
-  resolved "https://registry.npmmirror.com/rollup/download/rollup-2.60.1.tgz?cache=0&sync_timestamp=1637567576726&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Frollup%2Fdownload%2Frollup-2.60.1.tgz#4b34cd247f09b421f10a3c9286eda2ecf9972079"
-  integrity sha512-akwfnpjY0rXEDSn1UTVfKXJhPsEBu+imi1gqBA1ZkHGydUnkV/fWCC90P7rDaLEW8KTwBcS1G3N4893Ndz+jwg==
-  optionalDependencies:
-    fsevents "~2.3.2"
-
 run-parallel@^1.1.9:
   version "1.2.0"
   resolved "https://registry.nlark.com/run-parallel/download/run-parallel-1.2.0.tgz#66d1368da7bdf921eb9d95bd1a9229e7f21a43ee"
@@ -8929,6 +8981,11 @@ scheduler@^0.20.2:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+screenfull@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.npmmirror.com/screenfull/download/screenfull-5.2.0.tgz?cache=0&sync_timestamp=1635923453416&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fscreenfull%2Fdownload%2Fscreenfull-5.2.0.tgz#6533d524d30621fc1283b9692146f3f13a93d1ba"
+  integrity sha1-ZTPVJNMGIfwSg7lpIUbz8TqT0bo=
 
 semver-compare@^1.0.0:
   version "1.0.0"
