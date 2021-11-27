@@ -1,8 +1,17 @@
 import React from 'react';
 import styles from './index.module.scss';
 import AddIcon from '@material-ui/icons/Add';
+import { myEmitter } from '../../utils/EventEmiter';
 
 export const ApiCard = () => {
+  const onFocus = () => {
+    myEmitter.emit<boolean>('inputFocus', true);
+  };
+
+  const onBlur = () => {
+    myEmitter.emit<boolean>('inputFocus', false);
+  };
+
   return (
     <div className={styles.apiCard}>
       <div className={styles.header}>
@@ -14,11 +23,11 @@ export const ApiCard = () => {
       <div className={styles.info}>
         <div>
           <span className={styles.label}>name:</span>
-          <input value={'test'} className={styles.content} />
+          <input onFocus={onFocus} onBlur={onBlur} value={'test'} className={styles.content} />
         </div>
         <div>
           <span className={styles.label}>count:</span>
-          <input value={'test'} className={styles.content} />
+          <input onFocus={onFocus} onBlur={onBlur} value={'test'} className={styles.content} />
         </div>
       </div>
     </div>
