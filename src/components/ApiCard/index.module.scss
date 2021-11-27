@@ -9,8 +9,70 @@
   border-radius: 15px;
   -webkit-overflow-scrolling: touch;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   &:hover{
     cursor: pointer;
+  }
+
+  .header{
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: -10px;
+
+    .point{
+      margin-left: 10px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: #B6BFFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .inner{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #3C30FF;
+      }
+    }
+
+    .time{
+      flex: 1;
+      margin-left: 30px;
+      color: #6C63FF;
+    }
+  }
+
+  .info{
+    flex: 1;
+    margin-top: 10px;
+    margin-left: 15px;
+
+    .label{
+      font-size: 17px;
+      font-weight: 400;
+      color: #6B6C84;
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .content{
+      width: 100px;
+      outline: none;
+      border: none;
+      padding: 2px 5px;
+      border-radius: 5px;
+      background-color: #C5CCFE;
+      color:#3F3D56;
+
+    }
   }
 }
