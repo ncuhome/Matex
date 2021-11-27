@@ -7,22 +7,3 @@
   white-space:nowrap;
   scroll-behavior: smooth;
 }
-
-.addCard{
-  flex: none;
-  flex-shrink: 0;
-  width: 200px;
-  margin: 0 10px;
-  height: 130px;
-  background: var(--card-bg--);
-  border-radius: 15px;
-  -webkit-overflow-scrolling: touch;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover{
-    cursor: pointer;
-  }
-}

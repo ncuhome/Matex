@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-import ApiCard from '../../../components/ApiCard';
-import AddIcon from '@material-ui/icons/Add';
+import { AddApiCard, ApiCard } from '../../../components/ApiCard';
 
 const APIHeader = () => {
   return (
@@ -15,9 +14,7 @@ const APIHeader = () => {
       <ApiCard />
       <ApiCard />
       <ApiCard />
-      <div className={styles.addCard}>
-        <AddIcon sx={{ transform: 'scale(1.5)' }} />
-      </div>
+      <AddApiCard />
     </div>
   );
 };

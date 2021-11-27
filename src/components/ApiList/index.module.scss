@@ -4,39 +4,46 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: rgba(138,163,253,0.7);
+  background-color: rgba(138,163,253,0.3);
   border-radius: 10px;
   padding: 5px;
+  margin-bottom: 20px;
 
   &:hover{
     cursor: pointer;
-    background-color: #6365F1;
+    background-color: rgba(138,148,253,0.6);
   }
 
   .url{
     margin-left: 10px;
     flex: 1;
+    color: #6C63FF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     .urlInfo{
       line-height: 40px;
       font-size: 20px;
 
-      .labelPort{
+      .label{
         display: inline-block;
         text-align: center;
-        background-color: #F6C4E0;
-        border-radius: 4px;
         width: 50px;
+        color: #6C63FF;
         line-height: 30px;
-        font-size: 16px;
+        font-size: 20px;
+        margin-right: 10px;
+        user-select: none;
       }
 
-      .labelPath{
+      .path{
         display: inline-block;
         text-align: center;
-        background-color: #1E9CFC;
+        background-color: #FFFFFF;
         border-radius: 4px;
         width: 50px;
+        color: #3C30FF;
         line-height: 30px;
         font-size: 16px;
       }
