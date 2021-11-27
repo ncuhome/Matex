@@ -37,7 +37,7 @@
     "watch:electron": "wait-on ./dev/main.js && cross-env NODE_ENV=development nodemon --exec \"electron ./dev/main.js\"",
     "test:build": "electron release/build/main/main.js",
     "build": "concurrently \"npm run build:react\" \"npm run build:electron\"",
-    "build:react": "tsc && vite build",
+    "build:react": "vite build",
     "build:worker": "rollup ./src/useWorker.ts --file bundle.js --format iife",
     "build:server": "cross-env NODE_ENV=production parcel build ./electron/server/app.ts --out-dir ./electron/server/dist --target node",
     "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron",

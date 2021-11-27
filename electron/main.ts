@@ -22,7 +22,7 @@ async function createWindow() {
     resizable: true,
     titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
-      // preload: path.resolve(process.cwd(), './electron/scripts/preload.js'),
+      preload: path.resolve(process.cwd(), './electron/scripts/preload.js'),
       nodeIntegration: true,
       contextIsolation: false
     }

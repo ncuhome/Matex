@@ -1,11 +1,10 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
-    window.isMain = true;
-    const element = document.getElementById(selector);
-    if (element) element.className = 'main';
+  const inject = () => {
+    const { ipcRenderer } = require('electron');
+    window.ipc = ipcRenderer;
   };
 
   for (const type of ['chrome', 'node', 'electron']) {
-    replaceText('root', process.versions[type]?.toString());
+    inject();
   }
 });

@@ -8,21 +8,31 @@ const MockView = () => {
   const [down, setDown] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [startX, setStartX] = useState(0);
+
   const onMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation();
-    if (down) {
-      const distance = e.clientX - startX;
-      if (distance > 0) {
-        scrollRef.current!.scrollLeft -= Math.abs(distance) / 4;
-      } else {
-        scrollRef.current!.scrollLeft += Math.abs(distance) / 4;
+    window.requestAnimationFrame(() => {
+      if (down) {
+        const distance = e.clientX - startX;
+        if (distance > 0) {
+          scrollRef.current!.scrollLeft -= Math.abs(distance) / 3;
+        } else {
+          scrollRef.current!.scrollLeft += Math.abs(distance) / 3;
+        }
       }
-    }
+    });
   };
+
   const onMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation();
     setDown(true);
     setStartX(e.clientX);
+  };
+
+  const onMouseUp: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.stopPropagation();
+    setDown(false);
+    setStartX(0);
   };
 
   return (
@@ -32,7 +42,7 @@ const MockView = () => {
         className={styles.header}
         onMouseDownCapture={onMouseDown}
         onMouseMove={onMouseMove}
-        onMouseUp={() => setDown(false)}
+        onMouseUp={onMouseUp}
         onMouseDown={onMouseDown}
         onMouseLeave={() => setDown(false)}
       >
