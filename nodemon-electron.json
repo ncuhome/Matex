@@ -1,0 +1,14 @@
+{
+  "verbose": true,
+  "ignore": [
+    "asar",
+    "release/**",
+    ".cache",
+    "node_modules/**"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js",
+  "exec": "electron ./dev/main.js"
+}

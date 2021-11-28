@@ -31,10 +31,10 @@
   "scripts": {
     "dev": "concurrently \"vite\" \"npm run remove\" \"npm run dev:electron\" \"npm run watch:electron\"",
     "dev:react": "vite",
-    "dev:server": "cross-env NODE_ENV=development nodemon --ext ts --exec 'ts-node ./electron/server/app.ts'",
+    "dev:server": "nodemon --config nodemon-express.json",
     "remove": "rm -R ./electron/dev",
     "dev:electron": "parcel watch ./electron/main.ts --out-dir ./dev --target electron",
-    "watch:electron": "wait-on ./dev/main.js && cross-env NODE_ENV=development nodemon --exec \"electron ./dev/main.js\"",
+    "watch:electron": "wait-on ./dev/main.js && nodemon --config nodemon-electron.json",
     "test:build": "electron release/build/main/main.js",
     "build": "concurrently \"npm run build:react\" \"npm run build:electron\"",
     "build:react": "vite build",
