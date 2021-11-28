@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Window } from '../type';
 import type { IpcRendererEvent } from 'electron';
 
@@ -8,6 +8,7 @@ interface IpcProps {
 }
 
 const useIpcOn = ({ channel, listener }: IpcProps) => {
+  console.log(Window.ipc);
   useEffect(() => {
     Window.ipc.on(channel, listener);
 

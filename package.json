@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "a music app",
   "private": true,
-  "keywords": [
-    "electron"
-  ],
   "author": "lqd1434",
   "license": "ISC",
   "homepage": ".",
   "main": "./release/build/main/main.js",
+  "keywords": [
+    "electron"
+  ],
   "build": {
     "productName": "ulisten",
     "appId": "org.ulisten.com",
@@ -40,7 +40,7 @@
     "build:react": "vite build",
     "build:worker": "rollup ./src/useWorker.ts --file bundle.js --format iife",
     "build:server": "cross-env NODE_ENV=production parcel build ./electron/server/app.ts --out-dir ./electron/server/dist --target node",
-    "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron",
+    "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron && cp -r ./electron/scripts/preload.js ./release/build/main/",
     "serve": "vite preview",
     "package": "cross-env NODE_ENV=production electron-builder build --publish never"
   },

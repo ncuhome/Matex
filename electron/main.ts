@@ -1,8 +1,9 @@
 import { app, BrowserWindow, MessageChannelMain } from 'electron';
 import * as path from 'path';
-import { startServer, closeServer } from './scripts/start_server';
-let mainWindow: BrowserWindow | null;
+import { closeServer, startServer } from './scripts/start_server';
 import * as signale from 'signale';
+
+let mainWindow: BrowserWindow | null;
 
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
@@ -10,6 +11,10 @@ signale.note('根路径 =>' + __dirname);
 signale.note('process.cwd()=>' + process.cwd());
 
 const { port1, port2 } = new MessageChannelMain();
+
+const preloadPath = isDev
+  ? path.resolve(process.cwd(), './electron/scripts/preload.js')
+  : `${path.resolve(__dirname, './preload.js')}`;
 
 async function createWindow() {
   mainWindow = new BrowserWindow({
@@ -22,7 +27,7 @@ async function createWindow() {
     resizable: true,
     titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
-      preload: path.resolve(process.cwd(), './electron/scripts/preload.js'),
+      preload: preloadPath,
       nodeIntegration: true,
       contextIsolation: false
     }
