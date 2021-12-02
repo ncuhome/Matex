@@ -1,0 +1,34 @@
+.form {
+  width: 100%;
+  height: 100%;
+
+  .fullUrl {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 60px;
+
+    .urlText {
+      display: block;
+      flex: 1;
+      border: none;
+      border-bottom: #FA86A3 1px solid;
+      outline: none;
+      padding: 10px;
+      background-color: transparent;
+      font-weight: 400;
+      color: #3F3D56;
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+  }
+}
+
+.select {
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #FDF0F7;
+  color: #FA86A3;
+}
