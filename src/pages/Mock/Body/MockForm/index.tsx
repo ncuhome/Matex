@@ -1,11 +1,11 @@
-import React, { ChangeEvent, Fragment } from 'react';
+import React, { ChangeEvent, Fragment } from "react";
 import styles from "./index.module.scss";
 import Box from "@mui/material/Box";
 
-const options = ['JSON', 'Plain Text', 'File', 'Form Data'];
+const options = ["JSON", "Plain Text", "File", "Form Data"];
 
 const MockForm = () => {
-  const [method, setMethod] = React.useState('');
+  const [method, setMethod] = React.useState("");
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setMethod(event.target.value);

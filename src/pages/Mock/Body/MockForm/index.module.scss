@@ -11,8 +11,8 @@
     .urlText {
       display: block;
       flex: 1;
-      border: none;
-      border-bottom: #FA86A3 1px solid;
+      border: #FA86A3 1px solid;
+      border-radius: 3px;
       outline: none;
       padding: 10px;
       background-color: transparent;
@@ -26,9 +26,13 @@
 
 .select {
   outline: none;
-  border: none;
   padding: 10px;
   border-radius: 5px;
   background-color: #FDF0F7;
   color: #FA86A3;
+  border: #FA86A3 1px solid;
+
+  option {
+    background-color: #FDF0F7;
+  }
 }

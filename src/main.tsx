@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import "./globle.scss";
@@ -9,10 +9,10 @@ import "./useWorker";
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1E9CFC'
+      main: "#1E9CFC"
     },
     secondary: {
-      main: '#6365F1'
+      main: "#6365F1"
     },
     error: {
       main: '#F73C3C'
