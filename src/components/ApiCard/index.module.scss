@@ -5,7 +5,7 @@
   width: 200px;
   margin: 0 10px;
   height: 150px;
-  background: linear-gradient(135deg, #EAE6FE, #E2DCFF);
+  background: var(--light-bg1--); //linear-gradient(135deg, #EAE6FE, #E2DCFF)
   border-radius: 15px;
   -webkit-overflow-scrolling: touch;
   padding: 5px;

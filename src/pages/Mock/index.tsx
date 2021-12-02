@@ -46,13 +46,13 @@ const MockView = () => {
   return (
     <div className={styles.con}>
       <div
-        ref={scrollRef}
+        // ref={scrollRef}
         className={styles.header}
-        onMouseDownCapture={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseDown={onMouseDown}
-        onMouseLeave={() => setDown(false)}
+        // onMouseDownCapture={onMouseDown}
+        // onMouseMove={onMouseMove}
+        // onMouseUp={onMouseUp}
+        // onMouseDown={onMouseDown}
+        // onMouseLeave={() => setDown(false)}
       >
         <APIHeader />
       </div>

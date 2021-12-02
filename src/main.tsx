@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { HashRouter, BrowserRouter } from 'react-router-dom';
-import './globle.scss';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import './useWorker';
+import App from "./App";
+import { BrowserRouter, HashRouter } from "react-router-dom";
+import "./globle.scss";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "./useWorker";
 
 const theme = createTheme({
   palette: {

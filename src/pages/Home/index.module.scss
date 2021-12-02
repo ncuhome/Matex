@@ -20,9 +20,11 @@
 .sideBar{
   grid-column: 1 / 2;
   grid-row: 2 / 5;
-  border-top-right-radius: 50px;
+  border-radius: 20px;
   position: relative;
-  background:var(--card-bg--);
+  background: var(--light-bg2--);
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 .body{

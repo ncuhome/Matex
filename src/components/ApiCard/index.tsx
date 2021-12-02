@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import styles from './index.module.scss';
-import AddIcon from '@material-ui/icons/Add';
-import CircleProgress from '../CircleProgress';
-import BadgeOutlinedIcon from '@material-ui/icons/BadgeOutlined';
-import EarbudsOutlined from '@material-ui/icons/EarbudsOutlined';
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
-import { MoreHoriz } from '@material-ui/icons';
+import React, { useState } from "react";
+import styles from "./index.module.scss";
+import CircleProgress from "../CircleProgress";
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import { Add, BadgeOutlined, EarbudsOutlined, MoreHoriz } from "@mui/icons-material";
 
-const options = ['修改', '删除', '保存'];
+const options = ["修改", "删除", "保存"];
 const ITEM_HEIGHT = 48;
 export const ApiCard = () => {
   const [anchorEl, setAnchorEl] = useState<any>(null);
@@ -57,7 +54,7 @@ export const ApiCard = () => {
       <div className={styles.info}>
         <div className={styles.intro}>
           <div className={styles.name}>
-            <BadgeOutlinedIcon sx={{ mr: 1 }} />
+            <BadgeOutlined sx={{ mr: 1 }} />
             <span>成绩</span>
           </div>
           <div className={styles.port}>
@@ -76,7 +73,7 @@ export const ApiCard = () => {
 export const AddApiCard = () => {
   return (
     <div className={styles.apiCard}>
-      <AddIcon sx={{ transform: 'scale(1.2)' }} />
+      <Add sx={{ transform: "scale(1.2)" }} />
     </div>
   );
 };

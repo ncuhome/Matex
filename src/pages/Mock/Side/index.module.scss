@@ -8,15 +8,15 @@
   .form{
     flex: 1;
     border-radius: 20px;
-    background:var(--card-bg--);
+    background: var(--light-bg1--);
     margin-bottom: 20px;
     padding: 15px;
     overflow: hidden auto;
   }
 
-  .card{
+  .card {
     height: 200px;
-    background: #EAE6FE;
+    background: var(--light-bg1--);
     border-radius: 20px;
   }
 }

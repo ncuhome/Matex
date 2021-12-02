@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
-import Badge from '../MethodBadge';
-import AddIcon from '@material-ui/icons/Add';
+import Badge from "../MethodBadge";
+import AddIcon from "@mui/icons-material/Add";
 
 interface ApiListProps {
   type?: 'get' | 'post';

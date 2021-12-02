@@ -6,7 +6,6 @@ import Home from '../pages/Home';
 
 export const RouterAuth = () => {
   const location = useLocation();
-  // console.log(location);
   const auth = !!localStorage.getItem('login');
   console.log(auth, 'checkAuth');
 

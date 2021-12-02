@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Fragment } from 'react';
-import styles from './index.module.scss';
-import { Box } from '@material-ui/core';
+import styles from "./index.module.scss";
+import Box from "@mui/material/Box";
 
 const options = ['JSON', 'Plain Text', 'File', 'Form Data'];
 
