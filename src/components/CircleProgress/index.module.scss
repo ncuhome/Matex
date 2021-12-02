@@ -1,0 +1,40 @@
+
+.cardPercent {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .circleLine {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: #92EBAC 3px solid;
+  }
+
+  .count {
+    position: absolute;
+
+  }
+
+  .percentSvg {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    z-index: 1000;
+    transform: rotate(-90deg);
+
+    .svgCircle {
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 220; // 2 * PI * radius
+      transition: all 1s ease;
+      stroke-width: 9px;
+    }
+  }
+}
+
+
+
