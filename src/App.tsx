@@ -33,7 +33,6 @@ function App() {
       }
     }, 5000);
   }, []);
-  console.log(loading);
   return (
     <div style={{ display: show || loading ? 'flex' : 'none' }} className={styles.app}>
       {!loading ? <RouterAuth /> : <Loading />}

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styles from "./index.module.scss";
-import CircleProgress from "../CircleProgress";
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import { Add, BadgeOutlined, EarbudsOutlined, MoreHoriz } from "@mui/icons-material";
+import React, { useState } from 'react';
+import styles from './index.module.scss';
+import CircleProgress from '../CircleProgress';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import { Add, BadgeOutlined, EarbudsOutlined, MoreHoriz } from '@mui/icons-material';
 
-const options = ["修改", "删除", "保存"];
+const options = ['修改', '删除', '保存'];
 const ITEM_HEIGHT = 48;
 export const ApiCard = () => {
   const [anchorEl, setAnchorEl] = useState<any>(null);
@@ -73,7 +73,7 @@ export const ApiCard = () => {
 export const AddApiCard = () => {
   return (
     <div className={styles.apiCard}>
-      <Add sx={{ transform: "scale(1.2)" }} />
+      <Add sx={{ transform: 'scale(1.2)' }} />
     </div>
   );
 };
