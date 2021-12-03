@@ -1,20 +1,24 @@
-body,html{
-  background-color:transparent;
+body, html {
+  background-color: transparent;
   overflow: hidden;
 }
 
-div{
+div {
   margin: 0;
   padding: 0;
 }
 
-#jsonEdit-warning-box svg{
+* {
+  user-select: none;
+}
+
+#jsonEdit-warning-box svg {
   height: 20px;
   width: 20px;
   transform: translateY(5px);
 }
 
-:root{
+:root {
   --card-bg--: linear-gradient(200deg, rgba(232, 227, 255, 0.5), rgba(226, 228, 255, 0.6));
   --light-bg1--: rgba(255, 255, 255, 0.6);
   --light-bg2--: rgba(255, 255, 255, 0.7);
