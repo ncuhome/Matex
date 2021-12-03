@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 
 const MockIdle = () => {
   return (
-    <div>
+    <div className={styles.con}>
       <img src={star} className={styles.idleImg} />
       <h1 className={styles.title}>Mock Server</h1>
     </div>

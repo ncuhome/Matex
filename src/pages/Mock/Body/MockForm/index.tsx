@@ -2,6 +2,7 @@ import React, { ChangeEvent } from "react";
 import styles from "./index.module.scss";
 import LabelInput from "../../../../components/LabelInput";
 import LinkIcon from "@mui/icons-material/Link";
+import MonacoEditor from "../../../../components/MonacoEditor";
 
 const resOptions = ["JSON", "Plain Text", "File", "Form Data"];
 const methodsOptions = ["Get", "Post", "Put", "Delete"];
@@ -24,6 +25,9 @@ const MockForm = () => {
         <LabelInput label={"数据类型"} select options={resOptions} />
         <LinkIcon sx={{ transform: "scale(1.5)", color: "#F86087" }} />
         <LabelInput label={"接口路径"} />
+      </div>
+      <div style={{ marginTop: 10 }}>
+        <MonacoEditor defaultVal={""} language={"json"} />
       </div>
     </div>
   );

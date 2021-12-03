@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./index.module.scss";
-import APIHeader from './Header';
-import APISider from './Side';
-import APIBody from './Body';
+import APIHeader from "./Header";
+import APISider from "./Side";
+import APIBody from "./Body";
+import MockIdle from "./Body/MockIdle";
 
 const MockView = () => {
   return (
@@ -14,7 +15,12 @@ const MockView = () => {
         <APISider />
       </div>
       <div className={styles.body}>
-        <APIBody />
+        <div className={styles.idle}>
+          <MockIdle />
+        </div>
+        <div className={styles.content}>
+          <APIBody />
+        </div>
       </div>
     </div>
   );
