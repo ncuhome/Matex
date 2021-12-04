@@ -6,6 +6,7 @@ const APISider = () => {
   return (
     <div className={styles.sider}>
       <div className={styles.form}>
+        <div className={styles.title}>接口列表</div>
         <ApiList type={'get'} />
         <ApiList type={'get'} />
         <ApiList type={'get'} />

@@ -1,6 +1,6 @@
 export const Colors = {
   orange: {
-    lineColor: '#FCC7A9',
+    lineColor: 'rgba(79,109,245,0.3)',
     background: ['#FEDACC', '#FA6C37']
   },
   red: {

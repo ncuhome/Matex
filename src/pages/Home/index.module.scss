@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background:linear-gradient(135deg,#BCCAFE,#D3D0FF,#F5DBFF);
+  background: var(--greyLight-2);
   display: grid;
   grid-template-columns: 236px 1fr;
   grid-template-rows:90px 1fr;
@@ -22,7 +22,10 @@
   grid-row: 2 / 5;
   border-radius: 20px;
   position: relative;
-  background: var(--light-bg2--);
+  background: var(--greyLight-1);
+  box-shadow: var(--light-shadow);
+  border: 1px white solid;
+
   margin-left: 10px;
   margin-bottom: 10px;
 }

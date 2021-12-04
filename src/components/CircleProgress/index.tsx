@@ -15,8 +15,8 @@ const CircleProgress: React.FC<CircleProgressProps> = (props) => {
       <svg className={styles.percentSvg}>
         <defs>
           <radialGradient id="gradient" cx="50%" cy="50%" r="60%" fx="50%" fy="50%">
-            <stop offset="30%" stopColor={colors.background[0]} />
-            <stop offset="100%" stopColor={colors.background[1]} />
+            <stop offset="30%" stopColor="var(--primary-dark)" />
+            <stop offset="100%" stopColor="#6C63FF" />
           </radialGradient>
         </defs>
         <circle

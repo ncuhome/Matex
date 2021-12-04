@@ -8,15 +8,26 @@
   .form{
     flex: 1;
     border-radius: 20px;
-    background: var(--light-bg1--);
+    background: var(--greyLight-1);
+    box-shadow: 0 0 10px rgba(100, 131, 177, 0.2);
+    border: 1px white solid;
     margin-bottom: 20px;
     padding: 15px;
     overflow: hidden auto;
+
+    .title{
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
   }
 
   .card {
     height: 200px;
-    background: var(--light-bg1--);
+    background: var(--greyLight-1);
+    box-shadow: 0 0 10px rgba(100, 131, 177, 0.2);
+    border: 1px white solid;
     border-radius: 20px;
   }
 }

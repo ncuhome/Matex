@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "./index.module.scss";
-import APIHeader from "./Header";
-import APISider from "./Side";
-import APIBody from "./Body";
-import MockIdle from "./Body/MockIdle";
+import React from 'react';
+import styles from './index.module.scss';
+import APIHeader from './Header';
+import APISider from './Side';
+import APIBody from './Body';
+import MockIdle from './Body/MockIdle';
 
 const MockView = () => {
   return (
