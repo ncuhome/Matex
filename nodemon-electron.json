@@ -2,7 +2,9 @@
   "verbose": true,
   "ignore": [
     "asar",
+    "src",
     "release/**",
+    "scripts/**",
     ".cache",
     "node_modules/**"
   ],

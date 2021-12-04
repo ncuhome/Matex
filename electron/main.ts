@@ -7,8 +7,8 @@ let mainWindow: BrowserWindow | null;
 
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
-signale.note('根路径 =>' + __dirname);
-signale.note('process.cwd()=>' + process.cwd());
+signale.note(process.env.NODE_ENV);
+signale.note("process.cwd()=>" + process.cwd());
 
 const { port1, port2 } = new MessageChannelMain();
 
@@ -23,7 +23,6 @@ async function createWindow() {
     center: true,
     frame: false,
     transparent: true,
-    // backgroundColor: '#8787D2',
     resizable: true,
     titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
@@ -86,7 +85,7 @@ app.on('before-quit', async (e: Electron.Event) => {
   try {
     await closeServer();
     app.quit();
-    console.log('退出时间before-quit', e.timeStamp);
+    console.log("退出时间before-quit1", e.timeStamp);
   } catch (e) {
     app.exit();
     signale.error(e);

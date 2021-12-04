@@ -18,6 +18,13 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["./src","electron","vite.config.ts"],
-  "exclude": ["release"]
+  "include": [
+    "./src",
+    "electron",
+    "vite.config.ts",
+    "./scripts"
+  ],
+  "exclude": [
+    "release"
+  ]
 }
