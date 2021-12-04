@@ -109,6 +109,7 @@
     "shelljs": "^0.8.4",
     "signale": "^1.4.0",
     "typeorm": "^0.2.41",
+    "winston": "^3.3.3",
     "zustand": "^3.6.5"
   }
 }

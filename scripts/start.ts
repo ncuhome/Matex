@@ -4,15 +4,6 @@ import Signale from 'signale';
 
 const parcelPath = path.resolve(__dirname, './parcel-dev.ts');
 
-const callback = (err: any, stdout: any, stderr: any) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log(stdout);
-  console.log(stderr);
-};
-
 (() => {
   let running = false;
   exec('vite');
@@ -21,7 +12,7 @@ const callback = (err: any, stdout: any, stderr: any) => {
     if (!running) {
       Signale.start('开启nodemon');
       running = true;
-      exec('nodemon --config nodemon-electron.json', callback);
+      exec('nodemon --config nodemon-electron.json');
     }
   });
 })();

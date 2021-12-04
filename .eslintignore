@@ -2,3 +2,4 @@ electron/dev
 config
 release
 dev
+.log

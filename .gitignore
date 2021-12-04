@@ -13,4 +13,5 @@ asar
 #vscode
 .DS_Store
 .vscode
+.log
 
