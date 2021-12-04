@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./index.module.scss";
-import { AddApiCard, ApiCard } from "../../../components/ApiCard";
-import { myEmitter } from "../../../utils/EventEmiter";
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './index.module.scss';
+import { AddApiCard, ApiCard } from '../../../components/ApiCard';
+import { myEmitter } from '../../../utils/EventEmiter';
 
 const APIHeader = () => {
   const [down, setDown] = useState(false);
@@ -36,7 +36,7 @@ const APIHeader = () => {
   };
 
   useEffect(() => {
-    myEmitter.on<boolean>("inputFocus", (data) => {
+    myEmitter.on<boolean>('inputFocus', (data) => {
       setFocus(data);
     });
   }, []);

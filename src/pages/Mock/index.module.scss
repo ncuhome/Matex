@@ -17,7 +17,7 @@
   .header{
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
     width: 100%;
   }
@@ -40,7 +40,7 @@
     position: relative;
     margin-left: 10px;
     margin-top: 10px;
-    border-radius: 20px;
+    border-radius: 12px;
     z-index: 10000;
 
     .idle {
