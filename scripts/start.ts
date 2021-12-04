@@ -1,8 +1,8 @@
-import { exec, fork } from "child_process";
-import path from "path";
-import Signale from "signale";
+import { exec, fork } from 'child_process';
+import path from 'path';
+import Signale from 'signale';
 
-const parcelPath = path.resolve(__dirname, "./parcel-dev.ts");
+const parcelPath = path.resolve(__dirname, './parcel-dev.ts');
 
 const callback = (err: any, stdout: any, stderr: any) => {
   if (err) {
@@ -15,13 +15,13 @@ const callback = (err: any, stdout: any, stderr: any) => {
 
 (() => {
   let running = false;
-  exec("vite");
-  const worker = fork(parcelPath, ["parcel"]);
-  worker.on("message", () => {
+  exec('vite');
+  const worker = fork(parcelPath, ['parcel']);
+  worker.on('message', () => {
     if (!running) {
-      Signale.start("开启nodemon");
+      Signale.start('开启nodemon');
       running = true;
-      exec("nodemon --config nodemon-electron.json", callback);
+      exec('nodemon --config nodemon-electron.json', callback);
     }
   });
 })();

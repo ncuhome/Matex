@@ -8,7 +8,7 @@ let mainWindow: BrowserWindow | null;
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
 signale.note(process.env.NODE_ENV);
-signale.note("process.cwd()=>" + process.cwd());
+signale.note('process.cwd()=>' + process.cwd());
 
 const { port1, port2 } = new MessageChannelMain();
 
@@ -85,7 +85,7 @@ app.on('before-quit', async (e: Electron.Event) => {
   try {
     await closeServer();
     app.quit();
-    console.log("退出时间before-quit1", e.timeStamp);
+    console.log('退出时间before-quit1', e.timeStamp);
   } catch (e) {
     app.exit();
     signale.error(e);

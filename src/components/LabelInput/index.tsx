@@ -1,5 +1,5 @@
-import React, { ChangeEvent, Fragment } from "react";
-import styles from "./index.module.scss";
+import React, { ChangeEvent, Fragment } from 'react';
+import styles from './index.module.scss';
 
 interface LabelInputProps {
   label: string;
@@ -10,7 +10,7 @@ interface LabelInputProps {
 }
 
 const LabelInput: React.FC<LabelInputProps> = ({
-  label = "",
+  label = '',
   showLabel = true,
   select = false,
   onChange,
@@ -20,7 +20,7 @@ const LabelInput: React.FC<LabelInputProps> = ({
     if (select) {
       return (
         <div>
-          <select className={styles.select} placeholder={"请选择类型"} onChange={onChange}>
+          <select className={styles.select} placeholder={'请选择类型'} onChange={onChange}>
             {options.map((option) => {
               return (
                 <Fragment key={option}>
