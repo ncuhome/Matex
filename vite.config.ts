@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import { chrome } from './info.json';
+import { chrome } from './meta.json';
 
 export default defineConfig({
   base: './',
