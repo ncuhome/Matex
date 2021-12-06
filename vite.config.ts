@@ -11,7 +11,7 @@ export default defineConfig({
     outDir: './release/build/render',
     emptyOutDir: true,
     target: `chrome${chrome}`,
-    brotliSize: true,
+    brotliSize: false,
     rollupOptions: {
       output: {
         compact: true,
