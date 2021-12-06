@@ -1,15 +1,44 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { AddApiList, ApiList } from '../../../components/ApiList';
-import BallLoading from '../../../components/BallLoading';
+import Idle from './Idle';
+import Started from './Started';
+import Loading from './Loading';
+
+enum Status {
+  Idle,
+  Loading,
+  Success
+}
+
+export interface ChildType {
+  onClick: React.MouseEventHandler<HTMLDivElement> | undefined;
+}
 
 const APISider = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [status, setStatus] = React.useState<Status>(Status.Idle);
+
   const handleClick = () => {
-    setOpen(true);
+    setStatus(Status.Loading);
+    setTimeout(() => {
+      setStatus(Status.Success);
+    }, 5000);
+  };
+
+  const render = () => {
+    let res: React.ReactNode;
+    switch (status) {
+      case Status.Idle:
+        res = <Idle onClick={handleClick} />;
+        break;
+      case Status.Success:
+        res = <Started onClick={handleClick} />;
+        break;
+      case Status.Loading:
+        res = <Loading onClick={handleClick} />;
+        break;
+    }
+    return res;
   };
 
   return (
@@ -24,17 +53,7 @@ const APISider = () => {
         <ApiList type={'get'} />
         <AddApiList />
       </div>
-      <div className={styles.card}>
-        {open ? (
-          <div onClick={handleClose} style={{ cursor: 'pointer' }}>
-            <BallLoading />
-          </div>
-        ) : (
-          <div className={styles.buttonOuter} onClick={handleClick}>
-            启动
-          </div>
-        )}
-      </div>
+      {render()}
     </div>
   );
 };
