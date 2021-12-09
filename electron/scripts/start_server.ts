@@ -1,4 +1,3 @@
-import { saveByRedis } from './redis';
 import execa from 'execa';
 import * as signale from 'signale';
 import path from 'path';
@@ -11,7 +10,6 @@ const startServer = () => {
   let exist = false;
   try {
     myEmitter.on<any>('ulisten', async (mockData) => {
-      await saveByRedis(mockData);
       try {
         const res = await execa.command('cat /Users/liqingdong/.pm2/pids/app-0.pid');
         if (res) {

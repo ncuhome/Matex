@@ -1,6 +1,6 @@
 import { app, BrowserWindow, MessageChannelMain } from 'electron';
 import * as path from 'path';
-import { closeServer, startServer } from './scripts/start_server';
+import { closeServer } from './scripts/start_server';
 import * as signale from 'signale';
 import { winstonLog } from './scripts/log';
 
@@ -72,7 +72,7 @@ app.whenReady().then(async () => {
   try {
     const startIpc = (await import('./scripts/ipc')).default;
     startIpc();
-    startServer();
+    // startServer();
   } catch (e) {
     winstonLog.error('发生错误' + e);
   }
