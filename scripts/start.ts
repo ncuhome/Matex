@@ -23,6 +23,9 @@ const parcelPath = path.resolve(__dirname, './parcel-dev.ts');
       electron.stderr?.on('error', (message: string) => {
         Signale.error(message);
       });
+      electron.stderr?.on('data', (message: string) => {
+        Signale.error(message);
+      });
     }
   });
 })();

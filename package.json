@@ -42,7 +42,6 @@
     "test:build": "electron release/build/main/main.js",
     "build": "concurrently \"npm run build:react\" \"npm run build:electron\"",
     "build:react": "vite build",
-    "build:server": "ts-node ./scripts/buildServer.ts",
     "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron && cp -r ./electron/scripts/preload.js ./release/build/main/",
     "preview": "vite preview",
     "autoo": "autoo",
