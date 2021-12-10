@@ -1,6 +1,5 @@
 import { app, BrowserWindow, MessageChannelMain } from 'electron';
 import * as path from 'path';
-import { closeServer } from './scripts/start_server';
 import * as signale from 'signale';
 import { winstonLog } from './scripts/log';
 import { startServer } from './server/start';
@@ -85,7 +84,7 @@ app.on('window-all-closed', function () {
 
 app.on('before-quit', async (e: Electron.Event) => {
   try {
-    await closeServer();
+    // await closeServer();
     app.quit();
     if (isDev) {
       signale.info('退出时间: ' + e.timeStamp);

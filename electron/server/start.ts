@@ -1,4 +1,4 @@
-import { userServer } from './app';
+import { mockserver } from './app';
 import signale from 'signale';
 import { myEmitter } from '../utils/EventEmiter';
 
@@ -11,7 +11,11 @@ export const startServer = async () => {
   myEmitter.on('server', (msg) => {
     signale.await('startServer:' + msg);
     try {
-      userServer();
+      mockserver.setRoutes(['/users']);
+      mockserver.startServer();
+      setTimeout(() => {
+        mockserver.deleteServer();
+      }, 15000);
     } catch (e) {
       signale.error(e);
     }
