@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-import TagFacesIcon from '@mui/icons-material/TagFaces';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ChildType } from '../index';
 
 const Started = ({ onClick }: ChildType) => {
@@ -8,7 +8,7 @@ const Started = ({ onClick }: ChildType) => {
     <div className={styles.con}>
       <div className={styles.start} onClick={onClick}>
         <div>
-          <TagFacesIcon sx={{ fontSize: 80, color: '#136F2E' }} />
+          <CheckCircleIcon sx={{ fontSize: 80, color: '#546CF7' }} />
         </div>
         <div className={styles.text}>已在运行,点击停止</div>
       </div>

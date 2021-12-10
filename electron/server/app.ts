@@ -1,36 +1,38 @@
-import express from 'express';
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
-import { createConnection } from 'typeorm';
-import { User } from './entity/User.entity';
 import signale from 'signale';
-import { BetterSqlite3ConnectionOptions } from 'typeorm/driver/better-sqlite3/BetterSqlite3ConnectionOptions';
 import path from 'path';
+import { PrismaClient } from '@prisma/client';
 
 // 创建 typeorm 连接
 const isDev = process.env.NODE_ENV === 'development';
 const database = path.resolve(__dirname, isDev ? './mock_data.db' : '../mock_data.db');
 signale.debug(isDev);
 signale.debug(process.cwd());
-const config: BetterSqlite3ConnectionOptions = {
-  type: 'better-sqlite3',
-  database: database,
-  entities: [User],
-  logging: true
+
+const prisma = new PrismaClient();
+
+export const userServer = async () => {
+  try {
+    // 创建并设置express app
+    const app = express();
+    app.use(bodyParser.json());
+
+    app.get('/users', async function (req: Request, res: Response) {
+      const allUsers = await prisma.mock.findMany();
+      console.log(allUsers);
+      res.send('hello world');
+    });
+
+    // 启动 express server
+    const server = app.listen(8000);
+    server.close();
+    signale.success('开启倒计时');
+    setTimeout(() => {
+      app.listen(8000);
+      signale.success('运行成功');
+    }, 9000);
+  } catch (e) {
+    signale.error(e);
+  }
 };
-createConnection(config).then((connection) => {
-  const userRepository = connection.getRepository(User);
-  // 创建并设置express app
-  const app = express();
-  app.use(bodyParser.json());
-
-  app.get('/users', async function (req: Request, res: Response) {
-    const user = await userRepository.find();
-    console.log(user);
-    res.send('hello world');
-  });
-
-  // 启动 express server
-  app.listen(8000);
-  signale.success('运行成功');
-});

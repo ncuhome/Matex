@@ -4,6 +4,7 @@ import { RouterAuth } from './router';
 import Loading from './components/Loading';
 import { IpcRendererEvent } from 'electron';
 import useIpcOn from './hooks/useIpcRender';
+import { Window } from './type';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -17,6 +18,7 @@ function App() {
         setLoading(false);
         setTimeout(() => {
           setShow(true);
+          Window.ipc.send('ipc', 'loading关闭');
         }, 50);
       }
     };

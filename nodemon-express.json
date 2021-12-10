@@ -16,5 +16,5 @@
     "NODE_ENV": "development"
   },
   "ext": "ts",
-  "exec": "ts-node ./electron/server/app.ts"
+  "exec": "ts-node ./electron/server/start.ts"
 }

@@ -12,7 +12,10 @@ const parcelPath = path.resolve(__dirname, './parcel-dev.ts');
     if (!running) {
       Signale.start('开启nodemon');
       running = true;
-      exec('nodemon --config nodemon-electron.json');
+      const electron = exec('nodemon --config nodemon-electron.json');
+      electron.stdout?.on('data', (message: string) => {
+        Signale.debug(message);
+      });
     }
   });
 })();

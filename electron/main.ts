@@ -3,6 +3,7 @@ import * as path from 'path';
 import { closeServer } from './scripts/start_server';
 import * as signale from 'signale';
 import { winstonLog } from './scripts/log';
+import { startServer } from './server/start';
 
 let mainWindow: BrowserWindow | null;
 
@@ -71,8 +72,8 @@ app.on('ready', createWindow);
 app.whenReady().then(async () => {
   try {
     const startIpc = (await import('./scripts/ipc')).default;
-    startIpc();
-    // startServer();
+    startIpc(port1);
+    await startServer();
   } catch (e) {
     winstonLog.error('发生错误' + e);
   }

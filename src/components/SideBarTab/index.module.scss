@@ -19,6 +19,7 @@
 
 .tab:hover{
   @extend .activeStyle;
+  background-color: #C5CDFE;
 }
 
 .tab.active{

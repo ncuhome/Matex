@@ -1,5 +1,6 @@
 {
   "verbose": true,
+  "watch": ["./dev/main.js"],
   "ignore": [
     "asar",
     "src",
