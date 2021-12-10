@@ -1,9 +1,11 @@
 .con {
-  filter: blur(1px);
+
+  opacity: 0.2;
 
   .idleImg {
     width: 300px;
     height: 250px;
+    filter: blur(0px);
   }
 
   .title {
