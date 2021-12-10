@@ -14,7 +14,14 @@ const parcelPath = path.resolve(__dirname, './parcel-dev.ts');
       running = true;
       const electron = exec('nodemon --config nodemon-electron.json');
       electron.stdout?.on('data', (message: string) => {
-        Signale.debug(message);
+        Signale.log(message);
+      });
+      electron.stdout?.on('error', (message: string) => {
+        Signale.error(message);
+      });
+
+      electron.stderr?.on('error', (message: string) => {
+        Signale.error(message);
       });
     }
   });
