@@ -12,9 +12,6 @@ signale.debug(isDev);
 signale.debug(process.cwd());
 
 const prisma = new PrismaClient();
-let expressServer: Server | null = null;
-// const app = express();
-// app.use(bodyParser.json());
 
 class MockServer {
   port: number = 8000;
@@ -73,7 +70,7 @@ class MockServer {
   closeServer() {
     if (this.server) {
       this.server.close();
-      signale.error('关闭服务器运行成功');
+      signale.error('关闭服务器成功');
     }
   }
 }

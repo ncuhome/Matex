@@ -3,7 +3,7 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 export const rules: monaco.editor.ITokenThemeRule[] = [
   {
     token: 'number.json',
-    foreground: '#1E9CFC'
+    foreground: '#FA86A3'
   },
   {
     token: 'delimiter.bracket.json',
