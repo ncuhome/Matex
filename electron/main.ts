@@ -1,4 +1,4 @@
-import { app, BrowserWindow, MessageChannelMain } from 'electron';
+import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
 import * as path from 'path';
 import * as signale from 'signale';
 import { winstonLog } from './scripts/log';
@@ -19,9 +19,12 @@ const preloadPath = isDev
   : `${path.resolve(__dirname, './preload.js')}`;
 
 async function createWindow() {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   mainWindow = new BrowserWindow({
     width: 400,
     height: 400,
+    x: (width - 400) / 2,
+    y: (height - 400) / 2,
     center: true,
     frame: false,
     transparent: true,
@@ -34,7 +37,7 @@ async function createWindow() {
     }
   });
   mainWindow.setWindowButtonVisibility(false);
-
+  console.log();
   const url = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..')}/render/index.html`;
   await mainWindow.loadURL(url);
 
@@ -46,7 +49,7 @@ async function createWindow() {
   setTimeout(() => {
     PortChannel.postMessage<null>('loading', null);
     mainWindow?.hide();
-    mainWindow?.setSize(1200, 700, true);
+    mainWindow?.setSize(width - 100, height, true);
     mainWindow?.center();
     mainWindow?.setWindowButtonVisibility(true);
     setTimeout(() => {
@@ -89,7 +92,7 @@ app.on('before-quit', async (e: Electron.Event) => {
   try {
     app.quit();
     if (isDev) {
-      signale.info('退出时间: ' + e.timeStamp);
+      signale.info('退出时间11: ' + e.timeStamp);
     }
     winstonLog.log({ level: 'info', message: '退出时间: ' + e.timeStamp });
   } catch (e) {
