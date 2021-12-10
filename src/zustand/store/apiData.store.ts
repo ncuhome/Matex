@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { ApiDataType } from '../type/apiData.type';
+import { ApiDataType, MessageChannel } from '../type/apiData.type';
 import { ApiData } from '../../type/api';
 
 const initData: ApiData = {
@@ -18,4 +18,10 @@ export const useApiDataStore = create<ApiDataType>((set) => ({
       tempList[index][key] = value;
       return { apiList: tempList };
     })
+}));
+
+export const useChannel = create<MessageChannel>((set) => ({
+  port: null,
+  setPort: (value) => set((state) => ({ port: value })),
+  cleanPort: () => set((state) => ({ port: null }))
 }));

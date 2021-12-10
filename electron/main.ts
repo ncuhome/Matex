@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as signale from 'signale';
 import { winstonLog } from './scripts/log';
 import { startServer } from './server/start';
+import { PortChannel } from './scripts/ipc';
 
 let mainWindow: BrowserWindow | null;
 
@@ -43,7 +44,7 @@ async function createWindow() {
     mainWindow = null;
   });
   setTimeout(() => {
-    port1.postMessage({ loading: false });
+    PortChannel.postMessage<null>('loading', null);
     mainWindow?.hide();
     mainWindow?.setSize(1200, 700, true);
     mainWindow?.center();
@@ -66,7 +67,10 @@ if (!gotTheLock) {
   });
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  PortChannel.setPort(port1);
+  createWindow();
+});
 
 app.whenReady().then(async () => {
   try {

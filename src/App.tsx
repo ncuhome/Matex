@@ -5,19 +5,24 @@ import Loading from './components/Loading';
 import { IpcRendererEvent } from 'electron';
 import useIpcOn from './hooks/useIpcRender';
 import { Window } from './type';
+import { useChannel } from './zustand/store/apiData.store';
+import { ChannelData } from './type/api';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
+  const { setPort, port, cleanPort } = useChannel((state) => state);
 
   const ipcListener = (e: IpcRendererEvent) => {
     const port = e.ports[0];
-    port.onmessage = (event: { data: { loading: boolean } }) => {
-      const { loading } = event.data as { loading: boolean };
-      if (!loading) {
+    setPort(port);
+    port.onmessage = (event) => {
+      const { type } = event.data as ChannelData<null>;
+      if (type === 'loading') {
         setLoading(false);
         setTimeout(() => {
           setShow(true);
+          port.postMessage('loading关闭port');
           Window.ipc.send('ipc', 'loading关闭');
         }, 50);
       }
@@ -35,6 +40,11 @@ function App() {
       }
     }, 5000);
   }, []);
+
+  useEffect(() => {
+    console.log(port);
+  });
+
   return (
     <div style={{ display: show || loading ? 'flex' : 'none' }} className={styles.app}>
       {!loading ? <RouterAuth /> : <Loading />}
