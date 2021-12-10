@@ -69,13 +69,12 @@ if (!gotTheLock) {
 
 app.on('ready', () => {
   PortChannel.setPort(port1);
+  PortChannel.startListening();
   createWindow();
 });
 
 app.whenReady().then(async () => {
   try {
-    const startIpc = (await import('./scripts/ipc')).default;
-    startIpc(port1);
     await startServer();
   } catch (e) {
     winstonLog.error('发生错误' + e);
@@ -88,7 +87,6 @@ app.on('window-all-closed', function () {
 
 app.on('before-quit', async (e: Electron.Event) => {
   try {
-    // await closeServer();
     app.quit();
     if (isDev) {
       signale.info('退出时间: ' + e.timeStamp);

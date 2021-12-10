@@ -9,7 +9,7 @@ export const startServer = async () => {
   signale.start('等待服务器启动');
 
   myEmitter.on('server', (msg) => {
-    signale.await('startServer:' + msg);
+    signale.await('startServer==:' + msg);
     try {
       mockserver.setRoutes(['/users']);
       mockserver.startServer();
