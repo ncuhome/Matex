@@ -18,7 +18,8 @@
     "files": [
       "electron",
       "release/build",
-      "package.json"
+      "package.json",
+      "node_modules"
     ],
     "mac": {
       "icon": "./electron/assets/icon/icon.png",
