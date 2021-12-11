@@ -13,6 +13,7 @@ export const usePortChannel = <T>() => {
   };
 
   return {
-    postMessage
+    postMessage,
+    port
   };
 };

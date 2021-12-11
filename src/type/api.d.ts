@@ -5,6 +5,8 @@ interface ChannelEvents {
   server;
 }
 
+export type ChannelEvent = keyof ChannelEvents;
+
 export interface ApiData {
   id: number;
   route: string;

@@ -92,7 +92,7 @@ app.on('before-quit', async (e: Electron.Event) => {
   try {
     app.quit();
     if (isDev) {
-      signale.info('退出时间11: ' + e.timeStamp);
+      signale.info('退出时间: ' + e.timeStamp);
     }
     winstonLog.log({ level: 'info', message: '退出时间: ' + e.timeStamp });
   } catch (e) {

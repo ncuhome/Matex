@@ -1,5 +1,6 @@
 interface ChannelEvents {
   loading;
+  server;
 }
 
 export interface ChannelData<T extends any> {
