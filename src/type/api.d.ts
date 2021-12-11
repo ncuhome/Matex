@@ -2,10 +2,7 @@ export type ResDataType = 'Plain Text' | 'JSON' | 'File' | 'Form Data';
 
 interface ChannelEvents {
   loading;
-  rt;
-  bj;
-  ck;
-  vg;
+  server;
 }
 
 export interface ApiData {

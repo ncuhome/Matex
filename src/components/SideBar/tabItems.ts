@@ -14,15 +14,11 @@ export const tabItems: TabProps[] = [
     route: '/todayTop'
   },
   {
-    text: '优选歌单',
+    text: '数据获取',
     route: '/gedan'
   },
   {
-    text: '喜欢的歌',
+    text: 'Mock服务',
     route: '/love'
-  },
-  {
-    text: '自建歌单',
-    route: '/selfGedan'
   }
 ];

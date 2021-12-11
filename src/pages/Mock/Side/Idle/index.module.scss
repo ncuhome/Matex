@@ -4,12 +4,16 @@
   box-shadow: 0 0 10px rgba(100, 131, 177, 0.2);
   border: 1px white solid;
   border-radius: 10px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   cursor: pointer;
 
   .con{
     height: 200px;
+    width: 150px;
+
     display: flex;
     align-items: center;
     flex-direction: column;

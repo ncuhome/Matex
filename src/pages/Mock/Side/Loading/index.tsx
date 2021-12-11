@@ -12,7 +12,7 @@ const Loading = ({ onClick }: ChildType) => {
           <div className={styles.arc} />
         </div>
       </div>
-      <div className={styles.text}>启动中,点击取消</div>
+      <div className={styles.text}>启动中</div>
     </div>
   );
 };

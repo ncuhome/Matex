@@ -9,9 +9,10 @@
     justify-content: center;
 
     .text{
-        color: white;
+        color: #1B9EFD;
         position: absolute;
         bottom: 25px;
+        font-size: 25px;
     }
 
     .con{
@@ -23,13 +24,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #292838;
+        background-color: #EBF5FC;
         border-radius: 10px;
 
         .loading {
+            margin-top: -20px;
             position: relative;
-            width: 4rem;
-            height: 4rem;
+            width: 5rem;
+            height: 5rem;
             transform-style: preserve-3d;
             perspective: 800px;
 

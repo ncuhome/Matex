@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.scss';
 import { AddApiList, ApiList } from '../../../components/ApiList';
 import Idle from './Idle';
-import Started from './Started';
+import Success from './Success';
 import Loading from './Loading';
 
 enum Status {
@@ -19,10 +19,20 @@ const APISider = () => {
   const [status, setStatus] = React.useState<Status>(Status.Idle);
 
   const handleClick = () => {
-    setStatus(Status.Loading);
-    setTimeout(() => {
-      setStatus(Status.Success);
-    }, 5000);
+    switch (status) {
+      case Status.Idle:
+        setStatus(Status.Loading);
+        setTimeout(() => {
+          setStatus(Status.Success);
+        }, 5000);
+        break;
+      case Status.Loading:
+        setStatus(Status.Idle);
+        break;
+      case Status.Success:
+        setStatus(Status.Idle);
+        break;
+    }
   };
 
   const render = () => {
@@ -32,7 +42,7 @@ const APISider = () => {
         res = <Idle onClick={handleClick} />;
         break;
       case Status.Success:
-        res = <Started onClick={handleClick} />;
+        res = <Success onClick={handleClick} />;
         break;
       case Status.Loading:
         res = <Loading onClick={handleClick} />;

@@ -8,9 +8,9 @@ const Login: React.FC<any> = (props: any) => {
     navigate('/', { replace: true });
   };
   return (
-    <>
+    <div>
       <div onClick={login}>登录页面1</div>
-    </>
+    </div>
   );
 };
 

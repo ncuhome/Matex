@@ -3,12 +3,12 @@ import styles from './index.module.scss';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ChildType } from '../index';
 
-const Started = ({ onClick }: ChildType) => {
+const Success = ({ onClick }: ChildType) => {
   return (
     <div className={styles.con}>
       <div className={styles.start} onClick={onClick}>
-        <div>
-          <CheckCircleIcon sx={{ fontSize: 80, color: '#546CF7' }} />
+        <div className={styles.img}>
+          <CheckCircleIcon sx={{ fontSize: 70, color: 'rgba(33,200,84,0.8)' }} />
         </div>
         <div className={styles.text}>已在运行,点击停止</div>
       </div>
@@ -16,4 +16,4 @@ const Started = ({ onClick }: ChildType) => {
   );
 };
 
-export default Started;
+export default Success;
