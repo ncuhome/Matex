@@ -32,8 +32,8 @@
     "schema": "electron/server/prisma/schema.prisma"
   },
   "scripts": {
-    "dev": "concurrently \"vite\" \"npm run dev:electron\" \"npm run watch:electron\"",
     "start": "ts-node ./scripts/start.ts",
+    "dev": "concurrently \"vite\" \"npm run dev:electron\" \"npm run watch:electron\"",
     "dev:react": "vite",
     "dev:server": "nodemon --config nodemon-express.json",
     "remove": "rm -R ./dev",
