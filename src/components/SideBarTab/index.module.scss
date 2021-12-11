@@ -1,6 +1,5 @@
 
 .activeStyle{
-  //background-color: rgba(230,205,241,0.8);
   color: #F4FFFF;
   background-color: #93A1FD;
 }
@@ -25,5 +24,9 @@
 .tab.active{
   @extend .activeStyle;
   //border: 1px solid #FA86A3;
+
+  &:hover{
+    background-color: #93A1FD;
+  }
 
 }

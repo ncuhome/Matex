@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as signale from 'signale';
 import { winstonLog } from './scripts/log';
 import { startServer } from './server/start';
-import { PortChannel } from './scripts/ipc';
+import { PortChannel } from './communication';
 
 let mainWindow: BrowserWindow | null;
 

@@ -5,11 +5,13 @@ const Login: React.FC<any> = (props: any) => {
   const navigate = useNavigate();
   const login = () => {
     localStorage.setItem('login', 'true');
-    navigate('/', { replace: true });
+    navigate('/mock', { replace: true });
   };
   return (
     <div>
-      <div onClick={login}>登录页面1</div>
+      <div onClick={login} style={{ marginTop: 40, marginLeft: 40 }}>
+        登录页面1
+      </div>
     </div>
   );
 };

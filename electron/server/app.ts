@@ -1,13 +1,10 @@
 import express, { Express, Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
 import signale from 'signale';
-import path from 'path';
 import { PrismaClient } from '@prisma/client';
 import type { Server } from 'http';
 
-// 创建 typeorm 连接
 const isDev = process.env.NODE_ENV === 'development';
-const database = path.resolve(__dirname, isDev ? './mock_data.db' : '../mock_data.db');
 signale.debug(isDev);
 signale.debug(process.cwd());
 

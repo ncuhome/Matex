@@ -6,19 +6,19 @@ export interface TabProps {
 
 export const tabItems: TabProps[] = [
   {
-    text: '今日推荐',
-    route: '/todayIntr'
+    text: 'Mock服务',
+    route: '/mock'
   },
   {
     text: '每日排行',
-    route: '/todayTop'
+    route: '/push'
   },
   {
     text: '数据获取',
-    route: '/gedan'
+    route: '/pull'
   },
   {
-    text: 'Mock服务',
-    route: '/love'
+    text: '敬请期待',
+    route: '/ok'
   }
 ];
