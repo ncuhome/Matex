@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './app.module.scss';
 import { RouterAuth } from './router';
 import Loading from './components/Loading';
@@ -19,24 +19,21 @@ function App() {
       const { type } = event.data as ChannelData<null>;
       if (type === 'loading') {
         setLoading(false);
-        setTimeout(() => {
-          setShow(true);
-        }, 50);
+        setShow(true);
+        port.postMessage({ type, data: 'ok' } as ChannelData<string>);
       }
     };
   };
   useIpcOn({ channel: 'port', listener: ipcListener });
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (loading) {
-        setLoading(false);
-        setTimeout(() => {
-          setShow(true);
-        }, 50);
-      }
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (loading) {
+  //       setLoading(false);
+  //       setShow(true);
+  //     }
+  //   }, 5000);
+  // }, []);
 
   return (
     <div style={{ display: show || loading ? 'flex' : 'none' }} className={styles.app}>

@@ -21,9 +21,13 @@ class PortChannel_ {
       this.portMain.on('message', (msg: MessageEvent) => {
         signale.success(msg);
         const { type, data } = msg.data as ChannelData<string>;
-        myEmitter.emit('server', msg.data);
         if (type === 'server') {
+          myEmitter.emit('server', msg.data);
           this.postMessage<string>('server', '启动成功');
+        }
+
+        if (type === 'loading' && data === 'ok') {
+          myEmitter.emit('loading', true);
         }
       });
       this.portMain.start();

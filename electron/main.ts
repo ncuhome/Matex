@@ -4,6 +4,7 @@ import * as signale from 'signale';
 import { winstonLog } from './scripts/log';
 import { startServer } from './server/start';
 import { PortChannel } from './communication';
+import { myEmitter } from './utils/EventEmiter';
 
 let mainWindow: BrowserWindow | null;
 
@@ -25,7 +26,7 @@ async function createWindow() {
     height: 400,
     x: (width - 400) / 2,
     y: (height - 400) / 2,
-    center: true,
+    center: false,
     frame: false,
     transparent: true,
     resizable: true,
@@ -37,7 +38,6 @@ async function createWindow() {
     }
   });
   mainWindow.setWindowButtonVisibility(false);
-  console.log();
   const url = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..')}/render/index.html`;
   await mainWindow.loadURL(url);
 
@@ -46,15 +46,13 @@ async function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+  //假设的加载过程
   setTimeout(() => {
     PortChannel.postMessage<null>('loading', null);
     mainWindow?.hide();
-    mainWindow?.setSize(width - 100, height, true);
+    mainWindow?.setSize(width - 100, height, false);
     mainWindow?.center();
     mainWindow?.setWindowButtonVisibility(true);
-    setTimeout(() => {
-      mainWindow?.show();
-    }, 1000);
   }, 3000);
 }
 
@@ -74,6 +72,16 @@ app.on('ready', () => {
   PortChannel.setPort(port1);
   PortChannel.startListening();
   createWindow();
+
+  myEmitter.on('loading', (data) => {
+    if (data) {
+      console.log(mainWindow?.getSize());
+      setTimeout(() => {
+        mainWindow?.show();
+        console.log(mainWindow?.getSize());
+      }, 50);
+    }
+  });
 });
 
 app.whenReady().then(async () => {
