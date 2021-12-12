@@ -7,7 +7,7 @@ export default defineConfig({
   publicDir: './public',
   plugins: [reactRefresh()],
   build: {
-    sourcemap: true,
+    // sourcemap: true,
     outDir: './release/build/render',
     emptyOutDir: true,
     target: `chrome${chrome}`,

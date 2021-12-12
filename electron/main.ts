@@ -1,7 +1,6 @@
 import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
 import * as path from 'path';
 import * as signale from 'signale';
-import { winstonLog } from './scripts/log';
 import { startServer } from './server/start';
 import { PortChannel } from './communication';
 import { myEmitter } from './utils/EventEmiter';
@@ -10,7 +9,6 @@ let mainWindow: BrowserWindow | null;
 
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
-winstonLog.log({ level: 'info', message: process.env.NODE_ENV ?? '' });
 signale.note('process.cwd()=>' + process.cwd());
 
 const { port1, port2 } = new MessageChannelMain();
@@ -88,7 +86,7 @@ app.whenReady().then(async () => {
   try {
     await startServer();
   } catch (e) {
-    winstonLog.error('发生错误' + e);
+    signale.error('发生错误' + e);
   }
 });
 
@@ -102,12 +100,12 @@ app.on('before-quit', async (e: Electron.Event) => {
     if (isDev) {
       signale.info('退出时间: ' + e.timeStamp);
     }
-    winstonLog.log({ level: 'info', message: '退出时间: ' + e.timeStamp });
+    signale.log({ level: 'info', message: '退出时间: ' + e.timeStamp });
   } catch (e) {
     app.exit();
     if (isDev) {
       signale.error(e);
     }
-    winstonLog.error('发生错误' + e);
+    signale.error('发生错误' + e);
   }
 });
