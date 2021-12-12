@@ -1,14 +1,14 @@
 import express, { Express, Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
 import signale from 'signale';
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
 import type { Server } from 'http';
 
 const isDev = process.env.NODE_ENV === 'development';
 signale.debug(isDev);
 signale.debug(process.cwd());
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 class MockServer {
   port: number = 8000;

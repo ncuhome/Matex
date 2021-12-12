@@ -15,11 +15,20 @@
     "appId": "org.ulisten.com",
     "icon": "./electron/assets/icon/icon.png",
     "asar": true,
+    "extraResources":[
+      "resources/database.db",
+      "node_modules/.prisma/**/*",
+      "node_modules/@prisma/client/**/*"
+    ],
     "files": [
       "electron",
       "release/build",
       "package.json",
-      "node_modules"
+      "node_modules",
+      {
+        "from": "node_modules/.prisma/client/",
+        "to": "node_modules/.prisma/client/"
+      }
     ],
     "mac": {
       "icon": "./electron/assets/icon/icon.png",

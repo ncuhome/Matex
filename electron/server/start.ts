@@ -13,9 +13,9 @@ export const startServer = async () => {
     try {
       mockserver.setRoutes(['/users']);
       mockserver.startServer();
-      setTimeout(() => {
-        mockserver.deleteServer();
-      }, 15000);
+      // setTimeout(() => {
+      //   mockserver.deleteServer();
+      // }, 15000);
     } catch (e) {
       signale.error(e);
     }
