@@ -1,13 +1,12 @@
 import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
-import * as signale from 'signale';
 import { startServer } from './server/start';
 import { PortChannel } from './message';
 import { myEmitter } from './utils/EventEmiter';
 import { loadUrl, preloadPath } from './utils/path';
+import { MatexLog } from './scripts/log';
 
 let mainWindow: BrowserWindow | null;
 
-const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
 
 const { port1, port2 } = new MessageChannelMain();
@@ -84,7 +83,7 @@ app.whenReady().then(async () => {
   try {
     await startServer();
   } catch (e) {
-    signale.error('发生错误' + e);
+    MatexLog.error('发生错误' + e);
   }
 });
 
@@ -95,15 +94,9 @@ app.on('window-all-closed', function () {
 app.on('before-quit', async (e: Electron.Event) => {
   try {
     app.quit();
-    if (isDev) {
-      signale.info('退出时间: ' + e.timeStamp);
-    }
-    signale.log({ level: 'info', message: '退出时间: ' + e.timeStamp });
-  } catch (e) {
+    MatexLog.log('退出时间: ' + Date.now().toLocaleString());
+  } catch (e: any) {
     app.exit();
-    if (isDev) {
-      signale.error(e);
-    }
-    signale.error('发生错误' + e);
+    MatexLog.error('发生错误' + e);
   }
 });

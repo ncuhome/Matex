@@ -1,5 +1,4 @@
 import { MessageEvent, MessagePortMain } from 'electron';
-import * as signale from 'signale';
 import { myEmitter } from '../utils/EventEmiter';
 import { ChannelData } from '../type/api';
 
@@ -19,7 +18,6 @@ class PortChannel_ {
   startListening() {
     if (this.portMain) {
       this.portMain.on('message', (msg: MessageEvent) => {
-        signale.success(msg);
         const { type, data } = msg.data as ChannelData<string>;
         if (type === 'server') {
           myEmitter.emit('server', msg.data);

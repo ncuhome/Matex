@@ -1,23 +1,21 @@
-import signale from 'signale';
 import path from 'path';
-import { PortChannel } from '../../message';
 import { DataTypes, Sequelize } from 'sequelize';
 import { resourcesPath } from '../../utils/path';
+import { MatexLog } from '../../scripts/log';
 
 const isDev = process.env.NODE_ENV === 'development';
 let dbPath: string;
-signale.debug('模式: ', isDev);
+
 if (isDev) {
   dbPath = path.resolve(process.cwd(), './electron/server/db/data.db');
 } else {
   dbPath = path.resolve(resourcesPath, './data.db');
 }
-signale.star(dbPath);
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: dbPath,
-  logging: (msg) => signale.debug(msg)
+  logging: (msg) => MatexLog.debug(msg)
 });
 
 const User = sequelize.define(
@@ -45,7 +43,7 @@ export class DBServer {
       await sequelize.authenticate();
       return true;
     } catch (error) {
-      signale.error('Unable to connect to the database:', error);
+      MatexLog.error('Unable to connect to the database:' + error);
       return false;
     }
   }
@@ -55,8 +53,7 @@ export class DBServer {
       const jane = await User.create({ name: 'Jane' });
       return jane.toJSON();
     } catch (e: any) {
-      signale.error(e);
-      PortChannel.postMessage('test', e.toString());
+      MatexLog.error(e);
     }
   }
 }

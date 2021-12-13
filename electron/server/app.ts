@@ -1,12 +1,10 @@
 import express, { Express, Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
-import signale from 'signale';
 import type { Server } from 'http';
 import { DBServer } from './db';
+import { MatexLog } from '../scripts/log';
 
 const isDev = process.env.NODE_ENV === 'development';
-signale.debug(isDev);
-signale.debug(process.cwd());
 
 class MockServer {
   port: number = 8000;
@@ -17,7 +15,7 @@ class MockServer {
   setPort(port: number) {
     this.port = port;
   }
-  setRoutes(routes: string[]) {
+  addRoutes(routes: string[]) {
     this.routes = [...routes];
   }
 
@@ -42,13 +40,13 @@ class MockServer {
       for (const route of this.routes) {
         this.app!.get(route, async (req: Request, res: Response) => {
           const res2 = await DBServer.create();
-          signale.debug(res2);
+          MatexLog.debug(res2);
           res.send('hello' + res2);
         });
       }
       this.setServer(
         this.app!.listen(this.port, () => {
-          signale.success('服务器运行成功');
+          MatexLog.success('服务器运行成功');
         })
       );
     }
@@ -61,14 +59,14 @@ class MockServer {
       if (this.app) {
         this.setApp(null);
       }
-      signale.debug('服务器删除成功');
+      MatexLog.debug('服务器删除成功');
     }
   }
 
   closeServer() {
     if (this.server) {
       this.server.close();
-      signale.error('关闭服务器成功');
+      MatexLog.debug('关闭服务器成功');
     }
   }
 }
