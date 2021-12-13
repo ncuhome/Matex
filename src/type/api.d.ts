@@ -3,6 +3,7 @@ export type ResDataType = 'Plain Text' | 'JSON' | 'File' | 'Form Data';
 interface ChannelEvents {
   loading;
   server;
+  test;
 }
 
 export type ChannelEvent = keyof ChannelEvents;

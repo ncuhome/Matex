@@ -24,10 +24,7 @@ const APISider = () => {
   console.log(msg);
 
   useEffect(() => {
-    console.log(msg?.data);
-    if (msg) {
-      new Notification('新消息', { data: msg.data });
-    }
+    console.log(msg);
   }, [msg]);
 
   const handleClick = () => {

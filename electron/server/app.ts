@@ -1,18 +1,16 @@
 import express, { Express, Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
 import signale from 'signale';
-// import { PrismaClient } from '@prisma/client';
 import type { Server } from 'http';
+import { DBServer } from './db';
 
 const isDev = process.env.NODE_ENV === 'development';
 signale.debug(isDev);
 signale.debug(process.cwd());
 
-// const prisma = new PrismaClient();
-
 class MockServer {
   port: number = 8000;
-  routes: string[] = [];
+  routes: string[] = ['/test'];
   app: Express | null = null;
   server: Server | null = null;
 
@@ -23,7 +21,8 @@ class MockServer {
     this.routes = [...routes];
   }
 
-  initServer(routes: string[]) {
+  async initServer(routes: string[]) {
+    await DBServer.init();
     this.app = express();
     this.app.use(bodyParser.json());
   }
@@ -35,14 +34,16 @@ class MockServer {
     this.server = server;
   }
 
-  startServer() {
+  async startServer() {
     if (this.server) {
       this.deleteServer();
     } else {
-      this.initServer(this.routes);
+      await this.initServer(this.routes);
       for (const route of this.routes) {
-        this.app!.get(route, (req: Request, res: Response) => {
-          res.send('hello' + route);
+        this.app!.get(route, async (req: Request, res: Response) => {
+          const res2 = await DBServer.create();
+          signale.debug(res2);
+          res.send('hello' + res2);
         });
       }
       this.setServer(

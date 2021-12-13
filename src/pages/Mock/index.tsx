@@ -4,8 +4,15 @@ import APIHeader from './Header';
 import APISider from './Side';
 import APIBody from './Body';
 import MockIdle from './Body/MockIdle';
+import { usePortOn } from '../../hooks/usePortOn';
 
 const MockView = () => {
+  const data = usePortOn('test');
+  console.log(data);
+  // useEffect(()=>{
+  //
+  // },[])
+
   return (
     <div className={styles.con}>
       <div className={styles.header}>

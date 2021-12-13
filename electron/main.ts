@@ -1,21 +1,16 @@
 import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
-import * as path from 'path';
 import * as signale from 'signale';
 import { startServer } from './server/start';
-import { PortChannel } from './communication';
+import { PortChannel } from './message';
 import { myEmitter } from './utils/EventEmiter';
+import { loadUrl, preloadPath } from './utils/path';
 
 let mainWindow: BrowserWindow | null;
 
 const isDev = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
-signale.note('process.cwd()=>' + process.cwd());
 
 const { port1, port2 } = new MessageChannelMain();
-
-const preloadPath = isDev
-  ? path.resolve(process.cwd(), './electron/scripts/preload.js')
-  : `${path.resolve(__dirname, './preload.js')}`;
 
 async function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -36,14 +31,17 @@ async function createWindow() {
     }
   });
   mainWindow.setWindowButtonVisibility(false);
-  const url = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '..')}/render/index.html`;
-  await mainWindow.loadURL(url);
 
+  //加载
+  await mainWindow.loadURL(loadUrl);
+
+  //发送通信端口
   mainWindow.webContents.postMessage('port', null, [port2]);
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
   //假设的加载过程
   setTimeout(() => {
     PortChannel.postMessage<null>('loading', null);
