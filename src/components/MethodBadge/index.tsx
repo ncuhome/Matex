@@ -6,7 +6,7 @@ interface BadgeProps {
   type?: 'get' | 'post' | 'put' | 'delete' | 'header';
 }
 
-const Badge: React.FC<BadgeProps> = ({ type = 'post' }) => {
+const Badge: React.FC<BadgeProps> = ({ type = 'get' }) => {
   return (
     <div className={clsx([styles.badge, styles[type]])}>
       <div className={clsx([styles.inner, styles[`${type}Inner`]])}>Get</div>

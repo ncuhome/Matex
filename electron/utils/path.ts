@@ -7,6 +7,7 @@ export const appDir = __dirname;
 export const resolvePath = (_path: string) => path.resolve(appDir, _path);
 
 export const resourcesPath = process.resourcesPath;
+export const loadingPath = `file://${path.join(rootDir, '.')}/loading.html`;
 
 export const preloadPath = isDev
   ? path.resolve(process.cwd(), './electron/scripts/preload.js')

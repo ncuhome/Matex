@@ -8310,7 +8310,7 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.11, postcss@^7.0.14, postcss@^7.0.1
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postcss@^8.3.7, postcss@^8.3.8:
+postcss@^8.3.8:
   version "8.3.11"
   resolved "https://registry.npmmirror.com/postcss/download/postcss-8.3.11.tgz?cache=0&sync_timestamp=1634821212090&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fpostcss%2Fdownload%2Fpostcss-8.3.11.tgz#c3beca7ea811cd5e1c4a3ec6d2e7599ef1f8f858"
   integrity sha1-w77KfqgRzV4cSj7G0udZnvH4+Fg=

@@ -9,9 +9,6 @@ import { usePortOn } from '../../hooks/usePortOn';
 const MockView = () => {
   const data = usePortOn('test');
   console.log(data);
-  // useEffect(()=>{
-  //
-  // },[])
 
   return (
     <div className={styles.con}>

@@ -26,7 +26,7 @@ const MockForm = () => {
         <LinkIcon sx={{ transform: 'scale(1.5)', color: '#F86087' }} />
         <LabelInput label={'接口路径'} />
       </div>
-      <div style={{ marginTop: 10 }}>
+      <div style={{ marginTop: 10, marginRight: 10 }}>
         <MonacoEditor defaultVal={''} language={'json'} />
       </div>
     </div>
