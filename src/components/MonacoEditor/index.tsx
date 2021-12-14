@@ -1,15 +1,19 @@
-import React, { FC, useRef, useState, useEffect } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { resizeAble } from './resize';
 import { rules } from './theme';
-import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
+import { suggestions } from './suggestions';
+import { myEmitter } from '../../utils/EventEmiter';
 import ProviderResult = languages.ProviderResult;
 import CompletionList = languages.CompletionList;
-import { suggestions } from './suggestions';
 
 interface MonacoEditorProps {
+  name: string;
+  height: number;
+  width: number | string;
   defaultVal: string;
   language: string;
   readOnly?: boolean;
@@ -18,12 +22,16 @@ interface MonacoEditorProps {
   onBlur?: () => void;
   watchModelMarkers?: (marks: monaco.editor.IMarker[]) => void;
   getValue?: (value: string) => void;
+  setValue?: (value: string) => void;
   autoFormat?: boolean;
   className?: string;
   onFocus?: () => void;
 }
 
 const MonacoEditor: FC<MonacoEditorProps> = ({
+  name = '',
+  height = 200,
+  width = '100%',
   language = 'json',
   defaultVal = '',
   enabledMinMap = false,
@@ -34,6 +42,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   onChange = () => {},
   onBlur = () => {},
   getValue = () => {},
+  setValue = () => {},
   onFocus = () => {}
 }) => {
   const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor | null>(null);
@@ -42,6 +51,16 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   useEffect(() => {
     resizeAble();
   }, [monacoEl]);
+
+  useEffect(() => {
+    myEmitter.on<string>(`monacoEditor-${name}`, (val) => {
+      if (val) {
+        console.log(editor);
+        editor?.setValue(val);
+        editor?.getAction('editor.action.formatDocument')?.run();
+      }
+    });
+  }, [editor]);
 
   useEffect(() => {
     monaco.editor.defineTheme('my-theme', {
@@ -60,7 +79,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       rules
     });
     monaco.editor.setTheme('my-theme');
-  }, []);
+  }, [editor]);
 
   useEffect(() => {
     setEditor(null);
@@ -70,6 +89,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       }
     });
     if (monacoEl && !editor) {
+      console.log('初始化---');
       setEditor(
         monaco.editor.create(monacoEl.current!, {
           value: defaultVal,
@@ -86,7 +106,10 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
         })
       );
     }
-    return () => editor?.dispose();
+    return () => {
+      console.log('删除----');
+      editor?.dispose();
+    };
   }, [monacoEl.current]);
 
   useEffect(() => {
@@ -97,15 +120,23 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       getValue(val);
       watchModelMarkers(monaco.editor.getModelMarkers({}));
     });
+    editor?.onDidBlurEditorText(() => {
+      onBlur();
+      console.log('失去焦点');
+      autoFormat && editor?.getAction('editor.action.formatDocument').run();
+    });
     editor?.onDidBlurEditorWidget(() => {
       onBlur();
+      console.log('失去焦点-onDidBlurEditorWidget');
       autoFormat && editor?.getAction('editor.action.formatDocument').run();
     });
     editor?.onDidFocusEditorWidget(() => {
       onFocus();
     });
-  }, []);
+  }, [editor]);
 
-  return <div id={'monacoEditor'} className={clsx([styles.editor, className])} ref={monacoEl} />;
+  return (
+    <div id={'monacoEditor'} style={{ height }} className={clsx([styles.editor, className])} ref={monacoEl} />
+  );
 };
 export default MonacoEditor;
