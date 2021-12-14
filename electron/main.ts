@@ -1,11 +1,11 @@
 import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
 import { startServer } from './server/start';
 import { PortChannel } from './message';
-import { myEmitter } from './utils/EventEmiter';
-import { loadUrl, preloadPath } from './utils/path';
+import { loadingPath, loadUrl, preloadPath } from './utils/path';
 import { MatexLog } from './scripts/log';
 
-let mainWindow: BrowserWindow | null;
+let mainWindow: BrowserWindow | undefined;
+let loadWindow: BrowserWindow | undefined;
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -14,12 +14,11 @@ const { port1, port2 } = new MessageChannelMain();
 async function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   mainWindow = new BrowserWindow({
-    width: 400,
-    height: 400,
-    x: (width - 400) / 2,
-    y: (height - 400) / 2,
-    center: false,
+    width: width - 100,
+    height: height - 20,
+    center: true,
     frame: false,
+    show: false,
     transparent: true,
     resizable: true,
     titleBarStyle: 'customButtonsOnHover',
@@ -29,26 +28,42 @@ async function createWindow() {
       contextIsolation: false
     }
   });
-  mainWindow.setWindowButtonVisibility(false);
+  loadWindow = new BrowserWindow({
+    width: 400,
+    height: 400,
+    center: false,
+    x: (width - 400) / 2,
+    y: (height - 400) / 2,
+    frame: false,
+    transparent: true,
+    resizable: false,
+    show: true,
+    titleBarStyle: 'customButtonsOnHover',
+    webPreferences: {
+      preload: preloadPath,
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  });
+  loadWindow.setWindowButtonVisibility(false);
+  await loadWindow?.loadURL(loadingPath);
+  loadWindow.once('ready-to-show', () => {
+    loadWindow?.show();
+  });
 
-  //加载
   await mainWindow.loadURL(loadUrl);
 
   //发送通信端口
   mainWindow.webContents.postMessage('port', null, [port2]);
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
+    mainWindow = undefined;
   });
 
-  //假设的加载过程
-  setTimeout(() => {
-    PortChannel.postMessage<null>('loading', null);
-    mainWindow?.hide();
-    mainWindow?.setSize(width - 100, height, false);
-    mainWindow?.center();
-    mainWindow?.setWindowButtonVisibility(true);
-  }, 3000);
+  loadWindow.on('closed', () => {
+    MatexLog.success('loadWindow 关闭');
+    loadWindow = undefined;
+  });
 }
 
 //避免多实例
@@ -63,20 +78,15 @@ if (!gotTheLock) {
   });
 }
 
-app.on('ready', () => {
+app.on('ready', async () => {
   PortChannel.setPort(port1);
   PortChannel.startListening();
   createWindow();
-
-  myEmitter.on('loading', (data) => {
-    if (data) {
-      console.log(mainWindow?.getSize());
-      setTimeout(() => {
-        mainWindow?.show();
-        console.log(mainWindow?.getSize());
-      }, 50);
-    }
-  });
+  setTimeout(() => {
+    loadWindow?.close();
+    loadWindow?.destroy();
+    mainWindow?.show();
+  }, 7000);
 });
 
 app.whenReady().then(async () => {
