@@ -6,14 +6,22 @@
 
 
 .tab{
-  line-height: 2.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
   border: 1px solid transparent;
-  color: #9294F5;
+  color: #C5CDFE;
   margin: 10px 20px;
-  font-size: 15px;
+  font-size: 14px;
+}
+
+.img{
+  width: 40px;
 }
 
 .tab:hover{
@@ -28,5 +36,4 @@
   &:hover{
     background-color: #93A1FD;
   }
-
 }
