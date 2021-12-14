@@ -4,6 +4,7 @@ import Login from '../pages/auth/login';
 import Home from '../pages/Home';
 import MockView from '../pages/Mock';
 import WaitWorkPage from '../components/Work';
+import Collection from '../pages/Collection';
 
 export const RouterAuth = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ export const RouterAuth = () => {
         <Route path={'/login'} element={<Login />} />
         <Route path={'/'} element={auth ? <Home /> : <Navigate to={'login'} replace />}>
           <Route path={'mock'} element={<MockView />} />
-          <Route path={'pull'} element={<WaitWorkPage />} />
+          <Route path={'collect'} element={<Collection />} />
           <Route path={'push'} element={<WaitWorkPage />} />
           <Route path={'ok'} element={<WaitWorkPage />} />
         </Route>

@@ -27,7 +27,7 @@ const MockForm = () => {
         <LabelInput label={'接口路径'} />
       </div>
       <div style={{ marginTop: 10, marginRight: 10 }}>
-        <MonacoEditor defaultVal={''} language={'json'} />
+        <MonacoEditor name={'mock'} defaultVal={''} language={'json'} height={250} width={'100%'} />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ export const ApiList: React.FC<ApiListProps> = ({ type = 'get', url = '' }) => {
   return (
     <div className={styles.apiList}>
       <Badge />
-      <div className={styles.url}>http:localhost:8080/mac1111111111111</div>
+      <div className={styles.url}>http:localhost:8080/mac11111</div>
     </div>
   );
 };
