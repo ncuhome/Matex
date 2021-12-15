@@ -1,6 +1,7 @@
 import create from 'zustand';
-import { ApiDataType, MessageChannel } from '../type/apiData.type';
+import { ApiDataType, MessageChannel, MonacoEditorTypes } from '../type/apiData.type';
 import { ApiData } from '../../type/api';
+import { editor } from 'monaco-editor';
 
 const initData: ApiData = {
   id: 1,
@@ -24,4 +25,20 @@ export const useChannel = create<MessageChannel>((set) => ({
   port: null,
   setPort: (value) => set((state) => ({ port: value })),
   cleanPort: () => set((state) => ({ port: null }))
+}));
+
+export const useEditors = create<MonacoEditorTypes>((set) => ({
+  editors: new Map<string, editor.IStandaloneCodeEditor | null>(),
+  addEditor: (name, editor) =>
+    set((state) => {
+      const tempMap = new Map<string, editor.IStandaloneCodeEditor | null>(state.editors);
+      tempMap.set(name, editor);
+      return { editors: tempMap };
+    }),
+  deleteEditor: (name) =>
+    set((state) => {
+      const tempMap = new Map<string, editor.IStandaloneCodeEditor | null>(state.editors);
+      tempMap.delete(name);
+      return { editors: tempMap };
+    })
 }));
