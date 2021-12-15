@@ -19,7 +19,7 @@ const MockForm = () => {
         <div style={{ marginRight: 10 }}>
           <LabelInput showLabel={false} label={'请求方法'} select options={methodsOptions} />
         </div>
-        <input type="text" value={'http://localhost:8080/m'} className={styles.urlText} />
+        <input type="text" value={'http://localhost:8080/m'} onChange={() => {}} className={styles.urlText} />
       </div>
       <div className={styles.info}>
         <LabelInput label={'数据类型'} select options={resOptions} />

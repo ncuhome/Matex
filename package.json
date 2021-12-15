@@ -42,6 +42,7 @@
     "dev": "concurrently \"vite\" \"npm run dev:electron\" \"npm run watch:electron\"",
     "dev:react": "vite",
     "dev:server": "nodemon --config nodemon-express.json",
+    "test:server": "node ./test/index.js",
     "remove": "rm -R ./dev",
     "dev:electron": "npm run remove && cross-env NODE_ENV=development ts-node ./scripts/parcel-dev.ts",
     "watch:electron": "wait-on ./dev/main.js && nodemon --config nodemon-electron.json",

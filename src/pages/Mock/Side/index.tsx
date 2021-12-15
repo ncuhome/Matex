@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './index.module.scss';
 import { AddApiList, ApiList } from '../../../components/ApiList';
 import Idle from './Idle';
 import Success from './Success';
 import Loading from './Loading';
 import { usePortChannel } from '../../../hooks/usePortChannel';
-import { usePortOn } from '../../../hooks/usePortOn';
 
 enum Status {
   Idle,
@@ -20,12 +19,6 @@ export interface ChildType {
 const APISider = () => {
   const [status, setStatus] = React.useState<Status>(Status.Idle);
   const { postMessage, port } = usePortChannel();
-  const msg = usePortOn<string>('server');
-  console.log(msg);
-
-  useEffect(() => {
-    console.log(msg);
-  }, [msg]);
 
   const handleClick = () => {
     switch (status) {
