@@ -13,7 +13,7 @@ function App() {
     setPort(port);
   };
   useIpcOn({ channel: 'port', listener: ipcListener });
-
+  console.log(window);
   return (
     <div className={styles.app}>
       <RouterAuth />

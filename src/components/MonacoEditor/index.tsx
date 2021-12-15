@@ -80,7 +80,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     });
     monaco.editor.setTheme('my-theme');
   }, [editor]);
-
   useEffect(() => {
     setEditor(null);
     monaco.languages.registerCompletionItemProvider('json', {
@@ -96,6 +95,8 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
           language,
           readOnly,
           automaticLayout: true,
+          fontSize: 14,
+          fontFamily: 'JetBrains Mono NL Light',
           scrollbar: {
             verticalScrollbarSize: 10,
             verticalSliderSize: 12

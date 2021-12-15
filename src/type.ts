@@ -1,7 +1,9 @@
 import type { IpcRenderer } from 'electron';
+import type { AxiosStatic } from 'axios';
 
-interface IpcWindow extends Window {
+interface MatexWindow extends Window {
   ipc: IpcRenderer;
+  Mixos: AxiosStatic;
 }
 
-export const Window: IpcWindow = window as unknown as IpcWindow;
+export const Window: MatexWindow = window as unknown as MatexWindow;

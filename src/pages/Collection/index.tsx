@@ -2,16 +2,19 @@ import React from 'react';
 import styles from './index.module.scss';
 import MonacoEditor from '../../components/MonacoEditor';
 import { myEmitter } from '../../utils/EventEmiter';
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
+import { Window } from '../../type';
 
 const Collection = () => {
-  const handleClick = () => {
-    myEmitter.emit<string>('monacoEditor-collect', JSON.stringify({ ok: 1, hello: 'hello' }));
+  const handleClick = async () => {
+    const res = await Window.Mixos.get('http://localhost:9000/test');
+    myEmitter.emit<string>('monacoEditor-collect', JSON.stringify(res));
   };
 
   return (
     <div className={styles.collection}>
       <div>
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
         <Button variant="outlined" onClick={handleClick}>
           发送
         </Button>
