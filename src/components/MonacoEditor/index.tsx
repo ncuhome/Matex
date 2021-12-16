@@ -8,6 +8,7 @@ import { rules } from './theme';
 import { suggestions } from './suggestions';
 import { myEmitter } from '../../utils/EventEmiter';
 import { useEditors } from '../../zustand/store/apiData.store';
+import { defaultSchema } from './schema';
 import ProviderResult = languages.ProviderResult;
 import CompletionList = languages.CompletionList;
 
@@ -32,6 +33,40 @@ monaco.editor.defineTheme('my-theme', {
   rules
 });
 monaco.editor.setTheme('my-theme');
+const modelUri = monaco.Uri.parse('a://b/foo.json'); // a made up unique URI for our model
+const model = monaco.editor.createModel('', 'json', modelUri);
+monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+  validate: true,
+  schemas: [
+    ...defaultSchema,
+    {
+      uri: 'http://myserver/foo-schema.json', // id of the first schema
+      fileMatch: [modelUri.toString()], // associate with our model
+      schema: {
+        type: 'object',
+        properties: {
+          p1: {
+            enum: ['v1', 'v2']
+          },
+          p2: {
+            $ref: 'http://myserver/bar-schema.json' // reference the second schema
+          }
+        }
+      }
+    },
+    {
+      uri: 'http://myserver/bar-schema.json', // id of the second schema
+      schema: {
+        type: 'object',
+        properties: {
+          q1: {
+            enum: ['x1', 'x2']
+          }
+        }
+      }
+    }
+  ]
+});
 
 interface MonacoEditorProps {
   name: string;
@@ -74,13 +109,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     resizeAble();
   }, [monacoEl]);
   const editor = editors.get(name);
-  console.log('editor', editor);
   console.log(editors);
-
-  useEffect(() => {
-    console.log('重新render');
-  }, [editor]);
-
   const setVal = useCallback(
     (value: string) => {
       if (value) {
@@ -95,9 +124,9 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
 
   useEffect(() => {
     if (monacoEl && !editor) {
-      console.log('初始化---');
       const editor_ = monaco.editor.create(monacoEl.current!, {
         value: defaultVal,
+        model: model,
         language,
         readOnly,
         automaticLayout: true,
@@ -118,7 +147,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       deleteEditor(name);
       myEmitter.offAll(`monacoEditor-${name}`);
     };
-  }, []);
+  }, [monacoEl]);
 
   useEffect(() => {
     if (editor) {
@@ -133,10 +162,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
       const val = model!.getValue();
       getValue(val);
       watchModelMarkers(monaco.editor.getModelMarkers({}));
-    });
-    editor?.onDidBlurEditorText(() => {
-      onBlur();
-      autoFormat && editor?.getAction('editor.action.formatDocument').run();
     });
     editor?.onDidBlurEditorWidget(() => {
       onBlur();
