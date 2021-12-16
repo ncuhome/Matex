@@ -35,7 +35,7 @@ div {
   --white: #FFFFFF;
   --greyLight-1: #FFFFFE;
   --sideBar-bg1:#636CD7;
-  --greyLight-2: #EFF1F5;
+  --greyLight-2: linear-gradient(130deg, #E2E4F3 20%, #F0F0F0);
   --greyLight-3: #c1d9f0;
   --greyDark: #646b8c;
 }

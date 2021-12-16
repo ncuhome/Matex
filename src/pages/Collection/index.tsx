@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './index.module.scss';
 import MonacoEditor from '../../components/MonacoEditor';
 import { myEmitter } from '../../utils/EventEmiter';
-import { Button, ButtonGroup, TextField } from '@mui/material';
 import { Window } from '../../type';
+import { Button, ButtonGroup, Input } from '@geist-ui/react';
 
 const Collection = () => {
   const handleClick = async () => {
@@ -14,17 +14,15 @@ const Collection = () => {
   return (
     <div className={styles.collection}>
       <div>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        <Button variant="outlined" onClick={handleClick}>
-          发送
-        </Button>
+        <Input placeholder="一个基础示例" />
+        <Button onClick={handleClick}>发送</Button>
       </div>
       <div className={styles.edit}>
         <div className={styles.btnGroup}>
-          <ButtonGroup size="small" variant="outlined" color={'info'}>
-            <Button sx={{ textTransform: 'none', backgroundColor: '#424557', color: '#FFF' }}>Pretty</Button>
-            <Button sx={{ textTransform: 'none', backgroundColor: '#424557', color: '#FFF' }}>Two</Button>
-            <Button sx={{ textTransform: 'none', backgroundColor: '#424557', color: '#FFF' }}>Three</Button>
+          <ButtonGroup>
+            <Button>One</Button>
+            <Button>Two</Button>
+            <Button>Three</Button>
           </ButtonGroup>
         </div>
         <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={300} width={'100%'} />

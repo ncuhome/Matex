@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import Badge from '../MethodBadge';
-import AddIcon from '@mui/icons-material/Add';
+import Plus from '@geist-ui/react-icons/plus';
 
 interface ApiListProps {
   type?: 'get' | 'post';
@@ -20,7 +20,7 @@ export const ApiList: React.FC<ApiListProps> = ({ type = 'get', url = '' }) => {
 export const AddApiList = () => {
   return (
     <div className={styles.apiList}>
-      <AddIcon sx={{ transform: 'scale(1.5)' }} />
+      <Plus />
     </div>
   );
 };
