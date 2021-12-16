@@ -3,38 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import './globle.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './useWorker';
+import { GeistProvider } from '@geist-ui/react';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1E9CFC'
-    },
-    secondary: {
-      main: '#6365F1'
-    },
-    error: {
-      main: '#F73C3C'
-    },
-    info: {
-      main: '#BFC3C4'
-    },
-    success: {
-      main: '#3CDB6B'
-    },
-    warning: {
-      main: '#F5D21E'
-    }
-  }
-});
 const isDev = process.env.NODE_ENV === 'development';
 
 ReactDOM.render(
   renderRoot(
-    <ThemeProvider theme={theme}>
+    <GeistProvider>
       <App />
-    </ThemeProvider>
+    </GeistProvider>
   ),
   document.getElementById('root')
 );
