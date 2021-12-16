@@ -1,7 +1,7 @@
 
 .activeStyle{
   color: #FFF;
-  background-color: #99A5F8;
+  background-color: #000;
 }
 
 
@@ -16,11 +16,15 @@
   border-radius: 10px;
   cursor: pointer;
   border: 1px solid transparent;
-  color: #C5CDFE;
+  color: #666666;
   font-size: 14px;
   transition: all 0.3s ease-out;
   margin-top: 15px;
 
+  &:hover{
+    color: #B1B1B1;
+    background-color: #4D4D4D;
+  }
 
   .tabIcon{
     transition: all 0.3s ease-out;
@@ -52,14 +56,11 @@
   animation: left 0.3s ease-out;
 }
 
-.tab:hover{
-  background-color: #99A5F8;
-}
-
 .tab.active{
   @extend .activeStyle;
 
   &:hover{
-    background-color: #93A1FD;
+    color: #FFF;
+    background-color: #4D4D4D;
   }
 }

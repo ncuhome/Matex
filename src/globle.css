@@ -27,15 +27,15 @@ div {
   --light-bg3--: rgba(255, 255, 255, 0.8);
   --light-bg4--: linear-gradient(135deg, #EAE6FE, #E2DCFF);
   --light-shadow:0px 20px 30px rgba(100, 131, 177, 0.3);
-  --dark-shadow:2px 2px 5px rgba(44,46,58,0.3);
+  --dark-shadow:2px 2px 5px #D1D6F0;
 
   --primary-light: #39ddfa;
   --primary: #00abdf;
   --primary-dark: #008ada;
   --white: #FFFFFF;
-  --greyLight-1: #FFFFFE;
-  --sideBar-bg1:#636CD7;
-  --greyLight-2: linear-gradient(130deg, #E2E4F3 20%, #F0F0F0);
+  --greyLight-1: #FFFFFF;
+  --sideBar-bg1:#000;
+  --greyLight-2: #FBFCFF;
   --greyLight-3: #c1d9f0;
   --greyDark: #646b8c;
 }

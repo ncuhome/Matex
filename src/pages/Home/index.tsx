@@ -18,7 +18,7 @@ const Home: React.FC<any> = () => {
         <Header />
       </div>
       <div className={styles.con}>
-        <div className={styles.sideBar} style={{ width: collapse ? '70px' : '150px' }}>
+        <div className={styles.sideBar} style={{ width: collapse ? '70px' : '190px' }}>
           <SideBar />
         </div>
         <div className={styles.body}>
