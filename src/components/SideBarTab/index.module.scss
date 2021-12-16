@@ -1,37 +1,63 @@
 
 .activeStyle{
-  color: #F4FFFF;
-  background-color: #93A1FD;
+  color: #FFF;
+  background-color: #99A5F8;
 }
 
 
 .tab{
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  height: 40px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
   border: 1px solid transparent;
   color: #C5CDFE;
-  margin: 10px 20px;
   font-size: 14px;
+  transition: all 0.3s ease-out;
+  margin-top: 15px;
+
+
+  .tabIcon{
+    transition: all 0.3s ease-out;
+  }
+
+  .text{
+    text-wrap: none;
+    margin-left: 10px;
+  }
+
 }
 
-.img{
-  width: 40px;
+.show{
+  transition: all 0.3s ease-out;
+  animation: left1 0.29s ease-out;
+}
+
+@keyframes left1 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-35px);
+  }
+}
+
+.hidden{
+  transition: all 0.3s ease-out;
+  animation: left 0.3s ease-out;
 }
 
 .tab:hover{
-  @extend .activeStyle;
-  background-color: #C5CDFE;
+  background-color: #99A5F8;
 }
 
 .tab.active{
   @extend .activeStyle;
-  //border: 1px solid #FA86A3;
 
   &:hover{
     background-color: #93A1FD;

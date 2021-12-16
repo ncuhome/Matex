@@ -1,27 +1,61 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import { TabProps } from '../SideBar/tabItems';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
+import { useCollapse } from '../../zustand/store/ui.store';
+import { Globe, Inbox, Target, Truck } from '@geist-ui/react-icons';
 
-const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active = false, renderIcon }) => {
+const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active = false }) => {
   const navigate = useNavigate();
-  const [hover, setHover] = React.useState(false);
+  const tabRef = useRef<HTMLDivElement>(null);
+  const { collapse } = useCollapse((state) => state);
+  const [show, setShow] = useState(false);
 
   const handleClick = () => {
     navigate(route);
   };
+  useEffect(() => {
+    if (!collapse) {
+      setTimeout(() => {
+        setShow(true);
+      }, 200);
+    } else {
+      setShow(false);
+    }
+  }, [collapse]);
   return (
     <div
+      ref={tabRef}
       onClick={handleClick}
-      onMouseLeave={() => setHover(false)}
-      onMouseEnter={() => setHover(true)}
+      style={{ width: collapse ? '50px' : '130px' }}
       className={clsx([styles.tab, active && styles.active])}
     >
-      <div>{renderIcon({ active: hover || active })}</div>
-      {text}
+      <div className={clsx([styles.tabIcon])}>{getIcon(route)}</div>
+      <div style={{ display: show ? 'block' : 'none' }} className={clsx([styles.text])}>
+        {text}
+      </div>
     </div>
   );
+};
+
+const getIcon = (route: string) => {
+  let res;
+  switch (route) {
+    case '/collect':
+      res = <Globe />;
+      break;
+    case '/mock':
+      res = <Truck />;
+      break;
+    case '/push':
+      res = <Inbox />;
+      break;
+    case '/ok':
+      res = <Target />;
+      break;
+  }
+  return res;
 };
 
 export default SideBarTab;
