@@ -1,9 +1,10 @@
 import React, { ChangeEvent } from 'react';
 import styles from './index.module.scss';
-import LabelInput from '../../../../components/LabelInput';
 import Anchor from '@geist-ui/react-icons/anchor';
 
 import MonacoEditor from '../../../../components/MonacoEditor';
+import { Input, Select, Spacer } from '@geist-ui/react';
+import Link2 from '@geist-ui/react-icons/link2';
 
 const resOptions = ['JSON', 'Plain Text', 'File', 'Form Data'];
 const methodsOptions = ['Get', 'Post', 'Put', 'Delete'];
@@ -18,14 +19,23 @@ const MockForm = () => {
     <div className={styles.form}>
       <div className={styles.fullUrl}>
         <div style={{ marginRight: 10 }}>
-          <LabelInput showLabel={false} label={'请求方法'} select options={methodsOptions} />
+          <Select placeholder="选择工作" width={5.5} style={{ minWidth: '0px' }}>
+            <Select.Option value="1">远程工作</Select.Option>
+            <Select.Option value="2">线下工作</Select.Option>
+          </Select>
+          {/*<LabelInput showLabel={false} label={'请求方法'} select options={methodsOptions} />*/}
         </div>
-        <input type="text" value={'http://localhost:8080/m'} onChange={() => {}} className={styles.urlText} />
+        <Spacer w={1} />
+        <Anchor />
+        <Spacer w={1} />
+        <Input value={'http://localhost:8080/m'} width={'100%'} onChange={() => {}} />
       </div>
       <div className={styles.info}>
-        <LabelInput label={'数据类型'} select options={resOptions} />
-        <Anchor />
-        <LabelInput label={'接口路径'} />
+        <Input label="端口" width={'100%'} placeholder="一个基础示例" />
+        <Spacer w={1} />
+        <Link2 />
+        <Spacer w={1} />
+        <Input label="/" width={'100%'} placeholder="https://github" />
       </div>
       <div style={{ marginTop: 10, marginRight: 10 }}>
         <MonacoEditor name={'mock'} defaultVal={''} language={'json'} height={250} width={'100%'} />
