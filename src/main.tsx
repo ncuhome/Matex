@@ -4,13 +4,14 @@ import App from './App';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import './globle.css';
 import './useWorker';
-import { GeistProvider } from '@geist-ui/react';
+import { CssBaseline, GeistProvider } from '@geist-ui/react';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 ReactDOM.render(
   renderRoot(
     <GeistProvider>
+      <CssBaseline />
       <App />
     </GeistProvider>
   ),

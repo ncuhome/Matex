@@ -1,6 +1,6 @@
 .apiList{
   width: 95%;
-  height: 48px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -13,14 +13,14 @@
 
   &:hover {
     cursor: pointer;
-    background-color: rgba(188,204,255,0.3);
+    background-color: rgba(102,102,102,0.5);
     border-color: transparent;
   }
 
   .url {
-    margin-left: 10px;
+    margin-left: 15px;
     flex: 1;
-    color: #6C63FF;
+    color: #000;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

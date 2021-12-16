@@ -11,9 +11,6 @@ const MockView = () => {
       <div className={styles.header}>
         <APIHeader />
       </div>
-      <div className={styles.side}>
-        <APISider />
-      </div>
       <div className={styles.body}>
         <div className={styles.idle}>
           <MockIdle />
@@ -21,6 +18,9 @@ const MockView = () => {
         <div className={styles.content}>
           <APIBody />
         </div>
+      </div>
+      <div className={styles.side}>
+        <APISider />
       </div>
     </div>
   );

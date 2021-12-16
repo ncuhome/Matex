@@ -5,6 +5,8 @@ import Idle from './Idle';
 import Success from './Success';
 import Loading from './Loading';
 import { usePortChannel } from '../../../hooks/usePortChannel';
+import { Button, Capacity } from '@geist-ui/react';
+import { ChevronLeftCircle, ChevronRightCircle } from '@geist-ui/react-icons';
 
 enum Status {
   Idle,
@@ -56,17 +58,34 @@ const APISider = () => {
 
   return (
     <div className={styles.sider}>
-      <div className={styles.form}>
-        <div className={styles.title}>接口列表</div>
-        <ApiList type={'get'} />
-        <ApiList type={'get'} />
-        <ApiList type={'get'} />
-        <ApiList type={'get'} />
-        <ApiList type={'get'} />
-        <ApiList type={'get'} />
-        <AddApiList />
+      <div className={styles.data}>
+        <div className={styles.header}>
+          <div className={styles.title}>接口列表</div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Capacity value={15} mr={0.5} color={'black'} />
+            <span style={{ fontSize: '14px' }}>24</span>
+          </div>
+        </div>
+        <div className={styles.list}>
+          <ApiList type={'get'} />
+          <ApiList type={'get'} />
+          <ApiList type={'get'} />
+          <ApiList type={'get'} />
+          <AddApiList />
+        </div>
       </div>
-      {render()}
+      <div className={styles.btnGroup}>
+        <Button
+          style={{ backgroundColor: 'black' }}
+          icon={<ChevronLeftCircle color={'white'} />}
+          shadow
+          auto
+          mr={2}
+          px={0.6}
+        />
+        <Button icon={<ChevronRightCircle />} shadow auto px={0.6} />
+      </div>
+      <div className={styles.status}>{render()}</div>
     </div>
   );
 };
