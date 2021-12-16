@@ -1,13 +1,17 @@
 
 .header{
   display: flex;
+  position: relative;
 
   .logoCon{
-    width: 230px;
+    width: 130px;
     height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease-out;
 
     .logo{
       width: 100px;

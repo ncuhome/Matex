@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.scss';
 import MonacoEditor from '../../components/MonacoEditor';
 import { myEmitter } from '../../utils/EventEmiter';
-import { Button, TextField } from '@mui/material';
+import { Button, ButtonGroup, TextField } from '@mui/material';
 import { Window } from '../../type';
 
 const Collection = () => {
@@ -19,7 +19,16 @@ const Collection = () => {
           发送
         </Button>
       </div>
-      <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={300} width={'100%'} />
+      <div className={styles.edit}>
+        <div className={styles.btnGroup}>
+          <ButtonGroup size="small" variant="outlined" color={'info'}>
+            <Button sx={{ textTransform: 'none', backgroundColor: '#424557', color: '#FFF' }}>Pretty</Button>
+            <Button sx={{ textTransform: 'none', backgroundColor: '#424557', color: '#FFF' }}>Two</Button>
+            <Button sx={{ textTransform: 'none', backgroundColor: '#424557', color: '#FFF' }}>Three</Button>
+          </ButtonGroup>
+        </div>
+        <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={300} width={'100%'} />
+      </div>
     </div>
   );
 };

@@ -98,6 +98,8 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "@geist-ui/react": "^2.2.0",
+    "@geist-ui/react-icons": "^1.0.1",
     "@mui/icons-material": "^5.2.0",
     "@mui/material": "^5.2.2",
     "ahooks": "^2.10.12",

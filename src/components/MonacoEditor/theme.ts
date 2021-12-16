@@ -1,5 +1,6 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
+// !!! Tokens can be inspected using F1 > Developer: Inspect Tokens !!!
 export const rules: monaco.editor.ITokenThemeRule[] = [
   {
     token: 'number.json',

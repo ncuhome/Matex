@@ -1,7 +1,7 @@
 .card {
   height: 200px;
   background: var(--greyLight-1);
-  box-shadow: 0 0 10px rgba(100, 131, 177, 0.2);
+  box-shadow: var(--dark-shadow);
   border: 1px white solid;
   border-radius: 10px;
   display: flex;

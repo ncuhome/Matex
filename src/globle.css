@@ -1,6 +1,8 @@
 body, html {
   background-color: transparent;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 div {
@@ -24,14 +26,16 @@ div {
   --light-bg2--: rgba(255, 255, 255, 0.7);
   --light-bg3--: rgba(255, 255, 255, 0.8);
   --light-bg4--: linear-gradient(135deg, #EAE6FE, #E2DCFF);
-  --light-shadow:0px 20px 30px rgba(100, 131, 177, 0.2);
+  --light-shadow:0px 20px 30px rgba(100, 131, 177, 0.3);
+  --dark-shadow:2px 2px 5px rgba(44,46,58,0.3);
 
   --primary-light: #39ddfa;
   --primary: #00abdf;
   --primary-dark: #008ada;
   --white: #FFFFFF;
-  --greyLight-1: #ebf5fc;
-  --greyLight-2: #d5e0f3;
+  --greyLight-1: #FFFFFE;
+  --sideBar-bg1:#636CD7;
+  --greyLight-2: #EFF1F5;
   --greyLight-3: #c1d9f0;
   --greyDark: #646b8c;
 }
