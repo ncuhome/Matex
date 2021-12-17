@@ -6,7 +6,6 @@ Signale.start('开始parcel打包');
 const rootDir = process.cwd();
 // 单个入口文件路径
 const entryFiles = Path.resolve(rootDir, './electron/main.ts');
-Signale.star(process.env.NODE_ENV);
 // Bundler 选项
 const options = {
   outDir: './dev', // 将生成的文件放入输出目录下，默认为 dist
