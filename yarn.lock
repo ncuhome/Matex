@@ -1560,6 +1560,13 @@
   resolved "https://registry.npmmirror.com/@types/verror/download/@types/verror-1.10.5.tgz?cache=0&sync_timestamp=1637271562927&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fverror%2Fdownload%2F%40types%2Fverror-1.10.5.tgz#2a1413aded46e67a1fe2386800e291123ed75eb1"
   integrity sha1-KhQTre1G5nof4jhoAOKREj7XXrE=
 
+"@types/wait-on@^5.3.1":
+  version "5.3.1"
+  resolved "https://registry.npmjs.org/@types/wait-on/-/wait-on-5.3.1.tgz#bc5520d1d8b90b9caab1bef23315685ded73320d"
+  integrity sha512-2FFOKCF/YydrMUaqg+fkk49qf0e5rDgwt6aQsMzFQzbS419h2gNOXyiwp/o2yYy27bi/C1z+HgfncryjGzlvgQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/yargs-parser@*":
   version "20.2.1"
   resolved "https://registry.npmmirror.com/@types/yargs-parser/download/@types/yargs-parser-20.2.1.tgz?cache=0&sync_timestamp=1637270733678&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fyargs-parser%2Fdownload%2F%40types%2Fyargs-parser-20.2.1.tgz#3b9ce2489919d9e4fea439b76916abc34b2df129"
