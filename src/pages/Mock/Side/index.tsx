@@ -5,8 +5,8 @@ import Idle from './Idle';
 import Success from './Success';
 import Loading from './Loading';
 import { usePortChannel } from '../../../hooks/usePortChannel';
-import { Button, Capacity } from '@geist-ui/react';
-import { ChevronLeftCircle, ChevronRightCircle, Delete } from '@geist-ui/react-icons';
+import { Button, Input } from '@geist-ui/react';
+import { ChevronLeftCircle, Delete, Save } from '@geist-ui/react-icons';
 
 enum Status {
   Idle,
@@ -60,11 +60,8 @@ const APISider = () => {
     <div className={styles.sider}>
       <div className={styles.data}>
         <div className={styles.header}>
+          <Input label="端口" placeholder="请输入端口" />
           <div className={styles.title}>接口列表</div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Capacity value={15} mr={0.5} color={'black'} />
-            <span style={{ fontSize: '14px' }}>24</span>
-          </div>
         </div>
         <div className={styles.list}>
           <ApiList type={'get'} />
@@ -82,7 +79,7 @@ const APISider = () => {
           auto
           px={0.6}
         />
-        <Button icon={<ChevronRightCircle />} shadow auto px={0.6} />
+        <Button icon={<Save />} shadow auto px={0.6} />
         <Button icon={<Delete />} shadow auto px={0.6} />
       </div>
       <div className={styles.status}>{render()}</div>

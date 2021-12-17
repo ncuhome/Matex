@@ -29,4 +29,21 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .editorCon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .opBtnGroup{
+      height: 70px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+    }
+
+    .editor{
+      flex: 1;
+    }
+  }
 }

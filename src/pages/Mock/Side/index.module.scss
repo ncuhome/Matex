@@ -18,15 +18,16 @@
 
     .header{
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
+      align-items: start;
 
       .title{
-        text-align: center;
+        text-align: left;
         font-weight: 500;
-        margin-bottom: 8px;
-        font-size: 17px;
+        font-size: 12px;
         color: #545274;
+        margin: 5px 0;
       }
     }
 

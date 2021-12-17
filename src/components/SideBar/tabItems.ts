@@ -10,13 +10,13 @@ export const tabItems: TabProps[] = [
     route: '/collect'
   },
   {
-    text: 'Mock服务',
+    text: '虚拟接口',
     route: '/mock'
   },
 
   {
-    text: '每日排行',
-    route: '/push'
+    text: '压力测试',
+    route: '/benchmark'
   },
   {
     text: '敬请期待',

@@ -3,11 +3,10 @@ import styles from './index.module.scss';
 import Anchor from '@geist-ui/react-icons/anchor';
 
 import MonacoEditor from '../../../../components/MonacoEditor';
-import { Input, Select, Spacer } from '@geist-ui/react';
+import { Button, ButtonGroup, Input, Select, Spacer } from '@geist-ui/react';
 import Link2 from '@geist-ui/react-icons/link2';
-
-const resOptions = ['JSON', 'Plain Text', 'File', 'Form Data'];
-const methodsOptions = ['Get', 'Post', 'Put', 'Delete'];
+import Settings from '@geist-ui/react-icons/settings';
+import { MethodsOptions, ResultOptions } from '../../../../Model/request.model';
 
 const MockForm = () => {
   const [method, setMethod] = React.useState('');
@@ -19,11 +18,19 @@ const MockForm = () => {
     <div className={styles.form}>
       <div className={styles.fullUrl}>
         <div style={{ marginRight: 10 }}>
-          <Select placeholder="选择工作" width={5.5} height={1.2} style={{ minWidth: '0px' }}>
-            <Select.Option value="1">远程工作</Select.Option>
-            <Select.Option value="2">线下工作</Select.Option>
+          <Select
+            placeholder="选择工作"
+            initialValue={'Get'}
+            width={5.5}
+            height={1.1}
+            style={{ minWidth: '0px' }}
+          >
+            {MethodsOptions.map((item, index) => (
+              <Select.Option key={index} value={item}>
+                {item}
+              </Select.Option>
+            ))}
           </Select>
-          {/*<LabelInput showLabel={false} label={'请求方法'} select options={methodsOptions} />*/}
         </div>
         <Spacer w={1} />
         <Anchor />
@@ -37,8 +44,27 @@ const MockForm = () => {
         <Spacer w={1} />
         <Input label="/" width={'100%'} placeholder="https://github" />
       </div>
-      <div style={{ marginTop: 10, marginRight: 10 }}>
-        <MonacoEditor name={'mock'} defaultVal={''} language={'json'} height={250} width={'100%'} />
+      <div className={styles.editorCon}>
+        <div className={styles.opBtnGroup}>
+          <ButtonGroup scale={2 / 3}>
+            <Button scale={2 / 3} style={{ backgroundColor: '#000', color: '#FFF' }}>
+              Pretty
+            </Button>
+            <Button scale={2 / 3}>Raw</Button>
+            <Button scale={2 / 3}>Preview</Button>
+          </ButtonGroup>
+          <Select placeholder="选择工作方式" width={5.5} initialValue={'JSON'} style={{ minWidth: '0px' }}>
+            {ResultOptions.map((item, index) => (
+              <Select.Option key={index} value={item}>
+                {item}
+              </Select.Option>
+            ))}
+          </Select>
+          <Button icon={<Settings />} auto scale={2 / 3} px={0.6} ml={1} />
+        </div>
+        <div className={styles.editor}>
+          <MonacoEditor name={'mock'} defaultVal={''} language={'json'} height={260} width={'100%'} />
+        </div>
       </div>
     </div>
   );

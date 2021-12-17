@@ -11,7 +11,9 @@ interface ApiListProps {
 export const ApiList: React.FC<ApiListProps> = ({ type = 'get', url = '' }) => {
   return (
     <div className={styles.apiList}>
-      <Tag type="secondary">Get</Tag>
+      <Tag type="secondary" scale={3 / 4}>
+        Get
+      </Tag>
       <div className={styles.url}>/mac</div>
     </div>
   );

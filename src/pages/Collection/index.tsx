@@ -3,7 +3,8 @@ import styles from './index.module.scss';
 import MonacoEditor from '../../components/MonacoEditor';
 import { myEmitter } from '../../utils/EventEmiter';
 import { Window } from '../../type';
-import { Button, ButtonGroup, Input } from '@geist-ui/react';
+import { Button, ButtonGroup, Input, Select } from '@geist-ui/react';
+import { MethodsOptions } from '../../Model/request.model';
 
 const Collection = () => {
   const handleClick = async () => {
@@ -13,7 +14,16 @@ const Collection = () => {
 
   return (
     <div className={styles.collection}>
-      <div>
+      <div className={styles.header}>
+        <Select placeholder="请求方式" style={{ minWidth: '0px' }} w={6}>
+          {MethodsOptions.map((item, index) => {
+            return (
+              <Select.Option key={index} value={item}>
+                {item}
+              </Select.Option>
+            );
+          })}
+        </Select>
         <Input placeholder="一个基础示例" />
         <Button onClick={handleClick}>发送</Button>
       </div>

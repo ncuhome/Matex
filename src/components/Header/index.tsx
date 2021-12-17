@@ -18,7 +18,7 @@ const Header = () => {
     <div className={styles.header}>
       <div
         className={styles.logoCon}
-        style={{ marginLeft: collapse ? '-16px' : '25px' }}
+        style={{ marginLeft: collapse ? '-16px' : '35px' }}
         onClick={handleClick}
       >
         <img src={rainbow} className={styles.logo} alt={''} />

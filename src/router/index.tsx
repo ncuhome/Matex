@@ -22,7 +22,7 @@ export const RouterAuth = () => {
         <Route path={'/'} element={auth ? <Home /> : <Navigate to={'login'} replace />}>
           <Route path={'mock'} element={<MockView />} />
           <Route path={'collect'} element={<Collection />} />
-          <Route path={'push'} element={<WaitWorkPage />} />
+          <Route path={'benchmark'} element={<WaitWorkPage />} />
           <Route path={'ok'} element={<WaitWorkPage />} />
         </Route>
       </Routes>

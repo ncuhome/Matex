@@ -15,17 +15,22 @@ export const rules: monaco.editor.ITokenThemeRule[] = [
     token: 'delimiter.colon.json',
     foreground: '#090821'
   },
+  //中括号
+  {
+    token: 'delimiter.array.json',
+    foreground: '#DC7DFB'
+  },
   {
     token: 'delimiter.comma.json',
     foreground: '#3C878A'
   },
   {
     token: 'string.key.json',
-    foreground: '#AC2B2E'
+    foreground: '#514945'
   },
   {
     token: 'string.value.json',
-    foreground: '#14C929'
+    foreground: '#1B9540'
   },
   {
     token: 'custom-highlight',
