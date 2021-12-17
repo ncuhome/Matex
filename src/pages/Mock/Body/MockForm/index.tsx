@@ -19,7 +19,7 @@ const MockForm = () => {
     <div className={styles.form}>
       <div className={styles.fullUrl}>
         <div style={{ marginRight: 10 }}>
-          <Select placeholder="选择工作" width={5.5} style={{ minWidth: '0px' }}>
+          <Select placeholder="选择工作" width={5.5} height={1.2} style={{ minWidth: '0px' }}>
             <Select.Option value="1">远程工作</Select.Option>
             <Select.Option value="2">线下工作</Select.Option>
           </Select>
@@ -28,7 +28,7 @@ const MockForm = () => {
         <Spacer w={1} />
         <Anchor />
         <Spacer w={1} />
-        <Input value={'http://localhost:8080/m'} width={'100%'} onChange={() => {}} />
+        <Input height={1.2} value={'http://localhost:8080/m'} width={'100%'} onChange={() => {}} />
       </div>
       <div className={styles.info}>
         <Input label="端口" width={'100%'} placeholder="一个基础示例" />

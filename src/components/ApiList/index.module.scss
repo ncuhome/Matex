@@ -13,8 +13,9 @@
 
   &:hover {
     cursor: pointer;
-    background-color: rgba(102,102,102,0.5);
+    background-color: #000;
     border-color: transparent;
+    color: #FFF;
   }
 
   .url {
@@ -52,4 +53,8 @@
       }
     }
   }
+}
+
+.apiList:hover .url{
+  color: #FFF;
 }

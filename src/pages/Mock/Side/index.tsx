@@ -6,7 +6,7 @@ import Success from './Success';
 import Loading from './Loading';
 import { usePortChannel } from '../../../hooks/usePortChannel';
 import { Button, Capacity } from '@geist-ui/react';
-import { ChevronLeftCircle, ChevronRightCircle } from '@geist-ui/react-icons';
+import { ChevronLeftCircle, ChevronRightCircle, Delete } from '@geist-ui/react-icons';
 
 enum Status {
   Idle,
@@ -80,10 +80,10 @@ const APISider = () => {
           icon={<ChevronLeftCircle color={'white'} />}
           shadow
           auto
-          mr={2}
           px={0.6}
         />
         <Button icon={<ChevronRightCircle />} shadow auto px={0.6} />
+        <Button icon={<Delete />} shadow auto px={0.6} />
       </div>
       <div className={styles.status}>{render()}</div>
     </div>
