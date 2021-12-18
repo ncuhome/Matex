@@ -6,6 +6,7 @@ import { NavTabProps } from '../../components/NavTabs';
 import MonacoEditor from '../../components/MonacoEditor';
 import { MethodsOptions } from '../../Model/request.model';
 import { Button, ButtonGroup, Input, Select, Table } from '@geist-ui/react';
+import CollectSide from './Side';
 
 const list: NavTabProps[] = [
   {
@@ -62,8 +63,8 @@ const Collection = () => {
           </div>
           <div className={styles.table}>
             <Table data={data}>
-              <Table.Column prop="property" label="property" />
-              <Table.Column prop="description" label="description" />
+              <Table.Column prop="property" label="Key" />
+              <Table.Column prop="description" label="Value" />
               <Table.Column prop="type" label="type" />
               <Table.Column prop="default" label="default" />
             </Table>
@@ -75,7 +76,9 @@ const Collection = () => {
           <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={250} width={'100%'} />
         </div>
       </div>
-      <div className={styles.side} />
+      <div className={styles.side}>
+        <CollectSide />
+      </div>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 .tabCon{
-  height: 60px;
   border-bottom: #2C3550 1px solid;
   display: flex;
   justify-content: start;
   align-items: end;
   position: relative;
   z-index: 1;
+  margin-bottom: 10px;
 
   .tab{
     z-index: 100;
@@ -13,8 +13,8 @@
     padding: 6px 12px;
     border: transparent 1px solid;
     border-bottom: none;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     margin-right: 1px;
 
     &:hover{

@@ -1,0 +1,47 @@
+.side{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+
+  .list{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--greyLight-1);
+    border-radius: 20px;
+    box-shadow: var(--dark-shadow);
+    overflow: hidden auto;
+    padding-bottom: 10px;
+
+    .header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding: 0 20px;
+    }
+
+    .recordList{
+      padding:10px 20px;
+      overflow: hidden auto;
+      border-radius: 20px;
+    }
+  }
+
+  .ops{
+    margin-top: 20px;
+    height: 70px;
+    background: var(--greyLight-1);
+    border-radius: 20px;
+    box-shadow: var(--dark-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
