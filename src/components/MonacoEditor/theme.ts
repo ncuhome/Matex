@@ -4,7 +4,8 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 export const rules: monaco.editor.ITokenThemeRule[] = [
   {
     token: 'number.json',
-    foreground: '#FA86A3'
+    foreground: '#0ECCCC',
+    fontStyle: 'italic'
   },
   {
     token: 'delimiter.bracket.json',
@@ -26,7 +27,7 @@ export const rules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'string.key.json',
-    foreground: '#514945'
+    foreground: '#CC0ECC'
   },
   {
     token: 'string.value.json',
