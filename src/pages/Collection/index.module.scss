@@ -30,21 +30,42 @@
 
     .url{
       @extend .cardStyle;
-      margin-bottom: 20px;
       height: 70px;
       width: 100%;
+      margin-bottom: 5px;
       display: flex;
       align-items: center;
       justify-content: start;
     }
+
     .config{
+      overflow: hidden;
       flex: 1;
-      @extend .cardStyle;
+      display: flex;
+      padding: 15px 0;
       width: 100%;
+      margin-right: 10px;
+
+      .leftBtns{
+        @extend .cardStyle;
+        padding: 10px;
+        overflow: auto;
+        margin-left: 5px;
+
+      }
+
+      .table{
+        flex: 1;
+        @extend .cardStyle;
+        overflow: auto;
+        margin:0 10px 0 15px;
+        padding: 10px 15px;
+      }
     }
   }
 
   .body{
+    margin-top: -10px;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
     background: var(--greyLight-1);

@@ -5,7 +5,7 @@ import { Window } from '../../type';
 import { NavTabProps } from '../../components/NavTabs';
 import MonacoEditor from '../../components/MonacoEditor';
 import { MethodsOptions } from '../../Model/request.model';
-import { Button, Input, Select } from '@geist-ui/react';
+import { Button, ButtonGroup, Input, Select, Table } from '@geist-ui/react';
 
 const list: NavTabProps[] = [
   {
@@ -23,6 +23,11 @@ const list: NavTabProps[] = [
 ];
 
 const Collection = () => {
+  const data = [
+    { property: 'type', description: 'Content type', type: 'secondary | warning', default: '-' },
+    { property: 'Component', description: 'DOM element to use', type: 'string', default: '-' },
+    { property: 'bold', description: 'Bold style', type: 'boolean', default: 'true' }
+  ];
   const handleClick = async () => {
     const res = await Window.Mixos.get('http://localhost:9000/test');
     myEmitter.emit<string>('monacoEditor-collect', JSON.stringify(res));
@@ -46,28 +51,31 @@ const Collection = () => {
             发送
           </Button>
         </div>
-        <div className={styles.config}></div>
+        <div className={styles.config}>
+          <div className={styles.leftBtns}>
+            <ButtonGroup vertical>
+              <Button>Params</Button>
+              <Button>Auth</Button>
+              <Button>Headers</Button>
+              <Button>Body</Button>
+            </ButtonGroup>
+          </div>
+          <div className={styles.table}>
+            <Table data={data}>
+              <Table.Column prop="property" label="property" />
+              <Table.Column prop="description" label="description" />
+              <Table.Column prop="type" label="type" />
+              <Table.Column prop="default" label="default" />
+            </Table>
+          </div>
+        </div>
       </div>
       <div className={styles.body}>
         <div className={styles.editor}>
-          <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={200} width={'100%'} />
+          <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={250} width={'100%'} />
         </div>
       </div>
-      {/*<div className={styles.left}>*/}
-      {/*  */}
-      {/*</div>*/}
       <div className={styles.side} />
-
-      {/*<div className={styles.edit}>*/}
-      {/*  <div className={styles.btnGroup}>*/}
-      {/*    <ButtonGroup>*/}
-      {/*      <Button>One</Button>*/}
-      {/*      <Button>Two</Button>*/}
-      {/*      <Button>Three</Button>*/}
-      {/*    </ButtonGroup>*/}
-      {/*  </div>*/}
-      {/*  <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={300} width={'100%'} />*/}
-      {/*</div>*/}
     </div>
   );
 };
