@@ -2,36 +2,32 @@ import React from 'react';
 import styles from './index.module.scss';
 import { myEmitter } from '../../utils/EventEmiter';
 import { Window } from '../../type';
-import { NavTabProps } from '../../components/NavTabs';
 import MonacoEditor from '../../components/MonacoEditor';
 import { MethodsOptions } from '../../Model/request.model';
 import { Button, ButtonGroup, Input, Select, Table } from '@geist-ui/react';
 import CollectSide from './Side';
 
-const list: NavTabProps[] = [
-  {
-    name: '测试一',
-    value: '1'
-  },
-  {
-    name: '测试二',
-    value: '2'
-  },
-  {
-    name: '测试三',
-    value: '3'
-  }
-];
-
 const Collection = () => {
-  const data = [
-    { property: 'type', description: 'Content type', type: 'secondary | warning', default: '-' },
-    { property: 'Component', description: 'DOM element to use', type: 'string', default: '-' },
-    { property: 'bold', description: 'Bold style', type: 'boolean', default: 'true' }
+  const dataSource = [
+    { key: 'type', value: 'Content type', operation: '' },
+    { key: 'Component', value: 'DOM element to use', operation: '' },
+    { key: '<Text >bold</Text>', value: 'Bold style', operation: '' }
   ];
   const handleClick = async () => {
     const res = await Window.Mixos.get('http://localhost:9000/test');
     myEmitter.emit<string>('monacoEditor-collect', JSON.stringify(res));
+  };
+
+  const [data, setData] = React.useState(dataSource);
+  const renderAction = (value: any, rowData: any, index: number) => {
+    const removeHandler = () => {
+      setData((last) => last.filter((_, dataIndex) => dataIndex !== index));
+    };
+    return (
+      <Button type="error" auto scale={1 / 3} onClick={removeHandler}>
+        Remove
+      </Button>
+    );
   };
 
   return (
@@ -62,11 +58,10 @@ const Collection = () => {
             </ButtonGroup>
           </div>
           <div className={styles.table}>
-            <Table data={data}>
-              <Table.Column prop="property" label="Key" />
-              <Table.Column prop="description" label="Value" />
-              <Table.Column prop="type" label="type" />
-              <Table.Column prop="default" label="default" />
+            <Table data={data} onChange={(value) => setData(value)}>
+              <Table.Column prop="key" label="key" />
+              <Table.Column prop="value" label="value" />
+              <Table.Column prop="operation" label="operation" width={150} render={renderAction} />
             </Table>
           </div>
         </div>
