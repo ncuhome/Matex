@@ -35,10 +35,13 @@ jobs:
           echo Package Electron app
           yarn package
 
-      - name: Release
-        uses: crazy-max/ghaction-github-pages@v2.5.0
+      - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          target_branch: release
-          build_dir: release/app
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          username: 'root'
+          server: ${{ secrets.HOST }}
+          ssh_private_key: ${{ secrets.PRIVATE_KEY }}
+          local_path: './release/app/*'
+          remote_path: '/web/Matex'
+          args: '-o ConnectTimeout=5'
+
