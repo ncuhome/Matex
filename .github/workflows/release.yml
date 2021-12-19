@@ -34,3 +34,11 @@ jobs:
         run: |
           echo Package Electron app
           yarn package
+
+      - name: Release
+        uses: crazy-max/ghaction-github-pages@v2.5.0
+        with:
+          target_branch: release
+          build_dir: release/app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
