@@ -1,7 +1,6 @@
 {
   "productName": "Matex",
   "appId": "org.Matex.com",
-  "icon": "./electron/assets/icon/icon.png",
   "asar": true,
   "files": [
     "release/build",
@@ -13,7 +12,7 @@
     "hardenedRuntime": true
   },
   "win": {
-    "icon": "./electron/assets/icon/icon.png",
+    "icon": "./electron/assets/icon/icon.ico",
     "target": [
       "nsis",
       "zip"
@@ -25,9 +24,9 @@
     "perMachine": true,
     "allowElevation": true,
     "allowToChangeInstallationDirectory": true,
-    "installerIcon": "./electron/assets/icon/icon.png",
-    "uninstallerIcon": "./electron/assets/icon/icon.png",
-    "installerHeaderIcon": "./electron/assets/icon/icon.png",
+    "installerIcon": "./electron/assets/icon/icon.ico",
+    "uninstallerIcon": "./electron/assets/icon/icon.ico",
+    "installerHeaderIcon": "./electron/assets/icon/icon.ico",
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
     "shortcutName": "matex"
