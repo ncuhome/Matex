@@ -4,7 +4,7 @@ import { TabProps } from '../SideBar/tabItems';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { useCollapse } from '../../zustand/store/ui.store';
-import { Cpu, Globe, Target, Truck } from '@geist-ui/react-icons';
+// import { Cpu, Globe, Target, Truck } from '@geist-ui/react-icons';
 
 const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active = false }) => {
   const navigate = useNavigate();
@@ -43,16 +43,16 @@ const getIcon = (route: string) => {
   let res;
   switch (route) {
     case '/collect':
-      res = <Globe />;
+      res = 1;
       break;
     case '/mock':
-      res = <Truck />;
+      res = 2;
       break;
     case '/benchmark':
-      res = <Cpu />;
+      res = 3;
       break;
     case '/ok':
-      res = <Target />;
+      res = 4;
       break;
   }
   return res;

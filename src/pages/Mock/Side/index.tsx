@@ -5,8 +5,8 @@ import Idle from './Idle';
 import Success from './Success';
 import Loading from './Loading';
 import { usePortChannel } from '../../../hooks/usePortChannel';
-import { Button, Input } from '@geist-ui/react';
-import { ChevronLeftCircle, Delete, Save } from '@geist-ui/react-icons';
+// import { Button, Input } from '@geist-ui/react';
+// import { ChevronLeftCircle, Delete, Save } from '@geist-ui/react-icons';
 
 enum Status {
   Idle,
@@ -60,7 +60,7 @@ const APISider = () => {
     <div className={styles.sider}>
       <div className={styles.data}>
         <div className={styles.header}>
-          <Input label="端口" placeholder="请输入端口" />
+          {/*<Input label="端口" placeholder="请输入端口" />*/}
           <div className={styles.title}>接口列表</div>
         </div>
         <div className={styles.list}>
@@ -72,15 +72,15 @@ const APISider = () => {
         </div>
       </div>
       <div className={styles.btnGroup}>
-        <Button
-          style={{ backgroundColor: 'black' }}
-          icon={<ChevronLeftCircle color={'white'} />}
-          shadow
-          auto
-          px={0.6}
-        />
-        <Button icon={<Save />} shadow auto px={0.6} />
-        <Button icon={<Delete />} shadow auto px={0.6} />
+        {/*<Button*/}
+        {/*  style={{ backgroundColor: 'black' }}*/}
+        {/*  icon={<ChevronLeftCircle color={'white'} />}*/}
+        {/*  shadow*/}
+        {/*  auto*/}
+        {/*  px={0.6}*/}
+        {/*/>*/}
+        {/*<Button icon={<Save />} shadow auto px={0.6} />*/}
+        {/*<Button icon={<Delete />} shadow auto px={0.6} />*/}
       </div>
       <div className={styles.status}>{render()}</div>
     </div>

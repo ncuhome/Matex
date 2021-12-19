@@ -7,7 +7,6 @@ export default defineConfig({
   publicDir: './public',
   plugins: [reactRefresh()],
   build: {
-    // minify: false,
     sourcemap: true,
     outDir: './release/build/render',
     emptyOutDir: true,

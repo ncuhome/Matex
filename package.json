@@ -74,8 +74,6 @@
     "wait-on": "^6.0.0"
   },
   "dependencies": {
-    "@geist-ui/react": "^2.2.0",
-    "@geist-ui/react-icons": "^1.0.1",
     "ahooks": "^2.10.12",
     "axios": "^0.24.0",
     "body-parser": "^1.19.0",
