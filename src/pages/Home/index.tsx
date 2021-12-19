@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import styles from './index.module.scss';
-import Header from '../../components/Header';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useCollapse } from '../../zustand/store/ui.store';
 import SideBar from '../../components/SideBar';
+import Header from '../../components/Header';
 
 const Home: React.FC<any> = () => {
   const navigate = useNavigate();

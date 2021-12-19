@@ -3,12 +3,6 @@
   "appId": "org.Matex.com",
   "icon": "./electron/assets/icon/icon.png",
   "asar": true,
-  "extraResources": [
-    {
-      "from": "./electron/server/db/data.db",
-      "to": "."
-    }
-  ],
   "files": [
     "release/build",
     "package.json",
@@ -23,11 +17,7 @@
     "target": [
       "nsis",
       "zip"
-    ],
-    "extraResources":  {
-      "from": "./electron/server/db/data.db",
-      "to": "."
-    }
+    ]
   },
   "nsis": {
     "oneClick": false,

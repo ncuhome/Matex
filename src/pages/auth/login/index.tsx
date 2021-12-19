@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC<any> = (props: any) => {
   const navigate = useNavigate();
+  console.log('login');
   const login = () => {
     localStorage.setItem('login', 'true');
     navigate('/mock', { replace: true });
