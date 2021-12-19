@@ -10,6 +10,10 @@
   "keywords": [
     "electron"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lqd1434/Matex.git"
+  },
   "scripts": {
     "start": "ts-node ./scripts/start.ts",
     "dev": "concurrently \"vite\" \"npm run dev:electron\" \"npm run watch:electron\"",

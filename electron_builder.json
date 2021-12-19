@@ -20,6 +20,10 @@
   },
   "win": {
     "icon": "./electron/assets/icon/icon.png",
+    "target": [
+      "nsis",
+      "zip"
+    ],
     "extraResources":  {
       "from": "./electron/server/db/data.db",
       "to": "."
