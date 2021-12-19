@@ -13,4 +13,5 @@ try {
   signale.success('复制 loading.html 到 build/render 成功');
 } catch (e) {
   signale.error('复制失败');
+  signale.error(e);
 }

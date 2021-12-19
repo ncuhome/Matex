@@ -48,8 +48,8 @@
     "watch:electron": "wait-on ./dev/main.js && nodemon --config nodemon-electron.json",
     "test:build": "electron release/build/main/main.js",
     "build": "concurrently \"npm run build:react\" \"npm run build:electron\"",
-    "build:react": "vite build",
-    "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron && ts-node ./scripts/copyFile.ts",
+    "build:react": "vite build && ts-node ./scripts/copyFile.ts",
+    "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron",
     "preview": "vite preview",
     "autoo": "autoo",
     "package": "cross-env NODE_ENV=production electron-builder build --publish never"
