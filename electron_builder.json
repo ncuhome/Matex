@@ -1,0 +1,44 @@
+{
+  "productName": "Matex",
+  "appId": "org.Matex.com",
+  "icon": "./electron/assets/icon/icon.png",
+  "asar": true,
+  "extraResources": [
+    {
+      "from": "./electron/server/db/data.db",
+      "to": "."
+    }
+  ],
+  "files": [
+    "release/build",
+    "package.json",
+    "node_modules"
+  ],
+  "mac": {
+    "icon": "./electron/assets/icon/icon.png",
+    "hardenedRuntime": true
+  },
+  "win": {
+    "icon": "./electron/assets/icon/icon.png",
+    "extraResources":  {
+      "from": "./electron/server/db/data.db",
+      "to": "."
+    }
+  },
+  "nsis": {
+    "oneClick": false,
+    "guid": "matex",
+    "perMachine": true,
+    "allowElevation": true,
+    "allowToChangeInstallationDirectory": true,
+    "installerIcon": "./electron/assets/icon/icon.png",
+    "uninstallerIcon": "./electron/assets/icon/icon.png",
+    "installerHeaderIcon": "./electron/assets/icon/icon.png",
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "matex"
+  },
+  "directories": {
+    "output": "release/app"
+  }
+}

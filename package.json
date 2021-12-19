@@ -10,33 +10,6 @@
   "keywords": [
     "electron"
   ],
-  "build": {
-    "productName": "Matex",
-    "appId": "org.Matex.com",
-    "icon": "./electron/assets/icon/icon.png",
-    "asar": true,
-    "extraResources": [
-      {
-        "from": "./electron/server/db/data.db",
-        "to": "."
-      }
-    ],
-    "files": [
-      "release/build",
-      "package.json",
-      "node_modules"
-    ],
-    "mac": {
-      "icon": "./electron/assets/icon/icon.png",
-      "hardenedRuntime": true
-    },
-    "directories": {
-      "output": "release/app"
-    }
-  },
-  "prisma": {
-    "schema": "electron/server/prisma/schema.prisma"
-  },
   "scripts": {
     "start": "ts-node ./scripts/start.ts",
     "dev": "concurrently \"vite\" \"npm run dev:electron\" \"npm run watch:electron\"",
@@ -52,7 +25,7 @@
     "build:electron": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/build/main --target electron",
     "preview": "vite preview",
     "autoo": "autoo",
-    "package": "cross-env NODE_ENV=production electron-builder build --publish never"
+    "package": "cross-env NODE_ENV=production electron-builder build --config electron_builder.json --publish never"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^5.3.0",
