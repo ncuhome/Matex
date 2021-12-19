@@ -35,13 +35,12 @@ jobs:
           echo Package Electron app
           yarn package
 
-      - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
-        with:
-          username: 'root'
-          server: ${{ secrets.HOST }}
-          ssh_private_key: ${{ secrets.PRIVATE_KEY }}
-          local_path: './release/app/*'
-          remote_path: '/web/Matex'
-          args: '-o ConnectTimeout=5'
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          SOURCE: "release/app/"
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: "root"
+          TARGET: "/web/Matex"
 
