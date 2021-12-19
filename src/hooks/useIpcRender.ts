@@ -9,14 +9,14 @@ interface IpcProps {
 
 const useIpcOn = ({ channel, listener }: IpcProps) => {
   useEffect(() => {
-    Window.ipc.on(channel, listener);
+    Window.ipc?.on(channel, listener);
     return () => {
-      Window.ipc.removeListener(channel, listener);
+      Window.ipc?.removeListener(channel, listener);
     };
   }, []);
 
   const off = () => {
-    Window.ipc.removeListener(channel, listener);
+    Window.ipc?.removeListener(channel, listener);
   };
   return { off };
 };
