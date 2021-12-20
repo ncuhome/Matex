@@ -86,7 +86,7 @@ app.on('ready', async () => {
     loadWindow?.close();
     loadWindow?.destroy();
     mainWindow?.show();
-  }, 7000);
+  }, 4000);
 });
 
 app.whenReady().then(async () => {

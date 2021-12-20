@@ -2,6 +2,10 @@
   "productName": "Matex",
   "appId": "org.Matex.com",
   "asar": true,
+  "extraResources": {
+    "from": "./release/build/render",
+    "to": "./render"
+  },
   "files": [
     "release/build",
     "package.json",
@@ -9,10 +13,18 @@
   ],
   "mac": {
     "icon": "./electron/assets/icon/icon.png",
-    "hardenedRuntime": true
+    "hardenedRuntime": true,
+    "extraResources": {
+      "from": "./release/build/render",
+      "to": "./render"
+    }
   },
   "win": {
     "icon": "./electron/assets/icon/icon.ico",
+    "extraResources": {
+      "from": "./release/build/render",
+      "to": "./render"
+    },
     "target": [
       "nsis",
       "zip"
