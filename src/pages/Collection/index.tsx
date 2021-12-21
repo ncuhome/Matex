@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './index.module.scss';
-import MonacoEditor from '../../components/MonacoEditor';
 import CollectSide from './Side';
 import Header from './Header';
+import Body from './Body';
 
 const Collection = () => {
   return (
@@ -11,9 +11,7 @@ const Collection = () => {
         <Header />
       </div>
       <div className={styles.body}>
-        <div className={styles.editor}>
-          <MonacoEditor name={'collect'} language={'json'} defaultVal={''} height={250} width={'100%'} />
-        </div>
+        <Body />
       </div>
       <div className={styles.side}>
         <CollectSide />

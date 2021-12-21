@@ -27,7 +27,6 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    //padding-left: 20px;
 
     .url{
       @extend .cardStyle;
@@ -50,9 +49,9 @@
     margin-top: -10px;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
-    background: var(--greyLight-1);
+    //background: var(--greyLight-1);
     border-radius: 10px;
-    box-shadow: var(--dark-shadow);
+    //box-shadow: var(--dark-shadow);
     position: relative;
 
     .editor{
@@ -61,7 +60,6 @@
       left: 0;
       right: 0;
       bottom: 0;
-      padding: 10px 15px 10px 5px;
     }
   }
 
