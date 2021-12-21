@@ -1,6 +1,6 @@
 # Matex
 electron项目
-
+![screenshot](https://github.com/ncuhome/Matex/tree/master/test/screenshot/screenshot.png?raw=true)
 
 ## 预期功能
 
