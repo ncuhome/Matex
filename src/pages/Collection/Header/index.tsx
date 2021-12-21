@@ -50,7 +50,7 @@ const Header = () => {
           <Tabs />
         </div>
         <div className={styles.table}>
-          <Table celled>
+          <Table celled striped compact>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell width={3}>键</Table.HeaderCell>
@@ -68,7 +68,7 @@ const Header = () => {
                 <Table.Cell>Cell</Table.Cell>
                 <Table.Cell>Cell</Table.Cell>
                 <Table.Cell textAlign={'center'}>
-                  <Button icon>
+                  <Button icon compact>
                     <Icon name="delete" />
                   </Button>
                 </Table.Cell>
@@ -78,7 +78,7 @@ const Header = () => {
                 <Table.Cell>Cell</Table.Cell>
                 <Table.Cell>Cell</Table.Cell>
                 <Table.Cell textAlign={'center'}>
-                  <Button icon>
+                  <Button icon compact>
                     <Icon name="delete" />
                   </Button>
                 </Table.Cell>
@@ -88,7 +88,7 @@ const Header = () => {
                 <Table.Cell>Cell</Table.Cell>
                 <Table.Cell>Cell</Table.Cell>
                 <Table.Cell textAlign={'center'}>
-                  <Button icon>
+                  <Button icon compact>
                     <Icon name="delete" />
                   </Button>
                 </Table.Cell>
