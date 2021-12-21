@@ -1,8 +1,24 @@
 
-.editor{
-  width: 100%;
-  overflow: hidden;
-  padding: 5px;
-  //border: #FA86A3 1px solid;
-  border-radius: 3px;
+
+.con{
+  border-radius: 10px;
+  border: #E0E1E2 1px solid;
+
+  .operate{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #F8F9FA;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    padding-left: 16px;
+  }
+
+  .editor{
+    width: 100%;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 3px;
+  }
 }
+
