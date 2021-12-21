@@ -27,6 +27,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
+    //padding-left: 20px;
 
     .url{
       @extend .cardStyle;
@@ -36,30 +37,13 @@
       display: flex;
       align-items: center;
       justify-content: start;
-    }
 
-    .config{
-      overflow: hidden;
-      flex: 1;
-      display: flex;
-      padding: 15px 0;
-      width: 100%;
-
-      .leftBtns{
-        @extend .cardStyle;
-        padding: 10px;
-        overflow: auto;
-        margin-left: 5px;
-
+      .select{
+        width: 100px;
       }
 
-      .table{
-        flex: 1;
-        @extend .cardStyle;
-        margin:0 5px 0 15px;
-        padding: 10px 15px;
-      }
     }
+
   }
 
   .body{
@@ -67,7 +51,7 @@
     grid-column: 1 / 2;
     grid-row: 2 / 3;
     background: var(--greyLight-1);
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: var(--dark-shadow);
     position: relative;
 
@@ -77,7 +61,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      padding: 10px 15px;
+      padding: 10px 15px 10px 5px;
     }
   }
 

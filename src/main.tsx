@@ -4,9 +4,7 @@ import App from './App';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import './globle.css';
 import './useWorker';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
+import 'semantic-ui-css/semantic.min.css';
 
 const isDev = process.env.NODE_ENV === 'development';
 

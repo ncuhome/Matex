@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-// import Plus from '@geist-ui/react-icons/plus';
-// import { Tag } from '@geist-ui/react';
+import { Label } from 'semantic-ui-react';
 
 interface ApiListProps {
   type?: 'get' | 'post';
@@ -11,12 +10,16 @@ interface ApiListProps {
 export const ApiList: React.FC<ApiListProps> = ({ type = 'get', url = '/mac' }) => {
   return (
     <div className={styles.apiList}>
-      {/*<Tag type="secondary" scale={3 / 4}>*/}
-      {/*  Get*/}
-      {/*</Tag>*/}
+      <Label ribbon as="a" color={getColor(type)}>
+        First
+      </Label>
       <div className={styles.url}>{url}</div>
     </div>
   );
+};
+
+const getColor = (type: string) => {
+  return type === 'get' ? 'teal' : 'orange';
 };
 
 export const AddApiList = () => {

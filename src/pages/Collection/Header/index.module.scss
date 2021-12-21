@@ -1,0 +1,59 @@
+.cardStyle{
+  background: var(--greyLight-1);
+  box-shadow: var(--dark-shadow);
+  border-radius: 10px;
+}
+
+.url {
+  @extend .cardStyle;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  .startBtn{
+    height: 45px;
+  }
+
+  .input{
+    flex: 1;
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+  }
+}
+
+.config{
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  padding: 15px 0;
+  width: 100%;
+
+  .leftBtns{
+    @extend .cardStyle;
+    padding: 10px;
+    overflow: auto;
+    margin-left: 5px;
+
+    display: flex;
+    flex-direction:column;
+
+    .btn{
+      flex-shrink: 0;
+    }
+
+  }
+
+  .table{
+    flex: 1;
+    @extend .cardStyle;
+    margin:0 5px 0 15px;
+    padding: 10px 15px;
+    overflow: auto;
+  }
+}

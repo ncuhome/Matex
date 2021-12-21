@@ -28,7 +28,7 @@ div {
   --light-bg3--: rgba(255, 255, 255, 0.8);
   --light-bg4--: linear-gradient(135deg, #EAE6FE, #E2DCFF);
   --light-shadow:0px 20px 30px rgba(100, 131, 177, 0.3);
-  --dark-shadow:2px 2px 5px #D1D6F0;
+  --dark-shadow:1px 1px 5px #D8D9D8;
 
   --primary-light: #39ddfa;
   --primary: #00abdf;
