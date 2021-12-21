@@ -2,10 +2,6 @@
   "productName": "Matex",
   "appId": "org.Matex.com",
   "asar": true,
-  "extraResources": {
-    "from": "./release/build/render",
-    "to": "./render"
-  },
   "files": [
     "release/build",
     "package.json",
