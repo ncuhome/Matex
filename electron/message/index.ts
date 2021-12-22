@@ -1,6 +1,6 @@
-import { MessageEvent, MessagePortMain } from 'electron';
-import { myEmitter } from '../utils/EventEmiter';
+import { MessagePortMain } from 'electron';
 import { ChannelData } from '../type/api';
+import { CollectionIpc } from './collection.ipc';
 
 class PortChannel_ {
   portMain: MessagePortMain | null = null;
@@ -16,20 +16,7 @@ class PortChannel_ {
   }
 
   startListening() {
-    if (this.portMain) {
-      this.portMain.on('message', (msg: MessageEvent) => {
-        const { type, data } = msg.data as ChannelData<string>;
-        if (type === 'server') {
-          myEmitter.emit('server', msg.data);
-          this.postMessage<string>('server', '启动成功');
-        }
-
-        if (type === 'loading' && data === 'ok') {
-          myEmitter.emit('loading', true);
-        }
-      });
-      this.portMain.start();
-    }
+    CollectionIpc.init();
   }
 }
 
