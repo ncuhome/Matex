@@ -11,7 +11,7 @@ export const ApiList: React.FC<ApiListProps> = ({ type = 'get', url = '/mac' }) 
   return (
     <div className={styles.apiList}>
       <Label ribbon as="a" color={getColor(type)}>
-        First
+        {type?.toUpperCase()}
       </Label>
       <div className={styles.url}>{url}</div>
     </div>

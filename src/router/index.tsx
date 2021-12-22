@@ -9,7 +9,7 @@ import Collection from '../pages/Collection';
 export const RouterAuth = () => {
   const location = useLocation();
   const auth = !!localStorage.getItem('login');
-  console.log(auth, 'checkAuth11');
+  console.log('checkAuth--', auth);
 
   useEffect(() => {
     console.log(location.pathname);

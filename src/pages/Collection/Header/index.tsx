@@ -3,9 +3,11 @@ import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input, Table } from 'semantic-ui-react';
 import Tabs from '../Tabs';
 import clsx from 'clsx';
+import { Window } from '../../../type';
 
 const Header = () => {
   const [method, setMethod] = useState('Get');
+  const [url, setUrl] = useState('');
 
   const countryOptions = [
     { key: 'Get', value: 'Get', text: 'Get' },
@@ -17,6 +19,10 @@ const Header = () => {
 
   const handleChange = (event: SyntheticEvent, { value }: any) => {
     setMethod(value);
+  };
+
+  const handleClick = () => {
+    Window.ipc?.send('collection_fetch', { url, method });
   };
 
   return (
@@ -33,7 +39,9 @@ const Header = () => {
           />
         </Button.Group>
         <Input
+          value={url}
           size="big"
+          onChange={(e) => setUrl(e.target.value)}
           className={styles.input}
           icon={
             <div style={{ display: 'inline', position: 'absolute', right: '6px', top: '6px' }}>
@@ -41,7 +49,7 @@ const Header = () => {
             </div>
           }
         />
-        <Button primary className={styles.startBtn}>
+        <Button primary className={styles.startBtn} onClick={handleClick}>
           发送
         </Button>
       </div>

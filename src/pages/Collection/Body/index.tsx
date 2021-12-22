@@ -1,18 +1,19 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Button, Dropdown, Menu } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import MonacoEditor from '../../../components/MonacoEditor';
+import { Window } from '../../../type';
+import { myEmitter } from '../../../utils/EventEmiter';
+import type { IpcRendererEvent } from 'electron';
 
 const Body = () => {
   const [activeItem, setActiveItem] = useState('Pretty');
-  const [method, setMethod] = useState('Get');
+  const [method, setMethod] = useState('JSON');
 
   const methodOptions = [
-    { key: 'Get', value: 'Get', text: 'Get' },
-    { key: 'Post', value: 'Post', text: 'Post' },
-    { key: 'Put', value: 'Put', text: 'Put' },
-    { key: 'Delete', value: 'Delete', text: 'Delete' },
-    { key: 'Header', value: 'Header', text: 'Header' }
+    { key: 'HTML', value: 'HTML', text: 'HTML' },
+    { key: 'JSON', value: 'JSON', text: 'JSON' },
+    { key: 'Text', value: 'Text', text: 'Text' }
   ];
 
   const handleItemClick = (e: any, { name }: any) => {
@@ -22,6 +23,19 @@ const Body = () => {
   const handleChange = (event: SyntheticEvent, { value }: any) => {
     setMethod(value);
   };
+
+  const listen = (e: IpcRendererEvent, args: any[]) => {
+    console.log(args);
+    myEmitter.emit('monacoEditor-collect', JSON.stringify(args));
+  };
+
+  useEffect(() => {
+    console.log('渲染次数');
+    Window.ipc.on('collection_res', listen);
+    return () => {
+      Window.ipc.removeListener('collection_res', listen);
+    };
+  }, []);
 
   const renderActions = () => {
     return (
