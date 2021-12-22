@@ -1,15 +1,14 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 import { suggestions } from './suggestions';
 import { rules } from './theme';
 import { defaultSchema } from './schema';
-import { useEffect, useState } from 'react';
-import { editor } from 'monaco-editor';
-import ProviderResult = languages.ProviderResult;
-import CompletionList = languages.CompletionList;
+import { useEffect, useRef } from 'react';
+import { useEditors } from '../../zustand/store/apiData.store';
+import ProviderResult = monaco.languages.ProviderResult;
+import CompletionList = monaco.languages.CompletionList;
 
 monaco.languages.registerCompletionItemProvider('json', {
-  provideCompletionItems: (model, position, context, token) => {
+  provideCompletionItems: () => {
     return { suggestions: suggestions } as ProviderResult<CompletionList>;
   }
 });
@@ -65,26 +64,31 @@ monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
 });
 
 interface EditorProps {
-  domElement: HTMLElement;
+  name: string;
   enabledMinMap?: boolean;
   readOnly: boolean;
   defaultVal: string | undefined;
   language: 'json' | 'html' | 'text/plain' | string;
 }
 
-export const useEditor = () => {
-  const [editor, setEditor] = useState<editor.IStandaloneCodeEditor | null>(null);
+export const useEditor = ({
+  name,
+  defaultVal,
+  language,
+  readOnly = false,
+  enabledMinMap = false
+}: EditorProps) => {
+  const { editors, addEditor, deleteEditor } = useEditors((state) => state);
+  const domRef = useRef<HTMLElement>();
+  const editor = editors.get(name);
 
-  const createEditor = ({
-    domElement,
-    defaultVal,
-    language,
-    readOnly = false,
-    enabledMinMap = false
-  }: EditorProps) => {
+  //创建新的编辑器实例
+  const createEditor = (domElement: HTMLElement) => {
+    console.log('重新实例化');
+    domRef.current = domElement;
     const editorIns = monaco.editor.create(domElement, {
       value: defaultVal,
-      model: model,
+      model: language === 'json' ? model : undefined,
       language,
       readOnly,
       automaticLayout: true,
@@ -98,18 +102,29 @@ export const useEditor = () => {
         enabled: enabledMinMap
       }
     });
-    setEditor(editorIns);
+    if (editorIns) {
+      addEditor(name, editorIns);
+    }
   };
 
   const destroyEditor = () => {
     editor?.dispose();
-    setEditor(null);
+    deleteEditor(name);
   };
+
+  //更改语言重新实例化编辑器
+  useEffect(() => {
+    console.log(language);
+    destroyEditor();
+    if (domRef.current) {
+      createEditor(domRef.current);
+    }
+  }, [language]);
 
   useEffect(() => {
     return () => {
-      editor?.dispose();
+      destroyEditor();
     };
   }, []);
-  return { editor, destroyEditor, createEditor };
+  return { destroyEditor, createEditor };
 };

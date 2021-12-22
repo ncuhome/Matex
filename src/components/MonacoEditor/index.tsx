@@ -1,9 +1,8 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, memo, useEffect, useRef } from 'react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { resizeAble } from './resize';
-import { myEmitter } from '../../utils/EventEmiter';
 import { useEditors } from '../../zustand/store/apiData.store';
 import { useEditor } from './create';
 import { useEditorListen } from './listening';
@@ -30,7 +29,6 @@ interface MonacoEditorProps {
 const MonacoEditor: FC<MonacoEditorProps> = ({
   name = '',
   height = 200,
-  width = '100%',
   language = 'json',
   defaultVal = '',
   enabledMinMap = false,
@@ -38,16 +36,14 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   autoFormat = true,
   className = '',
   actions,
-  watchModelMarkers = () => {},
   onChange = () => {},
   onBlur = () => {},
   getValue = () => {},
-  setValue = () => {},
   onFocus = () => {}
 }) => {
   const monacoEl = useRef(null);
-  const { editors, addEditor, deleteEditor } = useEditors((state) => state);
-  const { editor, createEditor, destroyEditor } = useEditor();
+  const { editors } = useEditors((state) => state);
+  const { createEditor, destroyEditor } = useEditor({ name, enabledMinMap, defaultVal, language, readOnly });
   useEditorListen({
     autoFormat,
     onBlur,
@@ -58,33 +54,20 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   });
 
   useEffect(() => {
-    if (editor) {
-      addEditor(name, editor);
-    }
-  }, [editor]);
-
-  useEffect(() => {
     resizeAble();
   }, [monacoEl.current]);
 
   console.log(editors);
 
+  const editor = editors.get(name);
+  if (editor) {
+    console.log(editor.getOptions());
+  }
+
   useEffect(() => {
     if (monacoEl) {
-      createEditor({
-        enabledMinMap,
-        defaultVal,
-        language,
-        readOnly,
-        domElement: monacoEl.current!
-      });
+      createEditor(monacoEl.current!);
     }
-    return () => {
-      console.log('清除editor');
-      destroyEditor();
-      deleteEditor(name);
-      myEmitter.offAll(`monacoEditor-${name}`);
-    };
   }, [monacoEl]);
 
   const renderActions = () => {
@@ -107,4 +90,4 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     </div>
   );
 };
-export default MonacoEditor;
+export default memo(MonacoEditor);

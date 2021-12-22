@@ -5,6 +5,7 @@ import MonacoEditor from '../../../components/MonacoEditor';
 import { Window } from '../../../type';
 import { myEmitter } from '../../../utils/EventEmiter';
 import type { IpcRendererEvent } from 'electron';
+import { LanguageMapper } from '../../../components/MonacoEditor/utils';
 
 const Body = () => {
   const [activeItem, setActiveItem] = useState('Pretty');
@@ -13,7 +14,7 @@ const Body = () => {
   const methodOptions = [
     { key: 'HTML', value: 'HTML', text: 'HTML' },
     { key: 'JSON', value: 'JSON', text: 'JSON' },
-    { key: 'Text', value: 'Text', text: 'Text' }
+    { key: 'TEXT', value: 'TEXT', text: 'TEXT' }
   ];
 
   const handleItemClick = (e: any, { name }: any) => {
@@ -66,7 +67,7 @@ const Body = () => {
       <MonacoEditor
         actions={renderActions()}
         name={'collect'}
-        language={'json'}
+        language={LanguageMapper.get(method)!}
         defaultVal={''}
         height={255}
         width={'100%'}

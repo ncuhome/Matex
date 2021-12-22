@@ -23,7 +23,7 @@ export const useEditorListen = ({
   getValue = () => {},
   onFocus = () => {}
 }: ListeningProps) => {
-  const { editors, addEditor, deleteEditor } = useEditors((state) => state);
+  const { editors } = useEditors((state) => state);
   const editor = editors.get(name);
 
   const setVal = useCallback(
