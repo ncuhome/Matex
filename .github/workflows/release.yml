@@ -26,15 +26,10 @@ jobs:
           echo start install dependencies
           yarn install --network-timeout 100000
 
-#      - name: Build project
-#        run: |
-#          echo start build project
-#          yarn build
-#
-#      - name: Package Electron app
-#        run: |
-#          echo Package Electron app
-#          yarn package
+      - name: postinstall
+        run: |
+          echo start postinstall
+          yarn postinstall
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
