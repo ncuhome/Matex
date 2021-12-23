@@ -3,6 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const { ipcRenderer } = require('electron');
     window.ipc = ipcRenderer;
     injectAxios();
+    injectDecode();
   };
 
   for (const type of ['chrome', 'node', 'electron']) {
@@ -21,4 +22,10 @@ const injectAxios = () => {
     (error) => Promise.reject(error)
   );
   window.Mixos = axios;
+};
+
+const injectDecode = () => {
+  const entities = require('entities');
+
+  window.decodeHTML5 = entities.decodeHTML5;
 };
