@@ -3,31 +3,24 @@
   "appId": "org.Matex.com",
   "asar": true,
   "directories": {
-    "app": "release/",
-    "buildResources": "assets",
-    "output": "release/app"
+    "app": "./release/app",
+    "buildResources": "./assets",
+    "output": "./release/build"
   },
   "extraResources": [
     "./assets/**"
   ],
   "files": [
-    "release/build",
+    "dist",
+    "node_modules",
     "package.json"
   ],
   "mac": {
     "icon": "./assets/icon/icon.png",
-    "hardenedRuntime": true,
-    "extraResources": {
-      "from": "./release/build/render",
-      "to": "./render"
-    }
+    "hardenedRuntime": true
   },
   "win": {
     "icon": "./assets/icon/icon.ico",
-    "extraResources": {
-      "from": "./release/build/render",
-      "to": "./render"
-    },
     "target": [
       "nsis",
       "zip"

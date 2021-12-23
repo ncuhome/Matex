@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [reactRefresh()],
   build: {
     sourcemap: false,
-    outDir: './release/build/render',
+    outDir: './release/app/dist/render',
     emptyOutDir: true,
     target: `chrome${chrome}`,
     brotliSize: false,
