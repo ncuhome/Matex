@@ -1,7 +1,7 @@
 
 .activeStyle{
   color: #FFF;
-  background-color: #000;
+  background-color: #2CB5AD;
 }
 
 
@@ -22,8 +22,8 @@
   margin-top: 15px;
 
   &:hover{
-    color: #B1B1B1;
-    background-color: #4D4D4D;
+    color: #000;
+    background-color: rgba(67,209,201,0.8);
   }
 
   .tabIcon{
@@ -61,7 +61,6 @@
   @extend .activeStyle;
 
   &:hover{
-    color: #FFF;
-    background-color: #4D4D4D;
+    @extend .activeStyle;
   }
 }
