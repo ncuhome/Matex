@@ -1,21 +1,20 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
+import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
 import { Button, Dropdown, Menu } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import MonacoEditor from '../../../components/MonacoEditor';
-import { Window } from '../../../type';
+import { MatexWin } from '../../../global';
 import { myEmitter } from '../../../utils/EventEmiter';
 import type { IpcRendererEvent } from 'electron';
 import { LanguageMapper } from '../../../components/MonacoEditor/utils';
+import { Actions, FormatOptions } from '../../../Model/collection.model';
 
 const Body = () => {
   const [activeItem, setActiveItem] = useState('Pretty');
-  const [method, setMethod] = useState('JSON');
+  const [method, setMethod] = useState('HTML');
 
-  const methodOptions = [
-    { key: 'HTML', value: 'HTML', text: 'HTML' },
-    { key: 'JSON', value: 'JSON', text: 'JSON' },
-    { key: 'TEXT', value: 'TEXT', text: 'TEXT' }
-  ];
+  const formatOptions = FormatOptions.map((item) => {
+    return { key: item, value: item, text: item };
+  });
 
   const handleItemClick = (e: any, { name }: any) => {
     setActiveItem(name);
@@ -25,25 +24,29 @@ const Body = () => {
     setMethod(value);
   };
 
-  const listen = (e: IpcRendererEvent, args: any[]) => {
+  const listen = (e: IpcRendererEvent, args: any[] | string) => {
     console.log(args);
-    myEmitter.emit('monacoEditor-collect', JSON.stringify(args));
+    myEmitter.emit('monacoEditor-collect', MatexWin.decodeHTML5(args));
   };
 
   useEffect(() => {
     console.log('渲染次数');
-    Window.ipc.on('collection_res', listen);
+    MatexWin.ipc.on('collection_res', listen);
     return () => {
-      Window.ipc.removeListener('collection_res', listen);
+      MatexWin.ipc.removeListener('collection_res', listen);
     };
   }, []);
 
   const renderActions = () => {
     return (
       <Menu secondary>
-        <Menu.Item name="Pretty" active={activeItem === 'Pretty'} onClick={handleItemClick} />
-        <Menu.Item name="Raw" active={activeItem === 'Raw'} onClick={handleItemClick} />
-        <Menu.Item name="Preview" active={activeItem === 'Preview'} onClick={handleItemClick} />
+        {Actions.map((item) => {
+          return (
+            <Fragment key={item}>
+              <Menu.Item name={item} active={activeItem === item} onClick={handleItemClick} />
+            </Fragment>
+          );
+        })}
         <Menu.Menu position="right">
           <Menu.Item>
             <Button.Group>
@@ -52,7 +55,7 @@ const Body = () => {
                 onChange={handleChange}
                 className="button icon"
                 floating
-                options={methodOptions}
+                options={formatOptions}
                 trigger={<></>}
               />
             </Button.Group>

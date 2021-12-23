@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input, Table } from 'semantic-ui-react';
 import Tabs from '../Tabs';
 import clsx from 'clsx';
-import { Window } from '../../../type';
+import { MatexWin } from '../../../global';
 
 const Header = () => {
   const [method, setMethod] = useState('Get');
@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   const handleClick = () => {
-    Window.ipc?.send('collection_fetch', { url, method });
+    MatexWin.ipc?.send('collection_fetch', { url, method });
   };
 
   return (

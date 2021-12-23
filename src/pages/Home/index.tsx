@@ -10,7 +10,7 @@ const Home: React.FC<any> = () => {
   const { collapse } = useCollapse((state) => state);
 
   useEffect(() => {
-    navigate('/mock', { replace: true });
+    navigate('/collect', { replace: true });
   }, []);
   return (
     <div className={styles.rootCon}>

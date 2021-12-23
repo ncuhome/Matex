@@ -1,6 +1,9 @@
 {
   "verbose": true,
   "watch": ["./dev/main.js"],
+  "events": {
+    "start": "cls || clear"
+  },
   "ignore": [
     "asar",
     "src",

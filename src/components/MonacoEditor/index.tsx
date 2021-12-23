@@ -59,11 +59,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
 
   console.log(editors);
 
-  const editor = editors.get(name);
-  if (editor) {
-    console.log(editor.getOptions());
-  }
-
   useEffect(() => {
     if (monacoEl) {
       createEditor(monacoEl.current!);

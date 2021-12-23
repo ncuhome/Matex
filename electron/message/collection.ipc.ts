@@ -1,6 +1,8 @@
 import { ipcMain } from 'electron';
 import got from 'got';
 
+const entities = require('entities');
+
 interface CollectionChannel_ {
   collection_fetch: any;
   collection_save: any;
@@ -35,7 +37,7 @@ export class CollectionIpc {
         const res = await got.get(url);
         const val = regexp.test(res.body);
         if (val) {
-          e.reply('collection_res', res.body.toString());
+          e.reply('collection_res', entities.encodeHTML5(res.body));
         } else {
           e.reply('collection_res', JSON.parse(res.body));
         }
