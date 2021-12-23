@@ -3,6 +3,11 @@ import { startServer } from './server/start';
 import { PortChannel } from './message';
 import { loadingPath, loadUrl, preloadPath } from './utils/path';
 import { MatexLog } from './scripts/log';
+import * as Sentry from '@sentry/electron';
+
+const isDev = process.env.NODE_ENV === 'development';
+if (!isDev)
+  Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 
 let mainWindow: BrowserWindow | undefined;
 let loadWindow: BrowserWindow | undefined;
@@ -50,7 +55,6 @@ async function createWindow() {
   loadWindow.once('ready-to-show', () => {
     loadWindow?.show();
   });
-
   await mainWindow.loadURL(loadUrl);
 
   //发送通信端口

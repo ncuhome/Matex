@@ -9,7 +9,7 @@ export const resolvePath = (_path: string) => path.resolve(appDir, _path);
 export const resourcesPath = process.resourcesPath;
 export const loadingPath = isDev
   ? `file://${path.join(rootDir, '.')}/loading.html`
-  : `file://${path.join(resourcesPath, '.')}/render/loading.html`;
+  : `file://${path.join(__dirname, '..')}/render/loading.html`;
 
 export const preloadPath = isDev
   ? path.resolve(process.cwd(), './electron/scripts/preload.js')
@@ -17,4 +17,4 @@ export const preloadPath = isDev
 
 export const loadUrl = isDev
   ? 'http://localhost:3000'
-  : `file://${path.join(resourcesPath, '.')}/render/index.html`;
+  : `file://${path.join(__dirname, '..')}/render/index.html`;
