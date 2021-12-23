@@ -2,13 +2,20 @@
   "productName": "Matex",
   "appId": "org.Matex.com",
   "asar": true,
+  "directories": {
+    "app": "release/",
+    "buildResources": "assets",
+    "output": "release/app"
+  },
+  "extraResources": [
+    "./assets/**"
+  ],
   "files": [
     "release/build",
-    "package.json",
-    "node_modules"
+    "package.json"
   ],
   "mac": {
-    "icon": "./electron/assets/icon/icon.png",
+    "icon": "./assets/icon/icon.png",
     "hardenedRuntime": true,
     "extraResources": {
       "from": "./release/build/render",
@@ -16,7 +23,7 @@
     }
   },
   "win": {
-    "icon": "./electron/assets/icon/icon.ico",
+    "icon": "./assets/icon/icon.ico",
     "extraResources": {
       "from": "./release/build/render",
       "to": "./render"
@@ -32,14 +39,15 @@
     "perMachine": true,
     "allowElevation": true,
     "allowToChangeInstallationDirectory": true,
-    "installerIcon": "./electron/assets/icon/icon.ico",
-    "uninstallerIcon": "./electron/assets/icon/icon.ico",
-    "installerHeaderIcon": "./electron/assets/icon/icon.ico",
+    "installerIcon": "./assets/icon/icon.ico",
+    "uninstallerIcon": "./assets/icon/icon.ico",
+    "installerHeaderIcon": "./assets/icon/icon.ico",
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
     "shortcutName": "matex"
   },
-  "directories": {
-    "output": "release/app"
+  "publish": {
+    "provider": "github",
+    "repo": "Matex"
   }
 }

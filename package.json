@@ -76,6 +76,7 @@
     "wait-on": "^6.0.0"
   },
   "dependencies": {
+    "@sentry/electron": "^2.5.4",
     "ahooks": "^2.10.12",
     "axios": "^0.24.0",
     "body-parser": "^1.19.0",
