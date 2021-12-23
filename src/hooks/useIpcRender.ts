@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Window } from '../type';
+import { MatexWin } from '../global';
 import type { IpcRendererEvent } from 'electron';
 
 interface IpcProps {
@@ -9,14 +9,14 @@ interface IpcProps {
 
 const useIpcOn = ({ channel, listener }: IpcProps) => {
   useEffect(() => {
-    Window.ipc?.on(channel, listener);
+    MatexWin.ipc?.on(channel, listener);
     return () => {
-      Window.ipc?.removeListener(channel, listener);
+      MatexWin.ipc?.removeListener(channel, listener);
     };
   }, []);
 
   const off = () => {
-    Window.ipc?.removeListener(channel, listener);
+    MatexWin.ipc?.removeListener(channel, listener);
   };
   return { off };
 };
