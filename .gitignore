@@ -4,7 +4,7 @@ build
 dev
 node_modules
 electron/dev
-release
+release/build
 #parcel
 .cache
 #electron
