@@ -1,4 +1,4 @@
-name: Build/release
+name: Build/Release
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ macos-latest, windows-latest ]
+        os: [ macos-latest, windows-latest, ubuntu-latest ]
 
     steps:
       - uses: actions/checkout@v2
@@ -21,25 +21,28 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: install dependencies
+      - name: Install dependencies
         run: |
           echo start install dependencies
           yarn install --network-timeout 100000
 
-      - name: postinstall
+      - name: Build main and render
         run: |
-          echo start postinstall
-          yarn postinstall
+          echo build main and render
+          yarn build
 
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
+      - name: Package electron app
+        run: |
+          echo Package Electron app
+          yarn release
+
+      - name: Upload app installer
+        uses: softprops/action-gh-release@v1
         with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.TOKEN }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
-          args: "--config electron_builder.json --publish always"
+          token: ${{ secrets.TOKEN }}
+          files: |
+            release/build/*.dmg
+            release/build/*.zip
+            release/build/*.exe
+            release/build/*.blockmap
 
