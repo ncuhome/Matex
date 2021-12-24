@@ -1,9 +1,15 @@
 import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
 import { startServer } from './server/start';
 import { PortChannel } from './message';
-import { loadingPath, loadUrl, preloadPath } from './utils/path';
+import { loadingPath, mainPath, preloadPath } from './utils/path';
 import { MatexLog } from './scripts/log';
 import * as Sentry from '@sentry/electron';
+import isLeapYear from 'dayjs/plugin/isLeapYear'; // 导入插件
+import 'dayjs/locale/zh-cn'; // 导入本地化语言
+import dayjs from 'dayjs';
+
+dayjs.extend(isLeapYear); // 使用插件
+dayjs.locale('zh-cn');
 
 const isDev = process.env.NODE_ENV === 'development';
 if (!isDev)
@@ -16,58 +22,92 @@ const gotTheLock = app.requestSingleInstanceLock();
 
 const { port1, port2 } = new MessageChannelMain();
 
+const setMainWin = async () => {
+  return new Promise((resolve, reject) => {
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    mainWindow = new BrowserWindow({
+      width: width - 100,
+      height: height - 20,
+      center: true,
+      frame: false,
+      show: false,
+      transparent: true,
+      resizable: true,
+      titleBarStyle: 'customButtonsOnHover',
+      webPreferences: {
+        preload: preloadPath,
+        nodeIntegration: true,
+        contextIsolation: false
+      }
+    });
+    if (mainWindow) {
+      resolve(true);
+    }
+  });
+};
+
+const setLoadWin = async () => {
+  return new Promise((resolve, reject) => {
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    loadWindow = new BrowserWindow({
+      width: 400,
+      height: 400,
+      center: false,
+      x: (width - 400) / 2,
+      y: (height - 400) / 2,
+      frame: false,
+      transparent: true,
+      resizable: false,
+      show: true,
+      titleBarStyle: 'customButtonsOnHover',
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true
+      }
+    });
+    if (loadWindow) {
+      resolve(true);
+    }
+  });
+};
+
+//创建窗口
 async function createWindow() {
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-  mainWindow = new BrowserWindow({
-    width: width - 100,
-    height: height - 20,
-    center: true,
-    frame: false,
-    show: false,
-    transparent: true,
-    resizable: true,
-    titleBarStyle: 'customButtonsOnHover',
-    webPreferences: {
-      preload: preloadPath,
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  });
-  loadWindow = new BrowserWindow({
-    width: 400,
-    height: 400,
-    center: false,
-    x: (width - 400) / 2,
-    y: (height - 400) / 2,
-    frame: false,
-    transparent: true,
-    resizable: false,
-    show: true,
-    titleBarStyle: 'customButtonsOnHover',
-    webPreferences: {
-      preload: preloadPath,
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  });
-  loadWindow.setWindowButtonVisibility(false);
-  await loadWindow?.loadURL(loadingPath);
-  loadWindow.once('ready-to-show', () => {
-    loadWindow?.show();
-  });
-  await mainWindow.loadURL(loadUrl);
+  try {
+    //加载页面
+    MatexLog.success(dayjs().format('开始创建 YYYY年 MM月 DD号 HH:mm:ss:SSS'));
+    await setLoadWin();
+    await setMainWin();
+    MatexLog.success(dayjs().format('创建完成 YYYY年 MM月 DD号 HH:mm:ss:SSS'));
 
-  //发送通信端口
-  mainWindow.webContents.postMessage('port', null, [port2]);
+    MatexLog.success('开始加载窗口:' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
 
-  mainWindow.on('closed', () => {
-    mainWindow = undefined;
-  });
+    loadWindow?.setWindowButtonVisibility(false);
+    await loadWindow?.loadURL(loadingPath);
+    MatexLog.success('完成加载窗口:' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
 
-  loadWindow.on('closed', () => {
-    MatexLog.success('loadWindow 关闭');
-    loadWindow = undefined;
-  });
+    loadWindow?.once('ready-to-show', () => {
+      loadWindow?.show();
+    });
+    loadWindow?.on('closed', () => {
+      MatexLog.success('loadWindow关闭');
+      MatexLog.success(dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
+      loadWindow = undefined;
+    });
+
+    //等待主页面创建
+    MatexLog.success('mainWindow开始' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
+    await mainWindow?.loadURL(mainPath);
+    MatexLog.success('mainWindow完成' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
+
+    //发送通信端口
+    mainWindow?.webContents.postMessage('port', null, [port2]);
+    mainWindow?.on('closed', () => {
+      mainWindow = undefined;
+    });
+  } catch (e) {
+    MatexLog.error(e);
+  }
 }
 
 //避免多实例
@@ -85,14 +125,15 @@ if (!gotTheLock) {
 app.on('ready', async () => {
   PortChannel.setPort(port1);
   PortChannel.startListening();
-  createWindow();
+  await createWindow();
   setTimeout(() => {
     loadWindow?.close();
     loadWindow?.destroy();
     mainWindow?.show();
-  }, 4000);
+  }, 100);
 });
 
+//当窗口加载完成调用
 app.whenReady().then(async () => {
   try {
     await startServer();

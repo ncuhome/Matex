@@ -15,6 +15,6 @@ export const preloadPath = isDev
   ? path.resolve(process.cwd(), './electron/scripts/preload.js')
   : `${path.resolve(__dirname, './preload.js')}`;
 
-export const loadUrl = isDev
+export const mainPath = isDev
   ? 'http://localhost:3000'
   : `file://${path.join(__dirname, '..')}/render/index.html`;
