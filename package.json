@@ -14,23 +14,16 @@
     "url": "https://github.com/ncuhome/Matex.git"
   },
   "scripts": {
-    "start": "ts-node ./scripts/start.ts",
-    "dev": "concurrently \"vite\" \"npm run dev:electron\" \"npm run watch:electron\"",
+    "start": "cross-env NODE_ENV=development ts-node ./scripts/start.ts",
     "dev:react": "vite",
     "dev:server": "nodemon --config nodemon-express.json",
-    "test:server": "node ./test/index.js",
-    "remove": "rm -R ./dev",
-    "dev:electron": "npm run remove && cross-env NODE_ENV=development ts-node ./scripts/parcel-dev.ts",
-    "watch:electron": "wait-on ./dev/main.js && nodemon --config nodemon-electron.json",
     "test:build": "ts-node ./test/vite_build.test.ts",
     "build": "concurrently \"npm run build:react\" \"npm run build:electron\"",
     "build:react": "vite build && ts-node ./scripts/copyFile.ts",
-    "build:test": "cross-env NODE_ENV=production parcel build ./electron/main.ts --out-dir ./release/app/dist/main --target electron",
-    "preview": "vite preview",
-    "autoo": "autoo",
     "build:electron": "cross-env NODE_ENV=production ts-node ./scripts/parcel-prod.ts",
+    "preview": "vite preview",
     "postinstall": "electron-builder install-app-deps",
-    "release": "npm run postinstall && cross-env NODE_ENV=production electron-builder build --config electron_builder.json --publish never"
+    "release": "cross-env NODE_ENV=production electron-builder build --config electron_builder.json --publish never"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^5.3.0",
