@@ -2181,28 +2181,6 @@ atob@^2.1.2:
   resolved "https://registry.nlark.com/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
-autoo@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/autoo/-/autoo-1.1.2.tgz#3f1c7d70af4c437376882f86959468d494856858"
-  integrity sha512-cL8sYXxA4/2zezLmfUmZ0rNZBQS/5oicpo5v1oG85A6VPr3+EdlKTEHgJlRfyJOQfPgYag6gUE20xqvTbi0vMQ==
-  dependencies:
-    autoo "^1.1.1"
-    chalk "^5.0.0"
-    chokidar "^3.5.2"
-    fs-extra "^10.0.0"
-    signale "^1.4.0"
-
-autoo@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/autoo/-/autoo-1.2.0.tgz#ca1ac677a9add7204d970831fea465c3e1429498"
-  integrity sha512-L9an3VKiuBtm6HkC2IpM7t19juTf9rwuZSFGwKgku2tCSyDPG9Ex75+AQFGTKtoMQHVRwUzXbsRsP/hL/V0+5A==
-  dependencies:
-    autoo "^1.1.1"
-    chalk "^5.0.0"
-    chokidar "^3.5.2"
-    fs-extra "^10.0.0"
-    signale "^1.4.0"
-
 autoprefixer@^9.6.1:
   version "9.8.8"
   resolved "https://registry.npmmirror.com/autoprefixer/download/autoprefixer-9.8.8.tgz#fd4bd4595385fa6f06599de749a4d5f7a474957a"
@@ -2819,11 +2797,6 @@ chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
-
-chalk@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/chalk/-/chalk-5.0.0.tgz#bd96c6bb8e02b96e08c0c3ee2a9d90e050c7b832"
-  integrity sha512-/duVOqst+luxCQRKEo4bNxinsOQtMP80ZYm7mMqzuh5PociNL0PvmHFvREJ9ueYL2TxlHjBcmLCdmocx9Vg+IQ==
 
 chardet@^0.7.0:
   version "0.7.0"
@@ -3556,12 +3529,7 @@ date-fns@^2.16.1:
   resolved "https://registry.npmmirror.com/date-fns/download/date-fns-2.26.0.tgz?cache=0&sync_timestamp=1637308994584&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fdate-fns%2Fdownload%2Fdate-fns-2.26.0.tgz#fa45305543c392c4f914e50775fd2a4461e60fbd"
   integrity sha512-VQI812dRi3cusdY/fhoBKvc6l2W8BPWU1FNVnFH9Nttjx4AFBRzfSVb/Eyc7jBT6e9sg1XtAGsYpBQ6c/jygbg==
 
-dayjs@^1.10.7:
-  version "1.10.7"
-  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
-  integrity sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==
-
-dayjs@^1.9.1:
+dayjs@^1.10.7, dayjs@^1.9.1:
   version "1.10.7"
   resolved "https://registry.nlark.com/dayjs/download/dayjs-1.10.7.tgz?cache=0&sync_timestamp=1631266519235&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdayjs%2Fdownload%2Fdayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
   integrity sha1-LPX5Gt0oEWdIRAhmoKHSbzps5Gg=

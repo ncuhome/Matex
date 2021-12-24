@@ -16,6 +16,7 @@
   "dependencies": {
     "@sentry/electron":"^2.5.4",
     "axios": "^0.24.0",
+    "dayjs": "^1.10.7",
     "body-parser": "^1.19.0",
     "entities": "^3.0.1",
     "express": "^4.17.1",
