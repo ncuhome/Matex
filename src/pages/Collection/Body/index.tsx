@@ -72,7 +72,7 @@ const Body = () => {
         name={'collect'}
         language={LanguageMapper.get(method)!}
         defaultVal={''}
-        height={255}
+        height={250}
         width={'100%'}
       />
     </div>

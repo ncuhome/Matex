@@ -3,7 +3,7 @@ import { suggestions } from './suggestions';
 import { rules } from './theme';
 import { defaultSchema } from './schema';
 import { useEffect, useRef } from 'react';
-import { useEditors } from '../../zustand/store/apiData.store';
+import { useEditors } from '../../zustand/store/common.store';
 import ProviderResult = monaco.languages.ProviderResult;
 import CompletionList = monaco.languages.CompletionList;
 

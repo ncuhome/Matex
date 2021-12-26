@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { ApiDataType, MessageChannel, MonacoEditorTypes } from '../type/apiData.type';
-import { ApiData } from '../../type/api';
+import { ApiData } from '../../type/common';
 import { editor } from 'monaco-editor';
 
 const initData: ApiData = {

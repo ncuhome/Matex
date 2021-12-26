@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './app.module.scss';
 import { RouterAuth } from './router';
-import { useChannel } from './zustand/store/apiData.store';
+import { useChannel } from './zustand/store/common.store';
 import useIpcOn from './hooks/useIpcRender';
 import { MatexWin } from './global';
 

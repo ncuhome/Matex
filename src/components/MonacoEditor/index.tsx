@@ -3,7 +3,7 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { resizeAble } from './resize';
-import { useEditors } from '../../zustand/store/apiData.store';
+import { useEditors } from '../../zustand/store/common.store';
 import { useEditor } from './create';
 import { useEditorListen } from './listening';
 

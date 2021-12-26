@@ -1,0 +1,18 @@
+
+
+.input{
+  height: 25px;
+  font-size: 13px;
+  color: #5A5A5A;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 0 5px 6px;
+  min-width: 0;
+  width: 100%;
+
+  &:hover{
+    background-color: #E0E1E2;
+    color: black;
+  }
+}

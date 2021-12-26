@@ -1,28 +1,27 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent } from 'react';
 import styles from './index.module.scss';
-import { Button, Dropdown, Icon, Input, Table } from 'semantic-ui-react';
-import Tabs from '../Tabs';
+import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
+import Tabs from './Tabs';
 import clsx from 'clsx';
-import { MatexWin } from '../../../global';
+import ConfigTable from './ConfigTabel';
+import { MethodsOptions } from '../../../Model/collection.model';
+import { useUrlConfig } from '../../../zustand/store/collection.store';
+import { useSendReq } from '../../../message/collection';
 
 const Header = () => {
-  const [method, setMethod] = useState('Get');
-  const [url, setUrl] = useState('');
-
-  const countryOptions = [
-    { key: 'Get', value: 'Get', text: 'Get' },
-    { key: 'Post', value: 'Post', text: 'Post' },
-    { key: 'Put', value: 'Put', text: 'Put' },
-    { key: 'Delete', value: 'Delete', text: 'Delete' },
-    { key: 'Header', value: 'Header', text: 'Header' }
-  ];
+  const { method, url, setMethod, setUrl } = useUrlConfig((state) => state);
+  const { sendToMain } = useSendReq();
+  const countryOptions = MethodsOptions.map((item) => {
+    return { key: item, value: item, text: item };
+  });
 
   const handleChange = (event: SyntheticEvent, { value }: any) => {
     setMethod(value);
   };
 
   const handleClick = () => {
-    MatexWin.ipc?.send('collection_fetch', { url, method });
+    sendToMain();
+    // MatexWin.ipc?.send('collection_fetch', { url, method });
   };
 
   return (
@@ -58,51 +57,7 @@ const Header = () => {
           <Tabs />
         </div>
         <div className={styles.table}>
-          <Table celled striped compact>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell width={3}>键</Table.HeaderCell>
-                <Table.HeaderCell>值</Table.HeaderCell>
-                <Table.HeaderCell>描述</Table.HeaderCell>
-                <Table.HeaderCell width={3} textAlign={'center'}>
-                  操作
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-
-            <Table.Body>
-              <Table.Row>
-                <Table.Cell>First</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell textAlign={'center'}>
-                  <Button icon compact>
-                    <Icon name="delete" />
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell textAlign={'center'}>
-                  <Button icon compact>
-                    <Icon name="delete" />
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell textAlign={'center'}>
-                  <Button icon compact>
-                    <Icon name="delete" />
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            </Table.Body>
-          </Table>
+          <ConfigTable />
         </div>
       </div>
     </>

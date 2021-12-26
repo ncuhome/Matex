@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import * as monaco from 'monaco-editor';
-import { useEditors } from '../../zustand/store/apiData.store';
+import { useEditors } from '../../zustand/store/common.store';
 import { myEmitter } from '../../utils/EventEmiter';
 
 interface ListeningProps {

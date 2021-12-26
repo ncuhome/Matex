@@ -1,0 +1,15 @@
+.input{
+  height: 25px;
+  font-size: 12px;
+  color: #5A5A5A;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  padding: 3px 0 3px 6px;
+  min-width: 0;
+
+  &:hover{
+    background-color: #E0E1E2;
+    color: black;
+  }
+}

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import './globle.css';
-import './useWorker';
 import 'semantic-ui-css/semantic.min.css';
+import './useWorker';
 
 const isDev = process.env.NODE_ENV === 'development';
 

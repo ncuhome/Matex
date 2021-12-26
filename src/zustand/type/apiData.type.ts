@@ -1,4 +1,4 @@
-import { ApiData } from '../../type/api';
+import { ApiData } from '../../type/common';
 import * as monaco from 'monaco-editor';
 
 export interface ApiDataType {

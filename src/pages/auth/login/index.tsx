@@ -11,7 +11,7 @@ const Login: React.FC<any> = (props: any) => {
   return (
     <div>
       <div onClick={login} style={{ marginTop: 40, marginLeft: 40 }}>
-        登录页面1
+        登录页面
       </div>
     </div>
   );

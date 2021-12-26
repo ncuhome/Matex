@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron';
 import got from 'got';
+import { MatexLog } from '../scripts/log';
 
 const entities = require('entities');
 
@@ -31,10 +32,13 @@ export class CollectionIpc {
 
   static listen() {
     ipcMain.on('collection_fetch', async (e, args) => {
-      const { url, method } = args;
+      const { url, method, headers } = args;
+      MatexLog.success(args);
       const regexp = /<[a-z][\s\S]*>/i;
       if (method === 'Get') {
-        const res = await got.get(url);
+        const res = await got.get(url, {
+          headers
+        });
         const val = regexp.test(res.body);
         if (val) {
           e.reply('collection_res', entities.encodeHTML5(res.body));

@@ -1,5 +1,5 @@
-import { useChannel } from '../zustand/store/apiData.store';
-import { ChannelData } from '../type/api';
+import { useChannel } from '../zustand/store/common.store';
+import { ChannelData } from '../type/common';
 
 export const usePortChannel = <T>() => {
   const { port } = useChannel((state) => state);
