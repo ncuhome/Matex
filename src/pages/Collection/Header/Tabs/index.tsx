@@ -3,16 +3,15 @@ import { Button } from 'semantic-ui-react';
 import { TabsItem } from '../../../../Model/collection.model';
 import { TabItems } from '../../../../type/collection';
 import { useUrlConfig } from '../../../../zustand/store/collection.store';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Tabs = () => {
   const { activeTab, setActiveTab } = useUrlConfig((state) => state);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleItemClick = (item: TabItems) => {
     setActiveTab(item);
-    const path = `${location.pathname}/${item.toLowerCase()}`;
+    const path = `/collect/${item.toLowerCase()}`;
     console.log(path);
     navigate(path);
   };

@@ -1,14 +1,17 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useEffect } from 'react';
 import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
 import Tabs from './Tabs';
 import clsx from 'clsx';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { MethodsOptions } from '../../../Model/collection.model';
 import { useUrlConfig } from '../../../zustand/store/collection.store';
 import { useSendReq } from '../../../message/collection';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { method, url, setMethod, setUrl } = useUrlConfig((state) => state);
   const { sendToMain } = useSendReq();
   const countryOptions = MethodsOptions.map((item) => {
@@ -22,6 +25,12 @@ const Header = () => {
   const handleClick = () => {
     sendToMain();
   };
+
+  useEffect(() => {
+    if (location.pathname === '/collect') {
+      navigate('/collect/params');
+    }
+  }, [location.pathname]);
 
   return (
     <>

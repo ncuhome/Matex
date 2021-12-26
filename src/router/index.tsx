@@ -21,7 +21,6 @@ export const RouterAuth = () => {
   return (
     <>
       <Routes>
-        <Route path={'/login'} element={<Login />} />
         <Route path={'/'} element={auth ? <Home /> : <Navigate to={'login'} replace />}>
           <Route path={'collect'} element={<Collection />}>
             <Route path={'params'} element={<ParamsTable />} />
@@ -32,6 +31,7 @@ export const RouterAuth = () => {
           <Route path={'benchmark'} element={<WaitWorkPage />} />
           <Route path={'ok'} element={<WaitWorkPage />} />
         </Route>
+        <Route path={'/login'} element={<Login />} />
       </Routes>
     </>
   );
