@@ -5,9 +5,9 @@ import Home from '../pages/Home';
 import MockView from '../pages/Mock';
 import WaitWorkPage from '../components/Work';
 import Collection from '../pages/Collection';
-import BodyTable from '../pages/Collection/Header/ConfigTabel/renderBody';
-import ParamsTable from '../pages/Collection/Header/ConfigTabel/renderParams';
-import HeadersTable from '../pages/Collection/Header/ConfigTabel/renderHeader';
+import BodyTable from '../pages/Collection/Header/ConfigTabel/Body';
+import ParamsTable from '../pages/Collection/Header/ConfigTabel/Params';
+import HeadersTable from '../pages/Collection/Header/ConfigTabel/Header';
 
 export const RouterAuth = () => {
   const location = useLocation();
