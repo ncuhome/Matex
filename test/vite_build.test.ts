@@ -50,10 +50,38 @@ const options: WaitOn.WaitOnOptions = {
       //启动截屏
       try {
         await WaitOn(options);
-        const browser = await chromium.launch({ devtools: true });
-        const page = await browser.newPage();
-        await page.goto('http://localhost:5000');
-        await page.screenshot({ path: './test/screenshot/vite_build.png' });
+        const browser = await chromium.launch({
+          headless: false,
+          devtools: false
+        });
+        const context = await browser.newContext();
+        // Open new page
+        const page = await context.newPage();
+        // Go to http://localhost:3000/
+        await page.goto('http://localhost:5000/');
+        // Go to http://localhost:3000/login
+        await page.goto('http://localhost:5000/login');
+        // Click text=登录页面
+        await page.click('text=登录页面');
+        // assert.equal(page.url(), 'http://localhost:3000/collect');
+        // Click text=Body
+        await page.click('text=Body');
+        await page.screenshot({ path: './test/screenshot/page_collection.png' });
+        // Click text=Headers
+        await page.click('text=Headers');
+        // Click text=虚拟接口
+        await page.click('text=虚拟接口');
+        await page.screenshot({ path: './test/screenshot/page_mock.png' });
+        // assert.equal(page.url(), 'http://localhost:3000/mock');
+        // Click text=压力测试
+        await page.click('text=压力测试');
+        await page.screenshot({ path: './test/screenshot/benchmark.png' });
+        // assert.equal(page.url(), 'http://localhost:3000/benchmark');
+        // Click text=敬请期待
+        await page.click('text=敬请期待');
+        // assert.equal(page.url(), 'http://localhost:3000/ok');
+        // ---------------------
+        await context.close();
         await browser.close();
         process.exit(0);
       } catch (e) {
