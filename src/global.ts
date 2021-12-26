@@ -2,7 +2,7 @@ import type { IpcRenderer } from 'electron';
 import type { AxiosStatic } from 'axios';
 
 interface MatexWindow extends Window {
-  ipc: IpcRenderer;
+  ipc: IpcRenderer | null;
   Mixos: AxiosStatic;
   decodeHTML5: (str: string | any[]) => string;
 }
