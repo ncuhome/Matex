@@ -1,12 +1,12 @@
 import React, { SyntheticEvent, useEffect } from 'react';
 import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
-import Tabs from './Tabs';
 import clsx from 'clsx';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { MethodsOptions } from '../../../Model/collection.model';
 import { useUrlConfig } from '../../../zustand/store/collection.store';
 import { useSendReq } from '../../../message/collection';
+import Tabs from './Tabs';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const Header = () => {
         </Button>
       </div>
       <div className={styles.config}>
-        <div className={styles.leftBtns}>
+        <div className={styles.option}>
           <Tabs />
         </div>
         <div className={styles.table}>

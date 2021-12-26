@@ -2,6 +2,7 @@ import { Button, Icon, Popup, Segment, Table } from 'semantic-ui-react';
 import React, { Fragment, useEffect } from 'react';
 import { useBodyList, useUrlConfig } from '../../../../zustand/store/collection.store';
 import styles from './index.module.scss';
+import { BodyTypes } from '../../../../Model/collection.model';
 
 const BodyTable = () => {
   const { updateBody, bodyList, addBody, deleteBody } = useBodyList((state) => state);
@@ -26,7 +27,7 @@ const BodyTable = () => {
     );
   } else {
     return (
-      <Table celled compact>
+      <Table celled compact size={'small'}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell width={3}>键</Table.HeaderCell>
@@ -64,7 +65,18 @@ const BodyTable = () => {
                       <Button.Group basic size="mini">
                         <Button icon="eye" disabled />
                         <Popup position="bottom center" on={'click'} trigger={<Button icon="file" />} flowing>
-                          1
+                          <Button.Group vertical>
+                            {BodyTypes.map((item) => {
+                              return (
+                                <Fragment key={item}>
+                                  <Button>
+                                    <Icon name="file" />
+                                    {item}
+                                  </Button>
+                                </Fragment>
+                              );
+                            })}
+                          </Button.Group>
                         </Popup>
                       </Button.Group>
                     </div>

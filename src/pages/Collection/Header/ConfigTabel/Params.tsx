@@ -18,7 +18,7 @@ const ParamsTable = () => {
   }, [paramList]);
 
   return (
-    <Table celled compact>
+    <Table celled compact size={'small'}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>键</Table.HeaderCell>

@@ -6,7 +6,7 @@
 
 .url {
   @extend .cardStyle;
-  height: 70px;
+  height: 60px;
   width: 100%;
   margin-bottom: 5px;
   display: flex;
@@ -32,29 +32,24 @@
   overflow: hidden;
   flex: 1;
   display: flex;
-  padding: 15px 0;
+  padding: 8px 8px 5px 15px;
   width: 100%;
+  flex-direction: column;
+  @extend .cardStyle;
+  margin-top: 10px;
 
-  .leftBtns{
-    @extend .cardStyle;
-    padding: 10px;
-    overflow: auto;
-    margin-left: 5px;
-
+  .option{
+    height: 45px;
     display: flex;
-    flex-direction:column;
-
-    .btn{
-      flex-shrink: 0;
-    }
-
+    align-items: center;
+    background-color: #F8F9FA;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    padding-left: 16px;
   }
 
   .table{
     flex: 1;
-    @extend .cardStyle;
-    margin:0 5px 0 15px;
-    padding: 10px 15px;
     border: transparent 1px solid;
     overflow: auto;
   }
