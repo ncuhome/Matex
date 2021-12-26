@@ -21,7 +21,6 @@ const Header = () => {
 
   const handleClick = () => {
     sendToMain();
-    // MatexWin.ipc?.send('collection_fetch', { url, method });
   };
 
   return (

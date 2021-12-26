@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { HeaderList, ParamList, UrlConfig } from '../type/collection.type';
+import { BodyList, HeaderList, ParamList, UrlConfig } from '../type/collection.type';
 import { produce } from 'immer';
 
 const checkIndex = (list: any[]) => {
@@ -74,9 +74,41 @@ export const useHeaders = create<HeaderList>((set) => ({
     })
 }));
 
+export const useBodyList = create<BodyList>((set) => ({
+  bodyList: [{ index: 0, key: '', value: '' }],
+  addBody: (body) =>
+    set(({ bodyList }) => {
+      const tempList = produce(bodyList, (draft) => {
+        draft.push(body);
+      });
+      return { bodyList: checkIndex(tempList) };
+    }),
+  updateBody: (index, field, val) =>
+    set(({ bodyList }) => {
+      const tempList = produce(bodyList, (draft) => {
+        draft.forEach((item, i) => {
+          if (item.index === index) {
+            draft[index][field] = val;
+          }
+        });
+      });
+      return { bodyList: checkIndex(tempList) };
+    }),
+  deleteBody: (index) =>
+    set(({ bodyList }) => {
+      console.log(index);
+      const tempList = produce(bodyList, (draft) => {
+        draft.splice(index, 1);
+      });
+      return { bodyList: checkIndex(tempList) };
+    })
+}));
+
 export const useUrlConfig = create<UrlConfig>((set) => ({
   url: '',
   method: 'Get',
+  activeTab: 'Params',
+  setActiveTab: (tab) => set({ activeTab: tab }),
   setUrl: (url) => set({ url }),
   setMethod: (method) => set({ method })
 }));

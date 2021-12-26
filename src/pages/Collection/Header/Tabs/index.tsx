@@ -1,30 +1,30 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { Button } from 'semantic-ui-react';
 import { TabsItem } from '../../../../Model/collection.model';
-import { myEmitter } from '../../../../utils/EventEmiter';
 import { TabItems } from '../../../../type/collection';
+import { useUrlConfig } from '../../../../zustand/store/collection.store';
 
 const Tabs = () => {
-  const [activeItem, setActiveItem] = useState<TabItems>('Params');
-
+  const { activeTab, setActiveTab } = useUrlConfig((state) => state);
   const handleItemClick = (item: TabItems) => {
-    myEmitter.emit<TabItems>('collection-config', item);
-    setActiveItem(item);
+    setActiveTab(item);
   };
 
-  return (
-    <Button.Group vertical>
-      {TabsItem.map((item) => {
-        return (
-          <Fragment key={item}>
-            <Button basic={!(activeItem === item)} onClick={() => handleItemClick(item)}>
-              {item}
-            </Button>
-          </Fragment>
-        );
-      })}
-    </Button.Group>
-  );
+  return useMemo(() => {
+    return (
+      <Button.Group vertical>
+        {TabsItem.map((item) => {
+          return (
+            <Fragment key={item}>
+              <Button basic={!(activeTab === item)} onClick={() => handleItemClick(item)}>
+                {item}
+              </Button>
+            </Fragment>
+          );
+        })}
+      </Button.Group>
+    );
+  }, [activeTab]);
 };
 
 export default Tabs;
