@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
 
-const renderHeadersTable = () => {
+const HeadersTable = () => {
   const { updateHeader, headerList, addHeader, deleteHeader } = useHeaders((state) => state);
   const { method } = useUrlConfig((state) => state);
   console.log(method, '--renderHeadersTable');
@@ -69,4 +69,4 @@ const renderHeadersTable = () => {
     </Table>
   );
 };
-export default renderHeadersTable;
+export default HeadersTable;

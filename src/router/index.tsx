@@ -5,6 +5,9 @@ import Home from '../pages/Home';
 import MockView from '../pages/Mock';
 import WaitWorkPage from '../components/Work';
 import Collection from '../pages/Collection';
+import BodyTable from '../pages/Collection/Header/ConfigTabel/renderBody';
+import ParamsTable from '../pages/Collection/Header/ConfigTabel/renderParams';
+import HeadersTable from '../pages/Collection/Header/ConfigTabel/renderHeader';
 
 export const RouterAuth = () => {
   const location = useLocation();
@@ -20,8 +23,12 @@ export const RouterAuth = () => {
       <Routes>
         <Route path={'/login'} element={<Login />} />
         <Route path={'/'} element={auth ? <Home /> : <Navigate to={'login'} replace />}>
+          <Route path={'collect'} element={<Collection />}>
+            <Route path={'params'} element={<ParamsTable />} />
+            <Route path={'body'} element={<BodyTable />} />
+            <Route path={'headers'} element={<HeadersTable />} />
+          </Route>
           <Route path={'mock'} element={<MockView />} />
-          <Route path={'collect'} element={<Collection />} />
           <Route path={'benchmark'} element={<WaitWorkPage />} />
           <Route path={'ok'} element={<WaitWorkPage />} />
         </Route>

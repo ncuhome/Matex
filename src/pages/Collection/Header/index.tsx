@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
 import Tabs from './Tabs';
 import clsx from 'clsx';
-import ConfigTable from './ConfigTabel';
+import { Outlet } from 'react-router-dom';
 import { MethodsOptions } from '../../../Model/collection.model';
 import { useUrlConfig } from '../../../zustand/store/collection.store';
 import { useSendReq } from '../../../message/collection';
@@ -56,7 +56,7 @@ const Header = () => {
           <Tabs />
         </div>
         <div className={styles.table}>
-          <ConfigTable />
+          <Outlet />
         </div>
       </div>
     </>

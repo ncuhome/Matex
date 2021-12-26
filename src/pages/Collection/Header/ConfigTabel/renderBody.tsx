@@ -3,9 +3,10 @@ import React, { Fragment, useEffect } from 'react';
 import { useBodyList, useUrlConfig } from '../../../../zustand/store/collection.store';
 import styles from './index.module.scss';
 
-const renderBodyTable = () => {
+const BodyTable = () => {
   const { updateBody, bodyList, addBody, deleteBody } = useBodyList((state) => state);
   const { method } = useUrlConfig((state) => state);
+  console.log(bodyList);
 
   useEffect(() => {
     const len = bodyList.length;
@@ -15,6 +16,7 @@ const renderBodyTable = () => {
       }
     }
   }, [bodyList]);
+
   if (method === 'Get') {
     return (
       <Segment style={{ marginTop: 10 }} color="red" textAlign={'center'}>
@@ -45,6 +47,7 @@ const renderBodyTable = () => {
                       className={styles.input}
                       value={item.key}
                       onChange={(e) => {
+                        console.log('change');
                         updateBody(index, 'key', e.target.value);
                       }}
                     />
@@ -86,4 +89,4 @@ const renderBodyTable = () => {
   }
 };
 
-export default renderBodyTable;
+export default BodyTable;

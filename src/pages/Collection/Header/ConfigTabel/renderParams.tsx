@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
 
-const renderParamsTable = () => {
+const ParamsTable = () => {
   const { updateParam, paramList, addParam, deleteParam } = useParams((state) => state);
   const { method } = useUrlConfig((state) => state);
   console.log(method, '--renderParamsTable');
@@ -71,4 +71,4 @@ const renderParamsTable = () => {
   );
 };
 
-export default renderParamsTable;
+export default ParamsTable;
