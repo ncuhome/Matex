@@ -75,7 +75,13 @@ export const useHeaders = create<HeaderList>((set) => ({
 }));
 
 export const useBodyList = create<BodyList>((set) => ({
+  type: 'form-data',
   bodyList: [{ index: 0, key: '', value: '' }],
+  raw: '',
+  binary: { key: '', value: '' },
+  setType: (type) => set({ type }),
+  setRaw: (raw) => set({ raw }),
+  setBinary: (binary) => set({ binary }),
   addBody: (body) =>
     set(({ bodyList }) => {
       const tempList = produce(bodyList, (draft) => {

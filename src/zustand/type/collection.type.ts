@@ -1,4 +1,4 @@
-import { ReqMethod, TabItems } from '../../type/collection';
+import { BodyItemType, ReqMethod, TabItems } from '../../type/collection';
 
 export interface ParamType {
   index: number;
@@ -33,7 +33,13 @@ export interface BodyType {
 }
 
 export interface BodyList {
+  type: BodyItemType;
+  raw: any;
+  binary: Omit<BodyType, 'index'>;
   bodyList: BodyType[];
+  setType: (type: BodyItemType) => void;
+  setRaw: (raw: any) => void;
+  setBinary: (binary: Omit<BodyType, 'index'>) => void;
   addBody: (header: BodyType) => void;
   updateBody: (index: number, field: 'key' | 'value', val: any) => void;
   deleteBody: (index: number) => void;

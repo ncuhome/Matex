@@ -1,22 +1,27 @@
 import React, { useMemo } from 'react';
 import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
-import { TabItems } from '../../../../type/collection';
-import { useUrlConfig } from '../../../../zustand/store/collection.store';
+import { BodyItemType, TabItems } from '../../../../type/collection';
+import { useBodyList, useUrlConfig } from '../../../../zustand/store/collection.store';
 import { useNavigate } from 'react-router-dom';
-import { MethodsOptions } from '../../../../Model/collection.model';
+import { BodyTypes } from '../../../../Model/collection.model';
 
 const Tabs = () => {
   const { activeTab, setActiveTab } = useUrlConfig((state) => state);
   const navigate = useNavigate();
+  const { type, setType } = useBodyList((state) => state);
 
   const handleItemClick = (item: TabItems) => {
     setActiveTab(item);
     const path = `/collect/${item.toLowerCase()}`;
     navigate(path);
   };
-  const countryOptions = MethodsOptions.map((item) => {
+  const options = BodyTypes.map((item) => {
     return { key: item, value: item, text: item };
   });
+
+  const handleChange = (e: React.SyntheticEvent, { value }: any) => {
+    setType(value as BodyItemType);
+  };
 
   return useMemo(() => {
     return (
@@ -24,7 +29,7 @@ const Tabs = () => {
         <Label ribbon as="a" color={'orange'}>
           选项
         </Label>
-        <Menu color={'teal'} secondary fluid>
+        <Menu color={'teal'} secondary>
           <Menu.Item
             name="Params"
             active={activeTab === 'Params'}
@@ -39,9 +44,14 @@ const Tabs = () => {
           {activeTab === 'Body' && (
             <Menu.Menu position="right" style={{ marginRight: 15 }}>
               <Menu.Item>
-                <Button.Group color={'blue'}>
-                  <Button>数据类型</Button>
-                  <Dropdown className="button icon" options={countryOptions} trigger={<></>} />
+                <Button.Group color={'teal'} size={'small'}>
+                  <Button>{type}</Button>
+                  <Dropdown
+                    className="button icon"
+                    onChange={handleChange}
+                    options={options}
+                    trigger={<></>}
+                  />
                 </Button.Group>
               </Menu.Item>
             </Menu.Menu>
@@ -49,7 +59,7 @@ const Tabs = () => {
         </Menu>
       </>
     );
-  }, [activeTab]);
+  }, [activeTab, type]);
 };
 
 export default Tabs;

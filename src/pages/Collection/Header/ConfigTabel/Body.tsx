@@ -29,7 +29,7 @@ const BodyTable = () => {
     return (
       <Table celled compact size={'small'}>
         <Table.Header>
-          <Table.Row>
+          <Table.Row style={{ background: '#FFF' }}>
             <Table.HeaderCell width={3}>键</Table.HeaderCell>
             <Table.HeaderCell>值</Table.HeaderCell>
             <Table.HeaderCell width={3} textAlign={'center'}>
