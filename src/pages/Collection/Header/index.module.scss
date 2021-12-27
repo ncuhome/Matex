@@ -32,25 +32,25 @@
   overflow: hidden;
   flex: 1;
   display: flex;
-  padding: 8px 8px 5px 15px;
+  padding: 0 8px 5px 15px;
   width: 100%;
   flex-direction: column;
   @extend .cardStyle;
-  margin-top: 10px;
+  margin-top: 12px;
 
   .option{
     height: 45px;
     display: flex;
     align-items: center;
-    background-color: #F8F9FA;
+    background-color: #FFFFFF;
     width: 100%;
     border-radius: 10px 10px 0 0;
-    padding-left: 16px;
+    padding-left: 15px;
+    margin-bottom: 10px;
   }
 
   .table{
     flex: 1;
-    border: transparent 1px solid;
     overflow: auto;
   }
 }
