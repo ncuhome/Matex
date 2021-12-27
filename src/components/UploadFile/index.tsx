@@ -31,9 +31,19 @@ const UploadFile = () => {
         files={files}
         onupdatefiles={handleUpdateFiles}
         allowMultiple={true}
+        allowBrowse
+        allowProcess
+        allowRevert
+        allowReplace
+        allowReorder
+        // @ts-ignore
+        credits={false}
         maxFiles={3}
         name="files"
-        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+        labelIdle={`拖拖拽上传文件或者 
+        <span class="filepond--label-action">浏览</span>
+        <br> <span style="font-size: 12px;color: gray">点击文件预览</span>
+        `}
       />
     </div>
   );

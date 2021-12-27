@@ -40,3 +40,7 @@ div {
   --greyLight-3: #c1d9f0;
   --greyDark: #646b8c;
 }
+
+.filepond--label-action{
+  color: #2CB5AD;
+}
