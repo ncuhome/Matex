@@ -31,8 +31,8 @@ const BodyTable = () => {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell width={3}>键</Table.HeaderCell>
-            <Table.HeaderCell width={6}>值</Table.HeaderCell>
-            <Table.HeaderCell width={4} textAlign={'center'}>
+            <Table.HeaderCell>值</Table.HeaderCell>
+            <Table.HeaderCell width={3} textAlign={'center'}>
               操作
             </Table.HeaderCell>
           </Table.Row>

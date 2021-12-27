@@ -21,9 +21,9 @@ const ParamsTable = () => {
     <Table celled compact size={'small'}>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>键</Table.HeaderCell>
+          <Table.HeaderCell width={3}>键</Table.HeaderCell>
           <Table.HeaderCell>值</Table.HeaderCell>
-          <Table.HeaderCell width={4} textAlign={'center'}>
+          <Table.HeaderCell width={3} textAlign={'center'}>
             操作
           </Table.HeaderCell>
         </Table.Row>
