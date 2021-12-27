@@ -6,13 +6,12 @@ import { useLocation } from 'react-router-dom';
 
 const SideBar = () => {
   const location = useLocation();
-
   return (
     <div className={styles.sideBar}>
       {tabItems.map(({ route, text }, index) => {
         return (
           <Fragment key={text}>
-            <Tab text={text} route={route} active={location.pathname === route} />
+            <Tab text={text} route={route} active={location.pathname.startsWith(route)} />
           </Fragment>
         );
       })}
