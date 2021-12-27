@@ -59,7 +59,7 @@ const Tabs = () => {
         </Menu>
       </>
     );
-  }, [activeTab, type]);
+  }, [activeTab, type, method]);
 };
 
 export default Tabs;

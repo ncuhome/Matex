@@ -2,11 +2,12 @@ import React, { SyntheticEvent, useEffect } from 'react';
 import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
 import clsx from 'clsx';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { MethodsOptions } from '../../../Model/collection.model';
 import { useUrlConfig } from '../../../zustand/store/collection.store';
 import { useSendReq } from '../../../message/collection';
 import Tabs from './Tabs';
+import UploadFile from '../../../components/UploadFile';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -65,7 +66,8 @@ const Header = () => {
           <Tabs />
         </div>
         <div className={styles.table}>
-          <Outlet />
+          {/*<Outlet />*/}
+          <UploadFile />
         </div>
       </div>
     </>

@@ -84,7 +84,6 @@ export const useEditor = ({
 
   //创建新的编辑器实例
   const createEditor = (domElement: HTMLElement) => {
-    console.log('重新实例化');
     domRef.current = domElement;
     const editorIns = monaco.editor.create(domElement, {
       value: defaultVal,

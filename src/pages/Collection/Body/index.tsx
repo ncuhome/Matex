@@ -30,7 +30,6 @@ const Body = () => {
   };
 
   useEffect(() => {
-    console.log('渲染次数');
     MatexWin.ipc?.on('collection_res', listen);
     return () => {
       MatexWin.ipc?.removeListener('collection_res', listen);

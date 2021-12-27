@@ -79,6 +79,8 @@
     "entities": "^3.0.1",
     "express": "^4.17.1",
     "filepond": "^4.30.3",
+    "filepond-plugin-image-exif-orientation": "^1.0.11",
+    "filepond-plugin-image-preview": "^4.6.10",
     "fs-extra": "^10.0.0",
     "got": "11.8.3",
     "history": "^5.1.0",

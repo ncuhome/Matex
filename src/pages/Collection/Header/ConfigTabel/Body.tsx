@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 import { BodyTypes } from '../../../../Model/collection.model';
 
 const BodyTable = () => {
-  const { updateBody, bodyList, addBody, deleteBody } = useBodyList((state) => state);
+  const { updateBody, type, bodyList, addBody, deleteBody } = useBodyList((state) => state);
   const { method } = useUrlConfig((state) => state);
   console.log(bodyList);
 
