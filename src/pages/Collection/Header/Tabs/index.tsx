@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { BodyTypes } from '../../../../Model/collection.model';
 
 const Tabs = () => {
-  const { activeTab, setActiveTab } = useUrlConfig((state) => state);
+  const { activeTab, setActiveTab, method } = useUrlConfig((state) => state);
   const navigate = useNavigate();
   const { type, setType } = useBodyList((state) => state);
 
@@ -41,7 +41,7 @@ const Tabs = () => {
             onClick={() => handleItemClick('Headers')}
           />
           <Menu.Item name={'Body'} active={activeTab === 'Body'} onClick={() => handleItemClick('Body')} />
-          {activeTab === 'Body' && (
+          {activeTab === 'Body' && method === 'Post' && (
             <Menu.Menu position="right" style={{ marginRight: 15 }}>
               <Menu.Item>
                 <Button.Group color={'teal'} size={'small'}>
