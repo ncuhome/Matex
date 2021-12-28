@@ -3,3 +3,8 @@ export interface CollapseOptions {
   openCollapse: () => void;
   closeCollapse: () => void;
 }
+
+export interface PreRouterTypes {
+  preRoute: string;
+  setPreRoute: (preRoute: string) => void;
+}
