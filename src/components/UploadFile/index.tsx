@@ -25,6 +25,10 @@ const UploadFile = () => {
     setFiles(files);
   };
 
+  const handleClickFile = (file: FilePondFile) => {
+    console.log(file);
+  };
+
   return (
     <div className="App">
       <FilePond
@@ -38,6 +42,7 @@ const UploadFile = () => {
         allowReorder
         // @ts-ignore
         credits={false}
+        onactivatefile={handleClickFile}
         maxFiles={3}
         name="files"
         labelIdle={`拖拖拽上传文件或者 

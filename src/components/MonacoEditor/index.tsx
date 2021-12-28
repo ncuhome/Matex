@@ -57,8 +57,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     resizeAble();
   }, [monacoEl.current]);
 
-  console.log(editors);
-
   useEffect(() => {
     if (monacoEl) {
       createEditor(monacoEl.current!);

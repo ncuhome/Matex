@@ -12,10 +12,9 @@ import HeadersTable from '../pages/Collection/Header/ConfigTabel/Header';
 export const RouterAuth = () => {
   const location = useLocation();
   const auth = !!localStorage.getItem('login');
-  console.log('checkAuth--', auth);
 
   useEffect(() => {
-    console.log(location.pathname);
+    console.log('当前路由=>' + location.pathname);
   }, [location.pathname]);
 
   return (

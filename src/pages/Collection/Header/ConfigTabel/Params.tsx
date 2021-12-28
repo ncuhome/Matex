@@ -6,7 +6,6 @@ import styles from './index.module.scss';
 const ParamsTable = () => {
   const { updateParam, paramList, addParam, deleteParam } = useParams((state) => state);
   const { method } = useUrlConfig((state) => state);
-  console.log(method, '--renderParamsTable');
 
   useEffect(() => {
     const len = paramList.length;

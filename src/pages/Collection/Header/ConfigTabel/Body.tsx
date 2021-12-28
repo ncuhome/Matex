@@ -17,7 +17,12 @@ const BodyTable = () => {
         addBody({ index: len, key: '', value: '' });
       }
     }
+
+    return () => {
+      console.log('组件卸载');
+    };
   }, [bodyList]);
+  console.log('type===> ' + type);
 
   if (method === 'Get') {
     return (

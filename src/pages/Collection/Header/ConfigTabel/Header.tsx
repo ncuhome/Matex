@@ -6,7 +6,6 @@ import styles from './index.module.scss';
 const HeadersTable = () => {
   const { updateHeader, headerList, addHeader, deleteHeader } = useHeaders((state) => state);
   const { method } = useUrlConfig((state) => state);
-  console.log(method, '--renderHeadersTable');
   useEffect(() => {
     const len = headerList.length;
     if (len) {

@@ -7,11 +7,12 @@ import { MethodsOptions } from '../../../Model/collection.model';
 import { useUrlConfig } from '../../../zustand/store/collection.store';
 import { useSendReq } from '../../../message/collection';
 import Tabs from './Tabs';
+import { usePreRoute } from '../../../zustand/store/ui.store';
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const { preRoute } = usePreRoute((state) => state);
   const { method, url, setMethod, setUrl } = useUrlConfig((state) => state);
   const { sendToMain } = useSendReq();
   const countryOptions = MethodsOptions.map((item) => {
@@ -28,7 +29,11 @@ const Header = () => {
 
   useEffect(() => {
     if (location.pathname === '/collect') {
-      navigate('/collect/params');
+      if (preRoute) {
+        navigate(preRoute);
+      } else {
+        navigate('/collect/params');
+      }
     }
   }, [location.pathname]);
 

@@ -113,7 +113,6 @@ export const useEditor = ({
 
   //更改语言重新实例化编辑器
   useEffect(() => {
-    console.log(language);
     destroyEditor();
     if (domRef.current) {
       createEditor(domRef.current);
