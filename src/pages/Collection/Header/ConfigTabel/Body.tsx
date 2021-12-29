@@ -8,7 +8,6 @@ import UploadFile from '../../../../components/UploadFile';
 const BodyTable = () => {
   const { updateBody, type, bodyList, addBody, deleteBody } = useBodyList((state) => state);
   const { method } = useUrlConfig((state) => state);
-  console.log(bodyList);
 
   useEffect(() => {
     const len = bodyList.length;
@@ -17,12 +16,7 @@ const BodyTable = () => {
         addBody({ index: len, key: '', value: '' });
       }
     }
-
-    return () => {
-      console.log('组件卸载');
-    };
   }, [bodyList]);
-  console.log('type===> ' + type);
 
   if (method === 'Get') {
     return (

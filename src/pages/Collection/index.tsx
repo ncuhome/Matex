@@ -7,14 +7,11 @@ import { usePreRoute } from '../../zustand/store/ui.store';
 import { useLocation } from 'react-router-dom';
 
 const Collection = () => {
-  const { setPreRoute, preRoute } = usePreRoute((state) => state);
+  const { setPreRoute } = usePreRoute((state) => state);
   const location = useLocation();
-
-  console.log(preRoute, '--preRoute');
 
   useEffect(() => {
     return () => {
-      console.log('即将离开', location.pathname);
       if (location.pathname !== '/collect') {
         setPreRoute(location.pathname);
       }

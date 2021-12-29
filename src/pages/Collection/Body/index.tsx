@@ -67,6 +67,7 @@ const Body = () => {
   return (
     <div className={styles.con}>
       <MonacoEditor
+        border={'#E0E1E2 1px solid'}
         actions={renderActions()}
         name={'collect'}
         language={LanguageMapper.get(method)!}
