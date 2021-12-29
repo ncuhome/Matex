@@ -3,7 +3,6 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { resizeAble } from './resize';
-import { useEditors } from '../../zustand/store/common.store';
 import { useEditor } from './create';
 import { useEditorListen } from './listening';
 
@@ -11,6 +10,7 @@ interface MonacoEditorProps {
   name: string;
   height: number;
   width: number | string;
+  border?: string;
   defaultVal: string;
   language: string;
   readOnly?: boolean;
@@ -36,14 +36,14 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   autoFormat = true,
   className = '',
   actions,
+  border,
   onChange = () => {},
   onBlur = () => {},
   getValue = () => {},
   onFocus = () => {}
 }) => {
   const monacoEl = useRef(null);
-  const { editors } = useEditors((state) => state);
-  const { createEditor, destroyEditor } = useEditor({ name, enabledMinMap, defaultVal, language, readOnly });
+  const { createEditor } = useEditor({ name, enabledMinMap, defaultVal, language, readOnly });
   useEditorListen({
     autoFormat,
     onBlur,
@@ -72,7 +72,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   const curHeight = actions ? height : parseInt(String(height)) + 50;
 
   return (
-    <div className={styles.con}>
+    <div className={styles.con} style={{ border }}>
       {renderActions()}
       <div
         id={'monacoEditor'}
