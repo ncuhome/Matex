@@ -6,12 +6,12 @@ export const useSendReq = () => {
   const { headerList } = useHeaders((state) => state);
   const { paramList } = useParams((state) => state);
 
-  const sendToMain = () => {
+  const sendReq = () => {
     const params = paramList.slice(0, paramList.length - 1);
     const headers = headerList.slice(0, paramList.length - 1);
     console.log(params);
-    MatexWin.ipc?.send('collection_fetch', { url, method, params, headers });
+    MatexWin.ipc?.send('collection_req', { url, method, params, headers });
   };
 
-  return { sendToMain };
+  return { sendReq };
 };

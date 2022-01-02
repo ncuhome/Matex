@@ -3,7 +3,7 @@ import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
 import { BodyItemType, TabItems } from '../../../../type/collection';
 import { useBodyList, useUrlConfig } from '../../../../zustand/store/collection.store';
 import { useNavigate } from 'react-router-dom';
-import { BodyTypes } from '../../../../Model/collection.model';
+import { BodyTypes } from '../../../../model/collection.model';
 
 const Tabs = () => {
   const { activeTab, setActiveTab, method } = useUrlConfig((state) => state);

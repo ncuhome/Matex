@@ -6,7 +6,7 @@ import { MatexWin } from '../../../global';
 import { myEmitter } from '../../../utils/EventEmiter';
 import type { IpcRendererEvent } from 'electron';
 import { LanguageMapper } from '../../../components/MonacoEditor/utils';
-import { Actions, FormatOptions } from '../../../Model/collection.model';
+import { Actions, FormatOptions } from '../../../model/collection.model';
 
 const Body = () => {
   const [activeItem, setActiveItem] = useState('Pretty');

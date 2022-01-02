@@ -2,7 +2,7 @@ import { Button, Icon, Popup, Segment, Table } from 'semantic-ui-react';
 import React, { Fragment, useEffect } from 'react';
 import { useBodyList, useUrlConfig } from '../../../../zustand/store/collection.store';
 import styles from './index.module.scss';
-import { BodyTypes } from '../../../../Model/collection.model';
+import { BodyTypes } from '../../../../model/collection.model';
 import UploadFile from '../../../../components/UploadFile';
 
 const BodyTable = () => {

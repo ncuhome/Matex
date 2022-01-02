@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { MethodsOptions } from '../../../Model/collection.model';
+import { MethodsOptions } from '../../../model/collection.model';
 import { useUrlConfig } from '../../../zustand/store/collection.store';
 import { useSendReq } from '../../../message/collection';
 import Tabs from './Tabs';
@@ -14,7 +14,7 @@ const Header = () => {
   const location = useLocation();
   const { preRoute } = usePreRoute((state) => state);
   const { method, url, setMethod, setUrl } = useUrlConfig((state) => state);
-  const { sendToMain } = useSendReq();
+  const { sendReq } = useSendReq();
   const countryOptions = MethodsOptions.map((item) => {
     return { key: item, value: item, text: item };
   });
@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   const handleClick = () => {
-    sendToMain();
+    sendReq();
   };
 
   useEffect(() => {

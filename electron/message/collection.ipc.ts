@@ -31,7 +31,7 @@ export class CollectionIpc {
   }
 
   static listen() {
-    ipcMain.on('collection_fetch', async (e, args) => {
+    ipcMain.on('collection_req', async (e, args) => {
       const { url, method, headers } = args;
       MatexLog.success(args);
       const regexp = /<[a-z][\s\S]*>/i;
