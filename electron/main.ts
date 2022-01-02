@@ -31,11 +31,11 @@ const setMainWin = async () => {
       width: width - 100,
       height: height - 20,
       center: true,
-      frame: false,
+      frame: OsType === 'win',
       show: false,
       transparent: true,
       resizable: true,
-      titleBarStyle: 'customButtonsOnHover',
+      titleBarStyle: OsType === 'mac' ? 'customButtonsOnHover' : 'default',
       webPreferences: {
         preload: preloadPath,
         nodeIntegration: true,
@@ -85,9 +85,7 @@ async function createWindow() {
 
     MatexLog.success('开始加载窗口:' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
 
-    if (OsType === 'mac') {
-      loadWindow?.setWindowButtonVisibility(false);
-    }
+    OsType === 'mac' && loadWindow?.setWindowButtonVisibility(false);
     await loadWindow?.loadURL(loadingPath);
     MatexLog.success('完成加载窗口:' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
 
