@@ -7,10 +7,12 @@ import * as Sentry from '@sentry/electron';
 import isLeapYear from 'dayjs/plugin/isLeapYear'; // 导入插件
 import 'dayjs/locale/zh-cn'; // 导入本地化语言
 import dayjs from 'dayjs';
+import { getSystemOs } from './utils/system';
 
+const OsType = getSystemOs();
+MatexLog.debug(OsType);
 dayjs.extend(isLeapYear); // 使用插件
 dayjs.locale('zh-cn');
-
 const isDev = process.env.NODE_ENV === 'development';
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
@@ -59,7 +61,8 @@ const setLoadWin = async () => {
       transparent: true,
       resizable: false,
       show: true,
-      titleBarStyle: 'customButtonsOnHover',
+      titleBarStyle: 'hidden',
+      titleBarOverlay: false,
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: true
@@ -82,7 +85,9 @@ async function createWindow() {
 
     MatexLog.success('开始加载窗口:' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
 
-    loadWindow?.setWindowButtonVisibility(false);
+    if (OsType === 'mac') {
+      loadWindow?.setWindowButtonVisibility(false);
+    }
     await loadWindow?.loadURL(loadingPath);
     MatexLog.success('完成加载窗口:' + dayjs().format('YYYY年 MM月 DD号 HH:mm:ss:SSS'));
 
