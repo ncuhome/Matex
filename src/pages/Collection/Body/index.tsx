@@ -37,12 +37,17 @@ const Body = () => {
   }, []);
 
   const renderActions = () => {
+    const style = {
+      background: '#228C86',
+      color: '#FFF'
+    };
     return (
       <Menu secondary>
         {Actions.map((item) => {
+          const active = activeItem === item;
           return (
             <Fragment key={item}>
-              <Menu.Item name={item} active={activeItem === item} onClick={handleItemClick} />
+              <Menu.Item style={active ? style : {}} name={item} active={active} onClick={handleItemClick} />
             </Fragment>
           );
         })}
