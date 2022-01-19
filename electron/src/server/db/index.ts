@@ -7,7 +7,7 @@ const isDev = process.env.NODE_ENV === 'development';
 let dbPath: string;
 
 if (isDev) {
-  dbPath = path.resolve(process.cwd(), './electron/server/db/data.db');
+  dbPath = path.resolve(process.cwd(), './electron/src/server/db/data.db');
 } else {
   dbPath = path.resolve(resourcesPath, './data.db');
 }

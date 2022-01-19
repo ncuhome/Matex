@@ -1,12 +1,20 @@
 .idea
-dist
-build
-dev
+
 node_modules
-electron/dev
+./release/app/node_modules
+#dev production
+.dev
+
+#build production
 release/build
+release/app/dist
+electron/dist
+preload/dist
+
+
 #parcel
 .cache
+.parcel-cache
 #electron
 asar
 

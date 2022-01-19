@@ -1,14 +1,10 @@
 {
   "verbose": true,
-  "watch": ["./dev/main.js"],
+  "watch": ["./scripts/watch.js"],
   "events": {
     "start": "cls || clear"
   },
   "ignore": [
-    "asar",
-    "src",
-    "release/**",
-    "scripts/**",
     ".cache",
     "node_modules/**"
   ],
@@ -16,5 +12,5 @@
     "NODE_ENV": "development"
   },
   "ext": "js",
-  "exec": "electron ./dev/main.js"
+  "exec": "node ./scripts/watch.js"
 }

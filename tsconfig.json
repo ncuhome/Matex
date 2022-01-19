@@ -19,7 +19,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "./src",
+    "./renderer/src",
     "electron",
     "vite.config.ts",
     "./scripts"

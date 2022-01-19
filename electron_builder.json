@@ -1,7 +1,7 @@
 {
   "productName": "Matex",
   "appId": "org.Matex.com",
-  "asar": true,
+  "asar": false,
   "directories": {
     "app": "./release/app",
     "buildResources": "./assets",

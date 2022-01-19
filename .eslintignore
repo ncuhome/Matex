@@ -1,5 +1,5 @@
-electron/dev
-config
 release/build
-dev
 .log
+.dev
+release/build
+release/app/dist

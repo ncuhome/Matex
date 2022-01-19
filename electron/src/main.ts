@@ -1,5 +1,5 @@
 import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
-import { startServer } from './server/start';
+// import { startServer } from './server/start';
 import { PortChannel } from './message';
 import { loadingPath, mainPath, preloadPath } from './utils/path';
 import { MatexLog } from './scripts/log';
@@ -13,7 +13,7 @@ const OsType = getSystemOs();
 MatexLog.debug(OsType);
 dayjs.extend(isLeapYear); // 使用插件
 dayjs.locale('zh-cn');
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development'||process.env.MODE === 'development';
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 
@@ -21,7 +21,6 @@ let mainWindow: BrowserWindow | undefined;
 let loadWindow: BrowserWindow | undefined;
 
 const gotTheLock = app.requestSingleInstanceLock();
-
 const { port1, port2 } = new MessageChannelMain();
 
 const setMainWin = async () => {
@@ -139,9 +138,9 @@ app.on('ready', async () => {
 //当窗口加载完成调用
 app.whenReady().then(async () => {
   try {
-    await startServer();
+    // await startServer();
   } catch (e) {
-    MatexLog.error('发生错误' + e);
+    MatexLog.error('发生错误1' + e);
   }
 });
 
@@ -152,7 +151,7 @@ app.on('window-all-closed', function () {
 app.on('before-quit', async (e: Electron.Event) => {
   try {
     app.quit();
-    MatexLog.log('退出时间: ' + Date.now().toLocaleString());
+    // MatexLog.log('退出时间: ' + Date.now().toLocaleString());
   } catch (e: any) {
     app.exit();
     MatexLog.error('发生错误' + e);
