@@ -16,7 +16,7 @@ export default defineConfig({
   base: '',
   logLevel:'info',
   build: {
-    sourcemap: 'inline',
+    sourcemap: false,
     target: `chrome${chrome}`,
     outDir: '../release/app/dist/render',
     rollupOptions: {

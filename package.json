@@ -21,7 +21,7 @@
     "codgen": "npx playwright codegen http://localhost:3000/",
     "test:playwright": "ts-node ./test/vite_build.test.ts",
     "build": "concurrently \"npm run build:react\" \"npm run build:main_preload\"",
-    "build:react": "export NODE_OPTIONS=--max_old_space_size=4096 && vite build --config renderer/vite.config.ts",
+    "build:react": "vite build --config renderer/vite.config.ts",
     "build:main_preload": "cross-env NODE_ENV=production node ./scripts/build.js",
     "postbuild": "node scripts/copyFile.js",
     "preview": "vite preview",
