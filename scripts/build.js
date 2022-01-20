@@ -1,15 +1,21 @@
 import { Parcel } from '@parcel/core';
-import {resolve} from 'path';
-import {ColorLog} from './colorLog.js';
+import { resolve } from 'path';
+import { ColorLog } from './colorLog.js';
+import { builtinModules } from 'module';
+import { addDependencies, verifyDep } from './syncDependencies.js';
 
 const rootDir = process.cwd();
-// 单个入口文件路径
+//main Entry
 const mainEntry = resolve(rootDir, './electron/src/main.ts');
+//preload Entry
 const preloadEntry = resolve(rootDir, './preload/src/index.ts');
-// Bundler 选项
 
 const preloadBundler = new Parcel({
   entries: preloadEntry,
+  mode: 'production',
+  env: {
+    NODE_ENV: 'production'
+  },
   targets: {
     preload: {
       distDir: resolve(rootDir, './release/app/dist/preload'),
@@ -21,6 +27,10 @@ const preloadBundler = new Parcel({
 
 const mainBundler = new Parcel({
   entries: mainEntry,
+  mode: 'production',
+  env: {
+    NODE_ENV: 'production'
+  },
   targets: {
     main: {
       distDir: resolve(rootDir, './release/app/dist/main'),
@@ -31,24 +41,27 @@ const mainBundler = new Parcel({
 });
 
 (async () => {
+  const dependencies = new Set();
   ColorLog.start('parcel开始打包 [preload]');
   const preloadEvent = await preloadBundler.run();
-  // preloadEvent.bundleGraph.traverse(node => {
-  //   console.log(node);
-  // });
+  preloadEvent.bundleGraph.traverse((node) => {
+    verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
+  });
   if (preloadEvent.type === 'buildSuccess') {
     ColorLog.success('[preload] 打包完成');
   }
   ColorLog.start('parcel开始打包 [main]');
   const mainEvent = await mainBundler.run();
-  // mainEvent.bundleGraph.traverse(node => {
-  //   if (node.type==='asset'){
-  //     console.log('-----------');
-  //     console.log(node.value);
-  //     console.log(mainEvent.bundleGraph.getDependencies(node.value));
-  //   }
-  // });
+
+  mainEvent.bundleGraph.traverse((node) => {
+    if (node.type !== 'asset') {
+      verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
+    }
+  });
   if (mainEvent.type === 'buildSuccess') {
     ColorLog.success('[main] 打包完成');
   }
+  const res = await addDependencies(dependencies);
+  ColorLog.success('app 依赖同步完成');
+  console.log(res);
 })();
