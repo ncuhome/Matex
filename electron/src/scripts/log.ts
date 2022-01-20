@@ -19,7 +19,7 @@ const winstonLog = winston.createLogger({
   format: combine(timestamp({ format: 'YYYY年 MM月 DD号 HH:mm:ss' }), prettyPrint()),
   transports: [
     new winston.transports.File({ filename: errorLogPath, level: 'error' }),
-    new winston.transports.File({ filename: normalLogPath })
+    new winston.transports.File({ filename: normalLogPath, level: 'info' })
   ]
 });
 
@@ -28,7 +28,7 @@ export class MatexLog {
     if (isDev) {
       signale.log(message);
     } else {
-      winstonLog.log({ level: 'log', message });
+      winstonLog.log({ level: 'info', message });
     }
   }
 
@@ -36,7 +36,7 @@ export class MatexLog {
     if (isDev) {
       signale.info(message);
     } else {
-      winstonLog.info(message);
+      winstonLog.log({ level: 'info', message });
     }
   }
 
@@ -44,7 +44,7 @@ export class MatexLog {
     if (isDev) {
       signale.success(message);
     } else {
-      winstonLog.log({ level: 'log', message });
+      winstonLog.log({ level: 'info', message });
     }
   }
 
@@ -60,7 +60,7 @@ export class MatexLog {
     if (isDev) {
       signale.debug(message);
     } else {
-      winstonLog.log({ level: 'log', message });
+      winstonLog.log({ level: 'info', message });
     }
   }
 
@@ -68,7 +68,7 @@ export class MatexLog {
     if (isDev) {
       signale.start(message);
     } else {
-      winstonLog.log({ level: 'log', message });
+      winstonLog.log({ level: 'info', message });
     }
   }
 }

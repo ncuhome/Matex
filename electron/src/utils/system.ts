@@ -1,7 +1,7 @@
 import os from 'os';
 import { MatexLog } from '../scripts/log';
 
-export const getSystemOs = () => {
+export const getOsType = () => {
   MatexLog.debug(os.type());
   let type: 'win' | 'mac' | 'other';
 

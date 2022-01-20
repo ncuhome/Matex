@@ -1,7 +1,6 @@
 import { Parcel } from '@parcel/core';
 import { resolve } from 'path';
 import { ColorLog } from './colorLog.js';
-import { builtinModules } from 'module';
 import { addDependencies, verifyDep } from './syncDependencies.js';
 
 const rootDir = process.cwd();
