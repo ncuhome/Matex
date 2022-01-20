@@ -13,7 +13,7 @@ dayjs.extend(isLeapYear); // 使用插件
 dayjs.locale('zh-cn');
 
 const os = getOsType();
-MatexLog.debug('ooo1');
+MatexLog.debug('o');
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 
