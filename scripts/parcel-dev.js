@@ -43,8 +43,6 @@ export const startWatchMainAndPreload = async (url) => {
       process.exit(1);
     }
     if (spawnProcess !== null) {
-      spawnProcess.kill('SIGINT');
-      spawnProcess = null;
       ColorLog.start('parcel重新打包[preload]');
     } else {
       ColorLog.start('parcel开始打包[preload]');
@@ -57,14 +55,14 @@ export const startWatchMainAndPreload = async (url) => {
           process.exit(1);
         }
         if (spawnProcess !== null) {
-          spawnProcess.kill();
+          spawnProcess.kill('SIGINT');
           spawnProcess = null;
           ColorLog.start('parcel重新打包[main]');
         } else {
           ColorLog.start('parcel开始打包[main]');
         }
         if (buildEvent?.type === 'buildSuccess') {
-          ColorLog.success('parcel打包完成');
+          ColorLog.success('main打包完成');
           spawnProcess = exec(execStr);
 
           spawnProcess.stdout?.on('data', (msg) => {

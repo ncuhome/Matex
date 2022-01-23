@@ -8,24 +8,11 @@
     "strict": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-
-    // Don't automatically include anything.
-    // Only include `@types` packages that we need to import.
+    "noEmit": true,
     "types" : [],
-
-    "baseUrl": ".",
-    "paths": {
-      "/@/*": [
-        "./src/*"
-      ]
-    },
+    "baseUrl": "."
   },
   "include": [
-    "src/**/*.ts",
-    "../../types/**/*.d.ts"
+    "src/**/*.ts"
   ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
 }

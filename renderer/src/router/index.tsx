@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Login from '../pages/auth/login';
 import Home from '../pages/Home';
-import MockView from '../pages/Mock';
+import MockView from '../pages/ApiTest';
 import WaitWorkPage from '../components/Work';
 import Collection from '../pages/Collection';
 import BodyTable from '../pages/Collection/Header/ConfigTabel/Body';
@@ -13,9 +13,9 @@ export const RouterAuth = () => {
   const location = useLocation();
   const auth = !!localStorage.getItem('login');
 
-  useEffect(() => {
-    console.log('当前路由=>' + location.pathname);
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   console.log('当前路由=>' + location.pathname);
+  // }, [location.pathname]);
 
   return (
     <>

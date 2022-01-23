@@ -1,6 +1,6 @@
-import { app, BrowserWindow, MessageChannelMain, screen } from 'electron';
+import { app, BrowserWindow, MessageChannelMain } from 'electron';
 import { PortChannel } from './message';
-import { isDev, loadingPath, mainPath, preloadPath } from './utils/path';
+import { documentsPath, isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './scripts/log';
 import * as Sentry from '@sentry/electron';
 import isLeapYear from 'dayjs/plugin/isLeapYear'; // 导入插件
@@ -8,12 +8,13 @@ import 'dayjs/locale/zh-cn'; // 导入本地化语言
 import dayjs from 'dayjs';
 import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './scripts/createWindows';
+import { writeFileSync } from 'fs';
 
 dayjs.extend(isLeapYear); // 使用插件
 dayjs.locale('zh-cn');
 
 const os = getOsType();
-MatexLog.debug('o');
+
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 
@@ -77,6 +78,7 @@ app.on('ready', async () => {
 //当窗口加载完成调用
 app.whenReady().then(async () => {
   try {
+    writeFileSync(documentsPath, '999');
     MatexLog.debug(process.env.NODE_ENV ?? '');
     MatexLog.debug(process.env.LOADING_PATH ?? '');
   } catch (e) {

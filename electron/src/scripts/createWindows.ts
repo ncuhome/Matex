@@ -4,7 +4,6 @@ import { getOsType } from '../utils/system';
 import { MatexLog } from './log';
 
 const os = getOsType();
-
 export const createMainWin = async (): Promise<BrowserWindow> => {
   return new Promise((resolve) => {
     try {
