@@ -15,7 +15,6 @@ const Body = () => {
   const formatOptions = FormatOptions.map((item) => {
     return { key: item, value: item, text: item };
   });
-
   const handleItemClick = (e: any, { name }: any) => {
     setActiveItem(name);
   };
