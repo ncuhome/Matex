@@ -7,7 +7,7 @@ const rootDir = process.cwd();
 //main Entry
 const mainEntry = resolve(rootDir, './electron/src/main.ts');
 //preload Entry
-const preloadEntry = resolve(rootDir, './preload/src/index.d.ts');
+const preloadEntry = resolve(rootDir, './preload/src/index.ts');
 
 const preloadBundler = new Parcel({
   entries: preloadEntry,
