@@ -23,7 +23,7 @@ const Header = () => {
     setMethod(value);
   };
 
-  const handleClick = () => {
+  const doFetch = () => {
     sendReq();
   };
 
@@ -61,7 +61,7 @@ const Header = () => {
             </div>
           }
         />
-        <Button primary className={styles.startBtn} onClick={handleClick}>
+        <Button primary className={styles.startBtn} onClick={doFetch}>
           发送
         </Button>
       </div>

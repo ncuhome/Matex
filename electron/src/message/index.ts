@@ -1,6 +1,6 @@
 import { MessagePortMain } from 'electron';
 import { ChannelData } from '../type/api';
-import { CollectionIpc } from './collection.ipc';
+import { ApiTestIpc } from './apiTest.ipc';
 
 class PortChannel_ {
   portMain: MessagePortMain | null = null;
@@ -16,7 +16,7 @@ class PortChannel_ {
   }
 
   startListening() {
-    CollectionIpc.init();
+    ApiTestIpc.init();
   }
 }
 

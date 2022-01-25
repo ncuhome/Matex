@@ -1,13 +1,8 @@
 import { ipcMain } from 'electron';
 import got from 'got';
 import { MatexLog } from '../scripts/log';
-
-const entities = require('entities');
-
-interface CollectionChannel_ {
-  collection_fetch: any;
-  collection_save: any;
-}
+import { ApiTest_Channel } from '../../../common/ipc/channel';
+import entities from 'entities';
 
 interface CollectionFetchProps {
   type: 'Get' | 'Post' | 'Put' | 'Delete';
@@ -23,15 +18,13 @@ interface CollectionFetchProps {
   };
 }
 
-export type CollectionChannels = keyof CollectionChannel_;
-
-export class CollectionIpc {
+export class ApiTestIpc {
   static init() {
-    CollectionIpc.listen();
+    ApiTestIpc.listen();
   }
 
   static listen() {
-    ipcMain.on('collection_req', async (e, args) => {
+    ipcMain.on(ApiTest_Channel.Request, async (e, args) => {
       const { url, method, headers } = args;
       MatexLog.success(args);
       const regexp = /<[a-z][\s\S]*>/i;
@@ -41,9 +34,9 @@ export class CollectionIpc {
         });
         const val = regexp.test(res.body);
         if (val) {
-          e.reply('collection_res', entities.encodeHTML5(res.body));
+          e.reply(ApiTest_Channel.Response, entities.encodeHTML5(res.body));
         } else {
-          e.reply('collection_res', JSON.parse(res.body));
+          e.reply(ApiTest_Channel.Response, JSON.parse(res.body));
         }
       }
     });
