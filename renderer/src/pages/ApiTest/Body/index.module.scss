@@ -1,20 +1,11 @@
-.body{
+
+.con{
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
   bottom: 0;
-  padding: 10px 10px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  .idleImg{
-    width: 300px;
-    height: 250px;
-  }
 
-  .title{
-    text-align: center;
-  }
+
 }

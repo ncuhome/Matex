@@ -7,7 +7,7 @@ const options: WaitOn.WaitOnOptions = {
   resources: ['tcp:5000'],
   delay: 1000, // initial delay in ms, default 0
   interval: 100, // poll interval in ms, default 250ms
-  simultaneous: 1, // limit to 1 connection per resource at a time
+  simultaneous: 1, // limit to Mock connection per resource at a time
   timeout: 30000, // timeout in ms, default Infinity
   tcpTimeout: 1000, // tcp timeout in ms, default 300ms
   window: 1000
@@ -41,6 +41,7 @@ const options: WaitOn.WaitOnOptions = {
     await page.click('text=登录页面');
     // assert.equal(page.url(), 'http://localhost:3000/collect');
     // Click text=Body
+    await page.screenshot({ path: './test/screenshot/screenshot.png' });
     await page.click('text=Body');
     await page.screenshot({ path: './test/screenshot/page_collection.png' });
     // Click text=Headers

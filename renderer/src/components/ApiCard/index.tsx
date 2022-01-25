@@ -12,7 +12,7 @@ export const ApiCard = () => {
     </div>
     // <Badge.Anchor>
     //     //
-    //     //   <Badge scale={0.5} mt={1.5} mr={1.3}>
+    //     //   <Badge scale={0.5} mt={Mock.5} mr={Mock.3}>
     //     //     10
     //     //   </Badge>
     //     // </Badge.Anchor>
@@ -21,5 +21,5 @@ export const ApiCard = () => {
 
 export const AddApiCard = () => {
   return <div>111</div>;
-  // return <Button iconRight={<Plus />} auto scale={1} mt={1} shadow mx={1} mr={2} px={0.6} />;
+  // return <Button iconRight={<Plus />} auto scale={Mock} mt={Mock} shadow mx={Mock} mr={2} px={0.6} />;
 };

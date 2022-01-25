@@ -1,67 +1,80 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { SyntheticEvent, useEffect } from 'react';
 import styles from './index.module.scss';
-import { AddApiCard, ApiCard } from '../../../components/ApiCard';
-import { myEmitter } from '../../../utils/EventEmiter';
+import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
+import clsx from 'clsx';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { MethodsOptions } from '../../../model/collection.model';
+import { useUrlConfig } from '../../../zustand/store/collection.store';
+import { useSendReq } from '../../../message/collection';
+import Tabs from './Tabs';
+import { usePreRoute } from '../../../zustand/store/ui.store';
 
-const APIHeader = () => {
-  const [down, setDown] = useState(false);
-  const [inputFocus, setFocus] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [startX, setStartX] = useState(0);
+const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { preRoute } = usePreRoute((state) => state);
+  const { method, url, setMethod, setUrl } = useUrlConfig((state) => state);
+  const { sendReq } = useSendReq();
+  const countryOptions = MethodsOptions.map((item) => {
+    return { key: item, value: item, text: item };
+  });
 
-  const onMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    e.stopPropagation();
-    window.requestAnimationFrame(() => {
-      if (down && !inputFocus) {
-        const distance = e.clientX - startX;
-        if (distance > 0) {
-          scrollRef.current!.scrollLeft -= Math.abs(distance) / 3;
-        } else {
-          scrollRef.current!.scrollLeft += Math.abs(distance) / 3;
-        }
-      }
-    });
+  const handleChange = (event: SyntheticEvent, { value }: any) => {
+    setMethod(value);
   };
 
-  const onMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    e.stopPropagation();
-    setDown(true);
-    setStartX(e.clientX);
-  };
-
-  const onMouseUp: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    e.stopPropagation();
-    setDown(false);
-    setStartX(0);
+  const handleClick = () => {
+    sendReq();
   };
 
   useEffect(() => {
-    myEmitter.on<boolean>('inputFocus', (data) => {
-      setFocus(data);
-    });
-  }, []);
+    if (location.pathname === '/apiTest') {
+      if (preRoute) {
+        navigate(preRoute);
+      } else {
+        navigate('/apiTest/params');
+      }
+    }
+  }, [location.pathname]);
 
   return (
-    <div className={styles.apiArea}>
-      <div
-        ref={scrollRef}
-        onMouseDownCapture={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseDown={onMouseDown}
-        onMouseLeave={() => setDown(false)}
-        className={styles.content}
-      >
-        <ApiCard />
-        <ApiCard />
-        <ApiCard />
-        <ApiCard />
-        <ApiCard />
-        <ApiCard />
-        <AddApiCard />
+    <>
+      <div className={styles.url}>
+        <Button.Group color="teal" className={styles.leftSelect}>
+          <Button>{method}</Button>
+          <Dropdown
+            className={clsx(['button', 'icon'])}
+            onChange={handleChange}
+            floating
+            options={countryOptions}
+            trigger={<></>}
+          />
+        </Button.Group>
+        <Input
+          value={url}
+          size="big"
+          onChange={(e) => setUrl(e.target.value)}
+          className={styles.input}
+          icon={
+            <div style={{ display: 'inline', position: 'absolute', right: '6px', top: '6px' }}>
+              <Icon name="clipboard outline" circular link />
+            </div>
+          }
+        />
+        <Button primary className={styles.startBtn} onClick={handleClick}>
+          发送
+        </Button>
       </div>
-    </div>
+      <div className={styles.config}>
+        <div className={styles.option}>
+          <Tabs />
+        </div>
+        <div className={styles.table}>
+          <Outlet />
+        </div>
+      </div>
+    </>
   );
 };
 
-export default APIHeader;
+export default Header;

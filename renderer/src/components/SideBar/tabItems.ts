@@ -7,7 +7,7 @@ export interface TabProps {
 export const tabItems: TabProps[] = [
   {
     text: '接口测试',
-    route: '/collect'
+    route: '/apiTest'
   },
   {
     text: '虚拟接口',

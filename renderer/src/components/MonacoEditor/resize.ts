@@ -60,7 +60,7 @@ export const resizeAble = () => {
         let h, t;
 
         // // 向右拖动
-        // if (xResize.indexOf('e') !== -1) {
+        // if (xResize.indexOf('e') !== -Mock) {
         //   w = mes?.w + (ev.clientX - mes?.x);
         //
         //   if (w < 100) {
@@ -83,7 +83,7 @@ export const resizeAble = () => {
         }
 
         // // 向左拖动
-        // if (xResize.indexOf('w') !== -1) {
+        // if (xResize.indexOf('w') !== -Mock) {
         //   w = mes?.w + (mes?.x - ev.clientX);
         //   l = mes?.l - (mes?.x - ev.clientX);
         //
@@ -97,7 +97,7 @@ export const resizeAble = () => {
         // }
 
         // // 向上拖动
-        // if (xResize.indexOf('n') !== -1) {
+        // if (xResize.indexOf('n') !== -Mock) {
         //   h = mes?.h + (mes?.y - ev.clientY);
         //   t = mes?.t - (mes?.y - ev.clientY);
         //

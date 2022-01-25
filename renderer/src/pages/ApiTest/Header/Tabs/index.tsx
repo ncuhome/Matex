@@ -12,7 +12,7 @@ const Tabs = () => {
 
   const handleItemClick = (item: TabItems) => {
     setActiveTab(item);
-    const path = `/collect/${item.toLowerCase()}`;
+    const path = `/apiTest/${item.toLowerCase()}`;
     navigate(path);
   };
   const options = BodyTypes.map((item) => {

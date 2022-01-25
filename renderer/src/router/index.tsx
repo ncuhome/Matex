@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Login from '../pages/auth/login';
 import Home from '../pages/Home';
-import MockView from '../pages/ApiTest';
+import MockView from '../pages/Mock';
 import WaitWorkPage from '../components/Work';
-import Collection from '../pages/Collection';
-import BodyTable from '../pages/Collection/Header/ConfigTabel/Body';
-import ParamsTable from '../pages/Collection/Header/ConfigTabel/Params';
-import HeadersTable from '../pages/Collection/Header/ConfigTabel/Header';
+import Collection from '../pages/ApiTest';
+import BodyTable from '../pages/ApiTest/Header/ConfigTabel/Body';
+import ParamsTable from '../pages/ApiTest/Header/ConfigTabel/Params';
+import HeadersTable from '../pages/ApiTest/Header/ConfigTabel/Header';
 
 export const RouterAuth = () => {
   const location = useLocation();
@@ -21,7 +21,7 @@ export const RouterAuth = () => {
     <>
       <Routes>
         <Route path={'/'} element={auth ? <Home /> : <Navigate to={'login'} replace />}>
-          <Route path={'collect'} element={<Collection />}>
+          <Route path={'apiTest'} element={<Collection />}>
             <Route path={'params'} element={<ParamsTable />} />
             <Route path={'body'} element={<BodyTable />} />
             <Route path={'headers'} element={<HeadersTable />} />

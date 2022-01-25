@@ -6,7 +6,7 @@ const MockIdle = () => {
   return (
     <div className={styles.con}>
       <img src={star} className={styles.idleImg} />
-      {/*<h1 className={styles.title}>ApiTest Server</h1>*/}
+      {/*<h1 className={styles.title}>Mock Server</h1>*/}
     </div>
   );
 };

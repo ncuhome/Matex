@@ -1,28 +1,26 @@
-import {createServer} from 'vite';
-import {resolve} from 'path';
+import { createServer } from 'vite';
+import { resolve } from 'path';
 import WaitOn from 'wait-on';
 import { startWatchMainAndPreload } from './parcel-dev.js';
 import { ColorLog } from './colorLog.js';
 import * as DotEnv from 'dotenv';
 
-DotEnv.config({path:resolve(process.cwd(),'./dev.env'),debug:true});
+DotEnv.config({ path: resolve(process.cwd(), './dev.env'), debug: true });
 
 /**
  * @param {string|number} port
  * @returns {import('wait-on').WaitOnOptions}
  */
-const getOptions =(port)=> {
-  return (
-    {
-      resources: [`tcp:${port}`],
-      delay: 500, // initial delay in ms, default 0
-      interval: 100, // poll interval in ms, default 250ms
-      simultaneous: 1, // limit to 1 connection per resource at a time
-      timeout: 30000, // timeout in ms, default Infinity
-      tcpTimeout: 1000, // tcp timeout in ms, default 300ms
-      window: 1000
-    }
-  );
+const getOptions = (port) => {
+  return {
+    resources: [`tcp:${port}`],
+    delay: 500, // initial delay in ms, default 0
+    interval: 100, // poll interval in ms, default 250ms
+    simultaneous: 1, // limit to Mock connection per resource at a time
+    timeout: 30000, // timeout in ms, default Infinity
+    tcpTimeout: 1000, // tcp timeout in ms, default 300ms
+    window: 1000
+  };
 };
 
 /**
@@ -39,14 +37,13 @@ const setWatcher = async (viteDevServer) => {
   await startWatchMainAndPreload(url);
 };
 
-
 (async () => {
   try {
     const viteDevServer = await createServer({
       configFile: resolve(process.cwd(), './renderer/vite.config.ts')
     });
     await viteDevServer.listen(parseInt(process.env.VITE_DEV_SERVER_PORT));
-    const {port} = viteDevServer.config.server;
+    const { port } = viteDevServer.config.server;
     await WaitOn(getOptions(port));
     ColorLog.logo(port);
     await setWatcher(viteDevServer);
@@ -55,5 +52,3 @@ const setWatcher = async (viteDevServer) => {
     process.exit(1);
   }
 })();
-
-
