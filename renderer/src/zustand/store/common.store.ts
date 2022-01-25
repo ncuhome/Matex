@@ -21,12 +21,6 @@ export const useApiDataStore = create<ApiDataType>((set) => ({
     })
 }));
 
-export const useChannel = create<MessageChannel>((set) => ({
-  port: null,
-  setPort: (value) => set((state) => ({ port: value })),
-  cleanPort: () => set((state) => ({ port: null }))
-}));
-
 export const useEditors = create<MonacoEditorTypes>((set) => ({
   editors: new Map<string, editor.IStandaloneCodeEditor | null>(),
   addEditor: (name, editor) =>

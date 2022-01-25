@@ -1,15 +1,11 @@
 import React from 'react';
 import styles from './app.module.scss';
 import { RouterAuth } from './router';
-import { useChannel } from './zustand/store/common.store';
 import useIpcOn from './hooks/useIpcRender';
 
 function App() {
-  const { setPort } = useChannel((state) => state);
-
   const ipcListener = (e: any) => {
-    const port = e.ports[0];
-    setPort(port);
+    window.MessagePort = e.ports[0];
   };
   useIpcOn({ channel: 'port', listener: ipcListener });
   return (

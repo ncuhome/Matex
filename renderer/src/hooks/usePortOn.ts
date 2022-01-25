@@ -1,11 +1,10 @@
-import { useChannel } from '../zustand/store/common.store';
 import { useEffect, useState } from 'react';
 import { ChannelData, ChannelEvent } from '../type/common';
+import { MatexWin } from '../global';
 
 export const usePortOn = <T>(channel: ChannelEvent) => {
-  const { port } = useChannel((state) => state);
   const [data, setState] = useState<ChannelData<T> | null>(null);
-  console.log(port);
+  const port = MatexWin.MessagePort;
   useEffect(() => {
     if (port) {
       port.onmessage = (e) => {
