@@ -3,16 +3,25 @@ import styles from './index.module.scss';
 import CollectSide from './Side';
 import Header from './Header';
 import Body from './Body';
-import { usePreRoute } from '../../zustand/store/ui.store';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { preRouteAtom } from '/@/store/commonStore';
 
 const Collection = () => {
-  const { setPreRoute } = usePreRoute((state) => state);
+  const [preRoute, setPreRoute] = useAtom(preRouteAtom);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (location.pathname === '/apiTest') {
+      if (preRoute) {
+        navigate(preRoute);
+      } else {
+        navigate('/apiTest/params');
+      }
+    }
     return () => {
-      if (location.pathname !== '/collect') {
+      if (location.pathname !== '/apiTest') {
         setPreRoute(location.pathname);
       }
     };

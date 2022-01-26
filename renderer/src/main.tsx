@@ -4,6 +4,7 @@ import App from './App';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import './globle.css';
 import 'semantic-ui-css/semantic.min.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import './useWorker';
 import { MatexWin } from './global';
 

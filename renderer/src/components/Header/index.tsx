@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './index.module.scss';
 import rainbow from '../../assets/icon/rainbow.svg';
-import { useCollapse } from '../../zustand/store/ui.store';
+import { useAtom } from 'jotai';
+import { collapseAtom } from '../../store/commonStore';
 
 const Header = () => {
-  const { collapse, openCollapse, closeCollapse } = useCollapse((state) => state);
-
+  const [collapse, setCollapse] = useAtom(collapseAtom);
   const handleClick = () => {
-    console.log('click');
     if (!collapse) {
-      openCollapse();
+      setCollapse(true);
     } else {
-      closeCollapse();
+      setCollapse(false);
     }
   };
   return (

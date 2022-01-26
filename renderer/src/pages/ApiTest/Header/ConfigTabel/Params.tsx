@@ -1,17 +1,17 @@
-import { useParams, useUrlConfig } from '../../../../zustand/store/collection.store';
 import React, { Fragment, useEffect } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
+import { useApiTestConfig, apiTestParamsAtom } from '/@/store/apiTestStore';
 
 const ParamsTable = () => {
-  const { updateParam, paramList, addParam, deleteParam } = useParams((state) => state);
-  const { method } = useUrlConfig((state) => state);
+  const [paramList, updateParamKey, updateParamValue, addApiTestParam, deleteApiTestParam] =
+    useApiTestConfig(apiTestParamsAtom);
 
   useEffect(() => {
     const len = paramList.length;
     if (len) {
-      if (paramList[len - 1].key && paramList[len - 1].value) {
-        addParam({ index: len, key: '', value: '' });
+      if (paramList[len - 1].key.trim() && paramList[len - 1].value) {
+        addApiTestParam({ key: '', value: '' });
       }
     }
   }, [paramList]);
@@ -38,7 +38,7 @@ const ParamsTable = () => {
                     className={styles.input}
                     value={item.key}
                     onChange={(e) => {
-                      updateParam(index, 'key', e.target.value);
+                      updateParamKey(index, e.target.value);
                     }}
                   />
                 </Table.Cell>
@@ -47,7 +47,7 @@ const ParamsTable = () => {
                     className={styles.input}
                     value={item.value}
                     onChange={(e) => {
-                      updateParam(index, 'value', e.target.value);
+                      updateParamValue(index, e.target.value);
                     }}
                   />
                 </Table.Cell>
@@ -56,7 +56,7 @@ const ParamsTable = () => {
                     <Button icon compact>
                       <Icon name="expand arrows alternate" />
                     </Button>
-                    <Button icon compact onClick={() => deleteParam(item.index)}>
+                    <Button icon compact onClick={() => deleteApiTestParam(item.index)}>
                       <Icon name="delete" />
                     </Button>
                   </div>

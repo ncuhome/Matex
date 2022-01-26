@@ -3,13 +3,15 @@ import styles from './index.module.scss';
 import { TabProps } from '../SideBar/tabItems';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
-import { useCollapse } from '../../zustand/store/ui.store';
 import { Icon } from 'semantic-ui-react';
+import { useAtom } from 'jotai';
+import { collapseAtom } from '../../store/commonStore';
 
 const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active = false }) => {
   const navigate = useNavigate();
   const tabRef = useRef<HTMLDivElement>(null);
-  const { collapse } = useCollapse((state) => state);
+  // const { collapse } = useCollapse((state) => state);
+  const [collapse] = useAtom(collapseAtom);
   const [show, setShow] = useState(false);
 
   const handleClick = () => {
@@ -42,7 +44,7 @@ const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active = false 
 const getIcon = (route: string) => {
   let res;
   switch (route) {
-    case '/collect':
+    case '/apiTest':
       res = <Icon disabled name="world" />;
       break;
     case '/mock':

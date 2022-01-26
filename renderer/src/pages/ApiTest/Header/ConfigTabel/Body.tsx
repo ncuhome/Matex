@@ -1,13 +1,15 @@
 import { Button, Icon, Popup, Segment, Table } from 'semantic-ui-react';
 import React, { Fragment, useEffect } from 'react';
-import { useBodyList, useUrlConfig } from '../../../../zustand/store/collection.store';
+import { useBodyList } from '/@/zustand/store/apiTest.store';
 import styles from './index.module.scss';
-import { BodyTypes } from '../../../../model/collection.model';
+import { BodyTypes } from '/@/model/apiTest.model';
 import UploadFile from '../../../../components/UploadFile';
+import { useAtomValue } from 'jotai/utils';
+import { apiTestMethodAtom } from '/@/store/apiTestStore';
 
 const BodyTable = () => {
   const { updateBody, type, bodyList, addBody, deleteBody } = useBodyList((state) => state);
-  const { method } = useUrlConfig((state) => state);
+  const method = useAtomValue(apiTestMethodAtom);
 
   useEffect(() => {
     const len = bodyList.length;

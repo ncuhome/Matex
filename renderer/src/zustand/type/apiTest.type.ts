@@ -1,4 +1,4 @@
-import { BodyItemType, ReqMethod, TabItems } from '../../type/collection';
+import { BodyItemType, ReqMethod, TabItems } from '/@/type/apiTest';
 
 export interface ParamType {
   index: number;

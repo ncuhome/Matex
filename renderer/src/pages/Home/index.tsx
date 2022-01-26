@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import styles from './index.module.scss';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useCollapse } from '../../zustand/store/ui.store';
 import SideBar from '../../components/SideBar';
 import Header from '../../components/Header';
+import { useAtom } from 'jotai';
+import { collapseAtom } from '/@/store/commonStore';
 
 const Home: React.FC<any> = () => {
   const navigate = useNavigate();
-  const { collapse } = useCollapse((state) => state);
+  const [collapse] = useAtom(collapseAtom);
 
   useEffect(() => {
     navigate('/apiTest', { replace: true });

@@ -1,16 +1,16 @@
-import { useHeaders, useUrlConfig } from '../../../../zustand/store/collection.store';
 import React, { Fragment, useEffect } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
+import { apiTestHeadersAtom, useApiTestConfig } from '/@/store/apiTestStore';
 
 const HeadersTable = () => {
-  const { updateHeader, headerList, addHeader, deleteHeader } = useHeaders((state) => state);
-  const { method } = useUrlConfig((state) => state);
+  const [headerList, updateHeaderKey, updateHeaderValue, addHeader, deleteHeader] =
+    useApiTestConfig(apiTestHeadersAtom);
   useEffect(() => {
     const len = headerList.length;
     if (len) {
       if (headerList[len - 1].key && headerList[len - 1].value) {
-        addHeader({ index: len, key: '', value: '' });
+        addHeader({ key: '', value: '' });
       }
     }
   }, [headerList]);
@@ -37,7 +37,7 @@ const HeadersTable = () => {
                     className={styles.input}
                     value={item.key}
                     onChange={(e) => {
-                      updateHeader(index, 'key', e.target.value);
+                      updateHeaderKey(index, e.target.value);
                     }}
                   />
                 </Table.Cell>
@@ -46,7 +46,7 @@ const HeadersTable = () => {
                     className={styles.input}
                     value={item.value}
                     onChange={(e) => {
-                      updateHeader(index, 'value', e.target.value);
+                      updateHeaderValue(index, e.target.value);
                     }}
                   />
                 </Table.Cell>

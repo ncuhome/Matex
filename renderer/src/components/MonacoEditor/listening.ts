@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import * as monaco from 'monaco-editor';
-import { useEditors } from '../../zustand/store/common.store';
-import { myEmitter } from '../../utils/EventEmiter';
+import { myEmitter } from '/@/utils/EventEmiter';
+import { useEditors } from '/@/store/commonStore';
 
 interface ListeningProps {
   name: string;
@@ -23,7 +23,8 @@ export const useEditorListen = ({
   getValue = () => {},
   onFocus = () => {}
 }: ListeningProps) => {
-  const { editors } = useEditors((state) => state);
+  const { editors } = useEditors();
+  console.log(editors);
   const editor = editors.get(name);
 
   const setVal = useCallback(

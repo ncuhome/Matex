@@ -3,9 +3,9 @@ import { suggestions } from './suggestions';
 import { rules } from './theme';
 import { defaultSchema } from './schema';
 import { useEffect, useRef } from 'react';
-import { useEditors } from '../../zustand/store/common.store';
 import ProviderResult = monaco.languages.ProviderResult;
 import CompletionList = monaco.languages.CompletionList;
+import { useEditors } from '/@/store/commonStore';
 
 monaco.languages.registerCompletionItemProvider('json', {
   provideCompletionItems: () => {
@@ -78,7 +78,7 @@ export const useEditor = ({
   readOnly = false,
   enabledMinMap = false
 }: EditorProps) => {
-  const { editors, addEditor, deleteEditor } = useEditors((state) => state);
+  const { editors, addEditor, deleteEditor } = useEditors();
   const domRef = useRef<HTMLElement>();
   const editor = editors.get(name);
 
@@ -102,7 +102,7 @@ export const useEditor = ({
       }
     });
     if (editorIns) {
-      addEditor(name, editorIns);
+      addEditor({ name, editor: editorIns });
     }
   };
 

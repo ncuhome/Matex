@@ -1,12 +1,13 @@
 import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
 import { Button, Dropdown, Menu } from 'semantic-ui-react';
 import styles from './index.module.scss';
-import MonacoEditor from '../../../components/MonacoEditor';
-import { MatexWin } from '../../../global';
-import { myEmitter } from '../../../utils/EventEmiter';
+import MonacoEditor from '/@cmp/MonacoEditor';
+import { MatexWin } from '/@/global';
+import { myEmitter } from '/@/utils/EventEmiter';
 import type { IpcRendererEvent } from 'electron';
-import { LanguageMapper } from '../../../components/MonacoEditor/utils';
-import { Actions, FormatOptions } from '../../../model/collection.model';
+import { LanguageMapper } from '/@/components/MonacoEditor/utils';
+import { Actions, FormatOptions } from '/@/model/apiTest.model';
+import { ApiTest_Channel } from '/@common/ipc/channel';
 
 const Body = () => {
   const [activeItem, setActiveItem] = useState('Pretty');
@@ -25,13 +26,13 @@ const Body = () => {
 
   const listen = (e: IpcRendererEvent, args: any[] | string) => {
     console.log(args);
-    myEmitter.emit('monacoEditor-collect', MatexWin.decodeHTML5(args));
+    myEmitter.emit('monacoEditor-apiTest', MatexWin.decodeHTML5(args));
   };
 
   useEffect(() => {
-    MatexWin.ipc?.on('collection_res', listen);
+    MatexWin.ipc?.on(ApiTest_Channel.Response, listen);
     return () => {
-      MatexWin.ipc?.removeListener('collection_res', listen);
+      MatexWin.ipc?.removeListener(ApiTest_Channel.Response, listen);
     };
   }, []);
 
@@ -73,7 +74,7 @@ const Body = () => {
       <MonacoEditor
         border={'#E0E1E2 1px solid'}
         actions={renderActions()}
-        name={'collect'}
+        name={'apiTest'}
         language={LanguageMapper.get(method)!}
         defaultVal={''}
         height={240}

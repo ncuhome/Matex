@@ -41,6 +41,7 @@ const options: WaitOn.WaitOnOptions = {
     await page.click('text=登录页面');
     // assert.equal(page.url(), 'http://localhost:3000/collect');
     // Click text=Body
+    await page.waitForTimeout(5000);
     await page.screenshot({ path: './test/screenshot/screenshot.png' });
     await page.click('text=Body');
     await page.screenshot({ path: './test/screenshot/page_collection.png' });

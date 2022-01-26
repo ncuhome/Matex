@@ -1,20 +1,21 @@
-import React, { SyntheticEvent, useEffect } from 'react';
+import React, { SyntheticEvent } from 'react';
 import styles from './index.module.scss';
 import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
 import clsx from 'clsx';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { MethodsOptions } from '../../../model/collection.model';
-import { useUrlConfig } from '../../../zustand/store/collection.store';
-import { useSendReq } from '../../../message/collection';
+import { Outlet } from 'react-router-dom';
+import { MethodsOptions } from '/@/model/apiTest.model';
+import { useSendReq } from '/@/message/apiTest.ipc';
 import Tabs from './Tabs';
-import { usePreRoute } from '../../../zustand/store/ui.store';
+import { ToastContainer, toast } from 'react-toastify';
+import { useAtom } from 'jotai';
+import { apiTestMethodAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
 
 const Header = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { preRoute } = usePreRoute((state) => state);
-  const { method, url, setMethod, setUrl } = useUrlConfig((state) => state);
+  const [method, setMethod] = useAtom(apiTestMethodAtom);
+  const [url, setUrl] = useAtom(apiTestUrlAtom);
+
   const { sendReq } = useSendReq();
+  const notify = () => toast('so easy !');
   const countryOptions = MethodsOptions.map((item) => {
     return { key: item, value: item, text: item };
   });
@@ -24,22 +25,14 @@ const Header = () => {
   };
 
   const doFetch = () => {
-    sendReq();
+    notify();
+    url.trim() && sendReq();
   };
-
-  useEffect(() => {
-    if (location.pathname === '/apiTest') {
-      if (preRoute) {
-        navigate(preRoute);
-      } else {
-        navigate('/apiTest/params');
-      }
-    }
-  }, [location.pathname]);
 
   return (
     <>
       <div className={styles.url}>
+        <ToastContainer style={{ color: 'red' }} />
         <Button.Group color="teal" className={styles.leftSelect}>
           <Button>{method}</Button>
           <Dropdown

@@ -1,12 +1,16 @@
 import React, { useMemo } from 'react';
 import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
-import { BodyItemType, TabItems } from '../../../../type/collection';
-import { useBodyList, useUrlConfig } from '../../../../zustand/store/collection.store';
+import { BodyItemType, TabItems } from '/@/type/apiTest';
+import { useBodyList } from '/@/zustand/store/apiTest.store';
 import { useNavigate } from 'react-router-dom';
-import { BodyTypes } from '../../../../model/collection.model';
+import { BodyTypes } from '/@/model/apiTest.model';
+import { useAtomValue } from 'jotai/utils';
+import { apiTestMethodAtom, apiTestTabAtom } from '/@/store/apiTestStore';
+import { useAtom } from 'jotai';
 
 const Tabs = () => {
-  const { activeTab, setActiveTab, method } = useUrlConfig((state) => state);
+  const method = useAtomValue(apiTestMethodAtom);
+  const [activeTab, setActiveTab] = useAtom(apiTestTabAtom);
   const navigate = useNavigate();
   const { type, setType } = useBodyList((state) => state);
 

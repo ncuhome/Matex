@@ -6,7 +6,7 @@ import {
   apiTestMethodAtom,
   apiTestParamsAtom,
   apiTestUrlAtom
-} from '../store/apiTest.store';
+} from '../store/apiTestStore';
 
 export const useSendReq = () => {
   const method = useAtomValue(apiTestMethodAtom);

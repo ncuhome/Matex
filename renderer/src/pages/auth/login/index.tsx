@@ -6,7 +6,7 @@ const Login: React.FC<any> = (props: any) => {
   console.log('login');
   const login = () => {
     localStorage.setItem('login', 'true');
-    navigate('/apiTest', { replace: true });
+    navigate('/apiTestStore', { replace: true });
   };
   return (
     <div>
