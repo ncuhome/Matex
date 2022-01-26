@@ -6,3 +6,11 @@ export interface NodeApiProps {
   MessagePort: MessagePort | null;
   decodeHTML5: (str: string | any[]) => string;
 }
+
+export interface ApiTestReqProps {
+  url: string;
+  method: 'Get' | 'Post' | 'Put' | 'Delete';
+  headers: {
+    [key: string]: string;
+  };
+}

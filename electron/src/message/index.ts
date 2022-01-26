@@ -1,6 +1,6 @@
 import { MessagePortMain } from 'electron';
 import { ChannelData } from '../type/api';
-import { ApiTestIpc } from './apiTest.ipc';
+import { ApiTestIpc } from './apiTest';
 
 class PortChannel_ {
   portMain: MessagePortMain | null = null;
