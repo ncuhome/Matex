@@ -15,7 +15,18 @@
     "noEmit": true,
     "types" : [],
     "baseUrl": ".",
-    "lib": ["ESNext", "dom", "dom.iterable"]
+    "lib": ["ESNext", "dom", "dom.iterable"],
+    "paths": {
+      "/@/*": [
+        "./src/*"
+      ],
+      "/@cmp/*": [
+        "./src/components/*"
+      ],
+      "/@common/*": [
+        "../common/*"
+      ]
+    }
   },
   "include": [
     "./vite.config.ts",

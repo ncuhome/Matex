@@ -1,29 +1,35 @@
 /* eslint-env node */
 import { defineConfig } from 'vite';
-import {chrome} from '../version.json';
-import {resolve} from 'path';
-import {builtinModules} from 'module';
+import { chrome } from '../version.json';
+import { join, resolve } from 'path';
+import { builtinModules } from 'module';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 
 const PACKAGE_ROOT = __dirname;
-const mode = process.env.MODE = process.env.MODE || 'development';
-const input = resolve(__dirname,'./index.html');
+const APP_ROOT = process.cwd();
+const mode = (process.env.MODE = process.env.MODE || 'development');
+const input = resolve(__dirname, './index.html');
 
 export default defineConfig({
   mode: mode,
   root: PACKAGE_ROOT,
   plugins: [reactRefresh()],
   base: '',
-  logLevel:'info',
+  logLevel: 'info',
+  resolve: {
+    alias: {
+      '/@/': join(PACKAGE_ROOT, 'src') + '/',
+      '/@cmp/': join(PACKAGE_ROOT, 'src/components') + '/',
+      '/@common/': join(APP_ROOT, 'common') + '/'
+    }
+  },
   build: {
     sourcemap: false,
     target: `chrome${chrome}`,
     outDir: '../release/app/dist/render',
     rollupOptions: {
       input,
-      external: [
-        ...builtinModules.flatMap(p => [p, `node:${p}`])
-      ],
+      external: [...builtinModules.flatMap((p) => [p, `node:${p}`])],
       output: {
         compact: true,
         assetFileNames: 'static/assets.[name].[ext]',
@@ -42,4 +48,3 @@ export default defineConfig({
     brotliSize: false
   }
 });
-
