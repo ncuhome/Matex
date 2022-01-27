@@ -1,5 +1,5 @@
 import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
-import { Button, Dropdown, Menu } from 'semantic-ui-react';
+import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { MatexWin } from '/@/global';
@@ -42,30 +42,40 @@ const Body = () => {
       color: '#FFF'
     };
     return (
-      <Menu secondary>
-        {Actions.map((item) => {
-          const active = activeItem === item;
-          return (
-            <Fragment key={item}>
-              <Menu.Item style={active ? style : {}} name={item} active={active} onClick={handleItemClick} />
-            </Fragment>
-          );
-        })}
-        <Menu.Menu position="right">
-          <Menu.Item>
-            <Button.Group>
-              <Button>{method}</Button>
-              <Dropdown
-                onChange={handleChange}
-                className="button icon"
-                floating
-                options={formatOptions}
-                trigger={<></>}
-              />
-            </Button.Group>
-          </Menu.Item>
-        </Menu.Menu>
-      </Menu>
+      <>
+        <Label ribbon as="a" color={'purple'}>
+          响应数据
+        </Label>
+        <Menu secondary>
+          {Actions.map((item) => {
+            const active = activeItem === item;
+            return (
+              <Fragment key={item}>
+                <Menu.Item
+                  style={active ? style : {}}
+                  name={item}
+                  active={active}
+                  onClick={handleItemClick}
+                />
+              </Fragment>
+            );
+          })}
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <Button.Group>
+                <Button>{method}</Button>
+                <Dropdown
+                  onChange={handleChange}
+                  className="button icon"
+                  floating
+                  options={formatOptions}
+                  trigger={<></>}
+                />
+              </Button.Group>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </>
     );
   };
 

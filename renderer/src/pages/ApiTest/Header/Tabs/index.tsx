@@ -31,7 +31,7 @@ const Tabs = () => {
     return (
       <>
         <Label ribbon as="a" color={'orange'}>
-          选项
+          请求选项
         </Label>
         <Menu color={'teal'} secondary>
           <Menu.Item
