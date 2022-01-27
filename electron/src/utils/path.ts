@@ -3,7 +3,7 @@ import * as DotEnv from 'dotenv';
 import { resolve } from 'path';
 import { app } from 'electron';
 
-export const isDev = process.env.NODE_ENV === 'development' || !(process.env.NODE_ENV === 'production');
+export const isDev = process.env.NODE_ENV === 'development';
 
 export const rootDir = process.cwd();
 export const appDir = __dirname;

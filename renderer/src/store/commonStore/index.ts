@@ -1,10 +1,9 @@
-import { atom, useAtom } from 'jotai';
+import { atom } from 'jotai';
 import { editor } from 'monaco-editor';
-import { useAtomValue } from 'jotai/utils';
-interface EditorProps {
-  name: string;
-  editor: editor.IStandaloneCodeEditor;
-}
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import {EditorProps} from '/@/store/commonStore/type';
+
+
 
 export const preRouteAtom = atom('');
 export const collapseAtom = atom(false);
@@ -21,8 +20,8 @@ export const deleteEditorsAtom = atom(null, (get, set, name: string) => {
   set(editorsAtom_, tempMap);
 });
 export const useEditors = () => {
-  const [, addEditor] = useAtom(addEditorsAtom);
-  const [, deleteEditor] = useAtom(deleteEditorsAtom);
+  const addEditor = useUpdateAtom(addEditorsAtom);
+  const deleteEditor = useUpdateAtom(deleteEditorsAtom);
   const editors = useAtomValue(editorsAtom_);
   return { editors, addEditor, deleteEditor };
 };
