@@ -13,10 +13,8 @@ export const useSendReq = () => {
   const url = useAtomValue(apiTestUrlAtom);
   const paramList = useAtomValue(apiTestParamsAtom);
   const headerList = useAtomValue(apiTestHeadersAtom);
-  console.log(url, 'url');
-  console.log(method, 'method');
+
   const sendReq = () => {
-    console.log(headerList);
     const params = paramList.slice(0, paramList.length - 1);
     const headers: { [key: string]: string } = {};
     headerList.slice(0, headerList.length - 1).forEach((item) => {
