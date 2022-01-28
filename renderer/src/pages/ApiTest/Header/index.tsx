@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import styles from './index.module.scss';
-import { Button, Dropdown, Icon, Input } from 'semantic-ui-react';
+import { Button, Dropdown, Icon, Input, Label } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { Outlet } from 'react-router-dom';
 import { MethodsOptions } from '/@/model/apiTest.model';

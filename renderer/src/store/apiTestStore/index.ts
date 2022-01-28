@@ -3,18 +3,22 @@ import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { produce } from 'immer';
 import { checkIndex } from '/@/store/utils';
 import { InitHeaders } from '/@/model/apiTest.model';
-import { ReqMethod, TabItems } from '/@/type/apiTest';
-import { ApiTestHPProps, ApiTestReturnType } from '/@/store/apiTestStore/type';
+import { BodyItemType, BodyRawType, ReqMethod, TabItems } from '/@/type/apiTest';
+import { ApiTestKVProps, ApiTestReturnType } from '/@/store/apiTestStore/type';
 
-export const apiTestParamsAtom = atom<ApiTestHPProps[]>([{ index: 0, key: '', value: '' }]);
-export const apiTestHeadersAtom = atom<ApiTestHPProps[]>(InitHeaders);
+export const apiTestParamsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
+export const apiTestHeadersAtom = atom<ApiTestKVProps[]>(InitHeaders);
+export const apiTestBodyFormsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
+
 export const apiTestUrlAtom = atom<string>('');
 export const apiTestMethodAtom = atom<ReqMethod>('Get');
 export const apiTestTabAtom = atom<TabItems>('Params');
+export const apiTestActiveBodyTypeAtom = atom<BodyItemType>('form-data');
+export const apiTestBodyRawAtom = atom<BodyRawType>('text');
 
 const getUpdateAtom = (receivedAtom: any) => {
-  return atom(null, (get, set, param: ApiTestHPProps) => {
-    const tempList = produce(get<ApiTestHPProps[]>(receivedAtom), (draft) => {
+  return atom(null, (get, set, param: ApiTestKVProps) => {
+    const tempList = produce(get<ApiTestKVProps[]>(receivedAtom), (draft) => {
       draft.forEach((item, index) => {
         if (index === param.index) {
           draft.splice(index, 1, param);
@@ -26,8 +30,8 @@ const getUpdateAtom = (receivedAtom: any) => {
 };
 
 const getAddAtom = (receivedAtom: any) => {
-  return atom(null, (get, set, param: Omit<ApiTestHPProps, 'index'>) => {
-    const tempList = produce(get<ApiTestHPProps[]>(receivedAtom), (draft) => {
+  return atom(null, (get, set, param: Omit<ApiTestKVProps, 'index'>) => {
+    const tempList = produce(get<ApiTestKVProps[]>(receivedAtom), (draft) => {
       draft.push({ index: draft.length, ...param });
     });
     set(receivedAtom, checkIndex(tempList));
@@ -36,7 +40,7 @@ const getAddAtom = (receivedAtom: any) => {
 
 const getDeleteAtom = (receivedAtom: any) => {
   return atom(null, (get, set, index: number) => {
-    const tempList = produce(get<ApiTestHPProps[]>(receivedAtom), (draft) => {
+    const tempList = produce(get<ApiTestKVProps[]>(receivedAtom), (draft) => {
       draft.splice(index, 1);
     });
     set(receivedAtom, checkIndex(tempList));
@@ -44,7 +48,7 @@ const getDeleteAtom = (receivedAtom: any) => {
 };
 
 export const useApiTestConfig = (receivedAtom: any): ApiTestReturnType => {
-  const list = useAtomValue<ApiTestHPProps[]>(receivedAtom);
+  const list = useAtomValue<ApiTestKVProps[]>(receivedAtom);
   const updateList = useUpdateAtom(getUpdateAtom(receivedAtom));
   const addItem = useUpdateAtom(getAddAtom(receivedAtom));
   const deleteItem = useUpdateAtom(getDeleteAtom(receivedAtom));

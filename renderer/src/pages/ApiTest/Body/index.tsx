@@ -43,7 +43,7 @@ const Body = () => {
     };
     return (
       <>
-        <Label ribbon as="a" color={'purple'}>
+        <Label ribbon as="a" color={'blue'} style={{ marginLeft: 15 }}>
           响应数据
         </Label>
         <Menu secondary>

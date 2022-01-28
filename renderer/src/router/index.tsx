@@ -13,9 +13,9 @@ export const RouterAuth = () => {
   const location = useLocation();
   const auth = !!localStorage.getItem('login');
 
-  // useEffect(() => {
-  //   console.log('当前路由=>' + location.pathname);
-  // }, [location.pathname]);
+  useEffect(() => {
+    console.log('当前路由=>' + location.pathname);
+  }, [location.pathname]);
 
   return (
     <>

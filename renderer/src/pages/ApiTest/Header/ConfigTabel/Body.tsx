@@ -5,11 +5,13 @@ import styles from './index.module.scss';
 import { BodyTypes } from '/@/model/apiTest.model';
 import UploadFile from '../../../../components/UploadFile';
 import { useAtomValue } from 'jotai/utils';
-import { apiTestMethodAtom } from '/@/store/apiTestStore';
+import { apiTestActiveBodyTypeAtom, apiTestMethodAtom } from '/@/store/apiTestStore';
+import { useAtom } from 'jotai';
 
 const BodyTable = () => {
   const { updateBody, type, bodyList, addBody, deleteBody } = useBodyList((state) => state);
   const method = useAtomValue(apiTestMethodAtom);
+  const activeBody = useAtomValue(apiTestActiveBodyTypeAtom);
 
   useEffect(() => {
     const len = bodyList.length;
@@ -28,7 +30,7 @@ const BodyTable = () => {
       </Segment>
     );
   } else {
-    if (type === 'binary') {
+    if (activeBody === 'binary') {
       return <UploadFile />;
     }
     return (

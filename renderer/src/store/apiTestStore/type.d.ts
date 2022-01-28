@@ -1,4 +1,4 @@
-export interface ApiTestHPProps {
+export interface ApiTestKVProps {
   index: number;
   key: string;
   value: string;
@@ -6,9 +6,9 @@ export interface ApiTestHPProps {
 export type updateApiTestHP = (index: number, key: string) => void;
 
 export type ApiTestReturnType = [
-  ApiTestHPProps[],
+  ApiTestKVProps[],
   updateApiTestHP,
   updateApiTestHP,
-  (update: Omit<ApiTestHPProps, 'index'>) => void,
+  (update: Omit<ApiTestKVProps, 'index'>) => void,
   (update: number) => void
 ];
