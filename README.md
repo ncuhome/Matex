@@ -1,5 +1,7 @@
-# Matex
-electron项目
+# Matex   基于electron的万能工具软件
+#
+![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/master/test/screenshot/dev.png)
+###
 ![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/master/test/screenshot/screenshot.png)
 
 ## 预期功能
