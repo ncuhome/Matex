@@ -24,7 +24,9 @@ jobs:
       - name: install dependencies
         run: |
           echo start install dependencies
+          yarn config set registry https://registry.yarnpkg.com
           yarn install --network-timeout 100000
+
 
       - name: build main and render
         run: |
