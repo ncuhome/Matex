@@ -8,3 +8,9 @@
   position: absolute;
   left: -20px;
 }
+
+.preview{
+  &:hover{
+    cursor: pointer;
+  }
+}

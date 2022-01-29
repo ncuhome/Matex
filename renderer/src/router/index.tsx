@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import Login from '../pages/auth/login';
+import Login from '../pages/Auth/login';
 import Home from '../pages/Home';
 import MockView from '../pages/Mock';
 import WaitWorkPage from '../components/Work';

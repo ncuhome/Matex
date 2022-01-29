@@ -5,12 +5,11 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import { useAtom } from 'jotai';
-import { collapseAtom } from '../../store/commonStore';
+import { collapseAtom } from '/@/store/commonStore';
 
 const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active = false }) => {
   const navigate = useNavigate();
   const tabRef = useRef<HTMLDivElement>(null);
-  // const { collapse } = useCollapse((state) => state);
   const [collapse] = useAtom(collapseAtom);
   const [show, setShow] = useState(false);
 

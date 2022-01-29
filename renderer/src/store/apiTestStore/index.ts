@@ -8,13 +8,15 @@ import { ApiTestKVProps, ApiTestReturnType } from '/@/store/apiTestStore/type';
 
 export const apiTestParamsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 export const apiTestHeadersAtom = atom<ApiTestKVProps[]>(InitHeaders);
-export const apiTestBodyFormsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 
 export const apiTestUrlAtom = atom<string>('');
 export const apiTestMethodAtom = atom<ReqMethod>('Get');
 export const apiTestTabAtom = atom<TabItems>('Params');
+//body
+export const apiTestBodyFormsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 export const apiTestActiveBodyTypeAtom = atom<BodyItemType>('form-data');
 export const apiTestBodyRawAtom = atom<BodyRawType>('text');
+export const apiTestBodyUrlencodedAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 
 const getUpdateAtom = (receivedAtom: any) => {
   return atom(null, (get, set, param: ApiTestKVProps) => {

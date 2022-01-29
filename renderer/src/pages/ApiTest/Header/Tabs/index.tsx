@@ -1,23 +1,30 @@
-import React, { Fragment, useMemo } from 'react';
-import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
+import React, { Fragment, useCallback, useMemo } from 'react';
+import { Button, Dropdown, Icon, Label, Menu, Popup } from 'semantic-ui-react';
 import { BodyItemType, BodyRawType, TabItems } from '/@/type/apiTest';
 import { useNavigate } from 'react-router-dom';
 import { BodyTypes, RawOptions, TabsItem } from '/@/model/apiTest.model';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
-  apiTestBodyRawAtom,
+  apiTestBodyUrlencodedAtom,
   apiTestMethodAtom,
   apiTestTabAtom
 } from '/@/store/apiTestStore';
 import { useAtom } from 'jotai';
+import useAction from '/@/pages/ApiTest/Header/Tabs/useAction';
+
+const style = {
+  background: '#2CB5AD',
+  color: '#FFF'
+};
 
 const Tabs = () => {
   const method = useAtomValue(apiTestMethodAtom);
+  const urlencodedList = useAtomValue(apiTestBodyUrlencodedAtom);
   const [activeTab, setActiveTab] = useAtom(apiTestTabAtom);
   const [activeBody, setActiveBody] = useAtom(apiTestActiveBodyTypeAtom);
-  const [activeRawType, setActiveRawType] = useAtom(apiTestBodyRawAtom);
   const navigate = useNavigate();
+  const Action = useAction();
 
   const handleItemClick = (item: TabItems) => {
     setActiveTab(item);
@@ -29,19 +36,8 @@ const Tabs = () => {
     return { key: item, value: item, text: item };
   });
 
-  const rawOptions = RawOptions.map((item) => {
-    return { key: item, value: item, text: item };
-  });
-
   const handleChangeBodyType = (e: React.SyntheticEvent, { value }: any) => {
     setActiveBody(value as BodyItemType);
-  };
-  const handleChangeRawType = (e: React.SyntheticEvent, { value }: any) => {
-    setActiveRawType(value as BodyRawType);
-  };
-  const style = {
-    background: '#2CB5AD',
-    color: '#FFF'
   };
 
   return useMemo(() => {
@@ -78,25 +74,13 @@ const Tabs = () => {
                   />
                 </Button.Group>
               </Menu.Item>
-              {activeBody === 'raw' && (
-                <Menu.Item style={{ marginLeft: -5 }}>
-                  <Button.Group size={'small'}>
-                    <Button>{activeRawType}</Button>
-                    <Dropdown
-                      className="button icon"
-                      onChange={handleChangeRawType}
-                      options={rawOptions}
-                      trigger={<></>}
-                    />
-                  </Button.Group>
-                </Menu.Item>
-              )}
+              {Action}
             </Menu.Menu>
           )}
         </Menu>
       </>
     );
-  }, [activeTab, activeBody, method]);
+  }, [activeTab, activeBody, method, urlencodedList, Action]);
 };
 
 export default Tabs;
