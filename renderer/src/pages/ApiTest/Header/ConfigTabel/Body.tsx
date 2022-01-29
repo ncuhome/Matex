@@ -1,5 +1,5 @@
 import { Header, Icon, Segment } from 'semantic-ui-react';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import UploadFile from '../../../../components/UploadFile';
 import { useAtomValue } from 'jotai/utils';
 import {
@@ -31,7 +31,6 @@ const BodyTable = () => {
   const activeRawType = useAtomValue(apiTestBodyRawAtom);
   const setEditorValue = useUpdateEditorValue('configBody');
   const list = activeBody === 'form-data' ? formDataList : urlencodedList;
-
   const addItem = ({ key, value }: Omit<ApiTestKVProps, 'index'>) => {
     if (activeBody === 'form-data') {
       return addFormDataItem({ key, value });

@@ -5,6 +5,7 @@ import { EditorProps } from '/@/store/commonStore/type';
 
 export const preRouteAtom = atom('');
 export const collapseAtom = atom(false);
+//editor
 export const editorsAtom_ = atom(new Map<string, editor.IStandaloneCodeEditor | null>());
 export const editorValueAtom = atom(new Map<string, string>());
 
