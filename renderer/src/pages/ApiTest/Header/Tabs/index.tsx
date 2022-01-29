@@ -1,8 +1,8 @@
-import React, { Fragment, useCallback, useMemo } from 'react';
-import { Button, Dropdown, Icon, Label, Menu, Popup } from 'semantic-ui-react';
-import { BodyItemType, BodyRawType, TabItems } from '/@/type/apiTest';
+import React, { Fragment, useMemo } from 'react';
+import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
+import { BodyItemType, TabItems } from '/@/type/apiTest';
 import { useNavigate } from 'react-router-dom';
-import { BodyTypes, RawOptions, TabsItem } from '/@/model/apiTest.model';
+import { BodyTypes, TabsItem } from '/@/model/apiTest.model';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,

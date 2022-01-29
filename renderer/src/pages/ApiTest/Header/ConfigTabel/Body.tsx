@@ -1,16 +1,20 @@
 import { Header, Icon, Segment } from 'semantic-ui-react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import UploadFile from '../../../../components/UploadFile';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
   apiTestBodyFormsAtom,
+  apiTestBodyRawAtom,
   apiTestBodyUrlencodedAtom,
   apiTestMethodAtom,
   useApiTestConfig
 } from '/@/store/apiTestStore';
 import KVTable from '/@cmp/KVTable';
 import { ApiTestKVProps } from '/@/store/apiTestStore/type';
+import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
+import MonacoEditor from '/@cmp/MonacoEditor';
+import { useUpdateEditorValue } from '/@/store/commonStore';
 
 const BodyTable = () => {
   const [formDataList, updateFormDataKey, updateFormDataValue, addFormDataItem, deleteFormDataItem] =
@@ -24,6 +28,8 @@ const BodyTable = () => {
   ] = useApiTestConfig(apiTestBodyUrlencodedAtom);
   const method = useAtomValue(apiTestMethodAtom);
   const activeBody = useAtomValue(apiTestActiveBodyTypeAtom);
+  const activeRawType = useAtomValue(apiTestBodyRawAtom);
+  const setEditorValue = useUpdateEditorValue('configBody');
   const list = activeBody === 'form-data' ? formDataList : urlencodedList;
 
   const addItem = ({ key, value }: Omit<ApiTestKVProps, 'index'>) => {
@@ -78,6 +84,25 @@ const BodyTable = () => {
   } else {
     if (activeBody === 'binary') {
       return <UploadFile />;
+    } else if (activeBody === 'raw') {
+      const language = LanguageMapper.get(activeRawType.toUpperCase()) ?? 'text/plain';
+      console.log(language);
+      return (
+        <MonacoEditor
+          onChange={(changes, value) => {
+            console.log(changes, 'changes');
+            console.log(value);
+            setEditorValue(value ?? '');
+          }}
+          shadow={false}
+          border={'#E0E1E2 1px solid'}
+          name={'configBody'}
+          language={language}
+          defaultVal={''}
+          height={80}
+          width={'100%'}
+        />
+      );
     }
     return (
       <KVTable

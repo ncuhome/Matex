@@ -1,4 +1,4 @@
-import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
+import React, { Fragment, SyntheticEvent, useEffect, useMemo, useState } from 'react';
 import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import MonacoEditor from '/@cmp/MonacoEditor';
@@ -81,15 +81,19 @@ const Body = () => {
 
   return (
     <div className={styles.con}>
-      <MonacoEditor
-        border={'#E0E1E2 1px solid'}
-        actions={renderActions()}
-        name={'apiTest'}
-        language={LanguageMapper.get(method)!}
-        defaultVal={''}
-        height={240}
-        width={'100%'}
-      />
+      {useMemo(() => {
+        return (
+          <MonacoEditor
+            border={'#E0E1E2 1px solid'}
+            actions={renderActions()}
+            name={'apiTest'}
+            language={LanguageMapper.get(method)!}
+            defaultVal={''}
+            height={240}
+            width={'100%'}
+          />
+        );
+      }, [method])}
     </div>
   );
 };
