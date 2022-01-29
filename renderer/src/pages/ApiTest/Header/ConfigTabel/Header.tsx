@@ -17,7 +17,6 @@ const HeadersTable = () => {
 
   return (
     <KVTable
-      file
       data={headerList}
       onChangeValue={updateHeaderValue}
       onChangeKey={updateHeaderKey}

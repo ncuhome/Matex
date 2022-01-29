@@ -1,13 +1,12 @@
 import { atom } from 'jotai';
 import { editor } from 'monaco-editor';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
-import {EditorProps} from '/@/store/commonStore/type';
-
-
+import { EditorProps } from '/@/store/commonStore/type';
 
 export const preRouteAtom = atom('');
 export const collapseAtom = atom(false);
 export const editorsAtom_ = atom(new Map<string, editor.IStandaloneCodeEditor | null>());
+export const editorValueAtom = atom(new Map<string, string>());
 
 export const addEditorsAtom = atom(null, (get, set, { name, editor }: EditorProps) => {
   const tempMap = new Map<string, editor.IStandaloneCodeEditor | null>(get(editorsAtom_));

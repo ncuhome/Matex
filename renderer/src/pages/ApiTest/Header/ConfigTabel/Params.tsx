@@ -19,7 +19,6 @@ const ParamsTable = () => {
 
   return (
     <KVTable
-      file
       data={paramList}
       onChangeValue={updateParamValue}
       onChangeKey={updateParamKey}

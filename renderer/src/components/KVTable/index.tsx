@@ -6,13 +6,13 @@ import { ApiTestKVProps } from '/@/store/apiTestStore/type';
 
 interface KVTableProps {
   data: ApiTestKVProps[];
-  file: boolean;
+  file?: boolean;
   onChangeKey?: (index: number, value: string) => void;
   onChangeValue?: (index: number, value: string) => void;
   onDeleteLine?: (index: number) => void;
 }
 
-const KVTable: React.FC<KVTableProps> = ({ data, file, onChangeKey, onChangeValue, onDeleteLine }) => {
+const KVTable: React.FC<KVTableProps> = ({ data, file=false, onChangeKey, onChangeValue, onDeleteLine }) => {
   return (
     <Table celled compact size={'small'}>
       <Table.Header>
