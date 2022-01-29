@@ -71,7 +71,9 @@ export const startWatchMainAndPreload = async (url) => {
 
           spawnProcess.stderr?.on('data', (d) => {
             const data = d.toString().trim();
-            ColorLog.error(data);
+            if (!data.toLowerCase().includes('font')) {
+              ColorLog.error(data);
+            }
           });
         } else {
           ColorLog.error('parcel打包失败');
