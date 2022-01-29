@@ -11,12 +11,13 @@ interface MonacoEditorProps {
   height: number;
   width: number | string;
   border?: string;
+  shadow?: boolean;
   defaultVal: string;
   language: string;
   readOnly?: boolean;
   enabledMinMap?: boolean;
   actions?: React.ReactNode;
-  onChange?: (value: monaco.editor.IModelContentChangedEvent) => void;
+  onChange?: (changes: monaco.editor.IModelContentChangedEvent, value: string | undefined) => void;
   onBlur?: () => void;
   watchModelMarkers?: (marks: monaco.editor.IMarker[]) => void;
   getValue?: (value: string | undefined) => void;
@@ -31,6 +32,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   height = 200,
   language = 'json',
   defaultVal = '',
+  shadow = true,
   enabledMinMap = false,
   readOnly = false,
   autoFormat = true,
@@ -59,7 +61,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
 
   useEffect(() => {
     if (monacoEl) {
-      createEditor(monacoEl.current!);
+      createEditor(monacoEl.current!, '');
     }
   }, [monacoEl]);
 
@@ -72,7 +74,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   const curHeight = actions ? height : parseInt(String(height)) + 50;
 
   return (
-    <div className={styles.con} style={{ border }}>
+    <div className={clsx([styles.con, shadow && styles.shadow])} style={{ border }}>
       {renderActions()}
       <div
         id={'monacoEditor'}

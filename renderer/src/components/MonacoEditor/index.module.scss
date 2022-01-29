@@ -4,7 +4,6 @@
   border-radius: 10px;
   border: #E0E1E2 1px solid;
   background: var(--greyLight-1);
-  box-shadow: var(--dark-shadow);
 
   .operate{
     height: 50px;
@@ -24,3 +23,6 @@
   }
 }
 
+.shadow{
+  box-shadow: var(--dark-shadow);
+}
