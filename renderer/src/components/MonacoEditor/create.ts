@@ -5,7 +5,8 @@ import { defaultSchema } from './schema';
 import { useEffect, useRef } from 'react';
 import ProviderResult = monaco.languages.ProviderResult;
 import CompletionList = monaco.languages.CompletionList;
-import { useEditors } from '/@/store/commonStore';
+import { editorValueAtom, useEditors } from '/@/store/commonStore';
+import { useAtomValue } from 'jotai/utils';
 
 monaco.languages.registerCompletionItemProvider('json', {
   provideCompletionItems: () => {
@@ -79,14 +80,16 @@ export const useEditor = ({
   enabledMinMap = false
 }: EditorProps) => {
   const { editors, addEditor, deleteEditor } = useEditors();
+  const editorValue = useAtomValue(editorValueAtom);
   const domRef = useRef<HTMLElement>();
   const editor = editors.get(name);
+  const existValue = editorValue.get(name) ?? '';
 
   //创建新的编辑器实例
-  const createEditor = (domElement: HTMLElement) => {
+  const createEditor = (domElement: HTMLElement, initValue: string) => {
     domRef.current = domElement;
     const editorIns = monaco.editor.create(domElement, {
-      value: defaultVal,
+      value: initValue,
       model: language === 'json' ? model : undefined,
       language,
       readOnly,
@@ -107,15 +110,22 @@ export const useEditor = ({
   };
 
   const destroyEditor = () => {
-    editor?.dispose();
-    deleteEditor(name);
+    if (editor) {
+      editor.dispose();
+      deleteEditor(name);
+      return true;
+    } else {
+      return false;
+    }
   };
 
   //更改语言重新实例化编辑器
   useEffect(() => {
-    destroyEditor();
+    const exist = destroyEditor();
     if (domRef.current) {
-      createEditor(domRef.current);
+      const initValue = exist ? existValue : defaultVal ?? '';
+      console.log('initValue', initValue);
+      createEditor(domRef.current, initValue);
     }
   }, [language]);
 

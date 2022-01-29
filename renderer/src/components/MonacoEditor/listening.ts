@@ -6,7 +6,7 @@ import { useEditors } from '/@/store/commonStore';
 interface ListeningProps {
   name: string;
   autoFormat: boolean;
-  onChange?: (value: monaco.editor.IModelContentChangedEvent) => void;
+  onChange?: (changes: monaco.editor.IModelContentChangedEvent, value: string | undefined) => void;
   onBlur?: () => void;
   watchModelMarkers?: (marks: monaco.editor.IMarker[]) => void;
   getValue?: (value: string | undefined) => void;
@@ -24,7 +24,6 @@ export const useEditorListen = ({
   onFocus = () => {}
 }: ListeningProps) => {
   const { editors } = useEditors();
-  console.log(editors);
   const editor = editors.get(name);
 
   const setVal = useCallback(
@@ -43,13 +42,16 @@ export const useEditorListen = ({
     if (editor) {
       myEmitter.on<string>(`monacoEditor-${name}`, setVal);
     }
+    return () => {
+      myEmitter.offAll(`monacoEditor-${name}`);
+    };
   }, [editor]);
 
   useEffect(() => {
     let model = editor?.getModel();
     model?.onDidChangeContent((e) => {
-      onChange(e);
       const val = model?.getValue();
+      onChange(e, val);
       getValue(val);
     });
     editor?.onDidBlurEditorWidget(() => {
