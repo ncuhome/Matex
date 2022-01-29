@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Dropdown, Header, Icon, Menu, Modal, Popup } from 'semantic-ui-react';
+import { Button, Dropdown, Icon, Input, Menu, Modal } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
 import {
@@ -48,7 +48,7 @@ const useAction = () => {
         <Modal.Header>x-www-form-urlencoded</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            <span style={{ color: '#2CB5AD' }}>{urlencodedStr()}</span>
+            <Input fluid value={urlencodedStr()} readOnly />
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
