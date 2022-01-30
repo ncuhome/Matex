@@ -6,12 +6,15 @@ import { MatexWin } from '/@/global';
 import { myEmitter } from '/@/utils/EventEmiter';
 import type { IpcRendererEvent } from 'electron';
 import { LanguageMapper } from '/@/components/MonacoEditor/utils';
-import { Actions, FormatOptions } from '/@/model/apiTest.model';
+import { Actions, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model';
 import { ApiTest_Channel } from '/@common/ipc/channel';
+import { FormatType, ResDisplayItemsType } from '/@/type/apiTest';
+import clsx from 'clsx';
 
 const Body = () => {
   const [activeItem, setActiveItem] = useState('Pretty');
-  const [method, setMethod] = useState('HTML');
+  const [method, setMethod] = useState<FormatType>('JSON');
+  const [displayItem, setDisplayItem] = useState<ResDisplayItemsType>('Body');
 
   const formatOptions = FormatOptions.map((item) => {
     return { key: item, value: item, text: item };
@@ -46,7 +49,7 @@ const Body = () => {
         <Label ribbon as="a" color={'blue'} style={{ marginLeft: 15 }}>
           响应数据
         </Label>
-        <Menu secondary>
+        <Menu secondary style={{ marginTop: -4 }}>
           {Actions.map((item) => {
             const active = activeItem === item;
             return (
@@ -81,19 +84,33 @@ const Body = () => {
 
   return (
     <div className={styles.con}>
-      {useMemo(() => {
-        return (
-          <MonacoEditor
-            border={'#E0E1E2 1px solid'}
-            actions={renderActions()}
-            name={'apiTest'}
-            language={LanguageMapper.get(method)!}
-            defaultVal={''}
-            height={240}
-            width={'100%'}
-          />
-        );
-      }, [method])}
+      <div className={styles.operationCon}>
+        {ResDisplayItems.map((item) => {
+          const active = displayItem === item;
+          return (
+            <Fragment key={item}>
+              <div
+                className={clsx([styles.btn, active && styles.active])}
+                onClick={() => setDisplayItem(item)}
+              >
+                {item}
+              </div>
+            </Fragment>
+          );
+        })}
+      </div>
+      <div className={styles.editorCon}>
+        <MonacoEditor
+          shadow={true}
+          border={'transparent 1px solid'}
+          actions={renderActions()}
+          name={'apiTest'}
+          language={LanguageMapper.get(method)!}
+          defaultVal={''}
+          height={200}
+          width={'100%'}
+        />
+      </div>
     </div>
   );
 };

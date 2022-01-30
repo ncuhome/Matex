@@ -45,7 +45,7 @@ const Header = () => {
         </Button.Group>
         <Input
           value={url}
-          size="big"
+          size="large"
           onChange={(e) => setUrl(e.target.value)}
           className={styles.input}
           icon={
@@ -54,7 +54,7 @@ const Header = () => {
             </div>
           }
         />
-        <Button primary className={styles.startBtn} onClick={doFetch}>
+        <Button primary size={'large'} onClick={doFetch}>
           发送
         </Button>
       </div>
