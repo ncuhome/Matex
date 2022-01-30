@@ -1,4 +1,4 @@
-import React, { Fragment, SyntheticEvent, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
 import { Button, Dropdown, Label, Menu, Popup } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import MonacoEditor from '/@cmp/MonacoEditor';
