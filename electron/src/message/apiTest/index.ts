@@ -12,18 +12,18 @@ export class ApiTestIpc {
 
   static listen() {
     ipcMain.on(ApiTest_Channel.Request, async (e, args) => {
-      const { url, method, headers } = args as ApiTestReqProps;
+      const { url, method, headers, params } = args as ApiTestReqProps;
 
       let res: string;
       switch (method) {
         case 'Get':
-          res = await RequestAction.doGet({ url, headers });
+          res = await RequestAction.doGet({ url, headers, params });
           break;
         case 'Post':
-          res = await RequestAction.doGet({ url, headers });
+          res = await RequestAction.doGet({ url, headers, params });
           break;
         default:
-          res = await RequestAction.doGet({ url, headers });
+          res = await RequestAction.doGet({ url, headers, params });
           break;
       }
       e.reply(ApiTest_Channel.Response, res);
