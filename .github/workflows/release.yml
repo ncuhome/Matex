@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           echo start install dependencies
-          npm install
+          yarn install --network-timeout 100000
 
       - name: Build main and render
         run: |
