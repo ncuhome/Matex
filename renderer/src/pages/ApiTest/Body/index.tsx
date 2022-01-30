@@ -1,5 +1,5 @@
 import React, { Fragment, SyntheticEvent, useEffect, useMemo, useState } from 'react';
-import { Button, Dropdown, Label, Menu } from 'semantic-ui-react';
+import { Button, Dropdown, Label, Menu, Popup } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { MatexWin } from '/@/global';
@@ -13,7 +13,7 @@ import clsx from 'clsx';
 
 const Body = () => {
   const [activeItem, setActiveItem] = useState('Pretty');
-  const [method, setMethod] = useState<FormatType>('JSON');
+  const [formatType, setFormatType] = useState<FormatType>('JSON');
   const [displayItem, setDisplayItem] = useState<ResDisplayItemsType>('Body');
 
   const formatOptions = FormatOptions.map((item) => {
@@ -23,8 +23,8 @@ const Body = () => {
     setActiveItem(name);
   };
 
-  const handleChange = (event: SyntheticEvent, { value }: any) => {
-    setMethod(value);
+  const handleChangeFormat = (event: SyntheticEvent, { value }: any) => {
+    setFormatType(value);
   };
 
   const listen = (e: IpcRendererEvent, args: any[] | string) => {
@@ -44,11 +44,46 @@ const Body = () => {
       background: '#228C86',
       color: '#FFF'
     };
+    let labelText = '';
+    switch (displayItem) {
+      case 'Body':
+        labelText = '响应数据';
+        break;
+      case 'Headers':
+        labelText = '响应头';
+        break;
+      case 'Cookies':
+        labelText = 'Cookie';
+        break;
+      default:
+        labelText = '响应数据';
+        break;
+    }
     return (
       <>
-        <Label ribbon as="a" color={'blue'} style={{ marginLeft: 15 }}>
-          响应数据
-        </Label>
+        <Popup
+          on="click"
+          position={'bottom center'}
+          pinned
+          trigger={
+            <Label ribbon as="a" color={'blue'} style={{ marginLeft: 15 }}>
+              {labelText}
+            </Label>
+          }
+        >
+          <Button.Group vertical>
+            {ResDisplayItems.map((item) => {
+              const active = item === displayItem;
+              return (
+                <Fragment key={item}>
+                  <Button className={clsx([active && styles.active])} onClick={() => setDisplayItem(item)}>
+                    {item}
+                  </Button>
+                </Fragment>
+              );
+            })}
+          </Button.Group>
+        </Popup>
         <Menu secondary style={{ marginTop: -4 }}>
           {Actions.map((item) => {
             const active = activeItem === item;
@@ -63,12 +98,12 @@ const Body = () => {
               </Fragment>
             );
           })}
-          <Menu.Menu position="right">
+          <Menu.Menu position="right" style={{ marginLeft: -10 }}>
             <Menu.Item>
               <Button.Group>
-                <Button>{method}</Button>
+                <Button>{formatType}</Button>
                 <Dropdown
-                  onChange={handleChange}
+                  onChange={handleChangeFormat}
                   className="button icon"
                   floating
                   options={formatOptions}
@@ -84,30 +119,15 @@ const Body = () => {
 
   return (
     <div className={styles.con}>
-      <div className={styles.operationCon}>
-        {ResDisplayItems.map((item) => {
-          const active = displayItem === item;
-          return (
-            <Fragment key={item}>
-              <div
-                className={clsx([styles.btn, active && styles.active])}
-                onClick={() => setDisplayItem(item)}
-              >
-                {item}
-              </div>
-            </Fragment>
-          );
-        })}
-      </div>
       <div className={styles.editorCon}>
         <MonacoEditor
           shadow={true}
           border={'transparent 1px solid'}
           actions={renderActions()}
           name={'apiTest'}
-          language={LanguageMapper.get(method)!}
+          language={LanguageMapper.get(formatType)!}
           defaultVal={''}
-          height={200}
+          height={240}
           width={'100%'}
         />
       </div>

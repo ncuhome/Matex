@@ -1,16 +1,13 @@
 
 .con{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
   border-radius: 10px;
   background-color: transparent;
+  position: relative;
+  margin-top: -5px;
 
   .editorCon{
     flex: 1;
@@ -53,15 +50,6 @@
 }
 
 .active{
-  background-color: white;
-  animation: scaleUp 0.5s ease-in-out;
-}
-
-@keyframes scaleUp {
-  0% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
+  background-color: #2185D0!important;
+  color: white!important;
 }
