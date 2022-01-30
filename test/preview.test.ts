@@ -35,29 +35,30 @@ const options: WaitOn.WaitOnOptions = {
     const page = await context.newPage();
     // Go to http://localhost:3000/
     await page.goto('http://localhost:5000/');
-    // Go to http://localhost:3000/login
-    await page.goto('http://localhost:5000/login');
+    // Go to http://localhost:3000/#/login
+    await page.goto('http://localhost:5000/#/login');
     // Click text=登录页面
     await page.click('text=登录页面');
-    // assert.equal(page.url(), 'http://localhost:3000/collect');
-    // Click text=Body
-    await page.waitForTimeout(5000);
+    // assert.equal(page.url(), 'http://localhost:3000/#/apiTest');
+    // Click text=Params
+    await page.click('text=Params');
     await page.screenshot({ path: './test/screenshot/screenshot.png' });
-    await page.click('text=Body');
-    await page.screenshot({ path: './test/screenshot/page_collection.png' });
+    // assert.equal(page.url(), 'http://localhost:3000/#/apiTest/params');
     // Click text=Headers
     await page.click('text=Headers');
-    // Click text=虚拟接口
-    await page.click('text=虚拟接口');
-    await page.screenshot({ path: './test/screenshot/page_mock.png' });
-    // assert.equal(page.url(), 'http://localhost:3000/mock');
+    // assert.equal(page.url(), 'http://localhost:3000/#/apiTest/headers');
+    // Click text=Body
+    await page.click('text=Body');
+    // assert.equal(page.url(), 'http://localhost:3000/#/apiTest/body');
+    // Click #root div div >> :nth-match(div:has-text("虚拟接口"), 4)
+    await page.click('#root div div >> :nth-match(div:has-text("虚拟接口"), 4)');
+    // assert.equal(page.url(), 'http://localhost:3000/#/mock');
     // Click text=压力测试
     await page.click('text=压力测试');
-    await page.screenshot({ path: './test/screenshot/benchmark.png' });
-    // assert.equal(page.url(), 'http://localhost:3000/benchmark');
+    // assert.equal(page.url(), 'http://localhost:3000/#/benchmark');
     // Click text=敬请期待
     await page.click('text=敬请期待');
-    // assert.equal(page.url(), 'http://localhost:3000/ok');
+    // assert.equal(page.url(), 'http://localhost:3000/#/ok');
     // ---------------------
     await context.close();
     await browser.close();
