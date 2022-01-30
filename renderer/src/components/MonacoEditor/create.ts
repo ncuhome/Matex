@@ -93,7 +93,7 @@ export const useEditor = ({
       model: language === 'json' ? model : undefined,
       language,
       readOnly,
-      automaticLayout: true,
+      automaticLayout: false,
       fontSize: 14,
       fontFamily: 'JetBrains Mono NL Light',
       scrollbar: {
