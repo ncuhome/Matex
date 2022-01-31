@@ -1,35 +1,25 @@
 import { GetReqParams } from './type';
 import MatexReq from 'got';
 import * as entities from 'entities';
+import { judgementType } from '../../utils/judgement';
+import { ApiTestResProps } from '../../../../common';
+import { getDescription } from '../../utils/statusCodeMapping';
 
 export class RequestAction {
-  static async doGet(props: GetReqParams) {
+  static async doGet(props: GetReqParams): Promise<ApiTestResProps> {
     const { url, headers, params } = props;
-    console.log(params);
     const res = await MatexReq.get(url, {
       headers,
       searchParams: params
     });
-    console.log(params);
-    // MatexReq.post(url, {
-    //   body: '1234',
-    //   headers: {
-    //     // ...headers,
-    //     'Content-Type': 'text/plain'
-    //   }
-    // });
-    console.log(res.headers);
-    if (res.headers['content-type']?.includes('text/html')) {
-      return entities.encodeHTML5(res.body);
-    } else {
-      return res.body;
-    }
+    const type = judgementType(res.headers['content-type'] ?? 'text/plain');
+    return {
+      type,
+      desc: getDescription(res.statusCode),
+      statusCode: res.statusCode,
+      body: res.body,
+      headers: res.headers,
+      timer: res.timings.phases
+    };
   }
-
-  // static async doPost(params: GetReqParams) {
-  //   const { url, headers } = params;
-  //   const res = await MatexReq.post(url, headers);
-  //   console.log(res);
-  //   return res;
-  // }
 }
