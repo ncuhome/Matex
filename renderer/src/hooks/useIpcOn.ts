@@ -2,12 +2,9 @@ import { useEffect } from 'react';
 import { MatexWin } from '../global';
 import type { IpcRendererEvent } from 'electron';
 
-interface IpcProps {
-  channel: string;
-  listener: (e: IpcRendererEvent) => void;
-}
+export type IpcListener = (e: IpcRendererEvent, msg?: any) => void;
 
-const useIpcOn = ({ channel, listener }: IpcProps) => {
+const useIpcOn = (channel: string, listener: IpcListener) => {
   useEffect(() => {
     MatexWin.ipc?.on(channel, listener);
     return () => {

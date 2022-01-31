@@ -22,7 +22,6 @@ export const useSendReq = () => {
     paramsArr.forEach((item) => {
       Object.assign(params, item);
     });
-    console.log(params);
     const headers: { [key: string]: string } = {};
     headerList.slice(0, headerList.length - 1).forEach((item) => {
       headers[item.key] = item.value;
