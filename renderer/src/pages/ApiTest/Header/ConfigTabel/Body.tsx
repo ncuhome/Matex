@@ -84,7 +84,7 @@ const BodyTable = () => {
     if (activeBody === 'binary') {
       return <UploadFile />;
     } else if (activeBody === 'raw') {
-      const language = LanguageMapper.get(activeRawType.toUpperCase()) ?? 'text/plain';
+      const language = LanguageMapper.get(activeRawType) ?? 'text/plain';
       console.log(language);
       return (
         <MonacoEditor

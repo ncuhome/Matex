@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 10px;
+  margin-right: 10px;
 
   .list{
     flex: 1;
@@ -17,32 +17,20 @@
     border-radius: 20px;
     box-shadow: var(--dark-shadow);
     overflow: hidden auto;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 
     .header{
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 10px;
-      margin-bottom: 10px;
       padding: 0 20px;
     }
 
     .recordList{
-      padding:10px 20px;
+      padding: 10px 20px;
       overflow: hidden auto;
       border-radius: 20px;
     }
-  }
-
-  .ops{
-    margin-top: 20px;
-    height: 70px;
-    background: var(--greyLight-1);
-    border-radius: 20px;
-    box-shadow: var(--dark-shadow);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
   }
 }
