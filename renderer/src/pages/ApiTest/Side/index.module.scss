@@ -14,23 +14,36 @@
     display: flex;
     flex-direction: column;
     background: var(--greyLight-1);
-    border-radius: 20px;
-    box-shadow: var(--dark-shadow);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px #BEC0BE;
     overflow: hidden auto;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 
     .header{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
+      margin: 10px -10px;
       padding: 0 20px;
     }
 
     .recordList{
       padding: 10px 20px;
       overflow: hidden auto;
-      border-radius: 20px;
+      border-radius: 10px;
     }
   }
+}
+
+.ops {
+  background-color: #F8F9FA;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px #BEC0BE;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  justify-items: center;
+  padding: 10px 0;
+
 }

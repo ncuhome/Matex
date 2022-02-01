@@ -17,7 +17,7 @@
   }
 }
 .operationCon {
-  box-shadow: var(--dark-shadow);
+  box-shadow: 0 2px 5px #BEC0BE;
   border-radius: 10px;
 }
 
@@ -64,28 +64,4 @@
 .active {
   background-color: #2185d0 !important;
   color: white !important;
-}
-
-.ops {
-  margin-left: 15px;
-  margin-right: 10px;
-  width: 200px;
-  background: var(--greyLight-1);
-  border-radius: 10px;
-  box-shadow: var(--dark-shadow);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  justify-items: center;
-  padding: 15px 0;
-
-  .btns {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    justify-items: center;
-  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { ApiList } from '/@cmp/ApiList';
-import { Label } from 'semantic-ui-react';
+import { Button, Icon, Label } from 'semantic-ui-react';
 
 const CollectSide = () => {
   return (
@@ -23,6 +23,17 @@ const CollectSide = () => {
           <ApiList url={'http://localhost:3000/test'} />
           <ApiList url={'http://localhost:3000/test'} />
         </div>
+      </div>
+      <div className={styles.ops}>
+        <Button icon>
+          <Icon name="save" />
+        </Button>
+        <Button icon>
+          <Icon name="tag" />
+        </Button>
+        <Button icon>
+          <Icon name="trash alternate" />
+        </Button>
       </div>
     </div>
   );

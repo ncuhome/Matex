@@ -43,25 +43,6 @@ const Body = () => {
           width={'100%'}
         />
       </div>
-      <div className={styles.ops}>
-        <Label style={{ marginLeft: -40 }} color={'black'}>
-          <Icon name="wrench" /> 操作
-        </Label>
-        <div className={styles.btns}>
-          <Button icon labelPosition="left">
-            <Icon name="save" />
-            保存
-          </Button>
-          <Button icon labelPosition="left">
-            <Icon name="tag" />
-            标签
-          </Button>
-          <Button icon labelPosition="left">
-            <Icon name="trash alternate" />
-            删除
-          </Button>
-        </div>
-      </div>
     </div>
   );
 };
