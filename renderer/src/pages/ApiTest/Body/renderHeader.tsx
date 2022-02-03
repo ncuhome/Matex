@@ -56,6 +56,9 @@ export const renderHeader = ({ formatType, handleChangeFormat }: Props) => {
                 <Fragment key={item}>
                   <Button className={clsx([active && styles.active])} onClick={() => setDisplayItem(item)}>
                     {item}
+                    <Label color={'purple'} style={{ marginLeft: 8 }} circular size={'small'}>
+                      2
+                    </Label>
                   </Button>
                 </Fragment>
               );
