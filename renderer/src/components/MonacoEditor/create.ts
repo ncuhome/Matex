@@ -124,7 +124,6 @@ export const useEditor = ({
     const exist = destroyEditor();
     if (domRef.current) {
       const initValue = exist ? existValue : defaultVal ?? '';
-      console.log('initValue', initValue);
       createEditor(domRef.current, initValue);
     }
   }, [language]);

@@ -4,7 +4,7 @@ export const MethodsOptions = ['Get', 'Post', 'Put', 'Delete'];
 
 export const TabsItem: TabItems[] = ['Params', 'Headers', 'Body'];
 
-export const FormatOptions = ['HTML', 'JSON', 'TEXT'];
+export const FormatOptions = ['JSON', 'TEXT', 'HTML'];
 export const ResDisplayItems: ResDisplayItemsType[] = ['Body', 'Headers', 'Cookies'];
 
 export const Actions = ['Pretty', 'Raw', 'Preview'];

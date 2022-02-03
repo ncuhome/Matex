@@ -7,7 +7,6 @@ export type IpcListener = (e: IpcRendererEvent, msg?: any) => void;
 const useIpcOn = (channel: string, listener: IpcListener) => {
   const listenerRef = useRef<IpcListener>(listener);
   useEffect(() => {
-    console.log('listener改变');
     MatexWin.ipc?.removeListener(channel, listenerRef.current);
     listenerRef.current = listener;
     MatexWin.ipc?.on(channel, listener);
