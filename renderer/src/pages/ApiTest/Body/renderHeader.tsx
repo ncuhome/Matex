@@ -43,7 +43,7 @@ export const renderHeader = ({ formatType, handleChangeFormat }: Props) => {
         position={'bottom center'}
         pinned
         trigger={
-          <Label ribbon as="a" color={'blue'} style={{ marginLeft: 15 }}>
+          <Label ribbon as="a" color={'blue'} style={{ marginLeft: 32, marginTop: 13, height: 24 }}>
             {getLabel(displayItem)}
           </Label>
         }
@@ -113,10 +113,10 @@ export const renderHeader = ({ formatType, handleChangeFormat }: Props) => {
   };
   const show = displayItem === 'Body';
   return (
-    <>
+    <div className={styles.header}>
       {renderLabel()}
       {show && renderActions()}
-    </>
+    </div>
   );
 };
 

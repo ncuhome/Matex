@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styles from './index.module.scss';
-import { Icon, Popup, Progress } from 'semantic-ui-react';
+import { Icon, Popup } from 'semantic-ui-react';
 import { useAtomValue } from 'jotai/utils';
 import { apiTestResDataAtom } from '/@/store/apiTestStore';
 
@@ -22,7 +22,7 @@ export const StatusCard = () => {
     }
     return (
       <div className={styles.timing}>
-        {timeList.map((item, index) => {
+        {timeList.map((item) => {
           return (
             <Fragment key={item.key}>
               <div className={styles.timingLine}>

@@ -18,7 +18,6 @@ interface MonacoEditorProps {
   language: string;
   readOnly?: boolean;
   enabledMinMap?: boolean;
-  actions?: React.ReactNode;
   onChange?: (changes: monaco.editor.IModelContentChangedEvent, value: string | undefined) => void;
   onBlur?: () => void;
   watchModelMarkers?: (marks: monaco.editor.IMarker[]) => void;
@@ -39,7 +38,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   readOnly = false,
   autoFormat = true,
   className = '',
-  actions,
   border,
   onChange = () => {},
   onBlur = () => {},
@@ -68,17 +66,10 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     }
   }, [monacoEl]);
 
-  const renderActions = () => {
-    if (actions) {
-      return <div className={styles.operate}>{actions}</div>;
-    }
-  };
-
-  const curHeight = actions ? height : parseInt(String(height)) + 50;
+  const curHeight = parseInt(String(height)) + 50;
 
   return (
     <div className={clsx([styles.con, shadow && styles.shadow])} style={{ border }}>
-      {renderActions()}
       <div
         id={'monacoEditor'}
         style={{ height: curHeight }}

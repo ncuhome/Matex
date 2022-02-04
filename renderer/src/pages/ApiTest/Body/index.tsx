@@ -40,15 +40,14 @@ const Body = () => {
 
   return (
     <div className={styles.con}>
+      {renderHeader({ formatType, handleChangeFormat })}
       <div className={styles.editorCon}>
         <MonacoEditor
-          shadow={true}
-          border={'transparent 1px solid'}
-          actions={renderHeader({ formatType, handleChangeFormat })}
+          shadow={false}
           name={'apiTest'}
           language={LanguageMapper.get(formatType.toLowerCase())!}
           defaultVal={''}
-          height={235}
+          height={185}
           width={'100%'}
         />
       </div>
