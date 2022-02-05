@@ -38,7 +38,7 @@ const options: WaitOn.WaitOnOptions = {
     // Go to http://localhost:3000/#/login
     await page.goto('http://localhost:5000/#/login');
     // Click text=登录页面
-    await page.click('text=登录页面');
+    await page.click('text=点我登录');
     // assert.equal(page.url(), 'http://localhost:3000/#/apiTest');
     // Click text=Params
     await page.click('text=Params');
