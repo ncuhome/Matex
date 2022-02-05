@@ -53,15 +53,13 @@
     "chalk": "^5.0.0",
     "concurrently": "^6.3.0",
     "cross-env": "^7.0.3",
-    "electron": "15.3.1",
+    "electron": "16.0.8",
     "electron-builder": "^22.14.5",
     "electron-debug": "^3.2.0",
-    "electron-rebuild": "^3.2.5",
-    "electron-reload": "^2.0.0-alpha.1",
+    "electron-rebuild": "^3.2.7",
     "eslint": "^8.2.0",
     "eslint-plugin-react": "^7.27.0",
     "glob": "^7.2.0",
-    "nodemon": "^2.0.15",
     "parcel": "^2.2.0",
     "pg-hstore": "^2.3.4",
     "playwright": "^1.17.1",
@@ -75,7 +73,6 @@
   },
   "dependencies": {
     "@sentry/electron": "^2.5.4",
-    "ahooks": "^2.10.12",
     "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "clsx": "^1.1.1",
@@ -107,8 +104,7 @@
     "sequelize": "^6.12.0-beta.3",
     "signale": "^1.4.0",
     "sqlite3": "^5.0.2",
-    "winston": "^3.3.3",
-    "zustand": "^3.6.5"
+    "winston": "^3.3.3"
   },
   "engines": {
     "node": "^12.20.0 || >=14.13.1"
