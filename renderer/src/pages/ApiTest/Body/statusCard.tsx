@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 import { Icon, Popup } from 'semantic-ui-react';
 import { useAtomValue } from 'jotai/utils';
 import { apiTestResDataAtom } from '/@/store/apiTestStore';
+import clsx from 'clsx';
 
 interface Timer {
   key: string;
@@ -13,24 +14,27 @@ export const StatusCard = () => {
   const resData = useAtomValue(apiTestResDataAtom);
 
   const renderTiming = () => {
-    console.log(resData!.timer.total);
     const timeList: Timer[] = [];
     for (const key in resData!.timer) {
-      console.log(key);
       // @ts-ignore
-      timeList.push({ key, value: resData.timer[key] });
+      timeList.push({ key: key, value: resData.timer[key] });
     }
     return (
       <div className={styles.timing}>
         {timeList.map((item) => {
+          const isTotal = item.key === 'Total';
           return (
             <Fragment key={item.key}>
-              <div className={styles.timingLine}>
+              <div className={clsx([isTotal && styles.totalLine, styles.timingLine])}>
                 <div className={styles.name}>{item.key}</div>
                 <div className={styles.progressCon}>
-                  <progress className={styles.progress} max={resData!.timer.total} value={item.value ?? 0} />
+                  <progress
+                    className={clsx([styles.progress, isTotal && styles.total])}
+                    max={resData!.timer.Total}
+                    value={item.value ?? 0}
+                  />
                 </div>
-                <div className={styles.time}>{item.value ?? 0}ms</div>
+                <div className={clsx([styles.time])}>{item.value ?? 0}ms</div>
               </div>
             </Fragment>
           );
@@ -45,6 +49,7 @@ export const StatusCard = () => {
       <div className={styles.statusCard} style={{ color }}>
         <div className={styles.statusCode}>{resData.statusCode}</div>
         <div className={styles.statusDesc}>{resData.desc}</div>
+        <div className={styles.statusSize}>{resData.size}</div>
         <div className={styles.statusTiming}>
           <Popup on={'click'} position={'top center'} trigger={<Icon name="clock" />}>
             {renderTiming()}

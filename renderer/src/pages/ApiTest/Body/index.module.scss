@@ -57,6 +57,10 @@
       cursor: pointer;
     }
 
+    .statusSize{
+      margin:0 12px 0 0;
+    }
+
     .statusDesc {
       margin: 0 12px 0 12px;
       max-width: 130px;
@@ -78,6 +82,20 @@
   align-items: center;
   justify-content: start;
 
+  .totalLine{
+    color: #636CD7;
+    margin-top: 20px;
+    text-transform: uppercase;
+
+    .total{
+      visibility: hidden;
+    }
+
+    .totalText{
+      color: teal;
+    }
+  }
+
   .timingLine {
     display: flex;
     width: 100%;
@@ -89,7 +107,8 @@
       margin: -2px;
       font-size: 13px;
       width: 150px;
-      color: blueviolet;
+      color: #636CD7;
+      font-weight: bold;
       text-align: center;
       letter-spacing: 1px;
     }
@@ -97,6 +116,7 @@
       height: 40px;
       margin: -3px 12px 0;
       font-size: 12px;
+      text-transform: lowercase;
     }
     .progressCon {
       height: 40px;
@@ -108,7 +128,7 @@
         width: 100px;
 
         &::-webkit-progress-bar{
-          background-color: #E0E1E2;
+          background-color: #DAE0E7;
           border-radius: 3px;
         }
         /* 表示已完成进度背景色 */
