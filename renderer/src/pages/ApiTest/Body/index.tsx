@@ -1,25 +1,31 @@
 import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import styles from './index.module.scss';
-import MonacoEditor from '/@cmp/MonacoEditor';
-import { myEmitter } from '/@/utils/EventEmiter';
 import type { IpcRendererEvent } from 'electron';
-import { LanguageMapper } from '/@/components/MonacoEditor/utils';
 import { ApiTest_Channel } from '/@common/ipc/channel';
 import type { FormatType } from '/@/type/apiTest';
 import { ApiTestResProps } from '/@common/index';
-import { useAtom } from 'jotai';
 import { apiTestResDataAtom } from '/@/store/apiTestStore';
 import useIpcOn from '/@/hooks/useIpcOn';
-import { renderHeader } from '/@/pages/ApiTest/Body/renderHeader';
+import { Header } from '/@/pages/ApiTest/Body/Header';
+import { identifyType } from '/@/pages/ApiTest/Body/utils';
+import renderContent from '/@/pages/ApiTest/Body/renderContent';
+import { useUpdateAtom } from 'jotai/utils';
+import { judgementType } from '/@/utils/typeUtils';
 
 const Body = () => {
   const [formatType, setFormatType] = useState<FormatType>('JSON');
-  const [resData, setResData] = useAtom(apiTestResDataAtom);
+  const setResData = useUpdateAtom(apiTestResDataAtom);
+  const [editAble, setEditAble] = useState(true);
 
   const listen = useCallback(
     (e: IpcRendererEvent, res: ApiTestResProps) => {
-      if (formatType.toLowerCase() !== res.type) {
-        setFormatType(res.type.toUpperCase() as FormatType);
+      const resType = judgementType(res.type).toUpperCase();
+      if (formatType !== resType) {
+        if (identifyType(resType.toLowerCase()) && !editAble) {
+          setFormatType(resType as FormatType);
+        } else {
+          setEditAble(false);
+        }
       }
       setResData(res);
     },
@@ -28,29 +34,14 @@ const Body = () => {
 
   useIpcOn(ApiTest_Channel.Response, listen);
 
-  useEffect(() => {
-    if (resData) {
-      myEmitter.emit('monacoEditor-apiTest', resData.body);
-    }
-  }, [resData]);
-
   const handleChangeFormat = (event: SyntheticEvent, { value }: any) => {
     setFormatType(value);
   };
 
   return (
     <div className={styles.con}>
-      {renderHeader({ formatType, handleChangeFormat })}
-      <div className={styles.editorCon}>
-        <MonacoEditor
-          shadow={false}
-          name={'apiTest'}
-          language={LanguageMapper.get(formatType.toLowerCase())!}
-          defaultVal={''}
-          height={185}
-          width={'100%'}
-        />
-      </div>
+      <Header formatType={formatType} handleChangeFormat={handleChangeFormat} />
+      <div className={styles.content}>{renderContent(editAble, formatType)}</div>
     </div>
   );
 };

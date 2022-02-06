@@ -9,12 +9,19 @@
   border: #e0e1e2 1px solid;
   box-shadow: var(--dark-shadow);
 
-  .editorCon {
+  .content {
     flex: 1;
-    width: 100%;
     background-color: transparent;
     border-radius: 8px;
+    position: relative;
+    overflow: hidden;
   }
+}
+
+.idleImg{
+  height: 230px;
+  width: 100%;
+  object-fit: contain;
 }
 
 .header{

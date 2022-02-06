@@ -7,14 +7,14 @@ import { myEmitter } from '/@/utils/EventEmiter';
 import { FormatType, ResDisplayItemsType } from '/@/type/apiTest';
 import { apiTestResDataAtom } from '/@/store/apiTestStore';
 import { useAtomValue } from 'jotai/utils';
-import { StatusCard } from '/@/pages/ApiTest/Body/statusCard';
+import { StatusCard } from '/@/pages/ApiTest/Body/StatusCard';
 
 interface Props {
   formatType: FormatType;
   handleChangeFormat: (event: SyntheticEvent, value: any) => void;
 }
 
-export const renderHeader = ({ formatType, handleChangeFormat }: Props) => {
+export const Header = ({ formatType, handleChangeFormat }: Props) => {
   const [activeAction, setActiveAction] = useState('Pretty');
   const [displayItem, setDisplayItem] = useState<ResDisplayItemsType>('Body');
   const resData = useAtomValue(apiTestResDataAtom);

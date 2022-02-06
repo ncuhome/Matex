@@ -6,7 +6,7 @@ import { getResponse } from '../utils/getResponse';
 export class RequestAction {
   static async doGet(props: GetReqParams): Promise<ApiTestResProps> {
     const { url, headers, params } = props;
-    let response: Response<string>;
+    let response: Response<any>;
     try {
       response = await MatexReq.get(url, {
         headers,

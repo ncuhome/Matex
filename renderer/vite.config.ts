@@ -16,6 +16,7 @@ export default defineConfig({
   plugins: [reactRefresh()],
   base: '',
   logLevel: 'info',
+  publicDir: join(PACKAGE_ROOT, 'assets'),
   resolve: {
     alias: {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',

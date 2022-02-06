@@ -1,6 +1,6 @@
 import { Timings } from '@szmarczak/http-timer';
 import { Response } from 'got';
-import { judgementType } from './judgement';
+import { judgementType, rawTypes } from './judgement';
 import { getDescription } from './statusCodeMapping';
 import { ApiTestResProps } from '../../../../common';
 import { Blob } from 'buffer';
@@ -17,10 +17,10 @@ export const getResponse = (res: Response<string>): ApiTestResProps => {
     size = 0;
   }
   return {
-    type,
+    type: res.headers['content-type'] ?? 'text/plain',
     desc: getDescription(res.statusCode),
     statusCode: res.statusCode,
-    body: res.body,
+    body: rawTypes.includes(type) ? res.rawBody : res.body,
     size: fileSize(size),
     headers: res.headers,
     timer: timings
@@ -29,10 +29,10 @@ export const getResponse = (res: Response<string>): ApiTestResProps => {
 
 const getTimings = (timings: Timings) => {
   return {
-    ['Socket-initialization']: timings.phases.wait,
-    ['Dns-lookup']: timings.phases.dns,
-    ['Tcp-connection']: timings.phases.tcp,
-    ['First-byte']: timings.phases.firstByte,
+    ['Socket-Initialization']: timings.phases.wait,
+    ['Dns-Lookup']: timings.phases.dns,
+    ['Tcp-Connection']: timings.phases.tcp,
+    ['First-Byte']: timings.phases.firstByte,
     ['Download']: timings.phases.download,
     ['Total']: timings.phases.total
   };

@@ -1,4 +1,5 @@
 export const rawTypes = ['image', 'audio', 'video', 'pdf', 'word'];
+export const EditorAbleType = ['json', 'text', 'html', 'xml', 'javascript'];
 
 export const judgementType = (typeStr: string) => {
   if (typeStr.includes('text/html')) {
@@ -20,6 +21,6 @@ export const judgementType = (typeStr: string) => {
   } else if (typeStr.includes('application/msword')) {
     return 'word';
   } else {
-    return 'text/plain';
+    return 'other';
   }
 };
