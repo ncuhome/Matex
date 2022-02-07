@@ -4,6 +4,7 @@ import type { IncomingHttpHeaders } from 'http';
 export interface NodeApiProps {
   NODE_ENV: 'development' | 'production' | string;
   ipc: IpcRenderer | null;
+  Clipboard: Electron.Clipboard;
   MessagePort: MessagePort | null;
   decodeHTML5: (str: string | any[]) => string;
 }

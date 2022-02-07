@@ -1,10 +1,12 @@
 import { decodeHTML5 } from 'entities';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, clipboard } from 'electron';
 import type { NodeApiProps } from '../../common';
 
+console.log(clipboard.availableFormats());
 const exposeThings: Omit<NodeApiProps, 'MessagePort'> = {
   NODE_ENV: process.env.NODE_ENV,
   ipc: ipcRenderer,
+  Clipboard: clipboard,
   decodeHTML5: decodeHTML5
 };
 Object.entries(exposeThings).forEach(([key, value]) => {
