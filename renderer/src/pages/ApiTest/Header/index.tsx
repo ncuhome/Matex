@@ -9,11 +9,14 @@ import Tabs from './Tabs';
 import { ToastContainer, toast } from 'react-toastify';
 import { useAtom } from 'jotai';
 import { apiTestMethodAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
-import { showMenu } from '/@/pages/ApiTest/Header/contextMenu';
+import { menuOptions } from '/@/pages/ApiTest/Header/contextMenu';
+import { MatexWin } from '/@/global';
+import { useContextMenu } from '/@/hooks/useContextMenu';
 
 const Header = () => {
   const [method, setMethod] = useAtom(apiTestMethodAtom);
   const [url, setUrl] = useAtom(apiTestUrlAtom);
+  const { showMenu } = useContextMenu({ options: menuOptions });
 
   const { sendReq } = useSendReq();
   const notify = () => toast('so easy !');
@@ -26,7 +29,6 @@ const Header = () => {
   };
 
   const doFetch = () => {
-    // notify();
     url.trim() && sendReq();
   };
 

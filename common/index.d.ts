@@ -22,13 +22,13 @@ export interface ApiTestReqProps {
 
 export interface ApiTestResProps<T = any> {
   type:
-    | 'text/html'
-    | 'text/plain'
-    | 'application/xml'
-    | 'application/json'
-    | 'application/pdf'
-    | 'application/msword'
-    | string;
+  | 'text/html'
+  | 'text/plain'
+  | 'application/xml'
+  | 'application/json'
+  | 'application/pdf'
+  | 'application/msword'
+  | string;
   statusCode: number;
   desc: string;
   size: string;
