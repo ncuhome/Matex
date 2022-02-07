@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import { Actions, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model';
 import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { myEmitter } from '/@/utils/EventEmiter';
+import { Emitter } from '/@/utils/EventEmiter';
 import { ResDisplayItemsType } from '/@/type/apiTest';
 import { apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
 import { useAtomValue } from 'jotai/utils';
@@ -32,9 +32,9 @@ export const Header = () => {
 
   useEffect(() => {
     if (displayItem === 'Body') {
-      myEmitter.emit('monacoEditor-apiTest', resData?.body);
+      Emitter.emit('monacoEditor-apiTest', resData?.body);
     } else {
-      myEmitter.emit('monacoEditor-apiTest', JSON.stringify(resData?.headers));
+      Emitter.emit('monacoEditor-apiTest', JSON.stringify(resData?.headers));
     }
   }, [displayItem]);
 

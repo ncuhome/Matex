@@ -63,16 +63,15 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   useEffect(() => {
     if (monacoEl) {
       createEditor(monacoEl.current!, existValue);
+      console.log('Editor初始化完成');
     }
   }, [monacoEl]);
-
-  const curHeight = parseInt(String(height)) + 50;
 
   return (
     <div className={clsx([styles.con, shadow && styles.shadow])} style={{ border }}>
       <div
         id={'monacoEditor'}
-        style={{ height: curHeight }}
+        style={{ height }}
         className={clsx([styles.editor, className])}
         ref={monacoEl}
       />

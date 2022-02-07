@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import * as monaco from 'monaco-editor';
-import { myEmitter } from '/@/utils/EventEmiter';
+import { Emitter } from '/@/utils/EventEmiter';
 import { useEditors } from '/@/store/commonStore';
+import Emittery from 'emittery';
 
 interface ListeningProps {
   name: string;
@@ -25,25 +26,24 @@ export const useEditorListen = ({
 }: ListeningProps) => {
   const { editors } = useEditors();
   const editor = editors.get(name);
+  const listenerRef = useRef<Emittery.UnsubscribeFn | null>(null);
 
   const setVal = useCallback(
-    (value: string) => {
-      console.log('收到');
+    async (value: string) => {
       if (value) {
         editor?.setValue(value);
-        editor?.getAction('editor.action.formatDocument')?.run();
+        await editor?.getAction('editor.action.formatDocument')?.run();
       }
     },
     [editor]
   );
-
   useEffect(() => {
-    myEmitter.offAll(`monacoEditor-${name}`);
+    listenerRef.current?.();
     if (editor) {
-      myEmitter.on<string>(`monacoEditor-${name}`, setVal);
+      listenerRef.current = Emitter.on(`monacoEditor-${name}`, setVal);
     }
     return () => {
-      myEmitter.offAll(`monacoEditor-${name}`);
+      listenerRef.current?.();
     };
   }, [editor]);
 

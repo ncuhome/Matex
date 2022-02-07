@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useCallback, useState } from 'react';
+import React from 'react';
 import styles from './index.module.scss';
 import type { IpcRendererEvent } from 'electron';
 import { ApiTest_Channel } from '/@common/ipc/channel';

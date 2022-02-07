@@ -26,7 +26,6 @@ export const useSendReq = () => {
     headerList.slice(0, headerList.length - 1).forEach((item) => {
       headers[item.key] = item.value;
     });
-    console.log({ url, method, params, headers });
     MatexWin.ipc?.send(ApiTest_Channel.Request, { url, method, params, headers });
   };
 
