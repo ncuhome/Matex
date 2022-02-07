@@ -6,7 +6,7 @@ import { useAtomValue } from 'jotai/utils';
 import { apiTestResDataAtom, apiTestBodyFormatAtom } from '/@/store/apiTestStore';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
-import Preview from '/@cmp/Preview';
+import PreviewRes from '/@cmp/PreviewResponse';
 import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
 
@@ -27,7 +27,7 @@ const Content = () => {
       const resType = judgementType(resData.type);
       if (!isEditorAble(resType)) {
         if (isPreviewAble(resType)) {
-          return <Preview src={getPreviewSrc(resData.body, resData.type)} />;
+          return <PreviewRes src={getPreviewSrc(resData.body, resData.type)} />;
         } else {
           return <div>无法预览</div>;
         }
