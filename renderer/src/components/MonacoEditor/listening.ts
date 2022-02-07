@@ -48,18 +48,20 @@ export const useEditorListen = ({
   }, [editor]);
 
   useEffect(() => {
-    let model = editor?.getModel();
-    model?.onDidChangeContent((e) => {
-      const val = model?.getValue();
-      onChange(e, val);
-      getValue(val);
-    });
-    editor?.onDidBlurEditorWidget(() => {
-      onBlur();
-      autoFormat && editor?.getAction('editor.action.formatDocument').run();
-    });
-    editor?.onDidFocusEditorWidget(() => {
-      onFocus();
-    });
+    if (editor) {
+      let model = editor.getModel();
+      model?.onDidChangeContent((e) => {
+        const val = model?.getValue();
+        onChange(e, val);
+        getValue(val);
+      });
+      editor.onDidBlurEditorWidget(() => {
+        onBlur();
+        autoFormat && editor?.getAction('editor.action.formatDocument').run();
+      });
+      editor.onDidFocusEditorWidget(() => {
+        onFocus();
+      });
+    }
   }, [editor]);
 };

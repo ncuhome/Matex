@@ -22,7 +22,7 @@ export const StatusCard = () => {
     return (
       <div className={styles.timing}>
         {timeList.map((item) => {
-          const isTotal = item.key === 'Total';
+          const isTotal = item.key === 'total';
           return (
             <Fragment key={item.key}>
               <div className={clsx([isTotal && styles.totalLine, styles.timingLine])}>
@@ -30,7 +30,7 @@ export const StatusCard = () => {
                 <div className={styles.progressCon}>
                   <progress
                     className={clsx([styles.progress, isTotal && styles.total])}
-                    max={resData!.timer.Total}
+                    max={resData!.timer.total}
                     value={item.value ?? 0}
                   />
                 </div>

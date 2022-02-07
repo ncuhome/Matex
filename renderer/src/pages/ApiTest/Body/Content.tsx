@@ -9,14 +9,16 @@ import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
 import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
+import { useUpdateEditorValue } from '/@/store/commonStore';
 
 const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
   const formatType = useAtomValue(apiTestBodyFormatAtom);
-
+  const setEditorValue = useUpdateEditorValue('apiTest');
   useEffect(() => {
     if (resData) {
       Emitter.emit('monacoEditor-apiTest', resData.body);
+      setEditorValue(resData.body);
     }
   }, [resData]);
 
@@ -34,6 +36,9 @@ const Content = () => {
       } else {
         return (
           <MonacoEditor
+            onChange={(changes, value) => {
+              setEditorValue(value ?? '');
+            }}
             shadow={false}
             name={'apiTest'}
             language={LanguageMapper.get(formatType.toLowerCase())!}

@@ -89,8 +89,6 @@ const BodyTable = () => {
       return (
         <MonacoEditor
           onChange={(changes, value) => {
-            console.log(changes, 'changes');
-            console.log(value);
             setEditorValue(value ?? '');
           }}
           shadow={false}

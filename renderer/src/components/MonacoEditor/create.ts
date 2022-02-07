@@ -122,6 +122,7 @@ export const useEditor = ({
   //更改语言重新实例化编辑器
   useEffect(() => {
     const exist = destroyEditor();
+    console.log('更改语言为', language);
     if (domRef.current) {
       const initValue = exist ? existValue : defaultVal ?? '';
       createEditor(domRef.current, initValue);
