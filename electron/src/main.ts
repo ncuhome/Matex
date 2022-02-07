@@ -1,5 +1,5 @@
 import { app, BrowserWindow, MessageChannelMain } from 'electron';
-import { PortChannel } from './message';
+import { PortChannel } from './request';
 import { documentsPath, isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './scripts/log';
 import * as Sentry from '@sentry/electron';
