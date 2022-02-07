@@ -9,6 +9,7 @@ import Tabs from './Tabs';
 import { ToastContainer, toast } from 'react-toastify';
 import { useAtom } from 'jotai';
 import { apiTestMethodAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
+import { showMenu } from '/@/pages/ApiTest/Header/contextMenu';
 
 const Header = () => {
   const [method, setMethod] = useAtom(apiTestMethodAtom);
@@ -29,6 +30,11 @@ const Header = () => {
     url.trim() && sendReq();
   };
 
+  const handleContextMenu = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    e.preventDefault();
+    showMenu(e);
+  };
+
   return (
     <>
       <div className={styles.url}>
@@ -43,16 +49,11 @@ const Header = () => {
             trigger={<></>}
           />
         </Button.Group>
-        <Input
+        <input
+          onContextMenu={handleContextMenu}
           value={url}
-          size="large"
           onChange={(e) => setUrl(e.target.value)}
           className={styles.input}
-          icon={
-            <div style={{ display: 'inline', position: 'absolute', right: '6px', top: '6px' }}>
-              <Icon name="clipboard outline" circular link />
-            </div>
-          }
         />
         <Button primary size={'large'} onClick={doFetch}>
           发送

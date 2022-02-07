@@ -17,10 +17,19 @@
 
   .input{
     flex: 1;
-    margin-left: 15px;
-    margin-right: 15px;
+    border-radius: 5px;
+    height: 45px;
+    border: #C4C4C6 2px solid;
+    margin: 0 15px;
     position: relative;
-    color: #F6C4E0;
+    letter-spacing: 1px;
+    padding-left: 10px;
+    color: black;
+    font-family: "JetBrains Mono NL", serif;
+
+    &:focus{
+      outline: none;
+    }
   }
 }
 
@@ -50,3 +59,5 @@
     overflow: auto;
   }
 }
+
+
