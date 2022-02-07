@@ -3,20 +3,18 @@ import star from '/@/assets/icon/star.svg';
 import styles from './index.module.scss';
 import { myEmitter } from '/@/utils/EventEmiter';
 import { useAtomValue } from 'jotai/utils';
-import { apiTestResDataAtom } from '/@/store/apiTestStore';
+import { apiTestResDataAtom, apiTestBodyFormatAtom } from '/@/store/apiTestStore';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
-import type { FormatType } from '/@/type/apiTest';
 import Preview from '/@cmp/Preview';
-import { getPreviewSrc } from '/@/pages/ApiTest/Body/utils';
+import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
+import { judgementType } from '/@/utils/typeUtils';
 
-const renderContent = (editAble: boolean, formatType: FormatType) => {
+const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
-  console.log(resData);
-
+  const formatType = useAtomValue(apiTestBodyFormatAtom);
   useEffect(() => {
     if (resData) {
-      console.log('发送');
       myEmitter.emit('monacoEditor-apiTest', resData.body);
     }
   }, [resData]);
@@ -24,22 +22,26 @@ const renderContent = (editAble: boolean, formatType: FormatType) => {
   if (!resData) {
     return <img src={star} className={styles.idleImg} alt={'等待请求'} />;
   } else {
-    if (editAble) {
-      console.log('11');
+    const resType = judgementType(resData.type);
+    if (isEditorAble(resType)) {
       return (
         <MonacoEditor
           shadow={false}
           name={'apiTest'}
           language={LanguageMapper.get(formatType.toLowerCase())!}
           defaultVal={''}
-          height={185}
+          height={180}
           width={'100%'}
         />
       );
     } else {
-      return <Preview src={getPreviewSrc(resData.body, resData.type)} />;
+      if (isPreviewAble(resType)) {
+        return <Preview src={getPreviewSrc(resData.body, resData.type)} />;
+      } else {
+        return <div className={styles.noPreview}>无法预览</div>;
+      }
     }
   }
 };
 
-export default renderContent;
+export default React.memo(Content);

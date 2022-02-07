@@ -1,47 +1,38 @@
-import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useState } from 'react';
 import styles from './index.module.scss';
 import type { IpcRendererEvent } from 'electron';
 import { ApiTest_Channel } from '/@common/ipc/channel';
 import type { FormatType } from '/@/type/apiTest';
 import { ApiTestResProps } from '/@common/index';
-import { apiTestResDataAtom } from '/@/store/apiTestStore';
+import { apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
 import useIpcOn from '/@/hooks/useIpcOn';
 import { Header } from '/@/pages/ApiTest/Body/Header';
-import { identifyType } from '/@/pages/ApiTest/Body/utils';
-import renderContent from '/@/pages/ApiTest/Body/renderContent';
+import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
+import Content from '/@/pages/ApiTest/Body/Content';
 import { useUpdateAtom } from 'jotai/utils';
 import { judgementType } from '/@/utils/typeUtils';
 
 const Body = () => {
-  const [formatType, setFormatType] = useState<FormatType>('JSON');
+  const setFormatType = useUpdateAtom(apiTestBodyFormatAtom);
   const setResData = useUpdateAtom(apiTestResDataAtom);
-  const [editAble, setEditAble] = useState(true);
 
-  const listen = useCallback(
-    (e: IpcRendererEvent, res: ApiTestResProps) => {
-      const resType = judgementType(res.type).toUpperCase();
-      if (formatType !== resType) {
-        if (identifyType(resType.toLowerCase()) && !editAble) {
-          setFormatType(resType as FormatType);
-        } else {
-          setEditAble(false);
-        }
-      }
-      setResData(res);
-    },
-    [formatType]
-  );
+  const listen = (e: IpcRendererEvent, res: ApiTestResProps) => {
+    const resType = judgementType(res.type);
+    const canEditor = isEditorAble(resType);
+    if (canEditor) {
+      setFormatType(resType.toUpperCase() as FormatType);
+    }
+    setResData(res);
+  };
 
   useIpcOn(ApiTest_Channel.Response, listen);
 
-  const handleChangeFormat = (event: SyntheticEvent, { value }: any) => {
-    setFormatType(value);
-  };
-
   return (
     <div className={styles.con}>
-      <Header formatType={formatType} handleChangeFormat={handleChangeFormat} />
-      <div className={styles.content}>{renderContent(editAble, formatType)}</div>
+      <Header />
+      <div className={styles.content}>
+        <Content />
+      </div>
     </div>
   );
 };

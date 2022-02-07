@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   const doFetch = () => {
-    notify();
+    // notify();
     url.trim() && sendReq();
   };
 

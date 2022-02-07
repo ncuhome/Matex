@@ -20,7 +20,8 @@ export const createMainWin = async (): Promise<BrowserWindow> => {
         webPreferences: {
           preload: preloadPath,
           nodeIntegration: true,
-          contextIsolation: false
+          contextIsolation: false,
+          plugins: true
         }
       });
       if (mainWindow) {

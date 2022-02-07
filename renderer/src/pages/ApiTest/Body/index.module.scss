@@ -26,59 +26,62 @@
 
 .header{
   display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 60px;
 
   .operationCon {
     background-color: #F9FAFB;
     box-shadow: 0 2px 5px #bec0be;
     border-radius: 10px;
   }
+
+  .actionsCon {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+    background-color: #F9FAFB;
+    border-radius: 10px 10px 0 0 ;
+  }
 }
 
-.actionsCon {
+.statusCard {
+  position: absolute;
+  right: 20px;
+  top: 11px;
+  height: 36px;
+  width: fit-content;
+  //background-color: #e0e1e2;
+  border-radius: 4px;
   display: flex;
-  width: 100%;
   align-items: center;
-  justify-content: start;
-  position: relative;
-  background-color: #F9FAFB;
-  border-radius: 10px 10px 0 0 ;
+  justify-content: space-between;
+  padding: 0 13px;
+  border: 2px solid #e0e1e2;
+  color: #2cb5ad;
 
-  .statusCard {
-    position: absolute;
-    right: 20px;
-    top: 11px;
-    height: 36px;
-    width: fit-content;
-    //background-color: #e0e1e2;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 13px;
-    border: 2px solid #e0e1e2;
-    color: #2cb5ad;
+  .statusCode:hover,
+  .statusDesc:hover,
+  .statusTiming:hover {
+    cursor: pointer;
+  }
 
-    .statusCode:hover,
-    .statusDesc:hover,
-    .statusTiming:hover {
-      cursor: pointer;
-    }
+  .statusSize{
+    margin:0 12px 0 0;
+  }
 
-    .statusSize{
-      margin:0 12px 0 0;
-    }
-
-    .statusDesc {
-      margin: 0 12px 0 12px;
-      max-width: 130px;
-      overflow: auto;
-      word-wrap: break-word;
-      word-spacing: 5px;
-      white-space: nowrap;
-      -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
-      -webkit-box-orient: horizontal; /* 垂直排列 */
-      word-break: break-all; /* 内容自动换行 */
-    }
+  .statusDesc {
+    margin: 0 12px 0 12px;
+    max-width: 130px;
+    overflow: auto;
+    word-wrap: break-word;
+    word-spacing: 5px;
+    white-space: nowrap;
+    -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
+    -webkit-box-orient: horizontal; /* 垂直排列 */
+    word-break: break-all; /* 内容自动换行 */
   }
 }
 

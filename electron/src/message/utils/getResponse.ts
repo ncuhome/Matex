@@ -29,11 +29,11 @@ export const getResponse = (res: Response<string>): ApiTestResProps => {
 
 const getTimings = (timings: Timings) => {
   return {
-    ['Socket-Initialization']: timings.phases.wait,
-    ['Dns-Lookup']: timings.phases.dns,
-    ['Tcp-Connection']: timings.phases.tcp,
-    ['First-Byte']: timings.phases.firstByte,
-    ['Download']: timings.phases.download,
-    ['Total']: timings.phases.total
+    ['initialization']: timings.phases.wait,
+    ['dns-lookup']: timings.phases.dns,
+    ['tcp-connection']: timings.phases.tcp,
+    ['first-byte']: timings.phases.firstByte,
+    ['download']: timings.phases.download,
+    ['total']: timings.phases.total
   };
 };

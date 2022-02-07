@@ -3,7 +3,7 @@ import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { produce } from 'immer';
 import { checkIndex } from '/@/store/utils';
 import { InitHeaders } from '/@/model/apiTest.model';
-import { BodyItemType, BodyRawType, ReqMethod, TabItems } from '/@/type/apiTest';
+import { BodyItemType, BodyRawType, FormatType, ReqMethod, TabItems } from '/@/type/apiTest';
 import { ApiTestKVProps, ApiTestReturnType } from '/@/store/apiTestStore/type';
 import { ApiTestResProps } from '/@common/index';
 
@@ -18,6 +18,7 @@ export const apiTestBodyFormsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '',
 export const apiTestActiveBodyTypeAtom = atom<BodyItemType>('form-data');
 export const apiTestBodyRawAtom = atom<BodyRawType>('text');
 export const apiTestBodyUrlencodedAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
+export const apiTestBodyFormatAtom = atom<FormatType>('JSON');
 
 //response
 export const apiTestResDataAtom = atom<ApiTestResProps | undefined>(undefined);

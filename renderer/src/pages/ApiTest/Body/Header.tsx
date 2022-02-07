@@ -4,24 +4,31 @@ import { Actions, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model'
 import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { myEmitter } from '/@/utils/EventEmiter';
-import { FormatType, ResDisplayItemsType } from '/@/type/apiTest';
-import { apiTestResDataAtom } from '/@/store/apiTestStore';
+import { ResDisplayItemsType } from '/@/type/apiTest';
+import { apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
 import { useAtomValue } from 'jotai/utils';
 import { StatusCard } from '/@/pages/ApiTest/Body/StatusCard';
+import { useAtom } from 'jotai';
+import { judgementType } from '/@/utils/typeUtils';
+import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
 
-interface Props {
-  formatType: FormatType;
-  handleChangeFormat: (event: SyntheticEvent, value: any) => void;
-}
-
-export const Header = ({ formatType, handleChangeFormat }: Props) => {
+export const Header = () => {
+  const [formatType, setFormatType] = useAtom(apiTestBodyFormatAtom);
   const [activeAction, setActiveAction] = useState('Pretty');
   const [displayItem, setDisplayItem] = useState<ResDisplayItemsType>('Body');
   const resData = useAtomValue(apiTestResDataAtom);
+  const [showAction, setShowAction] = useState(true);
 
   const formatOptions = FormatOptions.map((item) => {
     return { key: item, value: item, text: item };
   });
+
+  useEffect(() => {
+    if (resData) {
+      const resType = judgementType(resData.type);
+      setShowAction(isEditorAble(resType));
+    }
+  }, [resData]);
 
   useEffect(() => {
     if (displayItem === 'Body') {
@@ -43,7 +50,7 @@ export const Header = ({ formatType, handleChangeFormat }: Props) => {
         position={'bottom center'}
         pinned
         trigger={
-          <Label ribbon as="a" color={'blue'} style={{ marginLeft: 32, marginTop: 13, height: 24 }}>
+          <Label ribbon as="a" color={'blue'} style={{ marginLeft: 32, height: 24 }}>
             {getLabel(displayItem)}
           </Label>
         }
@@ -94,7 +101,7 @@ export const Header = ({ formatType, handleChangeFormat }: Props) => {
                 <Button.Group color={'grey'}>
                   <Button>{formatType}</Button>
                   <Dropdown
-                    onChange={handleChangeFormat}
+                    onChange={(event: SyntheticEvent, { value }: any) => setFormatType(value)}
                     className="button icon"
                     floating
                     options={formatOptions}
@@ -105,17 +112,16 @@ export const Header = ({ formatType, handleChangeFormat }: Props) => {
             </Menu.Menu>
           </Menu>
         </div>
-        <div className={styles.statusCon}>
-          <StatusCard />
-        </div>
       </div>
     );
   };
-  const show = displayItem === 'Body';
   return (
     <div className={styles.header}>
       {renderLabel()}
-      {show && renderActions()}
+      {showAction && renderActions()}
+      <div className={styles.statusCon}>
+        <StatusCard />
+      </div>
     </div>
   );
 };
