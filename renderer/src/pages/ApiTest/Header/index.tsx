@@ -74,7 +74,6 @@ const Header = () => {
 
   const handleContextMenu = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
-    console.log();
     showMenu(e);
   };
 
