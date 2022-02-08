@@ -64,13 +64,14 @@ div {
   user-select: none;
   transition: all 0.1s;
   text-align: center;
+  border-radius: 3px;
 }
 .custom-context-menu li:last-child {
   border-bottom: none;
 }
 .custom-context-menu li:hover {
   cursor: pointer;
-  background-color: #0170fe;
+  background-color: #3F3D56;
   color: #fff;
 }
 .custom-context-menu li:active {

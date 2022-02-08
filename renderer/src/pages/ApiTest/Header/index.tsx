@@ -10,13 +10,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useAtom } from 'jotai';
 import { apiTestMethodAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
 import { menuOptions } from '/@/pages/ApiTest/Header/contextMenu';
-import { MatexWin } from '/@/global';
 import { useContextMenu } from '/@/hooks/useContextMenu';
 
 const Header = () => {
   const [method, setMethod] = useAtom(apiTestMethodAtom);
   const [url, setUrl] = useAtom(apiTestUrlAtom);
-  const { showMenu } = useContextMenu({ options: menuOptions });
+
+  const onSelect = (index: number, data: string) => {
+    console.log(index, data);
+  };
+
+  const { showMenu } = useContextMenu({ options: menuOptions, onSelect });
 
   const { sendReq } = useSendReq();
   const notify = () => toast('so easy !');

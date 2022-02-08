@@ -1,31 +1,34 @@
 import React, { useEffect, useRef } from 'react';
 
-interface MenuItem {
+interface MenuItem<T> {
   name: string;
-  onClick: (e: MenuItemEvent<HTMLLIElement>) => void;
 }
 
-interface MenuOptions {
-  menus: MenuItem[];
+export interface MenuOptions<T = HTMLElement> {
+  menus: MenuItem<T>[];
 }
 
-interface ContextMenuProps {
-  options: MenuOptions;
+interface ContextMenuProps<T = HTMLElement> {
+  options: MenuOptions<T>;
+  onSelect: OnselectType;
 }
 export type MenuItemEvent<T = HTMLElement> = React.MouseEvent<T, MouseEvent> | MouseEvent;
+type OnselectType = (index: number, text: string) => void;
 
-function createMenu(options: MenuOptions): HTMLUListElement {
+function createMenu<T>(options: MenuOptions<T>, onSelect: OnselectType): HTMLUListElement {
   const ul = document.createElement('ul');
   ul.classList.add('custom-context-menu');
   ul.style.display = 'none';
   const { menus } = options;
   if (menus && menus.length > 0) {
-    for (let menu of menus) {
+    menus.forEach((menu, index) => {
       const li = document.createElement('li');
       li.textContent = menu.name;
-      li.onclick = menu.onClick;
+      li.onclick = (e) => {
+        onSelect(index, menu.name);
+      };
       ul.appendChild(li);
-    }
+    });
   }
   const body = document.querySelector('body');
   body!.appendChild(ul);
@@ -42,8 +45,8 @@ export function hideMenu(e: MouseEvent, instance: HTMLUListElement) {
   instance.style.display = 'none';
 }
 
-export const useContextMenu = ({ options }: ContextMenuProps) => {
-  const menuRef = useRef<HTMLUListElement>(createMenu(options));
+export const useContextMenu = <T>({ options, onSelect }: ContextMenuProps<T>) => {
+  const menuRef = useRef<HTMLUListElement>(createMenu<T>(options, onSelect));
 
   const hidden = (e: MouseEvent) => {
     hideMenu(e, menuRef.current);

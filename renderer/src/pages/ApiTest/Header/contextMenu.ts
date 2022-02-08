@@ -1,31 +1,18 @@
-import React from 'react';
-import { MenuItemEvent } from '/@/hooks/useContextMenu';
+import { MenuItemEvent, MenuOptions } from '/@/hooks/useContextMenu';
 
-export const menuOptions = {
+export const menuOptions: MenuOptions<HTMLInputElement> = {
   menus: [
     {
-      name: '复制',
-      onClick: function (e: MenuItemEvent) {
-        console.log('menu1 clicked');
-      }
+      name: '复制'
     },
     {
-      name: '剪切',
-      onClick: function (e: MenuItemEvent) {
-        console.log('menu2 clicked');
-      }
+      name: '剪切'
     },
     {
-      name: '粘贴',
-      onClick: function (e: MenuItemEvent) {
-        console.log('menu3 clicked');
-      }
+      name: '粘贴'
     },
     {
-      name: '清除',
-      onClick: function (e: MenuItemEvent) {
-        console.log('menu3 clicked');
-      }
+      name: '清除'
     }
   ]
 };
