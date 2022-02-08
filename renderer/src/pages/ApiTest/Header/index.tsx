@@ -2,11 +2,11 @@ import React, { SyntheticEvent, useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 import { Button, Dropdown } from 'semantic-ui-react';
 import clsx from 'clsx';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { MethodsOptions } from '/@/model/apiTest.model';
 import { useSendReq } from '/@/message/apiTest.ipc';
 import Tabs from './Tabs';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useAtom } from 'jotai';
 import { apiTestMethodAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
 import { menuOptions } from '/@/pages/ApiTest/Header/contextMenu';
@@ -38,28 +38,19 @@ const Header = () => {
     listenerRef.current = Emitter.on('apiTest.select', ({ index }: any) => {
       switch (index) {
         case 0:
-          {
-            MatexWin.Clipboard.writeText(selectedTextRef.current);
-          }
+          MatexWin.Clipboard.writeText(selectedTextRef.current);
           break;
         case 1:
           {
             MatexWin.Clipboard.writeText(selectedTextRef.current);
-            console.log(selectedTextRef.current);
             setUrl(url.replace(selectedTextRef.current, ''));
           }
           break;
         case 2:
-          {
-            const str = url + MatexWin.Clipboard.readText();
-            console.log(str);
-            setUrl(str);
-          }
+          setUrl(url + MatexWin.Clipboard.readText());
           break;
         case 3:
-          {
-            setUrl('');
-          }
+          setUrl('');
           break;
       }
     });
@@ -103,15 +94,12 @@ const Header = () => {
         </Button.Group>
         <input
           ref={inputRef}
-          onSelect={(e) => {
+          onSelect={() => {
             selectedTextRef.current = window.getSelection()!.toString().trim();
           }}
           onContextMenu={handleContextMenu}
           value={url}
-          onChange={(e) => {
-            console.log('setUrl');
-            setUrl(e.target.value);
-          }}
+          onChange={(e) => setUrl(e.target.value)}
           className={styles.input}
         />
         <Button primary size={'large'} onClick={doFetch}>
