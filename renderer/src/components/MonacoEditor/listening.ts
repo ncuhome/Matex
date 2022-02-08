@@ -40,7 +40,7 @@ export const useEditorListen = ({
   useEffect(() => {
     listenerRef.current?.();
     if (editor) {
-      listenerRef.current = Emitter.on(`monacoEditor-${name}`, setVal);
+      listenerRef.current = Emitter.onCache(`monacoEditor-${name}`, setVal);
     }
     return () => {
       listenerRef.current?.();
