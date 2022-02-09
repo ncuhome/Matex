@@ -98,7 +98,7 @@ export const Header = () => {
             })}
             <Menu.Menu position="right" style={{ marginLeft: -10 }}>
               <Menu.Item>
-                <Button.Group color={'grey'}>
+                <Button.Group style={{ background: '#DAE0E7', borderRadius: 3 }}>
                   <Button>{formatType}</Button>
                   <Dropdown
                     onChange={(event: SyntheticEvent, { value }: any) => setFormatType(value)}
