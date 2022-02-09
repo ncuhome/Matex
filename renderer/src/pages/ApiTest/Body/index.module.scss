@@ -18,21 +18,21 @@
   }
 }
 
-.idleImg{
+.idleImg {
   height: 225px;
   padding: 20px;
   width: 100%;
   object-fit: contain;
 }
 
-.header{
+.header {
   display: flex;
   justify-content: start;
   align-items: center;
   height: 60px;
 
   .operationCon {
-    background-color: #F9FAFB;
+    background-color: #f9fafb;
     box-shadow: 0 2px 5px #bec0be;
     border-radius: 10px;
   }
@@ -43,8 +43,8 @@
     align-items: center;
     justify-content: start;
     position: relative;
-    background-color: #F9FAFB;
-    border-radius: 10px 10px 0 0 ;
+    background-color: #f9fafb;
+    border-radius: 10px 10px 0 0;
   }
 }
 
@@ -69,8 +69,8 @@
     cursor: pointer;
   }
 
-  .statusSize{
-    margin:0 12px 0 0;
+  .statusSize {
+    margin: 0 12px 0 0;
   }
 
   .statusDesc {
@@ -93,16 +93,16 @@
   align-items: center;
   justify-content: start;
 
-  .totalLine{
-    color: #636CD7;
+  .totalLine {
+    color: #636cd7;
     margin-top: 20px;
     text-transform: uppercase;
 
-    .total{
+    .total {
       visibility: hidden;
     }
 
-    .totalText{
+    .totalText {
       color: teal;
     }
   }
@@ -118,7 +118,7 @@
       margin: -2px;
       font-size: 13px;
       width: 150px;
-      color: #636CD7;
+      color: #636cd7;
       font-weight: bold;
       text-align: center;
       letter-spacing: 1px;
@@ -132,23 +132,38 @@
     .progressCon {
       height: 40px;
 
-      .progress{
+      .progress {
         border-radius: 3px;
-        background-color: #eee;         //总体的背景色
+        background-color: #eee; //总体的背景色
         height: 15px;
         width: 100px;
 
-        &::-webkit-progress-bar{
-          background-color: #DAE0E7;
+        &::-webkit-progress-bar {
+          background-color: #dae0e7;
           border-radius: 3px;
         }
         /* 表示已完成进度背景色 */
-        &::-webkit-progress-value{
+        &::-webkit-progress-value {
           background: teal;
           border-radius: 3px;
         }
       }
     }
+  }
+}
+
+.loading {
+  color: #3f3d56 !important;
+
+  .loadingContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &::after {
+    border-color: #3f3d56 transparent transparent !important;
   }
 }
 

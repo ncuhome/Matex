@@ -83,7 +83,7 @@ app.whenReady().then(async () => {
     MatexLog.debug(process.env.NODE_ENV ?? '');
     MatexLog.debug(process.env.LOADING_PATH ?? '');
   } catch (e) {
-    MatexLog.error('发生错误1' + e);
+    MatexLog.error('发生错误' + e);
   }
 });
 
