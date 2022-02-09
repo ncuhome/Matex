@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import star from '/@/assets/icon/star.svg';
 import styles from './index.module.scss';
 import { Emitter } from '/@/utils/EventEmiter';
@@ -15,6 +15,7 @@ const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
   const formatType = useAtomValue(apiTestBodyFormatAtom);
   const setEditorValue = useUpdateEditorValue('apiTest');
+
   useEffect(() => {
     if (resData) {
       Emitter.emit('monacoEditor-apiTest', resData.body);

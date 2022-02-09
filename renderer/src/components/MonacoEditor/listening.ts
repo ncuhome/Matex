@@ -31,8 +31,14 @@ export const useEditorListen = ({
   const setVal = useCallback(
     async (value: string) => {
       if (value) {
+        editor?.updateOptions({
+          readOnly: false
+        });
         editor?.setValue(value);
         await editor?.getAction('editor.action.formatDocument')?.run();
+        editor?.updateOptions({
+          readOnly: true
+        });
       }
     },
     [editor]

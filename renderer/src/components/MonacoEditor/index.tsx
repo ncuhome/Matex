@@ -5,8 +5,6 @@ import clsx from 'clsx';
 import { resizeAble } from './resize';
 import { useEditor } from './create';
 import { useEditorListen } from './listening';
-import { useAtomValue } from 'jotai/utils';
-import { editorValueAtom } from '/@/store/commonStore';
 
 interface MonacoEditorProps {
   name: string;
@@ -54,15 +52,13 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     onChange,
     getValue
   });
-  const editorValue = useAtomValue(editorValueAtom);
-  const existValue = editorValue.get(name) ?? '';
   useEffect(() => {
     resizeAble();
   }, [monacoEl.current]);
 
   useEffect(() => {
     if (monacoEl) {
-      createEditor(monacoEl.current!, existValue);
+      createEditor(monacoEl.current!, defaultVal);
       console.log('Editor初始化完成');
     }
   }, [monacoEl]);
