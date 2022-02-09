@@ -16,8 +16,6 @@
   "scripts": {
     "dev": "node ./scripts/watch.js",
     "dev:react": "vite",
-    "dev:server": "nodemon --config nodemon-express.json",
-    "dev:electron": "nodemon --config nodemon.json",
     "codgen": "npx playwright codegen http://localhost:3000/",
     "test:playwright": "ts-node test/preview.test.ts",
     "build": "concurrently \"npm run build:react\" \"npm run build:main_preload\"",

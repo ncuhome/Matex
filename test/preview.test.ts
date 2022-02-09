@@ -43,6 +43,7 @@ const options: WaitOn.WaitOnOptions = {
     // Click text=Params
     await page.click('text=Params');
     await page.screenshot({ path: './test/screenshot/screenshot.png' });
+    console.log('截图成功');
     // assert.equal(page.url(), 'http://localhost:3000/#/apiTest/params');
     // Click text=Headers
     await page.click('text=Headers');
