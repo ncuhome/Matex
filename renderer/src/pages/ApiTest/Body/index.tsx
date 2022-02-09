@@ -45,7 +45,8 @@ const Body = () => {
     background: 'transparent',
     border: 'none',
     margin: 0,
-    padding: 0
+    padding: 0,
+    borderRadius: 10
   };
 
   return (

@@ -5,7 +5,7 @@ import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Emitter } from '/@/utils/EventEmiter';
 import { ResDisplayItemsType } from '/@/type/apiTest';
-import { apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
+import { apiTestBodyActionAtom, apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
 import { useAtomValue } from 'jotai/utils';
 import { StatusCard } from '/@/pages/ApiTest/Body/StatusCard';
 import { useAtom } from 'jotai';
@@ -14,7 +14,7 @@ import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
 
 export const Header = () => {
   const [formatType, setFormatType] = useAtom(apiTestBodyFormatAtom);
-  const [activeAction, setActiveAction] = useState('Pretty');
+  const [activeAction, setActiveAction] = useAtom(apiTestBodyActionAtom);
   const [displayItem, setDisplayItem] = useState<ResDisplayItemsType>('Body');
   const resData = useAtomValue(apiTestResDataAtom);
   const [showAction, setShowAction] = useState(true);

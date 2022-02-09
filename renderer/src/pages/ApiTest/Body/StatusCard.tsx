@@ -12,7 +12,6 @@ interface Timer {
 
 export const StatusCard = () => {
   const resData = useAtomValue(apiTestResDataAtom);
-
   const renderTiming = () => {
     const timeList: Timer[] = [];
     for (const key in resData!.timer) {
