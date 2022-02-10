@@ -59,7 +59,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
   useEffect(() => {
     if (monacoEl) {
       createEditor(monacoEl.current!, defaultVal);
-      console.log('Editor初始化完成');
     }
   }, [monacoEl]);
 

@@ -7,13 +7,7 @@ import { apiTestResDataAtom, apiTestBodyFormatAtom, apiTestBodyActionAtom } from
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
-import {
-  getPreviewJsonSrc,
-  getPreviewSrc,
-  isEditorAble,
-  isPreviewAble,
-  renderJsonHtmlStr
-} from '/@/pages/ApiTest/Body/utils';
+import { getPreviewJsonSrc, getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
 import { useUpdateEditorValue } from '/@/store/commonStore';
 
@@ -30,6 +24,12 @@ const Content = () => {
     }
   }, [resData]);
 
+  useEffect(() => {
+    if (bodyAction === 'Pretty' && resData) {
+      Emitter.emit('monacoEditor-apiTest', resData.body);
+    }
+  }, [bodyAction]);
+
   const render = () => {
     const resType = judgementType(resData!.type);
     if (!isEditorAble(resType)) {
@@ -39,12 +39,14 @@ const Content = () => {
         return <div>无法预览</div>;
       }
     } else {
+      console.log(formatType);
       return (
         <MonacoEditor
           onChange={(changes, value) => {
             setEditorValue(value ?? '');
           }}
           shadow={false}
+          readOnly
           name={'apiTest'}
           language={LanguageMapper.get(formatType.toLowerCase())!}
           defaultVal={''}
