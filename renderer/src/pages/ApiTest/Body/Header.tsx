@@ -1,10 +1,10 @@
 import { Button, Dropdown, Label, Menu, Popup } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import { Actions, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model';
-import React, { Fragment, SyntheticEvent, useEffect, useState } from 'react';
+import React, { Fragment, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Emitter } from '/@/utils/EventEmiter';
-import { ResDisplayItemsType } from '/@/type/apiTest';
+import { FormatType, ResDisplayItemsType } from '/@/type/apiTest';
 import { apiTestBodyActionAtom, apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
 import { useAtomValue } from 'jotai/utils';
 import { StatusCard } from '/@/pages/ApiTest/Body/StatusCard';
@@ -12,16 +12,15 @@ import { useAtom } from 'jotai';
 import { judgementType } from '/@/utils/typeUtils';
 import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
 
+const formatOptions = FormatOptions.map((item) => {
+  return { key: item, value: item, text: item };
+});
 export const Header = () => {
   const [formatType, setFormatType] = useAtom(apiTestBodyFormatAtom);
   const [activeAction, setActiveAction] = useAtom(apiTestBodyActionAtom);
   const [displayItem, setDisplayItem] = useState<ResDisplayItemsType>('Body');
   const resData = useAtomValue(apiTestResDataAtom);
   const [showAction, setShowAction] = useState(true);
-
-  const formatOptions = FormatOptions.map((item) => {
-    return { key: item, value: item, text: item };
-  });
 
   useEffect(() => {
     if (resData) {
@@ -100,13 +99,22 @@ export const Header = () => {
               <Menu.Item>
                 <Button.Group style={{ background: '#DAE0E7', borderRadius: 3 }}>
                   <Button>{formatType}</Button>
-                  <Dropdown
-                    onChange={(event: SyntheticEvent, { value }: any) => setFormatType(value)}
-                    className="button icon"
-                    floating
-                    options={formatOptions}
-                    trigger={<></>}
-                  />
+                  <Dropdown className="button icon" floating trigger={<></>}>
+                    <Dropdown.Menu>
+                      {formatOptions.map((item) => {
+                        return (
+                          <Dropdown.Item
+                            onClick={() => setFormatType(item.text as FormatType)}
+                            key={item.value}
+                            value={item.value}
+                            active={item.text === formatType}
+                          >
+                            {item.text}
+                          </Dropdown.Item>
+                        );
+                      })}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Button.Group>
               </Menu.Item>
             </Menu.Menu>
