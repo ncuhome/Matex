@@ -4,7 +4,7 @@ import type { IpcRendererEvent } from 'electron';
 import { ApiTest_Channel } from '/@common/ipc/channel';
 import type { FormatType } from '/@/type/apiTest';
 import { ApiTestResProps } from '/@common/index';
-import { apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
+import { apiTestBodyActionAtom, apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
 import useIpcOn from '/@/hooks/useIpcOn';
 import { Header } from '/@/pages/ApiTest/Body/Header';
 import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
@@ -16,6 +16,7 @@ import { Button, Dimmer, Loader, Segment } from 'semantic-ui-react';
 
 const Body = () => {
   const setFormatType = useUpdateAtom(apiTestBodyFormatAtom);
+  const setBodyAction = useUpdateAtom(apiTestBodyActionAtom);
   const setResData = useUpdateAtom(apiTestResDataAtom);
   const [dimmer, setDimmer] = useState(false);
 
@@ -25,6 +26,7 @@ const Body = () => {
     if (canEditor) {
       setFormatType(resType.toUpperCase() as FormatType);
     }
+    setBodyAction('Pretty');
     setResData(res);
   };
 
