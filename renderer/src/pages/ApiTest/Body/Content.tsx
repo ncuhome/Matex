@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import star from '/@/assets/icon/star.svg';
 import styles from './index.module.scss';
 import { Emitter } from '/@/utils/EventEmiter';
@@ -7,7 +7,7 @@ import { apiTestResDataAtom, apiTestBodyFormatAtom, apiTestBodyActionAtom } from
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
-import { getPreviewJsonSrc, getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
+import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
 import { useUpdateEditorValue } from '/@/store/commonStore';
 
@@ -30,7 +30,7 @@ const Content = () => {
     }
   }, [bodyAction]);
 
-  const render = () => {
+  const prettyRender = () => {
     const resType = judgementType(resData!.type);
     if (!isEditorAble(resType)) {
       if (isPreviewAble(resType)) {
@@ -39,7 +39,6 @@ const Content = () => {
         return <div>无法预览</div>;
       }
     } else {
-      console.log(formatType);
       return (
         <MonacoEditor
           onChange={(changes, value) => {
@@ -50,7 +49,7 @@ const Content = () => {
           name={'apiTest'}
           language={LanguageMapper.get(formatType.toLowerCase())!}
           defaultVal={''}
-          height={230}
+          height={235}
           width={'100%'}
         />
       );
@@ -60,9 +59,9 @@ const Content = () => {
     return <img src={star} className={styles.idleImg} alt={'等待请求'} />;
   } else {
     if (bodyAction === 'Pretty') {
-      return <>{render()}</>;
+      return <>{prettyRender()}</>;
     } else {
-      return <PreviewRes src={getPreviewJsonSrc(resData.body)} />;
+      return <PreviewRes src={getPreviewSrc(resData.body, resData!.type)} />;
     }
   }
 };

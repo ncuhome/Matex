@@ -1,5 +1,6 @@
-export const EditorAbleType = ['json', 'text', 'html', 'xml', 'javascript'];
-export const PreviewAble = ['image', 'audio', 'video', 'pdf'];
+export const EditAble = ['json', 'text', 'html', 'xml', 'javascript'];
+export const OpenInBroAble = ['image', 'audio', 'video', 'pdf'];
+export const EditAndPreviewAble = ['json', 'html', 'text'];
 
 export const judgementType = (typeStr: string) => {
   if (typeStr.includes('text/html')) {
