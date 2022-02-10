@@ -1,7 +1,7 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 // !!! Tokens can be inspected using F1 > Developer: Inspect Tokens !!!
-export const rules: monaco.editor.ITokenThemeRule[] = [
+export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   {
     token: 'number.json',
     foreground: '#0ECCCC',
@@ -36,5 +36,24 @@ export const rules: monaco.editor.ITokenThemeRule[] = [
   {
     token: 'custom-highlight',
     foreground: '#FAC901'
+  }
+];
+
+export const htmlRules: monaco.editor.ITokenThemeRule[] = [
+  {
+    token: 'tag.html',
+    foreground: '#F84806'
+  },
+  {
+    token: 'delimiter.html',
+    foreground: '#2185D0'
+  },
+  {
+    token: 'attribute.name.html',
+    foreground: '#3B46CC'
+  },
+  {
+    token: 'attribute.value.html',
+    foreground: '#2CB6AD'
   }
 ];

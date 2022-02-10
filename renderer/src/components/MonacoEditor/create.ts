@@ -1,6 +1,6 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { suggestions } from './suggestions';
-import { rules } from './theme';
+import { htmlRules, jsonRules } from './theme';
 import { defaultSchema } from './schema';
 import { useEffect, useRef } from 'react';
 import ProviderResult = monaco.languages.ProviderResult;
@@ -26,7 +26,7 @@ monaco.editor.defineTheme('my-theme', {
     'editorWidget.border': '#00000000',
     'editorOverviewRuler.border': '#00000000'
   },
-  rules
+  rules: [...jsonRules, ...htmlRules]
 });
 monaco.editor.setTheme('my-theme');
 const modelUri = monaco.Uri.parse('a://b/foo.json'); // a made up unique URI for our model
@@ -88,6 +88,7 @@ export const useEditor = ({
   //创建新的编辑器实例
   const createEditor = (domElement: HTMLElement, initValue: string) => {
     domRef.current = domElement;
+    console.log('createEditor', language);
     const editorIns = monaco.editor.create(domElement, {
       value: initValue,
       model: language === 'json' ? model : undefined,
@@ -124,6 +125,7 @@ export const useEditor = ({
     const exist = destroyEditor();
     if (domRef.current && editor) {
       const initValue = exist ? existValue : defaultVal ?? '';
+      console.log(initValue);
       createEditor(domRef.current, initValue);
     }
   }, [language]);
