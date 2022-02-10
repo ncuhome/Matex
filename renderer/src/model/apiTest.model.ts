@@ -1,13 +1,20 @@
-import { BodyActionType, BodyItemType, BodyRawType, ResDisplayItemsType, TabItems } from '../type/apiTest';
+import {
+  BodyActionType,
+  BodyItemType,
+  BodyRawType,
+  FormatType,
+  ResDisplayItemsType,
+  TabItems
+} from '../type/apiTest';
 
 export const MethodsOptions = ['Get', 'Post', 'Put', 'Delete'];
 
 export const TabsItem: TabItems[] = ['Params', 'Headers', 'Body'];
 
-export const FormatOptions = ['JSON', 'TEXT', 'HTML'];
+export const FormatOptions: FormatType[] = ['JSON', 'TEXT', 'HTML', 'XML'];
 export const ResDisplayItems: ResDisplayItemsType[] = ['Body', 'Headers', 'Cookies'];
 
-export const Actions: BodyActionType[] = ['Pretty', 'Raw', 'Preview'];
+export const Actions: BodyActionType[] = ['Pretty', 'Preview'];
 export const BodyTypes: BodyItemType[] = ['form-data', 'urlencoded', 'raw', 'binary'];
 export const RawOptions: BodyRawType[] = ['text', 'json', 'html', 'javascript'];
 
