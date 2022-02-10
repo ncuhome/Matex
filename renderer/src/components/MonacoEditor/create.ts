@@ -91,7 +91,8 @@ export const useEditor = ({
     console.log('createEditor', language);
     const editorIns = monaco.editor.create(domElement, {
       value: initValue,
-      model: language === 'json' ? model : undefined,
+      // model: language === 'json' ? model : undefined,
+      model: undefined,
       language,
       readOnly,
       automaticLayout: false,
