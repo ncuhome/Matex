@@ -26,11 +26,13 @@ export const useEditorListen = ({
 }: ListeningProps) => {
   const { editors } = useEditors();
   const editor = editors.get(name);
-  const listenerRef = useRef<Emittery.UnsubscribeFn | null>(null);
+  const valueRef = useRef<Emittery.UnsubscribeFn | null>(null);
+  const findRef = useRef<Emittery.UnsubscribeFn | null>(null);
 
   const setVal = useCallback(
     async (value: string) => {
       if (value) {
+        console.log(editor?.getSupportedActions());
         editor?.updateOptions({
           readOnly: false
         });
@@ -43,13 +45,26 @@ export const useEditorListen = ({
     },
     [editor]
   );
+
   useEffect(() => {
-    listenerRef.current?.();
+    findRef.current?.();
     if (editor) {
-      listenerRef.current = Emitter.onCache(`monacoEditor-${name}`, setVal);
+      findRef.current = Emitter.onCache(`monacoEditor.${name}.find`, () => {
+        editor?.getAction('actions.find')?.run();
+      });
     }
     return () => {
-      listenerRef.current?.();
+      findRef.current?.();
+    };
+  }, [editor]);
+
+  useEffect(() => {
+    valueRef.current?.();
+    if (editor) {
+      valueRef.current = Emitter.onCache(`monacoEditor-${name}`, setVal);
+    }
+    return () => {
+      valueRef.current?.();
     };
   }, [editor]);
 

@@ -43,7 +43,7 @@ const Tabs = () => {
   return useMemo(() => {
     return (
       <>
-        <Label ribbon as="a" color={'orange'} style={{ marginTop: 5 }}>
+        <Label size={'small'} ribbon as="a" color={'orange'} style={{ marginTop: 5 }}>
           请求选项
         </Label>
         <Menu size={'small'} secondary style={{ marginLeft: -10 }}>

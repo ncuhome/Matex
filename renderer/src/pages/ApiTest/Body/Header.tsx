@@ -1,4 +1,4 @@
-import { Button, Dropdown, Label, Menu, Popup } from 'semantic-ui-react';
+import { Button, Dropdown, Icon, Label, Menu, Popup } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import { Actions, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model';
 import React, { Fragment, SyntheticEvent, useEffect, useRef, useState } from 'react';
@@ -11,6 +11,7 @@ import { StatusCard } from '/@/pages/ApiTest/Body/StatusCard';
 import { useAtom } from 'jotai';
 import { judgementType } from '/@/utils/typeUtils';
 import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
+import { MatexWin } from '/@/global';
 
 const formatOptions = FormatOptions.map((item) => {
   return { key: item, value: item, text: item };
@@ -42,6 +43,14 @@ export const Header = () => {
     color: '#FFF'
   };
 
+  const handleCopy = () => {
+    MatexWin.Clipboard.writeText(resData!.body);
+  };
+
+  const handleFind = () => {
+    Emitter.emit('monacoEditor.apiTest.find', true);
+  };
+
   const renderLabel = () => {
     return (
       <Popup
@@ -49,7 +58,7 @@ export const Header = () => {
         position={'bottom center'}
         pinned
         trigger={
-          <Label ribbon as="a" color={'blue'} style={{ marginLeft: 32, height: 24 }}>
+          <Label size={'small'} ribbon as="a" color={'blue'} style={{ marginLeft: 32, height: 24 }}>
             {getLabel(displayItem)}
           </Label>
         }
@@ -60,11 +69,13 @@ export const Header = () => {
               const active = item === displayItem;
               return (
                 <Fragment key={item}>
-                  <Button className={clsx([active && styles.active])} onClick={() => setDisplayItem(item)}>
+                  <Button
+                    style={{ boxShadow: '2px 2px 2px #8684A8' }}
+                    className={clsx([active && styles.active])}
+                    onClick={() => setDisplayItem(item)}
+                  >
                     {item}
-                    <Label color={'purple'} style={{ marginLeft: 8 }} circular size={'small'}>
-                      2
-                    </Label>
+                    {'(2)'}
                   </Button>
                 </Fragment>
               );
@@ -79,7 +90,7 @@ export const Header = () => {
     return (
       <div className={styles.actionsCon}>
         <div>
-          <Menu secondary>
+          <Menu secondary size={'small'}>
             {Actions.map((item) => {
               const active = activeAction === item;
               return (
@@ -97,7 +108,7 @@ export const Header = () => {
             })}
             <Menu.Menu position="right" style={{ marginLeft: -10 }}>
               <Menu.Item>
-                <Button.Group style={{ background: '#DAE0E7', borderRadius: 3 }}>
+                <Button.Group size={'small'} style={{ borderRadius: 3 }}>
                   <Button>{formatType}</Button>
                   <Dropdown className="button icon" floating trigger={<></>}>
                     <Dropdown.Menu>
@@ -118,6 +129,20 @@ export const Header = () => {
                 </Button.Group>
               </Menu.Item>
             </Menu.Menu>
+            {resData && (
+              <Menu.Menu style={{ marginLeft: -18 }}>
+                <Menu.Item>
+                  <Button.Group size={'small'}>
+                    <Button icon onClick={handleCopy}>
+                      <Icon name="copy outline" />
+                    </Button>
+                    <Button icon onClick={handleFind}>
+                      <Icon name="search" />
+                    </Button>
+                  </Button.Group>
+                </Menu.Item>
+              </Menu.Menu>
+            )}
           </Menu>
         </div>
       </div>
@@ -127,9 +152,7 @@ export const Header = () => {
     <div className={styles.header}>
       {renderLabel()}
       {showAction && renderActions()}
-      <div className={styles.statusCon}>
-        <StatusCard />
-      </div>
+      <StatusCard />
     </div>
   );
 };
