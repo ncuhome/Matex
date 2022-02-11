@@ -21,19 +21,21 @@ export const Header = () => {
   const [activeAction, setActiveAction] = useAtom(apiTestBodyActionAtom);
   const [displayItem, setDisplayItem] = useState<ResDisplayItemsType>('Body');
   const resData = useAtomValue(apiTestResDataAtom);
-  const [showAction, setShowAction] = useState(true);
+  const [actionStatus, setActionStatus] = useState(0);
 
   useEffect(() => {
     if (resData) {
       const resType = judgementType(resData.type);
-      setShowAction(isEditorAble(resType));
+      setActionStatus(isEditorAble(resType) ? 2 : 0);
     }
   }, [resData]);
 
   useEffect(() => {
     if (displayItem === 'Body') {
+      actionStatus !== 2 && setActionStatus(2);
       Emitter.emit('monacoEditor-apiTest', resData?.body);
     } else {
+      actionStatus !== 1 && setActionStatus(1);
       Emitter.emit('monacoEditor-apiTest', JSON.stringify(resData?.headers));
     }
   }, [displayItem]);
@@ -63,25 +65,32 @@ export const Header = () => {
           </Label>
         }
       >
-        <div className={styles.operationCon}>
-          <Button.Group vertical>
-            {ResDisplayItems.map((item) => {
-              const active = item === displayItem;
-              return (
-                <Fragment key={item}>
-                  <Button
-                    style={{ boxShadow: '2px 2px 2px #8684A8' }}
-                    className={clsx([active && styles.active])}
-                    onClick={() => setDisplayItem(item)}
-                  >
-                    {item}
-                    {'(2)'}
-                  </Button>
-                </Fragment>
-              );
-            })}
-          </Button.Group>
-        </div>
+        {resData ? (
+          <div className={styles.operationCon}>
+            <Button.Group vertical size={'small'}>
+              {ResDisplayItems.map((item) => {
+                const active = item === displayItem;
+                return (
+                  <Fragment key={item}>
+                    <Button
+                      size={'small'}
+                      style={{ boxShadow: '2px 2px 2px #8684A8' }}
+                      className={clsx([active && styles.active])}
+                      onClick={() => setDisplayItem(item)}
+                    >
+                      {item}&nbsp;&nbsp;
+                      {item === 'Headers' && (
+                        <span style={{ color: '#EC7781' }}>{`(${Object.keys(resData.headers).length})`}</span>
+                      )}
+                    </Button>
+                  </Fragment>
+                );
+              })}
+            </Button.Group>
+          </div>
+        ) : (
+          <div>等待请求</div>
+        )}
       </Popup>
     );
   };
@@ -91,45 +100,47 @@ export const Header = () => {
       <div className={styles.actionsCon}>
         <div>
           <Menu secondary size={'small'}>
-            {Actions.map((item) => {
-              const active = activeAction === item;
-              return (
-                <Fragment key={item}>
-                  <Menu.Item
-                    style={active ? style : {}}
-                    name={item}
-                    active={active}
-                    onClick={(e: any, { name }: any) => {
-                      setActiveAction(name);
-                    }}
-                  />
-                </Fragment>
-              );
-            })}
-            <Menu.Menu position="right" style={{ marginLeft: -10 }}>
-              <Menu.Item>
-                <Button.Group size={'small'} style={{ borderRadius: 3 }}>
-                  <Button>{formatType}</Button>
-                  <Dropdown className="button icon" floating trigger={<></>}>
-                    <Dropdown.Menu>
-                      {formatOptions.map((item) => {
-                        return (
-                          <Dropdown.Item
-                            onClick={() => setFormatType(item.text as FormatType)}
-                            key={item.value}
-                            value={item.value}
-                            active={item.text === formatType}
-                          >
-                            {item.text}
-                          </Dropdown.Item>
-                        );
-                      })}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </Button.Group>
-              </Menu.Item>
-            </Menu.Menu>
-            {resData && (
+            {actionStatus === 2 && (
+              <Menu.Menu>
+                {Actions.map((item) => {
+                  const active = activeAction === item;
+                  return (
+                    <Fragment key={item}>
+                      <Menu.Item
+                        style={active ? style : {}}
+                        name={item}
+                        active={active}
+                        onClick={(e: any, { name }: any) => {
+                          setActiveAction(name);
+                        }}
+                      />
+                    </Fragment>
+                  );
+                })}
+                <Menu.Item>
+                  <Button.Group size={'small'} style={{ borderRadius: 3 }}>
+                    <Button>{formatType}</Button>
+                    <Dropdown className="button icon" floating trigger={<></>}>
+                      <Dropdown.Menu>
+                        {formatOptions.map((item) => {
+                          return (
+                            <Dropdown.Item
+                              onClick={() => setFormatType(item.text as FormatType)}
+                              key={item.value}
+                              value={item.value}
+                              active={item.text === formatType}
+                            >
+                              {item.text}
+                            </Dropdown.Item>
+                          );
+                        })}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Button.Group>
+                </Menu.Item>
+              </Menu.Menu>
+            )}
+            {resData && actionStatus !== 0 && (
               <Menu.Menu style={{ marginLeft: -18 }}>
                 <Menu.Item>
                   <Button.Group size={'small'}>
@@ -151,7 +162,7 @@ export const Header = () => {
   return (
     <div className={styles.header}>
       {renderLabel()}
-      {showAction && renderActions()}
+      {renderActions()}
       <StatusCard />
     </div>
   );
