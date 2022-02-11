@@ -80,7 +80,9 @@ export const Header = () => {
                     >
                       {item}&nbsp;&nbsp;
                       {item === 'Headers' && (
-                        <span style={{ color: '#EC7781' }}>{`(${Object.keys(resData.headers).length})`}</span>
+                        <span style={{ color: '#EC7781' }}>{`( ${
+                          Object.keys(resData.headers).length
+                        } )`}</span>
                       )}
                     </Button>
                   </Fragment>

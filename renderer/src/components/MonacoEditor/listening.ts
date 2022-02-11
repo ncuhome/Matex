@@ -32,7 +32,6 @@ export const useEditorListen = ({
   const setVal = useCallback(
     async (value: string) => {
       if (value) {
-        console.log(editor?.getSupportedActions());
         editor?.updateOptions({
           readOnly: false
         });

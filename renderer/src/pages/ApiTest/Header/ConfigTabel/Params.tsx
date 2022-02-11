@@ -1,6 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
-import { Button, Icon, Table } from 'semantic-ui-react';
-import styles from './index.module.scss';
+import React, { useEffect } from 'react';
 import { useApiTestConfig, apiTestParamsAtom } from '/@/store/apiTestStore';
 import KVTable from '/@cmp/KVTable';
 
@@ -10,10 +8,8 @@ const ParamsTable = () => {
 
   useEffect(() => {
     const len = paramList.length;
-    if (len) {
-      if (paramList[len - 1].key.trim() && paramList[len - 1].value) {
-        addApiTestParam({ key: '', value: '' });
-      }
+    if (len === 0 || (paramList[len - 1].key.trim() && paramList[len - 1].value)) {
+      addApiTestParam({ key: '', value: '' });
     }
   }, [paramList]);
 

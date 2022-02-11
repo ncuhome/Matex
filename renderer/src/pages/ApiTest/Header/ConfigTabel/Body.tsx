@@ -1,4 +1,4 @@
-import { Header, Icon, Segment } from 'semantic-ui-react';
+import { Header, Icon } from 'semantic-ui-react';
 import React, { useEffect } from 'react';
 import UploadFile from '../../../../components/UploadFile';
 import { useAtomValue } from 'jotai/utils';
@@ -15,6 +15,7 @@ import { ApiTestKVProps } from '/@/store/apiTestStore/type';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { useUpdateEditorValue } from '/@/store/commonStore';
+import styles from './index.module.scss';
 
 const BodyTable = () => {
   const [formDataList, updateFormDataKey, updateFormDataValue, addFormDataItem, deleteFormDataItem] =
@@ -73,12 +74,12 @@ const BodyTable = () => {
   };
   if (method === 'Get') {
     return (
-      <Segment placeholder style={{ marginTop: -40 }}>
+      <div className={styles.warningCon}>
         <Header icon>
           <Icon name={'warning sign'} color={'red'} />
           &nbsp;当为Get请求时,无此配置
         </Header>
-      </Segment>
+      </div>
     );
   } else {
     if (activeBody === 'binary') {
