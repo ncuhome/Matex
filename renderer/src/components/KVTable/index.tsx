@@ -12,7 +12,15 @@ interface KVTableProps {
   onDeleteLine?: (index: number) => void;
 }
 
-const KVTable: React.FC<KVTableProps> = ({ data, file=false, onChangeKey, onChangeValue, onDeleteLine }) => {
+const KVTable: React.FC<KVTableProps> = ({
+  data,
+  file = false,
+  onChangeKey,
+  onChangeValue,
+  onDeleteLine
+}) => {
+  const [isFile, setFile] = React.useState(false);
+
   return (
     <Table celled compact size={'small'}>
       <Table.Header>
@@ -43,27 +51,20 @@ const KVTable: React.FC<KVTableProps> = ({ data, file=false, onChangeKey, onChan
                     <input
                       className={styles.input}
                       value={item.value}
+                      type={file && isFile ? 'file' : 'text'}
                       onChange={(e) => {
                         onChangeValue && onChangeValue(index, e.target.value);
                       }}
                     />
                     {file && (
                       <Button.Group basic size="mini">
-                        <Button icon="eye" disabled />
-                        <Popup position="bottom center" on={'click'} trigger={<Button icon="file" />} flowing>
-                          <Button.Group vertical>
-                            {BodyTypes.map((item) => {
-                              return (
-                                <Fragment key={item}>
-                                  <Button>
-                                    <Icon name="file" />
-                                    {item}
-                                  </Button>
-                                </Fragment>
-                              );
-                            })}
-                          </Button.Group>
-                        </Popup>
+                        <Button icon="eye" disabled={!isFile} />
+                        <Button icon onClick={() => setFile(!isFile)}>
+                          <Icon
+                            name={isFile ? 'file' : 'file outline'}
+                            style={{ color: isFile ? '#2CB5AD' : '#C1C1C1' }}
+                          />
+                        </Button>
                       </Button.Group>
                     )}
                   </div>
