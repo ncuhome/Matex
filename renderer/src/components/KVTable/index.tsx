@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react';
-import { Button, Icon, Popup, Table } from 'semantic-ui-react';
+import React, { Fragment, useEffect, useRef } from 'react';
+import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
-import { BodyTypes } from '/@/model/apiTest.model';
 import { ApiTestKVProps } from '/@/store/apiTestStore/type';
 
 interface KVTableProps {
@@ -48,14 +47,26 @@ const KVTable: React.FC<KVTableProps> = ({
                 </Table.Cell>
                 <Table.Cell textAlign={'center'}>
                   <div className={styles.bodyCell}>
-                    <input
-                      className={styles.input}
-                      value={item.value}
-                      type={file && isFile ? 'file' : 'text'}
-                      onChange={(e) => {
-                        onChangeValue && onChangeValue(index, e.target.value);
-                      }}
-                    />
+                    {file && isFile ? (
+                      <input
+                        className={styles.input}
+                        value={item.value}
+                        type={'file'}
+                        onChange={(e) => {
+                          onChangeValue && onChangeValue(index, e.target.value);
+                        }}
+                      />
+                    ) : (
+                      <input
+                        className={styles.input}
+                        value={item.value}
+                        type={'text'}
+                        onChange={(e) => {
+                          onChangeValue && onChangeValue(index, e.target.value);
+                        }}
+                      />
+                    )}
+
                     {file && (
                       <Button.Group basic size="mini">
                         <Button icon="eye" disabled={!isFile} />

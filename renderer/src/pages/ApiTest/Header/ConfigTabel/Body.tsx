@@ -5,6 +5,7 @@ import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
   apiTestBodyFormsAtom,
+  apiTestBodyFormsIsFileAtom,
   apiTestBodyRawAtom,
   apiTestBodyUrlencodedAtom,
   apiTestMethodAtom,
@@ -32,6 +33,8 @@ const BodyTable = () => {
   const activeRawType = useAtomValue(apiTestBodyRawAtom);
   const setEditorValue = useUpdateEditorValue('configBody');
   const list = activeBody === 'form-data' ? formDataList : urlencodedList;
+  const isFile = useAtomValue(apiTestBodyFormsIsFileAtom);
+
   const addItem = ({ key, value }: Omit<ApiTestKVProps, 'index'>) => {
     if (activeBody === 'form-data') {
       return addFormDataItem({ key, value });
@@ -72,6 +75,7 @@ const BodyTable = () => {
       return deleteUrlencodedItem(index);
     }
   };
+
   if (method === 'Get') {
     return (
       <div className={styles.warningCon}>
@@ -101,16 +105,21 @@ const BodyTable = () => {
           width={'100%'}
         />
       );
+    } else {
+      if (isFile) {
+        return <UploadFile />;
+      } else {
+        return (
+          <KVTable
+            file={activeBody === 'form-data'}
+            data={list}
+            onChangeValue={updateListValue}
+            onChangeKey={updateListKey}
+            onDeleteLine={deleteItem}
+          />
+        );
+      }
     }
-    return (
-      <KVTable
-        file={activeBody === 'form-data'}
-        data={list}
-        onChangeValue={updateListValue}
-        onChangeKey={updateListKey}
-        onDeleteLine={deleteItem}
-      />
-    );
   }
 };
 

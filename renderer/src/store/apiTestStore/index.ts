@@ -10,7 +10,8 @@ import { ApiTestResProps } from '/@common/index';
 export const apiTestParamsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 export const apiTestHeadersAtom = atom<ApiTestKVProps[]>(InitHeaders);
 export const apiTestBodyFormsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
-
+export const apiTestBodyFormsIsFileAtom = atom<boolean>(false);
+export const apiTextBodyFilesAtom = atom<{ key: string; files: File[] }>({ key: '', files: [] });
 //header
 export const apiTestUrlAtom = atom<string>('');
 export const apiTestMethodAtom = atom<ReqMethod>('Get');
@@ -69,4 +70,43 @@ export const useApiTestConfig = (receivedAtom: any): ApiTestReturnType => {
     updateList({ index, key: list[index].key, value });
   };
   return [list, updateListKey, updateListValue, addItem, deleteItem];
+};
+
+export const useApiTextBodyFiles = () => {
+  const updateKey = (key: string) => {
+    atom(null, (get, set, key: string) => {
+      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
+        draft.key = key;
+      });
+      set(apiTextBodyFilesAtom, temp);
+    });
+  };
+
+  const addFile = () => {
+    return atom(null, (get, set, file: File) => {
+      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
+        draft.files.push(file);
+      });
+      set(apiTextBodyFilesAtom, temp);
+    });
+  };
+
+  const updateFiles = () => {
+    return atom(null, (get, set, param: { index: number; file: File }) => {
+      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
+        draft.files.splice(param.index, 1, param.file);
+      });
+      set(apiTextBodyFilesAtom, temp);
+    });
+  };
+
+  const deleteFile = () => {
+    return atom(null, (get, set, index: number) => {
+      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
+        draft.files.splice(index, 1);
+      });
+      temp.files = checkIndex(temp.files);
+      set(apiTextBodyFilesAtom, temp);
+    });
+  };
 };
