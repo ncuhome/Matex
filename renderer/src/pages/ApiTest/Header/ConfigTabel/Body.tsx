@@ -4,23 +4,19 @@ import UploadFile from '../../../../components/UploadFile';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
-  apiTestBodyFormsAtom,
-  apiTestBodyFormsIsFileAtom,
   apiTestBodyRawAtom,
   apiTestBodyUrlencodedAtom,
   apiTestMethodAtom,
   useApiTestConfig
 } from '/@/store/apiTestStore';
 import KVTable from '/@cmp/KVTable';
-import { ApiTestKVProps } from '/@/store/apiTestStore/type';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { useUpdateEditorValue } from '/@/store/commonStore';
 import styles from './index.module.scss';
+import { BodyFormData } from '/@/pages/ApiTest/Header/ConfigTabel/BodyFormData';
 
 const BodyTable = () => {
-  const [formDataList, updateFormDataKey, updateFormDataValue, addFormDataItem, deleteFormDataItem] =
-    useApiTestConfig(apiTestBodyFormsAtom);
   const [
     urlencodedList,
     updateUrlencodedKey,
@@ -32,49 +28,13 @@ const BodyTable = () => {
   const activeBody = useAtomValue(apiTestActiveBodyTypeAtom);
   const activeRawType = useAtomValue(apiTestBodyRawAtom);
   const setEditorValue = useUpdateEditorValue('configBody');
-  const list = activeBody === 'form-data' ? formDataList : urlencodedList;
-  const isFile = useAtomValue(apiTestBodyFormsIsFileAtom);
-
-  const addItem = ({ key, value }: Omit<ApiTestKVProps, 'index'>) => {
-    if (activeBody === 'form-data') {
-      return addFormDataItem({ key, value });
-    } else {
-      return addUrlencodedItem({ key, value });
-    }
-  };
 
   useEffect(() => {
-    const len = list.length;
-    if (len) {
-      if (list[len - 1].key && list[len - 1].value) {
-        addItem({ key: '', value: '' });
-      }
+    const len = urlencodedList.length;
+    if (len === 0 || (urlencodedList[len - 1].key.trim() && urlencodedList[len - 1].value)) {
+      addUrlencodedItem({ key: '', value: '' });
     }
-  }, [list]);
-
-  const updateListKey = (index: number, key: string) => {
-    if (activeBody === 'form-data') {
-      updateFormDataKey(index, key);
-    } else {
-      updateUrlencodedKey(index, key);
-    }
-  };
-
-  const updateListValue = (index: number, key: string) => {
-    if (activeBody === 'form-data') {
-      updateFormDataValue(index, key);
-    } else {
-      updateUrlencodedValue(index, key);
-    }
-  };
-
-  const deleteItem = (index: number) => {
-    if (activeBody === 'form-data') {
-      return deleteFormDataItem(index);
-    } else {
-      return deleteUrlencodedItem(index);
-    }
-  };
+  }, [urlencodedList]);
 
   if (method === 'Get') {
     return (
@@ -105,20 +65,17 @@ const BodyTable = () => {
           width={'100%'}
         />
       );
+    } else if (activeBody === 'urlencoded') {
+      return (
+        <KVTable
+          data={urlencodedList}
+          onChangeValue={updateUrlencodedValue}
+          onChangeKey={updateUrlencodedKey}
+          onDeleteLine={deleteUrlencodedItem}
+        />
+      );
     } else {
-      if (isFile) {
-        return <UploadFile />;
-      } else {
-        return (
-          <KVTable
-            file={activeBody === 'form-data'}
-            data={list}
-            onChangeValue={updateListValue}
-            onChangeKey={updateListKey}
-            onDeleteLine={deleteItem}
-          />
-        );
-      }
+      return <BodyFormData />;
     }
   }
 };

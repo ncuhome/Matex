@@ -103,8 +103,8 @@ const useAction = () => {
       );
     case 'urlencoded':
       return <Menu.Item style={{ marginLeft: -5 }}>{renderPreview()}</Menu.Item>;
-    case 'form-data':
-      return renderFormDataAction();
+    // case 'form-data':
+    //   return renderFormDataAction();
     default:
       return <></>;
   }

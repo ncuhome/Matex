@@ -29,3 +29,31 @@
   justify-content: center;
   align-items: center;
 }
+
+.fileInput{
+  width: 100%;
+
+  .fileText{
+    border-radius: 3px ;
+    background-color: #F2F2F2;
+    padding: 3px 10px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+
+    .delete{
+      &:hover{
+        cursor: pointer;
+      }
+    }
+
+    &:hover{
+     cursor: pointer;
+      background-color: #D8D9D8;
+    }
+  }
+
+  .file{
+    display: none;
+  }
+}

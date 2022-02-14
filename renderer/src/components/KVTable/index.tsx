@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useRef } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
-import { ApiTestKVProps } from '/@/store/apiTestStore/type';
+import { ApiTestFormData, ApiTestKVProps } from '/@/store/apiTestStore/type';
 
 interface KVTableProps {
-  data: ApiTestKVProps[];
+  data: ApiTestKVProps[] | ApiTestFormData[];
   file?: boolean;
   onChangeKey?: (index: number, value: string) => void;
   onChangeValue?: (index: number, value: string) => void;
