@@ -28,7 +28,10 @@ export const judgementType = (typeStr: string) => {
   }
 };
 
-export const ContentTypeMapping = new Map<BodyItemType, string>([
+export const ContentTypeMapping = new Map<string, string>([
   ['form-data', 'multipart/form-data'],
-  ['urlencoded', 'application/x-www-form-urlencoded']
+  ['urlencoded', 'application/x-www-form-urlencoded'],
+  ['json', 'application/json'],
+  ['text', 'text/plain'],
+  ['html', 'text/html']
 ]);

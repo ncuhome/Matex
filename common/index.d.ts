@@ -1,6 +1,6 @@
 import type { IpcRenderer } from 'electron';
 import type { IncomingHttpHeaders } from 'http';
-import { BodyItemType } from '../renderer/src/type/apiTest';
+import { BodyItemType, BodyRawType } from '../renderer/src/type/apiTest';
 
 export interface NodeApiProps {
   NODE_ENV: 'development' | 'production' | string;
@@ -26,8 +26,10 @@ export interface ApiTestReqProps {
     [key: string]: string;
   };
   type: BodyItemType;
+  rawType: BodyRawType;
   body?: {
     formData?: FormDataReq[];
+    rawValue?: string;
     urlencoded?: {
       [key: string]: string;
     };

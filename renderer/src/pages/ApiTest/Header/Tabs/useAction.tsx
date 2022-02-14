@@ -29,15 +29,12 @@ const useAction = () => {
     let str = '';
     const len = urlencodedList.length - 1;
     urlencodedList.slice(0, len).forEach((item, index) => {
-      console.log(item, index);
       str += `${item.key}=${item.value}&`;
     });
-    console.log(str);
     return str.endsWith('&') ? str.slice(0, -1) : str;
   }, [urlencodedList]);
 
   const renderPreview = () => {
-    console.log(open);
     return (
       <Modal
         open={open}

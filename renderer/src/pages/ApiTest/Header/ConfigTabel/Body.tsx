@@ -54,14 +54,16 @@ const BodyTable = () => {
       return (
         <MonacoEditor
           onChange={(changes, value) => {
+            console.log(value);
             setEditorValue(value ?? '');
           }}
           shadow={false}
+          readOnly={false}
           border={'#E0E1E2 1px solid'}
           name={'configBody'}
           language={language}
           defaultVal={''}
-          height={80}
+          height={130}
           width={'100%'}
         />
       );

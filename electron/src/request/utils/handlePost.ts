@@ -50,3 +50,26 @@ export const handleUrlencoded = async (props: PostReqParams): Promise<ApiTestRes
     throw new Error('请求体不能为空');
   }
 };
+
+export const handleRaw = async (props: PostReqParams): Promise<ApiTestResProps> => {
+  const { body, url, headers, rawType } = props;
+  let response: Response;
+  if (body) {
+    const { rawValue } = body;
+    const isJson = rawType === 'json';
+    console.log(headers);
+    console.log(rawType);
+    console.log(isJson);
+    response = await ReqAsync({
+      url,
+      headers,
+      method: 'POST',
+      time: true,
+      json: isJson,
+      body: isJson ? JSON.parse(rawValue as string) : rawValue
+    });
+    return getResponse(response);
+  } else {
+    throw new Error('请求体不能为空');
+  }
+};

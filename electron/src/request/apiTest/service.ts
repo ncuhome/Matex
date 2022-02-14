@@ -3,7 +3,7 @@ import { ApiTestResProps } from '../../../../common';
 import { getResponse } from '../utils/getResponse';
 import { promisify } from 'util';
 import matexhttp, { Response } from 'matexhttp';
-import { handleFormData, handleUrlencoded } from '../utils/handlePost';
+import { handleFormData, handleRaw, handleUrlencoded } from '../utils/handlePost';
 
 const ReqAsync = promisify(matexhttp);
 
@@ -32,6 +32,9 @@ export class RequestAction {
         break;
       case 'urlencoded':
         response = await handleUrlencoded(props);
+        break;
+      case 'raw':
+        response = await handleRaw(props);
         break;
       default:
         response = await handleFormData(props);

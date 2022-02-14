@@ -16,7 +16,7 @@ export const useSendReq = () => {
   const paramList = useAtomValue(apiTestParamsAtom);
   const headerList = useAtomValue(apiTestHeadersAtom);
   const bodyType = useAtomValue(apiTestActiveBodyTypeAtom);
-  const { handleFormData, handleUrlencoded } = usePost();
+  const { handleFormData, handleUrlencoded, handleRaw } = usePost();
 
   const headers: { [key: string]: string } = {};
   headerList.slice(0, headerList.length - 1).forEach((item) => {
@@ -52,6 +52,9 @@ export const useSendReq = () => {
         break;
       case 'urlencoded':
         handleUrlencoded();
+        break;
+      case 'raw':
+        handleRaw();
         break;
     }
   };

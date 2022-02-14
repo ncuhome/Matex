@@ -84,6 +84,7 @@ export const useEditor = ({
   const domRef = useRef<HTMLElement>();
   const editor = editors.get(name);
   const existValue = editorValue.get(name) ?? '';
+  console.log(editors);
 
   //创建新的编辑器实例
   const createEditor = (domElement: HTMLElement, initValue: string) => {
@@ -92,7 +93,6 @@ export const useEditor = ({
     const editorIns = monaco.editor.create(domElement, {
       value: initValue,
       // model: language === 'json' ? model : undefined,
-      model: undefined,
       language,
       readOnly,
       automaticLayout: false,
@@ -132,7 +132,7 @@ export const useEditor = ({
   }, [language]);
 
   useEffect(() => {
-    if (editor) {
+    if (editor && readOnly) {
       editor.updateOptions({
         readOnly: true
       });

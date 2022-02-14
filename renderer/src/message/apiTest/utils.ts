@@ -2,6 +2,7 @@ import { ApiTestReqProps, FormDataReq } from '/@common/index';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
+  apiTestBodyRawAtom,
   apiTestBodyUrlencodedAtom,
   apiTestFormDataAtom,
   apiTestHeadersAtom,
@@ -11,6 +12,7 @@ import {
 import { ContentTypeMapping } from '/@/utils/typeUtils';
 import { MatexWin } from '/@/global';
 import { ApiTest_Channel } from '/@common/ipc/channel';
+import { editorValueAtom } from '/@/store/commonStore';
 
 export const usePost = () => {
   const method = useAtomValue(apiTestMethodAtom);
@@ -19,13 +21,22 @@ export const usePost = () => {
   const formDateList = useAtomValue(apiTestFormDataAtom);
   const bodyType = useAtomValue(apiTestActiveBodyTypeAtom);
   const urlencodedList = useAtomValue(apiTestBodyUrlencodedAtom);
+  const editorValues = useAtomValue(editorValueAtom);
+  const activeRawType = useAtomValue(apiTestBodyRawAtom);
+  const rawValue = editorValues.get('configBody') ?? '';
 
   const headers: { [key: string]: string } = {};
   headerList.slice(0, headerList.length - 1).forEach((item) => {
     headers[item.key] = item.value;
   });
 
-  headers['Content-Type'] = ContentTypeMapping.get(bodyType) ?? 'application/json';
+  if (bodyType !== 'raw') {
+    headers['Content-Type'] = ContentTypeMapping.get(bodyType) ?? 'application/json';
+  } else {
+    if (bodyType === 'raw') {
+      headers['Content-Type'] = ContentTypeMapping.get(activeRawType) ?? 'application/json';
+    }
+  }
 
   const handleFormData = () => {
     const formData = formDateList.slice(0, formDateList.length - 1).map((item) => {
@@ -64,8 +75,21 @@ export const usePost = () => {
     } as ApiTestReqProps);
   };
 
+  const handleRaw = () => {
+    MatexWin.ipc?.send(ApiTest_Channel.Request, {
+      url,
+      method,
+      headers,
+      type: bodyType,
+      rawType: activeRawType,
+      body: {
+        rawValue
+      }
+    } as ApiTestReqProps);
+  };
   return {
     handleFormData,
-    handleUrlencoded
+    handleUrlencoded,
+    handleRaw
   };
 };

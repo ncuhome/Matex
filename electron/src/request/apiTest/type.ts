@@ -1,5 +1,6 @@
 import type { BodyItemType } from '../../../../renderer/src/type/apiTest';
-import { ApiTestReqProps, ApiTestResProps } from '../../../../common';
+import { ApiTestReqProps } from '../../../../common';
+import { BodyRawType } from '../../../../renderer/src/type/apiTest';
 
 interface CollectionFetchProps {
   type: 'Get' | 'Post' | 'Put' | 'Delete';
@@ -28,5 +29,6 @@ export interface GetReqParams extends CommonReqParams {
 
 export interface PostReqParams extends CommonReqParams {
   type: BodyItemType;
+  rawType?: BodyRawType;
   body?: ApiTestReqProps['body'];
 }
