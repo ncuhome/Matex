@@ -4,7 +4,7 @@ import { Button, Dropdown } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { Outlet } from 'react-router-dom';
 import { MethodsOptions } from '/@/model/apiTest.model';
-import { useSendReq } from '/@/message/apiTest.ipc';
+import { useSendReq } from '/@/message/apiTest';
 import Tabs from './Tabs';
 import { ToastContainer } from 'react-toastify';
 import { useAtom } from 'jotai';

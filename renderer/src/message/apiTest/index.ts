@@ -1,23 +1,22 @@
-import { MatexWin } from '../global';
+import { MatexWin } from '/@/global';
 import { ApiTest_Channel } from '/@common/ipc/channel';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
-  apiTestFormDataAtom,
   apiTestHeadersAtom,
   apiTestMethodAtom,
   apiTestParamsAtom,
   apiTestUrlAtom
-} from '../store/apiTestStore';
-import { ContentTypeMapping } from '/@/utils/typeUtils';
+} from '/@/store/apiTestStore';
+import { usePost } from '/@/message/apiTest/utils';
 
 export const useSendReq = () => {
   const method = useAtomValue(apiTestMethodAtom);
   const url = useAtomValue(apiTestUrlAtom);
   const paramList = useAtomValue(apiTestParamsAtom);
   const headerList = useAtomValue(apiTestHeadersAtom);
-  const formDateList = useAtomValue(apiTestFormDataAtom);
   const bodyType = useAtomValue(apiTestActiveBodyTypeAtom);
+  const { handleFormData, handleUrlencoded } = usePost();
 
   const headers: { [key: string]: string } = {};
   headerList.slice(0, headerList.length - 1).forEach((item) => {
@@ -47,13 +46,14 @@ export const useSendReq = () => {
   };
 
   const doPost = () => {
-    headers['Content-Type'] = ContentTypeMapping.get(bodyType) ?? 'application/json';
-    MatexWin.ipc?.send(ApiTest_Channel.Request, {
-      url,
-      method,
-      body: formDateList.slice(0, formDateList.length - 1),
-      headers
-    });
+    switch (bodyType) {
+      case 'form-data':
+        handleFormData();
+        break;
+      case 'urlencoded':
+        handleUrlencoded();
+        break;
+    }
   };
 
   return { sendReq };

@@ -4,7 +4,6 @@ import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
-  apiTestBodyFormsIsFileAtom,
   apiTestBodyRawAtom,
   apiTestBodyUrlencodedAtom
 } from '/@/store/apiTestStore';
@@ -16,7 +15,6 @@ const useAction = () => {
   const urlencodedList = useAtomValue(apiTestBodyUrlencodedAtom);
   const activeBody = useAtomValue(apiTestActiveBodyTypeAtom);
   const [activeRawType, setActiveRawType] = useAtom(apiTestBodyRawAtom);
-  const [isFile, setIsFile] = useAtom(apiTestBodyFormsIsFileAtom);
   const [open, setOpen] = useState(false);
 
   const rawOptions = RawOptions.map((item) => {
@@ -61,31 +59,6 @@ const useAction = () => {
     );
   };
 
-  const renderFormDataAction = () => {
-    return (
-      <>
-        <Menu.Item>
-          <Button.Group basic size="mini" style={{ marginLeft: -15 }}>
-            <Button icon>
-              <Icon name={'eye'} />
-            </Button>
-            <Button icon onClick={() => setIsFile(false)}>
-              <Icon name={'pencil alternate'} style={{ color: !isFile ? '#2CB5AD' : '#C1C1C1' }} />
-            </Button>
-            <Button icon onClick={() => setIsFile(true)}>
-              <Icon name={'file'} style={{ color: isFile ? '#2CB5AD' : '#C1C1C1' }} />
-            </Button>
-          </Button.Group>
-        </Menu.Item>
-        {isFile && (
-          <Menu.Item>
-            <Input placeholder="key" size={'small'} style={{ width: 100, marginLeft: -20 }} />
-          </Menu.Item>
-        )}
-      </>
-    );
-  };
-
   switch (activeBody) {
     case 'raw':
       return (
@@ -103,8 +76,6 @@ const useAction = () => {
       );
     case 'urlencoded':
       return <Menu.Item style={{ marginLeft: -5 }}>{renderPreview()}</Menu.Item>;
-    // case 'form-data':
-    //   return renderFormDataAction();
     default:
       return <></>;
   }

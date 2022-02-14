@@ -2,12 +2,11 @@ import { useApiTestFormData } from '/@/store/apiTestStore';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import React, { Fragment, useEffect } from 'react';
 import styles from './index.module.scss';
+import FormDataInput from '/@cmp/FormDataInput';
 
 export const BodyFormData = () => {
   const { formData, updateFormDataKey, updateFormDataValue, addFormData, deleteFormData } =
     useApiTestFormData();
-
-  const [isFile, setFile] = React.useState(false);
 
   useEffect(() => {
     const len = formData.length;
@@ -20,7 +19,7 @@ export const BodyFormData = () => {
     !formData[index].value && document.getElementById(`file-${index}`)?.click();
   };
 
-  const onFileInputChange = (index: number, file: File) => {
+  const onFileInputChange = (index: number, file: File | string) => {
     console.log(file);
     file && updateFormDataValue(index, file);
   };
@@ -28,27 +27,6 @@ export const BodyFormData = () => {
   const deleteFile = (index: number) => {
     (document.getElementById(`file-${index}`) as HTMLInputElement)!.value = '';
     deleteFormData(index);
-  };
-
-  const renderFileInput = (index: number) => {
-    return (
-      <div className={styles.fileInput}>
-        <div className={styles.fileText} onClick={() => handleFileInputClick(index)}>
-          {(formData[index].value as File).name || '选择文件'}
-          {formData[index].value && (
-            <div className={styles.delete} onClick={() => deleteFile(index)}>
-              <Icon style={{ marginLeft: 10, marginTop: 2 }} name={'delete'} />
-            </div>
-          )}
-        </div>
-        <input
-          className={styles.file}
-          type={'file'}
-          id={`file-${index}`}
-          onChange={(e) => onFileInputChange(index, e.target?.files?.[0] as File)}
-        />
-      </div>
-    );
   };
 
   return (
@@ -77,29 +55,14 @@ export const BodyFormData = () => {
                   />
                 </Table.Cell>
                 <Table.Cell textAlign={'center'}>
-                  <div className={styles.bodyCell}>
-                    {isFile ? (
-                      renderFileInput(index)
-                    ) : (
-                      <input
-                        className={styles.input}
-                        value={item.value as string}
-                        type={'text'}
-                        onChange={(e) => {
-                          updateFormDataValue(index, e.target.value);
-                        }}
-                      />
-                    )}
-                    <Button.Group basic size="mini">
-                      <Button icon="eye" disabled={!isFile} />
-                      <Button icon onClick={() => setFile(!isFile)} disabled={!!item.value}>
-                        <Icon
-                          name={isFile ? 'file' : 'file outline'}
-                          style={{ color: isFile ? '#2CB5AD' : '#A5A6A5' }}
-                        />
-                      </Button>
-                    </Button.Group>
-                  </div>
+                  <FormDataInput
+                    onClick={handleFileInputClick}
+                    onChange={onFileInputChange}
+                    data={item}
+                    index={index}
+                    deleteFile={deleteFile}
+                    updateStrData={updateFormDataValue}
+                  />
                 </Table.Cell>
                 <Table.Cell textAlign={'center'}>
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>

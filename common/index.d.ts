@@ -1,5 +1,6 @@
 import type { IpcRenderer } from 'electron';
 import type { IncomingHttpHeaders } from 'http';
+import { BodyItemType } from '../renderer/src/type/apiTest';
 
 export interface NodeApiProps {
   NODE_ENV: 'development' | 'production' | string;
@@ -7,6 +8,12 @@ export interface NodeApiProps {
   Clipboard: Electron.Clipboard;
   MessagePort: MessagePort | null;
   decodeHTML5: (str: string | any[]) => string;
+}
+
+export interface FormDataReq {
+  isFile: boolean;
+  key: string;
+  value: string;
 }
 
 export interface ApiTestReqProps {
@@ -18,7 +25,13 @@ export interface ApiTestReqProps {
   params?: {
     [key: string]: string;
   };
-  body?: any;
+  type: BodyItemType;
+  body?: {
+    formData?: FormDataReq[];
+    urlencoded?: {
+      [key: string]: string;
+    };
+  };
 }
 
 export interface ApiTestResProps<T = any> {

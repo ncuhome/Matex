@@ -9,7 +9,6 @@ import { ApiTestResProps } from '/@common/index';
 
 export const apiTestParamsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 export const apiTestHeadersAtom = atom<ApiTestKVProps[]>(InitHeaders);
-export const apiTestBodyFormsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 export const apiTestBodyFormsIsFileAtom = atom<boolean>(false);
 export const apiTestFormDataAtom = atom<ApiTestFormData[]>([{ index: 0, key: '', value: '' }]);
 //header
@@ -80,7 +79,6 @@ export const useApiTestFormData = () => {
       draft[index].key = key;
     });
     updateFormData(checkIndex(temp));
-    console.log(temp);
   };
 
   const addFormData = (key: string, value: ApiTestFormData['value']) => {
