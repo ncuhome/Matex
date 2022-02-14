@@ -42,6 +42,7 @@ const options: WaitOn.WaitOnOptions = {
     // assert.equal(page.url(), 'http://localhost:3000/#/apiTest');
     // Click text=Params
     await page.click('text=Params');
+    await page.waitForTimeout(1000);
     await page.screenshot({ path: './test/screenshot/screenshot.png' });
     console.log('截图成功');
     // assert.equal(page.url(), 'http://localhost:3000/#/apiTest/params');
