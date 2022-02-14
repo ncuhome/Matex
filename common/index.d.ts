@@ -15,20 +15,21 @@ export interface ApiTestReqProps {
   headers: {
     [key: string]: string;
   };
-  params: {
+  params?: {
     [key: string]: string;
   };
+  body?: any;
 }
 
 export interface ApiTestResProps<T = any> {
   type:
-  | 'text/html'
-  | 'text/plain'
-  | 'application/xml'
-  | 'application/json'
-  | 'application/pdf'
-  | 'application/msword'
-  | string;
+    | 'text/html'
+    | 'text/plain'
+    | 'application/xml'
+    | 'application/json'
+    | 'application/pdf'
+    | 'application/msword'
+    | string;
   statusCode: number;
   desc: string;
   size: string;

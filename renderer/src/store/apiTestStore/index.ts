@@ -1,17 +1,17 @@
-import { atom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { produce } from 'immer';
 import { checkIndex } from '/@/store/utils';
 import { InitHeaders } from '/@/model/apiTest.model';
 import { BodyActionType, BodyItemType, BodyRawType, FormatType, ReqMethod, TabItems } from '/@/type/apiTest';
-import { ApiTestKVProps, ApiTestReturnType } from '/@/store/apiTestStore/type';
+import { ApiTestFormData, ApiTestKVProps, ApiTestReturnType } from '/@/store/apiTestStore/type';
 import { ApiTestResProps } from '/@common/index';
 
 export const apiTestParamsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 export const apiTestHeadersAtom = atom<ApiTestKVProps[]>(InitHeaders);
 export const apiTestBodyFormsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
 export const apiTestBodyFormsIsFileAtom = atom<boolean>(false);
-export const apiTextBodyFilesAtom = atom<{ key: string; files: File[] }>({ key: '', files: [] });
+export const apiTestFormDataAtom = atom<ApiTestFormData[]>([{ index: 0, key: '', value: '' }]);
 //header
 export const apiTestUrlAtom = atom<string>('');
 export const apiTestMethodAtom = atom<ReqMethod>('Get');
@@ -72,41 +72,43 @@ export const useApiTestConfig = (receivedAtom: any): ApiTestReturnType => {
   return [list, updateListKey, updateListValue, addItem, deleteItem];
 };
 
-export const useApiTextBodyFiles = () => {
-  const updateKey = (key: string) => {
-    atom(null, (get, set, key: string) => {
-      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
-        draft.key = key;
-      });
-      set(apiTextBodyFilesAtom, temp);
+export const useApiTestFormData = () => {
+  const [formData, updateFormData] = useAtom(apiTestFormDataAtom);
+
+  const updateFormDataKey = (index: number, key: string) => {
+    const temp = produce(formData, (draft) => {
+      draft[index].key = key;
     });
+    updateFormData(checkIndex(temp));
+    console.log(temp);
   };
 
-  const addFile = () => {
-    return atom(null, (get, set, file: File) => {
-      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
-        draft.files.push(file);
-      });
-      set(apiTextBodyFilesAtom, temp);
+  const addFormData = (key: string, value: ApiTestFormData['value']) => {
+    const temp = produce(formData, (draft) => {
+      draft.push({ index: draft.length, key, value });
     });
+    updateFormData(checkIndex(temp));
   };
 
-  const updateFiles = () => {
-    return atom(null, (get, set, param: { index: number; file: File }) => {
-      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
-        draft.files.splice(param.index, 1, param.file);
-      });
-      set(apiTextBodyFilesAtom, temp);
+  const deleteFormData = (index: number) => {
+    const temp = produce(formData, (draft) => {
+      draft.splice(index, 1);
     });
+    updateFormData(checkIndex(temp));
   };
 
-  const deleteFile = () => {
-    return atom(null, (get, set, index: number) => {
-      const temp = produce(get<{ key: string; files: File[] }>(apiTextBodyFilesAtom), (draft) => {
-        draft.files.splice(index, 1);
-      });
-      temp.files = checkIndex(temp.files);
-      set(apiTextBodyFilesAtom, temp);
+  const updateFormDataValue = (index: number, value: ApiTestFormData['value']) => {
+    const temp = produce(formData, (draft) => {
+      draft[index].value = value;
     });
+    updateFormData(checkIndex(temp));
+  };
+
+  return {
+    formData,
+    updateFormDataKey,
+    addFormData,
+    deleteFormData,
+    updateFormDataValue
   };
 };

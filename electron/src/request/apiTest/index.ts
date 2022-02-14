@@ -10,7 +10,7 @@ export class ApiTestIpc {
 
   static listen() {
     ipcMain.on(ApiTest_Channel.Request, async (e, args) => {
-      const { url, method, headers, params } = args as ApiTestReqProps;
+      const { url, method, headers, params, body } = args as ApiTestReqProps;
 
       let res: ApiTestResProps;
       switch (method) {
@@ -18,7 +18,7 @@ export class ApiTestIpc {
           res = await RequestAction.doGet({ url, headers, params });
           break;
         case 'Post':
-          res = await RequestAction.doGet({ url, headers, params });
+          res = await RequestAction.doPost({ url, headers, body });
           break;
         default:
           res = await RequestAction.doGet({ url, headers, params });

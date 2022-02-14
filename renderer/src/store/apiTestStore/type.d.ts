@@ -12,3 +12,9 @@ export type ApiTestReturnType = [
   (update: Omit<ApiTestKVProps, 'index'>) => void,
   (update: number) => void
 ];
+
+export interface ApiTestFormData {
+  index: number;
+  key: string;
+  value: string | File;
+}

@@ -24,3 +24,7 @@ export interface GetReqParams extends CommonReqParams {
     [key: string]: any;
   };
 }
+
+export interface PostReqParams extends CommonReqParams {
+  body?: any;
+}

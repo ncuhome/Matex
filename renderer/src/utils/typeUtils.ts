@@ -1,3 +1,5 @@
+import type { BodyItemType } from '/@/type/apiTest';
+
 export const EditAble = ['json', 'text', 'html', 'xml', 'javascript'];
 export const OpenInBroAble = ['image', 'audio', 'video', 'pdf'];
 export const EditAndPreviewAble = ['json', 'html', 'text'];
@@ -25,3 +27,8 @@ export const judgementType = (typeStr: string) => {
     return 'unknown';
   }
 };
+
+export const ContentTypeMapping = new Map<BodyItemType, string>([
+  ['form-data', 'multipart/form-data'],
+  ['urlencoded', 'application/x-www-form-urlencoded']
+]);
