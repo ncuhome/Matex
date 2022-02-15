@@ -1,5 +1,5 @@
-import { PostReqParams } from '../apiTest/type';
-import { ApiTestResProps } from '../../../../common';
+import { PostReqParams } from '../type';
+import { ApiTestResProps } from '../../../../../common';
 import matexhttp, { Response } from 'matexhttp';
 import * as fs from 'fs';
 import { promisify } from 'util';
@@ -7,7 +7,10 @@ import { getResponse } from './getResponse';
 
 const ReqAsync = promisify(matexhttp);
 
-export const handleFormData = async (props: PostReqParams): Promise<ApiTestResProps> => {
+export const handleFormData = async (
+  props: PostReqParams,
+  put: boolean = false
+): Promise<ApiTestResProps> => {
   const { body, url, headers } = props;
   let response: Response;
   if (body) {
@@ -23,7 +26,7 @@ export const handleFormData = async (props: PostReqParams): Promise<ApiTestResPr
     response = await ReqAsync({
       url,
       headers,
-      method: 'POST',
+      method: put ? 'PUT' : 'POST',
       time: true,
       formData: form
     });
@@ -33,7 +36,10 @@ export const handleFormData = async (props: PostReqParams): Promise<ApiTestResPr
   }
 };
 
-export const handleUrlencoded = async (props: PostReqParams): Promise<ApiTestResProps> => {
+export const handleUrlencoded = async (
+  props: PostReqParams,
+  put: boolean = false
+): Promise<ApiTestResProps> => {
   const { body, url, headers } = props;
   let response: Response;
   if (body) {
@@ -41,7 +47,7 @@ export const handleUrlencoded = async (props: PostReqParams): Promise<ApiTestRes
     response = await ReqAsync({
       url,
       headers,
-      method: 'POST',
+      method: put ? 'PUT' : 'POST',
       time: true,
       form: urlencoded
     });
@@ -51,7 +57,7 @@ export const handleUrlencoded = async (props: PostReqParams): Promise<ApiTestRes
   }
 };
 
-export const handleRaw = async (props: PostReqParams): Promise<ApiTestResProps> => {
+export const handleRaw = async (props: PostReqParams, put: boolean = false): Promise<ApiTestResProps> => {
   const { body, url, headers, rawType } = props;
   let response: Response;
   if (body) {
@@ -63,7 +69,7 @@ export const handleRaw = async (props: PostReqParams): Promise<ApiTestResProps> 
     response = await ReqAsync({
       url,
       headers,
-      method: 'POST',
+      method: put ? 'PUT' : 'POST',
       time: true,
       json: isJson,
       body: isJson ? JSON.parse(rawValue as string) : rawValue
@@ -74,7 +80,7 @@ export const handleRaw = async (props: PostReqParams): Promise<ApiTestResProps> 
   }
 };
 
-export const handleBinary = async (props: PostReqParams): Promise<ApiTestResProps> => {
+export const handleBinary = async (props: PostReqParams, put: boolean = false): Promise<ApiTestResProps> => {
   const { body, url, headers } = props;
   let response: Response;
   if (body) {
@@ -82,7 +88,7 @@ export const handleBinary = async (props: PostReqParams): Promise<ApiTestResProp
     response = await ReqAsync({
       url,
       headers,
-      method: 'POST',
+      method: put ? 'PUT' : 'POST',
       time: true,
       body: fs.readFileSync(binary!)
     });

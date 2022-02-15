@@ -20,6 +20,9 @@ export class ApiTestIpc {
         case 'Post':
           res = await RequestAction.doPost({ url, headers, body, type, rawType });
           break;
+        case 'Put':
+          res = await RequestAction.doPut({ url, headers, body, type, rawType });
+          break;
         default:
           res = await RequestAction.doGet({ url, headers, params });
           break;

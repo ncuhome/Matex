@@ -40,6 +40,8 @@ const Tabs = () => {
     setActiveBody(value as BodyItemType);
   };
 
+  const showBodyType = activeTab === 'Body' && (method === 'Post' || method === 'Put');
+
   return useMemo(() => {
     return (
       <>
@@ -61,7 +63,7 @@ const Tabs = () => {
               </Fragment>
             );
           })}
-          {activeTab === 'Body' && method === 'Post' && (
+          {showBodyType && (
             <Menu.Menu position="right" style={{ marginRight: 15 }}>
               <Menu.Item>
                 <Button.Group size={'small'}>

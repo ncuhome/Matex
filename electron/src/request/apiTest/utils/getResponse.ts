@@ -1,6 +1,6 @@
 import { judgementType, rawTypes } from './judgement';
 import { getDescription } from './statusCodeMapping';
-import { ApiTestResProps } from '../../../../common';
+import { ApiTestResProps } from '../../../../../common';
 import { Blob } from 'buffer';
 import fileSize from 'filesize';
 import type { Response } from 'matexhttp';

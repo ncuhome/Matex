@@ -1,9 +1,9 @@
 import { GetReqParams, PostReqParams } from './type';
 import { ApiTestResProps } from '../../../../common';
-import { getResponse } from '../utils/getResponse';
+import { getResponse } from './utils/getResponse';
 import { promisify } from 'util';
 import matexhttp, { Response } from 'matexhttp';
-import { handleBinary, handleFormData, handleRaw, handleUrlencoded } from '../utils/handlePost';
+import { handleBinary, handleFormData, handleRaw, handleUrlencoded } from './utils/handlePost';
 
 const ReqAsync = promisify(matexhttp);
 
@@ -22,7 +22,6 @@ export class RequestAction {
   }
 
   static async doPost(props: PostReqParams): Promise<ApiTestResProps> {
-    console.log(props);
     const { type } = props;
     let response: ApiTestResProps;
 
@@ -41,6 +40,30 @@ export class RequestAction {
         break;
       default:
         response = await handleFormData(props);
+        break;
+    }
+    return response;
+  }
+
+  static async doPut(props: PostReqParams): Promise<ApiTestResProps> {
+    const { type } = props;
+    let response: ApiTestResProps;
+
+    switch (type) {
+      case 'form-data':
+        response = await handleFormData(props, true);
+        break;
+      case 'urlencoded':
+        response = await handleUrlencoded(props, true);
+        break;
+      case 'raw':
+        response = await handleRaw(props, true);
+        break;
+      case 'binary':
+        response = await handleBinary(props, true);
+        break;
+      default:
+        response = await handleFormData(props, true);
         break;
     }
     return response;

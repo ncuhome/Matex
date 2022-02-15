@@ -41,7 +41,7 @@ const BodyTable = () => {
       <div className={styles.warningCon}>
         <Header icon>
           <Icon name={'warning sign'} color={'red'} style={{ marginBottom: 10 }} />
-          &nbsp;当为Get请求时,无此配置
+          &nbsp;当为{method}请求时,请使用Params传递参数
         </Header>
       </div>
     );

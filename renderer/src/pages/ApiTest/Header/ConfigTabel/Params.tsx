@@ -31,7 +31,7 @@ const ParamsTable = () => {
       <div className={styles.warningCon}>
         <Header icon>
           <Icon name={'warning sign'} color={'red'} style={{ marginBottom: 10 }} />
-          &nbsp;Post请求时,请使用body传递参数
+          &nbsp;{method}请求时,请使用Body传递参数
         </Header>
       </div>
     );

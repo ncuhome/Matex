@@ -35,6 +35,9 @@ export const useSendReq = () => {
         case 'Post':
           doPost();
           break;
+        case 'Put':
+          doPost();
+          break;
       }
     }
   };
