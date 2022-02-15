@@ -1,4 +1,4 @@
-import { app, BrowserWindow, MessageChannelMain } from 'electron';
+import { app, BrowserWindow, MessageChannelMain, Notification } from 'electron';
 import { PortChannel } from './request';
 import { documentsPath, isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './scripts/log';
@@ -83,6 +83,10 @@ app.whenReady().then(async () => {
     MatexLog.debug(process.env.NODE_ENV ?? '');
     MatexLog.debug(process.env.LOADING_PATH ?? '');
   } catch (e) {
+    new Notification({
+      title: '错误',
+      body: '' + e
+    }).show();
     MatexLog.error('发生错误' + e);
   }
 });

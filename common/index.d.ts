@@ -30,6 +30,7 @@ export interface ApiTestReqProps {
   body?: {
     formData?: FormDataReq[];
     rawValue?: string;
+    binary?: string;
     urlencoded?: {
       [key: string]: string;
     };

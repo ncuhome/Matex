@@ -3,7 +3,7 @@ import { ApiTestResProps } from '../../../../common';
 import { getResponse } from '../utils/getResponse';
 import { promisify } from 'util';
 import matexhttp, { Response } from 'matexhttp';
-import { handleFormData, handleRaw, handleUrlencoded } from '../utils/handlePost';
+import { handleBinary, handleFormData, handleRaw, handleUrlencoded } from '../utils/handlePost';
 
 const ReqAsync = promisify(matexhttp);
 
@@ -35,6 +35,9 @@ export class RequestAction {
         break;
       case 'raw':
         response = await handleRaw(props);
+        break;
+      case 'binary':
+        response = await handleBinary(props);
         break;
       default:
         response = await handleFormData(props);

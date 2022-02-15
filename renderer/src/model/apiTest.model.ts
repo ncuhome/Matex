@@ -16,7 +16,7 @@ export const ResDisplayItems: ResDisplayItemsType[] = ['Body', 'Headers'];
 
 export const Actions: BodyActionType[] = ['Pretty', 'Preview'];
 export const BodyTypes: BodyItemType[] = ['form-data', 'urlencoded', 'raw', 'binary'];
-export const RawOptions: BodyRawType[] = ['text', 'json', 'html'];
+export const RawOptions: BodyRawType[] = ['text', 'json', 'html', 'javascript'];
 
 export const InitHeaders = [
   { index: 0, key: 'Accept', value: '*/*' },

@@ -32,6 +32,7 @@ export const ContentTypeMapping = new Map<string, string>([
   ['form-data', 'multipart/form-data'],
   ['urlencoded', 'application/x-www-form-urlencoded'],
   ['json', 'application/json'],
+  ['javascript', 'text/javascript'],
   ['text', 'text/plain'],
   ['html', 'text/html']
 ]);

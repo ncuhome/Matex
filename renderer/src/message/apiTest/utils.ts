@@ -2,6 +2,7 @@ import { ApiTestReqProps, FormDataReq } from '/@common/index';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
+  apiTestBinaryAtom,
   apiTestBodyRawAtom,
   apiTestBodyUrlencodedAtom,
   apiTestFormDataAtom,
@@ -24,13 +25,14 @@ export const usePost = () => {
   const editorValues = useAtomValue(editorValueAtom);
   const activeRawType = useAtomValue(apiTestBodyRawAtom);
   const rawValue = editorValues.get('configBody') ?? '';
+  const files = useAtomValue(apiTestBinaryAtom);
 
   const headers: { [key: string]: string } = {};
   headerList.slice(0, headerList.length - 1).forEach((item) => {
     headers[item.key] = item.value;
   });
 
-  if (bodyType !== 'raw') {
+  if (bodyType !== 'raw' && bodyType !== 'binary') {
     headers['Content-Type'] = ContentTypeMapping.get(bodyType) ?? 'application/json';
   } else {
     if (bodyType === 'raw') {
@@ -87,9 +89,34 @@ export const usePost = () => {
       }
     } as ApiTestReqProps);
   };
+
+  const filePond: File[] = files.map((item) => {
+    return item.file as File;
+  });
+
+  const handleBinary = () => {
+    const type = filePond[0].type;
+    if (type.trim()) {
+      headers['Content-Type'] = filePond[0].type;
+    } else {
+      headers['Content-Type'] = 'text/plain';
+    }
+    MatexWin.ipc?.send(ApiTest_Channel.Request, {
+      url,
+      method,
+      headers,
+      type: bodyType,
+      rawType: activeRawType,
+      body: {
+        binary: filePond[0].path
+      }
+    } as ApiTestReqProps);
+  };
+
   return {
     handleFormData,
     handleUrlencoded,
-    handleRaw
+    handleRaw,
+    handleBinary
   };
 };

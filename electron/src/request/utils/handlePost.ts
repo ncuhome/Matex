@@ -73,3 +73,21 @@ export const handleRaw = async (props: PostReqParams): Promise<ApiTestResProps> 
     throw new Error('请求体不能为空');
   }
 };
+
+export const handleBinary = async (props: PostReqParams): Promise<ApiTestResProps> => {
+  const { body, url, headers } = props;
+  let response: Response;
+  if (body) {
+    const { binary } = body;
+    response = await ReqAsync({
+      url,
+      headers,
+      method: 'POST',
+      time: true,
+      body: fs.readFileSync(binary!)
+    });
+    return getResponse(response);
+  } else {
+    throw new Error('请求体不能为空');
+  }
+};
