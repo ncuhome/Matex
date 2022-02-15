@@ -31,6 +31,7 @@ jobs:
         run: |
           echo build main and render
           npm config set scripts-prepend-node-path true
+          npm cache clear --force
           yarn build
 
       - name: Package Electron app
