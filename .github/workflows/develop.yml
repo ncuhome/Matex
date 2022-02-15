@@ -30,6 +30,7 @@ jobs:
       - name: build main and render
         run: |
           echo build main and render
+          npm config set scripts-prepend-node-path true
           yarn build
 
       - name: Package Electron app
