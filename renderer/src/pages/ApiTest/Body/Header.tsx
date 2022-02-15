@@ -46,7 +46,11 @@ export const Header = () => {
   };
 
   const handleCopy = () => {
-    MatexWin.Clipboard.writeText(resData!.body);
+    if (displayItem === 'Body') {
+      MatexWin.Clipboard.writeText(resData!.body);
+    } else {
+      MatexWin.Clipboard.writeText(JSON.stringify(resData!.headers));
+    }
   };
 
   const handleFind = () => {
