@@ -6,11 +6,14 @@ import Body from './Body';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { preRouteAtom } from '/@/store/commonStore';
+import { useUpdateAtom } from 'jotai/utils';
+import { apiTestFormDataAtom } from '/@/store/apiTestStore';
 
 const Collection = () => {
   const [preRoute, setPreRoute] = useAtom(preRouteAtom);
   const location = useLocation();
   const navigate = useNavigate();
+  const updateFormData = useUpdateAtom(apiTestFormDataAtom);
 
   useEffect(() => {
     if (location.pathname === '/apiTest') {
@@ -21,6 +24,7 @@ const Collection = () => {
       }
     }
     return () => {
+      updateFormData([]);
       if (location.pathname !== '/apiTest') {
         setPreRoute(location.pathname);
       }

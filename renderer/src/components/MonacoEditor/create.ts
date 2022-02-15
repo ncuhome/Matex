@@ -84,12 +84,10 @@ export const useEditor = ({
   const domRef = useRef<HTMLElement>();
   const editor = editors.get(name);
   const existValue = editorValue.get(name) ?? '';
-  console.log(editors);
 
   //创建新的编辑器实例
   const createEditor = (domElement: HTMLElement, initValue: string) => {
     domRef.current = domElement;
-    console.log('createEditor', language);
     const editorIns = monaco.editor.create(domElement, {
       value: initValue,
       // model: language === 'json' ? model : undefined,
@@ -126,7 +124,6 @@ export const useEditor = ({
     const exist = destroyEditor();
     if (domRef.current && editor) {
       const initValue = exist ? existValue : defaultVal ?? '';
-      console.log(initValue);
       createEditor(domRef.current, initValue);
     }
   }, [language]);
