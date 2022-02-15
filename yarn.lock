@@ -4162,14 +4162,6 @@ format@^0.2.0:
   resolved "https://registry.npmmirror.com/format/-/format-0.2.2.tgz#d6170107e9efdc4ed30c9dc39016df942b5cb58b"
   integrity sha512-wzsgA6WOq+09wrU1tsJ09udeR/YZRaeArL9e1wPbFg3GG2yDnC2ldKpxs4xunpFF9DgqCqOIra3bc1HWrJ37Ww==
 
-formdata-node@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.npmmirror.com/formdata-node/-/formdata-node-4.3.2.tgz#0262e94931e36db7239c2b08bdb6aaf18ec47d21"
-  integrity sha512-k7lYJyzDOSL6h917favP8j1L0/wNyylzU+x+1w4p5haGVHNlP58dbpdJhiCUsDbWsa9HwEtLp89obQgXl2e0qg==
-  dependencies:
-    node-domexception "1.0.0"
-    web-streams-polyfill "4.0.0-beta.1"
-
 forwarded@0.2.0:
   version "0.2.0"
   resolved "https://registry.npmmirror.com/forwarded/-/forwarded-0.2.0.tgz#2269936428aad4c15c7ebe9779a84bf0b2a81811"
@@ -4426,6 +4418,11 @@ globby@^11.0.4:
     ignore "^5.2.0"
     merge2 "^1.4.1"
     slash "^3.0.0"
+
+goober@^2.1.1:
+  version "2.1.8"
+  resolved "https://registry.npmjs.org/goober/-/goober-2.1.8.tgz#e592c04d093cb38f77b38cfcb012b7811c85765e"
+  integrity sha512-S0C85gCzcfFCMSdjD/CxyQMt1rbf2qEg6hmDzxk2FfD7+7Ogk55m8ZFUMtqNaZM4VVX/qaU9AzSORG+Gf4ZpAQ==
 
 got@11.8.3, got@^11.7.0:
   version "11.8.3"
@@ -5874,11 +5871,6 @@ node-api-version@^0.1.4:
   dependencies:
     semver "^7.3.5"
 
-node-domexception@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmmirror.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
-  integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
-
 node-forge@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmmirror.com/node-forge/-/node-forge-1.2.1.tgz#82794919071ef2eb5c509293325cec8afd0fd53c"
@@ -7294,6 +7286,13 @@ react-filepond@^7.1.1:
   resolved "https://registry.npmmirror.com/react-filepond/-/react-filepond-7.1.1.tgz#467aa45051da5dbbca03a2ce58d2aacbbcfbb0e9"
   integrity sha512-6Szyi3zY4AEiSlE5rztJov/xIDB107Sv31MctDoSutdLinMqmbMej6kJ2MtSGzAhsP2+h8cDDr51mdHNXt97Yw==
 
+react-hot-toast@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/react-hot-toast/-/react-hot-toast-2.2.0.tgz#ab6f4caed4214b9534f94bb8cfaaf21b051e62b9"
+  integrity sha512-248rXw13uhf/6TNDVzagX+y7R8J183rp7MwUMNkcrBRyHj/jWOggfXTGlM8zAOuh701WyVW+eUaWG2LeSufX9g==
+  dependencies:
+    goober "^2.1.1"
+
 react-is@^16.13.1, react-is@^16.6.3:
   version "16.13.1"
   resolved "https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -8668,11 +8667,6 @@ weak-lru-cache@^1.2.2:
   version "1.2.2"
   resolved "https://registry.npmmirror.com/weak-lru-cache/-/weak-lru-cache-1.2.2.tgz#fdbb6741f36bae9540d12f480ce8254060dccd19"
   integrity sha512-DEAoo25RfSYMuTGc9vPJzZcZullwIqRDSI9LOy+fkCJPi6hykCnfKaXTuPBDuXAUcqHXyOgFtHNp/kB2FjYHbw==
-
-web-streams-polyfill@4.0.0-beta.1:
-  version "4.0.0-beta.1"
-  resolved "https://registry.npmmirror.com/web-streams-polyfill/-/web-streams-polyfill-4.0.0-beta.1.tgz#3b19b9817374b7cee06d374ba7eeb3aeb80e8c95"
-  integrity sha512-3ux37gEX670UUphBF9AMCq8XM6iQ8Ac6A+DSRRjDoRBm1ufCkaCDdNVbaqq60PsEkdNlLKrGtv/YBP4EJXqNtQ==
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"

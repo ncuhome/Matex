@@ -78,6 +78,12 @@ const Header = () => {
   }, [loading]);
 
   useEffect(() => {
+    Emitter.on('apiTest.sendReq', () => {
+      setLoading(true);
+    });
+  }, []);
+
+  useEffect(() => {
     if (resData) {
       setLoading(false);
       Emitter.emit('apiTest.bodyDimmer', false);
@@ -86,8 +92,6 @@ const Header = () => {
 
   const doFetch = () => {
     url.trim() && sendReq();
-    Emitter.emit('apiTest.bodyDimmer', true);
-    setLoading(true);
   };
 
   const handleContextMenu = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {

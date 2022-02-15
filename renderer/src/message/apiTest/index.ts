@@ -9,6 +9,8 @@ import {
   apiTestUrlAtom
 } from '/@/store/apiTestStore';
 import { usePost } from '/@/message/apiTest/utils';
+import { checkUrl } from '/@/message/apiTest/check';
+import { Emitter } from '/@/utils/EventEmiter';
 
 export const useSendReq = () => {
   const method = useAtomValue(apiTestMethodAtom);
@@ -24,13 +26,16 @@ export const useSendReq = () => {
   });
 
   const sendReq = () => {
-    switch (method) {
-      case 'Get':
-        doGet();
-        break;
-      case 'Post':
-        doPost();
-        break;
+    if (checkUrl(url)) {
+      Emitter.emit('apiTest.sendReq', true);
+      switch (method) {
+        case 'Get':
+          doGet();
+          break;
+        case 'Post':
+          doPost();
+          break;
+      }
     }
   };
 
