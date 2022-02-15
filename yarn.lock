@@ -5522,10 +5522,10 @@ matcher@^3.0.0:
   dependencies:
     escape-string-regexp "^4.0.0"
 
-matexhttp@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/matexhttp/-/matexhttp-1.0.2.tgz#9a8dc604663b1ee71ed0a9ef4ae3ce35eab1c51b"
-  integrity sha512-K1Q6EQqBSITZBw5/P1PuARvVKScSV9hMS6TFB3BmCw8Ti6ltqw6t+1eRV3yuEFsIv645ggfaN4a8sAoCWSeR3A==
+matexhttp@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/matexhttp/-/matexhttp-1.0.5.tgz#c8de94f74a10e98ef512b4d2edf77e3f0aad8180"
+  integrity sha512-O+lTO5g55wm9l8FkecerQgIwWlLb3VWA11ayjnw2UbXgr5doj2NPkMHYjV5GZLb6iVzeG+z786UWAfkchV72Dg==
   dependencies:
     aws-sign2 "~0.7.0"
     aws4 "^1.8.0"

@@ -90,7 +90,7 @@
     "jotai": "^1.5.3",
     "jsonfile": "^6.1.0",
     "magic-string": "^0.25.7",
-    "matexhttp": "^1.0.2",
+    "matexhttp": "^1.0.5",
     "monaco-editor": "^0.30.1",
     "nedb": "^1.8.0",
     "object-sizeof": "^1.6.2",

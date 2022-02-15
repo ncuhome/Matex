@@ -20,6 +20,5 @@ export const RawOptions: BodyRawType[] = ['text', 'json', 'html', 'javascript'];
 
 export const InitHeaders = [
   { index: 0, key: 'Accept', value: '*/*' },
-  { index: 1, key: 'Accept-Encoding', value: 'gzip, deflate, br' },
-  { index: 2, key: 'Connection', value: 'keep-alive' }
+  { index: 1, key: 'Connection', value: 'keep-alive' }
 ];
