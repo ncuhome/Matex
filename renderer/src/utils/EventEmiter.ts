@@ -4,9 +4,11 @@ const emitter = new Emittery();
 
 export default class MyEmitter {
   caches: Map<string, any>;
+  consume: boolean;
 
   constructor() {
     this.caches = new Map();
+    this.consume = false;
   }
 
   onCache(eventName: string, callback: (value: any) => void): Emittery.UnsubscribeFn {
@@ -15,6 +17,7 @@ export default class MyEmitter {
     if (cache) {
       callback(cache);
       this.caches.delete(eventName);
+      this.consume = true;
     }
     return emitter.on(eventName, callback);
   }
@@ -28,7 +31,9 @@ export default class MyEmitter {
   }
 
   emit(eventName: string, value: any) {
-    this.caches.set(eventName, value);
+    if (!this.consume) {
+      this.caches.set(eventName, value);
+    }
     emitter.emit(eventName, value);
   }
 }
