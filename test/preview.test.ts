@@ -42,9 +42,9 @@ const options: WaitOn.WaitOnOptions = {
     // assert.equal(page.url(), 'http://localhost:3000/#/apiTest');
     // Click text=Params
     await page.click('text=Params');
-    await page.waitForTimeout(1000);
-    await page.screenshot({ path: './test/screenshot/screenshot.png' });
-    console.log('截图成功');
+    // await page.waitForTimeout(1000);
+    // await page.screenshot({ path: './test/screenshot/screenshot.png' });
+    // console.log('截图成功');
     // assert.equal(page.url(), 'http://localhost:3000/#/apiTest/params');
     // Click text=Headers
     await page.click('text=Headers');
@@ -53,7 +53,7 @@ const options: WaitOn.WaitOnOptions = {
     await page.click('text=Body');
     // assert.equal(page.url(), 'http://localhost:3000/#/apiTest/body');
     // Click #root div div >> :nth-match(div:has-text("虚拟接口"), 4)
-    await page.click('#root div div >> :nth-match(div:has-text("虚拟接口"), 4)');
+    await page.click('#root div div >> :nth-match(div:has-text("websocket"), 4)');
     // assert.equal(page.url(), 'http://localhost:3000/#/mock');
     // Click text=压力测试
     await page.click('text=压力测试');

@@ -26,12 +26,17 @@ jobs:
           echo start install dependencies
           yarn install --network-timeout 100000
 
-      - name: Build main and render
+      - name: build main and preload
         run: |
           echo build main and render
           npm config set scripts-prepend-node-path true
           npm cache clear --force
-          yarn build
+          yarn build:main_preload
+
+      - name: build react
+        run: |
+          echo build react
+          yarn build:react
 
       - name: Package electron app
         run: |
