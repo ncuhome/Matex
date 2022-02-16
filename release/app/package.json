@@ -1,1 +1,26 @@
-{"name":"matex","version":"1.1.1","description":"Matex application","license":"ISC","homepage":".","main":"./dist/main/main.js","author":"lqd1434","scripts":{"postinstall":"electron-builder install-app-deps"},"devDependencies":{"electron":"16.0.8","electron-builder":"22.14.5"},"dependencies":{"entities":"^3.0.1","dotenv":"^14.2.0","winston":"^3.3.3","signale":"^1.4.0","@sentry/electron":"^2.5.4","dayjs":"^1.10.7","filesize":"^8.0.7","matexhttp":"^1.0.2"}}
+{
+  "name": "matex",
+  "version": "1.2.0",
+  "description": "Matex application",
+  "license": "MIT",
+  "homepage": ".",
+  "main": "./dist/main/main.js",
+  "author": "lqd1434",
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "devDependencies": {
+    "electron": "16.0.8",
+    "electron-builder": "22.14.5"
+  },
+  "dependencies": {
+    "entities": "^3.0.1",
+    "dotenv": "^14.2.0",
+    "winston": "^3.3.3",
+    "signale": "^1.4.0",
+    "@sentry/electron": "^2.5.4",
+    "dayjs": "^1.10.7",
+    "matexhttp": "^1.0.5",
+    "filesize": "^8.0.7"
+  }
+}
