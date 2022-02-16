@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Login from '../pages/Auth/login';
 import Home from '../pages/Home';
@@ -26,7 +26,7 @@ export const RouterAuth = () => {
             <Route path={'body'} element={<BodyTable />} />
             <Route path={'headers'} element={<HeadersTable />} />
           </Route>
-          <Route path={'mock'} element={<MockView />} />
+          <Route path={'websocket'} element={<MockView />} />
           <Route path={'benchmark'} element={<WaitWorkPage />} />
           <Route path={'ok'} element={<WaitWorkPage />} />
         </Route>
