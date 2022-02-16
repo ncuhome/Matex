@@ -7,7 +7,7 @@ import {
   TabItems
 } from '../type/apiTest';
 
-export const MethodsOptions = ['Get', 'Post', 'Put', 'Delete'];
+export const MethodsOptions = ['Get', 'Post', 'Put'];
 
 export const TabsItem: TabItems[] = ['Params', 'Headers', 'Body'];
 

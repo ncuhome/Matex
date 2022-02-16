@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
-import { TabProps } from '../SideBar/tabItems';
+import { TabProps } from '../../model/sidebar.model';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
@@ -46,11 +46,11 @@ const getIcon = (route: string) => {
     case '/apiTest':
       res = <Icon disabled name="world" />;
       break;
-    case '/mock':
-      res = <Icon disabled name="cubes" />;
+    case '/websocket':
+      res = <Icon disabled name="linkify" />;
       break;
     case '/benchmark':
-      res = <Icon disabled name="linkify" />;
+      res = <Icon disabled name="rocket" />;
       break;
     case '/ok':
       res = <Icon disabled name="find" />;

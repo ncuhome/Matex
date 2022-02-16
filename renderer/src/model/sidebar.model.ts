@@ -4,16 +4,15 @@ export interface TabProps {
   active?: boolean;
 }
 
-export const tabItems: TabProps[] = [
+export const sidebarModel: TabProps[] = [
   {
     text: '接口测试',
     route: '/apiTest'
   },
   {
-    text: '虚拟接口',
-    route: '/mock'
+    text: 'websocket',
+    route: '/websocket'
   },
-
   {
     text: '压力测试',
     route: '/benchmark'
