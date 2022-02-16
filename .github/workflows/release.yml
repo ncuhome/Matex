@@ -21,6 +21,18 @@ jobs:
         with:
           node-version: '14.x'
 
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install dependencies
         run: |
           echo start install dependencies
@@ -28,7 +40,7 @@ jobs:
 
       - name: build main and preload
         run: |
-          echo build main and render
+          echo build main and preload
           npm config set scripts-prepend-node-path true
           npm cache clear --force
           yarn build:main_preload
