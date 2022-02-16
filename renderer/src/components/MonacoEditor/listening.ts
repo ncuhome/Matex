@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
 import * as monaco from 'monaco-editor';
 import { Emitter } from '/@/utils/EventEmiter';
-import { useEditors } from '/@/store/commonStore';
+import { editorValueAtom, useEditors } from '/@/store/commonStore';
 import Emittery from 'emittery';
+import { useAtomValue } from 'jotai/utils';
 
 interface ListeningProps {
   name: string;
@@ -28,6 +29,8 @@ export const useEditorListen = ({
   const editor = editors.get(name);
   const valueRef = useRef<Emittery.UnsubscribeFn | null>(null);
   const findRef = useRef<Emittery.UnsubscribeFn | null>(null);
+  const editorValue = useAtomValue(editorValueAtom);
+  const existValue = editorValue.get(name);
 
   const setVal = useCallback(
     async (value: string) => {
@@ -65,6 +68,12 @@ export const useEditorListen = ({
     return () => {
       valueRef.current?.();
     };
+  }, [editor]);
+
+  useEffect(() => {
+    if (editor) {
+      existValue && setVal(existValue);
+    }
   }, [editor]);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import type { IpcRendererEvent } from 'electron';
 import { ApiTest_Channel } from '/@common/ipc/channel';
@@ -13,11 +13,13 @@ import { useUpdateAtom } from 'jotai/utils';
 import { judgementType } from '/@/utils/typeUtils';
 import { Emitter } from '/@/utils/EventEmiter';
 import { Button, Dimmer, Loader, Segment } from 'semantic-ui-react';
+import Emittery from 'emittery';
 
 const Body = () => {
   const setFormatType = useUpdateAtom(apiTestBodyFormatAtom);
   const setBodyAction = useUpdateAtom(apiTestBodyActionAtom);
   const setResData = useUpdateAtom(apiTestResDataAtom);
+  const listenerRef = useRef<Emittery.UnsubscribeFn>();
   const [dimmer, setDimmer] = useState(false);
 
   const listen = (e: IpcRendererEvent, res: ApiTestResProps) => {
@@ -34,9 +36,12 @@ const Body = () => {
   useIpcOn(ApiTest_Channel.Response, listen);
 
   useEffect(() => {
-    Emitter.on('apiTest.bodyDimmer', (data) => {
+    listenerRef.current = Emitter.on('apiTest.bodyDimmer', (data) => {
       setDimmer(data);
     });
+    return () => {
+      listenerRef.current?.();
+    };
   }, []);
 
   const cancelSend = () => {

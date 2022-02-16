@@ -26,6 +26,10 @@ export default class MyEmitter {
     return emitter.on(eventName, callback);
   }
 
+  reCache() {
+    this.consume = true;
+  }
+
   offAll(eventName: string): void {
     emitter.clearListeners(eventName);
   }

@@ -10,8 +10,9 @@ export const isPreviewAble = (typeStr: string) => {
 };
 
 export const getPreviewSrc = (data: any, type: ApiTestResProps['type']) => {
-  console.log(type);
-
+  const index = type.indexOf(';') > 0 ? type.indexOf(';') : type.length;
+  let mimeType = type.slice(0, index);
+  console.log(mimeType);
   const renderJsonHtmlStr = (json: string) => {
     return `<!DOCTYPE html><html lang="en"><head><title>json</title></head>
     <body><pre style="word-wrap: break-word; white-space: pre-wrap;">${json}</pre>
@@ -25,12 +26,14 @@ export const getPreviewSrc = (data: any, type: ApiTestResProps['type']) => {
   };
 
   let resData = data;
-  if (type === 'application/json') {
+  if (type.includes('application/json')) {
     resData = renderJsonHtmlStr(resData);
+    mimeType = 'text/html';
   }
-  if (type === 'text/plain') {
+  if (type.includes('text/plain')) {
     resData = renderTexStr(resData);
+    mimeType = 'text/html';
   }
-  const blob = new Blob([resData], { type });
+  const blob = new Blob([resData], { type: mimeType });
   return URL.createObjectURL(blob);
 };

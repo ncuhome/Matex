@@ -25,6 +25,7 @@ const Header = () => {
   const [url, setUrl] = useAtom(apiTestUrlAtom);
   const resData = useAtomValue(apiTestResDataAtom);
   const listenerRef = useRef<Emittery.UnsubscribeFn>();
+  const reqListenerRef = useRef<Emittery.UnsubscribeFn>();
   const selectedTextRef = useRef<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
@@ -78,9 +79,12 @@ const Header = () => {
   }, [loading]);
 
   useEffect(() => {
-    Emitter.on('apiTest.sendReq', () => {
+    reqListenerRef.current = Emitter.on('apiTest.sendReq', () => {
       setLoading(true);
     });
+    return () => {
+      reqListenerRef.current?.();
+    };
   }, []);
 
   useEffect(() => {

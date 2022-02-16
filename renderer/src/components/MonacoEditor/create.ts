@@ -7,6 +7,7 @@ import ProviderResult = monaco.languages.ProviderResult;
 import CompletionList = monaco.languages.CompletionList;
 import { editorValueAtom, useEditors } from '/@/store/commonStore';
 import { useAtomValue } from 'jotai/utils';
+import { Emitter } from '/@/utils/EventEmiter';
 
 monaco.languages.registerCompletionItemProvider('json', {
   provideCompletionItems: () => {
@@ -138,6 +139,7 @@ export const useEditor = ({
 
   useEffect(() => {
     return () => {
+      Emitter.reCache();
       destroyEditor();
     };
   }, []);

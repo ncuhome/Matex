@@ -24,12 +24,6 @@ const Content = () => {
     }
   }, [resData]);
 
-  useEffect(() => {
-    if (bodyAction === 'Pretty' && resData) {
-      Emitter.emit('monacoEditor-apiTest', resData.body);
-    }
-  }, [bodyAction]);
-
   const prettyRender = () => {
     const resType = judgementType(resData!.type);
     if (!isEditorAble(resType)) {
