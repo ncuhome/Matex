@@ -7,23 +7,13 @@ import { useAtomValue } from 'jotai/utils';
 
 interface ListeningProps {
   name: string;
-  autoFormat: boolean;
   onChange?: (changes: monaco.editor.IModelContentChangedEvent, value: string | undefined) => void;
-  onBlur?: () => void;
-  watchModelMarkers?: (marks: monaco.editor.IMarker[]) => void;
-  getValue?: (value: string | undefined) => void;
-  setValue?: (value: string) => void;
   className?: string;
-  onFocus?: () => void;
 }
 
 export const useEditorListen = ({
   name,
-  autoFormat = true,
-  onChange = () => {},
-  onBlur = () => {},
-  getValue = () => {},
-  onFocus = () => {}
+  onChange = () => {}
 }: ListeningProps) => {
   const { editors } = useEditors();
   const editor = editors.get(name);
@@ -76,21 +66,21 @@ export const useEditorListen = ({
     }
   }, [editor]);
 
-  useEffect(() => {
-    if (editor) {
-      let model = editor.getModel();
-      model?.onDidChangeContent((e) => {
-        const val = model?.getValue();
-        onChange(e, val);
-        getValue(val);
-      });
-      editor.onDidBlurEditorWidget(() => {
-        onBlur();
-        autoFormat && editor?.getAction('editor.action.formatDocument').run();
-      });
-      editor.onDidFocusEditorWidget(() => {
-        onFocus();
-      });
-    }
-  }, [editor]);
+  // useEffect(() => {
+  //   if (editor) {
+  //     let model = editor.getModel();
+  //     model?.onDidChangeContent((e) => {
+  //       const val = model?.getValue();
+  //       onChange(e, val);
+  //       getValue(val);
+  //     });
+  //     editor.onDidBlurEditorWidget(() => {
+  //       onBlur();
+  //       autoFormat && editor?.getAction('editor.action.formatDocument').run();
+  //     });
+  //     editor.onDidFocusEditorWidget(() => {
+  //       onFocus();
+  //     });
+  //   }
+  // }, [editor]);
 };

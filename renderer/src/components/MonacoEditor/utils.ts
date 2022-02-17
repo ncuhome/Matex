@@ -5,3 +5,5 @@ export const LanguageMapper = new Map<string, string>([
   ['text', 'text/plain'],
   ['javascript', 'javascript']
 ]);
+
+

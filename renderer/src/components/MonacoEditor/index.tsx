@@ -1,66 +1,58 @@
 import React, { FC, memo, useEffect, useRef } from 'react';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { resizeAble } from './resize';
 import { useEditor } from './create';
-import { useEditorListen } from './listening';
-
-interface MonacoEditorProps {
-  name: string;
-  height: number;
-  width: number | string;
-  border?: string;
-  shadow?: boolean;
-  defaultVal: string;
-  language: string;
-  readOnly?: boolean;
-  enabledMinMap?: boolean;
-  onChange?: (changes: monaco.editor.IModelContentChangedEvent, value: string | undefined) => void;
-  onBlur?: () => void;
-  watchModelMarkers?: (marks: monaco.editor.IMarker[]) => void;
-  getValue?: (value: string | undefined) => void;
-  setValue?: (value: string) => void;
-  autoFormat?: boolean;
-  className?: string;
-  onFocus?: () => void;
-}
+import {Editor, MonacoEditorProps} from '/@cmp/MonacoEditor/type';
 
 const MonacoEditor: FC<MonacoEditorProps> = ({
-  name = '',
   height = 200,
   language = 'json',
   defaultVal = '',
   shadow = true,
   enabledMinMap = false,
   readOnly = false,
-  autoFormat = true,
   className = '',
   border,
-  onChange = () => {},
-  onBlur = () => {},
-  getValue = () => {},
-  onFocus = () => {}
+  onCreated = () => {},
+  onDestroyed = () => {},
+  onChange = () => {}
 }) => {
   const monacoEl = useRef(null);
-  const { createEditor } = useEditor({ name, enabledMinMap, defaultVal, language, readOnly });
-  useEditorListen({
-    autoFormat,
-    onBlur,
-    onFocus,
-    name,
-    onChange,
-    getValue
-  });
+  const editorRef = useRef<Editor>();
+  const { createEditor,destroyEditor } = useEditor(
+    {enabledMinMap, language, readOnly });
+
   useEffect(() => {
     resizeAble();
   }, [monacoEl.current]);
 
   useEffect(() => {
     if (monacoEl) {
-      createEditor(monacoEl.current!, defaultVal);
+      const editorIns = createEditor(monacoEl.current!, defaultVal);
+      if (editorIns) {
+        editorRef.current = editorIns;
+        onCreated(editorIns);
+      }
     }
   }, [monacoEl]);
+
+
+  useEffect(() => {
+    return () => {
+      const res = destroyEditor();
+      res && onDestroyed();
+    };
+  }, []);
+
+  useEffect(()=>{
+    if (editorRef.current){
+      editorRef.current.onDidChangeModelContent((e) => {
+        onChange && onChange(e,editorRef.current?.getValue());
+      });
+    }
+
+  },[editorRef.current]);
 
   return (
     <div className={clsx([styles.con, shadow && styles.shadow])} style={{ border }}>
