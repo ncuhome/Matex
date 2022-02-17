@@ -36,6 +36,7 @@ const mainBundler = new Parcel({
 export const startWatchMainAndPreload = async (url) => {
   const main_path = process.env.MAIN_PATH;
   const execStr = `cross-env VITE_DEV_SERVER_URL=${url} electron ${main_path}`;
+  let processController = null;
   let spawnProcess = null;
   await preloadBundler.watch(async (err, buildEvent) => {
     if (err) {
@@ -55,7 +56,7 @@ export const startWatchMainAndPreload = async (url) => {
           process.exit(1);
         }
         if (spawnProcess !== null) {
-          spawnProcess.kill('SIGINT');
+          processController.abort();
           spawnProcess = null;
           ColorLog.start('parcel重新打包[main]');
         } else {
@@ -63,7 +64,8 @@ export const startWatchMainAndPreload = async (url) => {
         }
         if (buildEvent?.type === 'buildSuccess') {
           ColorLog.success('main打包完成');
-          spawnProcess = exec(execStr);
+          processController = new AbortController();
+          spawnProcess = exec(execStr,{signal:processController.signal});
 
           spawnProcess.stdout?.on('data', (msg) => {
             msg.toString().trim() && ColorLog.info(msg);

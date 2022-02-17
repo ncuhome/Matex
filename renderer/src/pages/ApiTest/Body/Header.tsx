@@ -3,7 +3,6 @@ import styles from './index.module.scss';
 import { Actions, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model';
 import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { Emitter } from '/@/utils/EventEmiter';
 import { FormatType, ResDisplayItemsType } from '/@/type/apiTest';
 import {
   apiTestBodyActionAtom,

@@ -14,7 +14,7 @@ dayjs.extend(isLeapYear); // 使用插件
 dayjs.locale('zh-cn');
 
 const os = getOsType();
-MatexLog.debug(`当前系统为${os}`);
+MatexLog.debug(`当前系统为:${os}`);
 MatexLog.debug(process.env.NODE_ENV ?? '环境未注入');
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
