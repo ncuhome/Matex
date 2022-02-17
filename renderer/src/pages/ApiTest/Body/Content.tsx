@@ -1,28 +1,56 @@
 import React, { useEffect } from 'react';
 import star from '/@/assets/icon/star.svg';
 import styles from './index.module.scss';
-import { Emitter } from '/@/utils/EventEmiter';
 import { useAtomValue } from 'jotai/utils';
 import { apiTestResDataAtom, apiTestBodyFormatAtom, apiTestBodyActionAtom } from '/@/store/apiTestStore';
 import MonacoEditor from '/@cmp/MonacoEditor';
-import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
+import {LanguageMapper} from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
 import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
-import { useUpdateEditorValue } from '/@/store/commonStore';
+import {useEditors, useUpdateEditorValue} from '/@/store/commonStore';
+import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
+import {Editor,EditorLanguage} from '/@cmp/MonacoEditor/type';
 
 const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
   const formatType = useAtomValue(apiTestBodyFormatAtom);
   const bodyAction = useAtomValue(apiTestBodyActionAtom);
   const setEditorValue = useUpdateEditorValue('apiTest');
+  const { setValue,changeLanguage } = useEditorAction({readOnly: true});
+  const editorRef = React.useRef<Editor|null>();
+  const { addEditor,deleteEditor } = useEditors();
+
+  const language:EditorLanguage = LanguageMapper.get(formatType.toLowerCase())??'text/plain';
 
   useEffect(() => {
-    if (resData) {
-      Emitter.emit('monacoEditor-apiTest', resData.body);
+    if (resData&&editorRef) {
+      setValue({
+        editor:editorRef.current!,
+        value: resData.body,
+        language
+      });
       setEditorValue(resData.body);
     }
-  }, [resData]);
+  }, [resData,editorRef.current]);
+
+  useEffect(()=>{
+    if (editorRef.current) {
+      changeLanguage(editorRef.current,language);
+    }
+  },[formatType]);
+
+  const onCreated = (editor: Editor) => {
+    if (editor){
+      editorRef.current = editor;
+      addEditor({name:'apiTest',editor});
+    }
+  };
+
+  const onDestroyed = () => {
+    editorRef.current = null;
+    deleteEditor('apiTest');
+  };
 
   const prettyRender = () => {
     const resType = judgementType(resData!.type);
@@ -35,13 +63,11 @@ const Content = () => {
     } else {
       return (
         <MonacoEditor
-          onChange={(changes, value) => {
-            setEditorValue(value ?? '');
-          }}
+          onCreated={onCreated}
+          onDestroyed={onDestroyed}
           shadow={false}
           readOnly
-          name={'apiTest'}
-          language={LanguageMapper.get(formatType.toLowerCase())!}
+          language={language}
           defaultVal={''}
           height={235}
           width={'100%'}

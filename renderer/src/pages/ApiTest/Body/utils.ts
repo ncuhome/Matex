@@ -12,7 +12,6 @@ export const isPreviewAble = (typeStr: string) => {
 export const getPreviewSrc = (data: any, type: ApiTestResProps['type']) => {
   const index = type.indexOf(';') > 0 ? type.indexOf(';') : type.length;
   let mimeType = type.slice(0, index);
-  console.log(mimeType);
   const renderJsonHtmlStr = (json: string) => {
     return `<!DOCTYPE html><html lang="en"><head><title>json</title></head>
     <body><pre style="word-wrap: break-word; white-space: pre-wrap;">${json}</pre>
