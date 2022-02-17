@@ -7,7 +7,7 @@ import {Editor, UseEditorProps} from '/@cmp/MonacoEditor/type';
 export const useEditor = ({
   language,
   readOnly = false,
-  enabledMinMap = false,
+  enabledMinMap = false
 }: UseEditorProps) => {
   const editorRef = useRef<Editor>();
 

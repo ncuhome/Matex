@@ -12,9 +12,11 @@ import {
 import KVTable from '/@cmp/KVTable';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import MonacoEditor from '/@cmp/MonacoEditor';
-import { useUpdateEditorValue } from '/@/store/commonStore';
+import {useEditors, useEditorValue} from '/@/store/commonStore';
 import styles from './index.module.scss';
 import { BodyFormData } from '/@/pages/ApiTest/Header/ConfigTabel/BodyFormData';
+import {Editor} from '/@cmp/MonacoEditor/type';
+import {useEditorAction} from '/@cmp/MonacoEditor/editorAction';
 
 const BodyTable = () => {
   const [
@@ -27,7 +29,35 @@ const BodyTable = () => {
   const method = useAtomValue(apiTestMethodAtom);
   const activeBody = useAtomValue(apiTestActiveBodyTypeAtom);
   const activeRawType = useAtomValue(apiTestBodyRawAtom);
-  const setEditorValue = useUpdateEditorValue('configBody');
+  const {editorValue,setEditorValue} = useEditorValue('configBody');
+  const editorRef = React.useRef<Editor|null>();
+  const { addEditor,deleteEditor } = useEditors();
+  const { setValue,changeLanguage } = useEditorAction({readOnly: false});
+
+  const language = LanguageMapper.get(activeRawType) ?? 'text/plain';
+
+  const onCreated = (editor: Editor) => {
+    if (editor){
+      setValue({
+        editor,
+        value: editorValue??'',
+        language
+      });
+      editorRef.current = editor;
+      addEditor({name:'configBody',editor});
+    }
+  };
+
+  const onDestroyed = () => {
+    editorRef.current = null;
+    deleteEditor('apiTest');
+  };
+
+  useEffect(()=>{
+    if (editorRef.current) {
+      changeLanguage(editorRef.current,language);
+    }
+  },[activeRawType]);
 
   useEffect(() => {
     const len = urlencodedList.length;
@@ -49,18 +79,16 @@ const BodyTable = () => {
     if (activeBody === 'binary') {
       return <UploadFile />;
     } else if (activeBody === 'raw') {
-      const language = LanguageMapper.get(activeRawType) ?? 'text/plain';
-      console.log(language);
       return (
         <MonacoEditor
           onChange={(changes, value) => {
-            console.log(value);
             setEditorValue(value ?? '');
           }}
+          onCreated={onCreated}
+          onDestroyed={onDestroyed}
           shadow={false}
           readOnly={false}
           border={'#E0E1E2 1px solid'}
-          name={'configBody'}
           language={language}
           defaultVal={''}
           height={130}

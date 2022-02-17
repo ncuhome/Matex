@@ -36,9 +36,13 @@ export const useEditors = () => {
   return { editors, addEditor, deleteEditor };
 };
 
-export const useUpdateEditorValue = (name: string) => {
-  const setValue = useUpdateAtom(updateEditorValueAtom);
-  return (value: string) => {
-    setValue({ name, value });
+export const useEditorValue = (name: string) => {
+  const updateValue = useUpdateAtom(updateEditorValueAtom);
+  const editorValueMap = useAtomValue(editorValueAtom);
+  const editorValue = editorValueMap.get(name);
+  const setEditorValue = (value: string) => {
+    updateValue({ name, value });
   };
+
+  return { editorValue, setEditorValue };
 };

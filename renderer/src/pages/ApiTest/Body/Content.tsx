@@ -8,7 +8,7 @@ import {LanguageMapper} from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
 import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
-import {useEditors, useUpdateEditorValue} from '/@/store/commonStore';
+import {useEditors, useEditorValue} from '/@/store/commonStore';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 import {Editor,EditorLanguage} from '/@cmp/MonacoEditor/type';
 
@@ -16,7 +16,7 @@ const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
   const formatType = useAtomValue(apiTestBodyFormatAtom);
   const bodyAction = useAtomValue(apiTestBodyActionAtom);
-  const setEditorValue = useUpdateEditorValue('apiTest');
+  const {setEditorValue} = useEditorValue('apiTest');
   const { setValue,changeLanguage } = useEditorAction({readOnly: true});
   const editorRef = React.useRef<Editor|null>();
   const { addEditor,deleteEditor } = useEditors();
