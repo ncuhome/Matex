@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "entities": "^3.0.1",
+    "filesize": "^8.0.7",
+    "matexhttp": "^1.0.5",
     "dotenv": "^14.2.0",
     "winston": "^3.3.3",
     "signale": "^1.4.0",
     "@sentry/electron": "^2.5.4",
-    "dayjs": "^1.10.7",
-    "matexhttp": "^1.0.5",
-    "filesize": "^8.0.7"
+    "dayjs": "^1.10.7"
   }
 }
