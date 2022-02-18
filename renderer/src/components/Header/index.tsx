@@ -22,7 +22,7 @@ const Header = () => {
       >
         <img src={rainbow} className={styles.logo} alt={''} />
       </div>
-      <h2 className={styles.title}>Mock Server</h2>
+      {/*<h2 className={styles.title}>接口测试</h2>*/}
     </div>
   );
 };
