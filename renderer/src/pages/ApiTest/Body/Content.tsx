@@ -69,7 +69,7 @@ const Content = () => {
           readOnly
           language={language}
           defaultVal={''}
-          height={228}
+          height={255}
           width={'100%'}
         />
       );

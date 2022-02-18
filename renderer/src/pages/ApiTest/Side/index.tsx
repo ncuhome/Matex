@@ -8,7 +8,7 @@ const CollectSide = () => {
     <div className={styles.side}>
       <div className={styles.list}>
         <div className={styles.header}>
-          <Label tag color={'purple'} size={'tiny'}>
+          <Label tag color={'grey'} size={'tiny'}>
             请求历史<span style={{ color: 'white', display: 'inline-block', marginLeft: 10 }}>79</span>
           </Label>
         </div>
