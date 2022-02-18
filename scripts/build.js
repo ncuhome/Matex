@@ -42,25 +42,39 @@ const mainBundler = new Parcel({
 (async () => {
   const dependencies = new Set();
   ColorLog.start('parcel开始打包 [preload]');
-  const preloadEvent = await preloadBundler.run();
-  preloadEvent.bundleGraph.traverse((node) => {
-    verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
-  });
-  if (preloadEvent.type === 'buildSuccess') {
-    ColorLog.success('[preload] 打包完成');
-  }
-  ColorLog.start('parcel开始打包 [main]');
-  const mainEvent = await mainBundler.run();
-
-  mainEvent.bundleGraph.traverse((node) => {
-    if (node.type !== 'asset') {
+  try {
+    const preloadEvent = await preloadBundler.run();
+    preloadEvent.bundleGraph.traverse((node) => {
       verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
+    });
+    if (preloadEvent.type === 'buildSuccess') {
+      ColorLog.success('[preload] 打包完成');
     }
-  });
-  if (mainEvent.type === 'buildSuccess') {
-    ColorLog.success('[main] 打包完成');
+  } catch (e) {
+    ColorLog.error(e);
   }
-  const res = await addDependencies(dependencies);
-  ColorLog.success('app 依赖同步完成');
-  console.log(res);
+
+  ColorLog.start('parcel开始打包 [main]');
+  try {
+    const mainEvent = await mainBundler.run();
+
+    mainEvent.bundleGraph.traverse((node) => {
+      if (node.type !== 'asset') {
+        verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
+      }
+    });
+    if (mainEvent.type === 'buildSuccess') {
+      ColorLog.success('[main] 打包完成');
+    }
+  } catch (e) {
+    ColorLog.error(e);
+  }
+  try {
+    const res = await addDependencies(dependencies);
+    ColorLog.success('app 依赖同步完成');
+    console.log('全部依赖如下:');
+    console.log(res);
+  } catch (e) {
+    ColorLog.error(e);
+  }
 })();

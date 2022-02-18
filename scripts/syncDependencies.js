@@ -2,6 +2,7 @@ import jsonfile from 'jsonfile';
 import { resolve } from 'path';
 import { builtinModules } from 'module';
 import { ColorLog } from './colorLog.js';
+import { exec } from 'child_process';
 
 const rootFile = resolve(process.cwd(), './package.json');
 const appFile = resolve(process.cwd(), './release/app/package.json');
@@ -15,7 +16,7 @@ export const verifyDep = (buildDep) => {
   return !!(buildDep && builtinModules.indexOf(buildDep) < 0 && !reg.test(buildDep));
 };
 /**
- *拿到所有主进程和preload依赖的包
+ * 拿到所有主进程和preload依赖的包
  * @param {Set} deps
  * @return {Promise<Object>}
  */
@@ -24,12 +25,13 @@ export const addDependencies = async (deps) => {
   const allDependencies = (await readJson(rootFile))['dependencies'];
   deps.forEach((dep) => {
     if (dep in allDependencies) {
-      usedDependencies[[dep.toString()]] = allDependencies[dep];
+      usedDependencies[dep.toString()] = allDependencies[dep];
     }
   });
   const appJson = await readJson(appFile);
   appJson['dependencies'] = usedDependencies;
   await writeJson(appFile, appJson);
+  formatJson();
   return usedDependencies;
 };
 /**
@@ -58,5 +60,13 @@ const writeJson = async (path, obj) => {
   } catch (e) {
     ColorLog.error(e);
     return false;
+  }
+};
+
+const formatJson = () => {
+  try {
+    exec(`prettier --write ${appFile}`);
+  } catch (e) {
+    ColorLog.error(e);
   }
 };
