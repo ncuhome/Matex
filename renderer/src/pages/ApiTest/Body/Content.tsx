@@ -4,46 +4,46 @@ import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
 import { apiTestResDataAtom, apiTestBodyFormatAtom, apiTestBodyActionAtom } from '/@/store/apiTestStore';
 import MonacoEditor from '/@cmp/MonacoEditor';
-import {LanguageMapper} from '/@cmp/MonacoEditor/utils';
+import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
 import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
-import {useEditors, useEditorValue} from '/@/store/commonStore';
+import { useEditors, useEditorValue } from '/@/store/commonStore';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
-import {Editor,EditorLanguage} from '/@cmp/MonacoEditor/type';
+import { Editor, EditorLanguage } from '/@cmp/MonacoEditor/type';
 
 const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
   const formatType = useAtomValue(apiTestBodyFormatAtom);
   const bodyAction = useAtomValue(apiTestBodyActionAtom);
-  const {setEditorValue} = useEditorValue('apiTest');
-  const { setValue,changeLanguage } = useEditorAction({readOnly: true});
-  const editorRef = React.useRef<Editor|null>();
-  const { addEditor,deleteEditor } = useEditors();
+  const { setEditorValue } = useEditorValue('apiTest');
+  const { setValue, changeLanguage } = useEditorAction({ readOnly: true });
+  const editorRef = React.useRef<Editor | null>();
+  const { addEditor, deleteEditor } = useEditors();
 
-  const language:EditorLanguage = LanguageMapper.get(formatType.toLowerCase())??'text/plain';
+  const language: EditorLanguage = LanguageMapper.get(formatType.toLowerCase()) ?? 'text/plain';
 
   useEffect(() => {
-    if (resData&&editorRef) {
+    if (resData && editorRef) {
       setValue({
-        editor:editorRef.current!,
+        editor: editorRef.current!,
         value: resData.body,
         language
       });
       setEditorValue(resData.body);
     }
-  }, [resData,editorRef.current]);
+  }, [resData, editorRef.current]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (editorRef.current) {
-      changeLanguage(editorRef.current,language);
+      changeLanguage(editorRef.current, language);
     }
-  },[formatType]);
+  }, [formatType]);
 
   const onCreated = (editor: Editor) => {
-    if (editor){
+    if (editor) {
       editorRef.current = editor;
-      addEditor({name:'apiTest',editor});
+      addEditor({ name: 'apiTest', editor });
     }
   };
 
@@ -69,7 +69,7 @@ const Content = () => {
           readOnly
           language={language}
           defaultVal={''}
-          height={235}
+          height={228}
           width={'100%'}
         />
       );
