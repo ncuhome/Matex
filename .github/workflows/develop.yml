@@ -36,14 +36,13 @@ jobs:
       - name: install dependencies
         run: |
           echo start install dependencies
+          npm config set scripts-prepend-node-path true
           yarn install --network-timeout 100000
 
 
       - name: build main and preload
         run: |
-          echo build main and render
-          npm config set scripts-prepend-node-path true
-          npm cache clear --force
+          echo build main and preload
           yarn build:main_preload
 
       - name: build react
