@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'JetBrains Mono NL Light';
+  src: url('./assets/font/JetBrainsMonoNL-Light.ttf');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono NL Bold';
+  src: url('./assets/font/JetBrainsMonoNL-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Regular';
+  src: url('./assets/font/JetBrainsMono-Regular.ttf');
+}
+
 body, html {
   background-color: transparent;
   overflow: hidden;
@@ -12,6 +27,10 @@ div {
 
 * {
   user-select: none;
+}
+
+input{
+  font-family: 'JetBrains Mono Regular', sans-serif !important;
 }
 
 
