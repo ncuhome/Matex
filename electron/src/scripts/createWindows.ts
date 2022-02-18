@@ -16,7 +16,11 @@ export const createMainWin = async (): Promise<BrowserWindow> => {
         show: false,
         transparent: true,
         resizable: true,
-        titleBarStyle: os === 'mac' ? 'customButtonsOnHover' : 'default',
+        titleBarStyle: 'hidden',
+        trafficLightPosition: {
+          x: 27,
+          y: 20
+        },
         webPreferences: {
           preload: preloadPath,
           nodeIntegration: true,
