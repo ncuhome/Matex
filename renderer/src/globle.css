@@ -28,6 +28,7 @@ div {
 * {
   user-select: none;
 }
+*::-webkit-scrollbar { width: 0 !important }
 
 input{
   font-family: 'JetBrains Mono Regular', sans-serif !important;
