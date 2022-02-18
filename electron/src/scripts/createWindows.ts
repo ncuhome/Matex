@@ -16,7 +16,7 @@ export const createMainWin = async (): Promise<BrowserWindow> => {
         show: false,
         transparent: true,
         resizable: true,
-        titleBarStyle: 'hidden',
+        titleBarStyle: os === 'win'?'default':'hidden',
         trafficLightPosition: {
           x: 27,
           y: 20
