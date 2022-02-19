@@ -3,6 +3,9 @@ import { resolve } from 'path';
 import { ColorLog } from './colorLog.js';
 import { addDependencies, verifyDep } from './syncDependencies.js';
 
+//依赖
+const dependencies = new Set();
+
 const rootDir = process.cwd();
 //main Entry
 const mainEntry = resolve(rootDir, './electron/src/main.ts');
@@ -24,6 +27,22 @@ const preloadBundler = new Parcel({
   defaultConfig: '@parcel/config-default'
 });
 
+//preload打包
+(async () => {
+  try {
+    ColorLog.start('parcel开始打包 [preload]');
+    const { bundleGraph, buildTime, type } = await preloadBundler.run();
+    bundleGraph.traverse((node) => {
+      verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
+    });
+    if (type === 'buildSuccess') {
+      ColorLog.success(`[preload] 打包完成,done in ${buildTime}ms`);
+    }
+  } catch (e) {
+    ColorLog.error(e);
+  }
+})();
+
 const mainBundler = new Parcel({
   entries: mainEntry,
   mode: 'production',
@@ -39,33 +58,26 @@ const mainBundler = new Parcel({
   defaultConfig: '@parcel/config-default'
 });
 
+//main打包
 (async () => {
   try {
-    const dependencies = new Set();
-    //preload打包
-    ColorLog.start('parcel开始打包 [preload]');
-    const preloadEvent = await preloadBundler.run();
-    preloadEvent.bundleGraph.traverse((node) => {
-      verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
-    });
-    if (preloadEvent.type === 'buildSuccess') {
-      ColorLog.success('[preload] 打包完成');
-    }
-    //main打包
     ColorLog.start('parcel开始打包 [main]');
-    const mainEvent = await mainBundler.run();
-    mainEvent.bundleGraph.traverse((node) => {
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, 2000);
+    });
+    const { bundleGraph, buildTime, type } = await mainBundler.run();
+    bundleGraph.traverse((node) => {
       if (node.type !== 'asset') {
         verifyDep(node.value.specifier) && dependencies.add(node.value.specifier);
       }
     });
-    if (mainEvent.type === 'buildSuccess') {
-      ColorLog.success('[main] 打包完成');
+    if (type === 'buildSuccess') {
+      ColorLog.success(`[main] 打包完成,done in ${buildTime}ms`);
     }
     const res = await addDependencies(dependencies);
     ColorLog.success('app 依赖同步完成');
-    console.log('全部依赖如下:');
-    console.log(res);
   } catch (e) {
     ColorLog.error(e);
   }
