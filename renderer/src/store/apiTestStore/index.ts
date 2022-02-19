@@ -13,7 +13,7 @@ import {
   TabItems
 } from '/@/type/apiTest';
 import { ApiTestFormData, ApiTestKVProps, ApiTestReturnType } from '/@/store/apiTestStore/type';
-import { ApiTestResProps } from '/@common/index';
+import { ApiTestResProps, ReqError } from '/@common/index';
 import type { FilePondFile } from 'filepond';
 
 export const apiTestParamsAtom = atom<ApiTestKVProps[]>([{ index: 0, key: '', value: '' }]);
@@ -34,6 +34,7 @@ export const apiTestBodyDisplayAtom = atom<ResDisplayItemsType>('Body');
 
 //response
 export const apiTestResDataAtom = atom<ApiTestResProps | undefined>(undefined);
+export const apiTestErrAtom = atom<ReqError | undefined>(undefined);
 
 const getUpdateAtom = (receivedAtom: any) => {
   return atom(null, (get, set, param: ApiTestKVProps) => {

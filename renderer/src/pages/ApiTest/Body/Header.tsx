@@ -8,6 +8,7 @@ import {
   apiTestBodyActionAtom,
   apiTestBodyDisplayAtom,
   apiTestBodyFormatAtom,
+  apiTestErrAtom,
   apiTestResDataAtom
 } from '/@/store/apiTestStore';
 import { useAtomValue } from 'jotai/utils';
@@ -16,10 +17,10 @@ import { useAtom } from 'jotai';
 import { judgementType } from '/@/utils/typeUtils';
 import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
 import { MatexWin } from '/@/global';
-import {useEditorAction} from '/@cmp/MonacoEditor/editorAction';
-import {editorsAtom} from '/@/store/commonStore';
-import {EditorLanguage} from '/@cmp/MonacoEditor/type';
-import {LanguageMapper} from '/@cmp/MonacoEditor/utils';
+import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
+import { editorsAtom } from '/@/store/commonStore';
+import { EditorLanguage } from '/@cmp/MonacoEditor/type';
+import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 
 const formatOptions = FormatOptions.map((item) => {
   return { key: item, value: item, text: item };
@@ -35,36 +36,41 @@ export const Header = () => {
   const [displayItem, setDisplayItem] = useAtom(apiTestBodyDisplayAtom);
   const resData = useAtomValue(apiTestResDataAtom);
   const [actionStatus, setActionStatus] = useState(0);
-  const { setValue,executeFind } = useEditorAction({readOnly: true});
+  const { setValue, executeFind } = useEditorAction({ readOnly: true });
   const editorMap = useAtomValue(editorsAtom);
   const editor = editorMap.get('apiTest');
-  const language:EditorLanguage = LanguageMapper.get(formatType.toLowerCase())??'text/plain';
+  const errorObj = useAtomValue(apiTestErrAtom);
+  const language: EditorLanguage = LanguageMapper.get(formatType.toLowerCase()) ?? 'text/plain';
 
   useEffect(() => {
     if (resData) {
       const resType = judgementType(resData.type);
       setActionStatus(isEditorAble(resType) ? 2 : 0);
     }
-  }, [resData]);
 
-  const onChangeDisplayItem = (item:ResDisplayItemsType) => {
+    if (errorObj) {
+      setActionStatus(0);
+    }
+  }, [resData, errorObj]);
+
+  const onChangeDisplayItem = (item: ResDisplayItemsType) => {
     setDisplayItem(item);
     if (item === 'Body') {
       actionStatus !== 2 && setActionStatus(2);
-      editor && setValue({
-        value:resData?.body,
-        language,
-        editor: editor
-
-      });
+      editor &&
+        setValue({
+          value: resData?.body,
+          language,
+          editor: editor
+        });
     } else {
       actionStatus !== 1 && setActionStatus(1);
-      editor && setValue({
-        value:JSON.stringify(resData?.headers),
-        language:'json',
-        editor: editor
-
-      });
+      editor &&
+        setValue({
+          value: JSON.stringify(resData?.headers),
+          language: 'json',
+          editor: editor
+        });
     }
   };
 
@@ -77,7 +83,7 @@ export const Header = () => {
   };
 
   const handleFind = () => {
-    editor&&executeFind(editor);
+    editor && executeFind(editor);
   };
 
   const renderLabel = () => {
@@ -103,7 +109,7 @@ export const Header = () => {
                       size={'small'}
                       style={{ boxShadow: '2px 2px 2px #8684A8' }}
                       className={clsx([active && styles.active])}
-                      onClick={()=>onChangeDisplayItem(item)}
+                      onClick={() => onChangeDisplayItem(item)}
                     >
                       {item}&nbsp;&nbsp;
                       {item === 'Headers' && (

@@ -55,3 +55,13 @@ export interface ApiTestResProps<T = any> {
     [key: string]: number | undefined;
   };
 }
+
+export interface ReqError {
+  type: 'error';
+  stack: string;
+  errno: number;
+  code: string;
+  syscall: string;
+  address: string;
+  port: number;
+}

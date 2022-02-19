@@ -3,8 +3,13 @@ import styles from './index.module.scss';
 import type { IpcRendererEvent } from 'electron';
 import { ApiTest_Channel } from '/@common/ipc/channel';
 import type { FormatType } from '/@/type/apiTest';
-import { ApiTestResProps } from '/@common/index';
-import { apiTestBodyActionAtom, apiTestBodyFormatAtom, apiTestResDataAtom } from '/@/store/apiTestStore';
+import { ApiTestResProps, ReqError } from '/@common/index';
+import {
+  apiTestBodyActionAtom,
+  apiTestBodyFormatAtom,
+  apiTestErrAtom,
+  apiTestResDataAtom
+} from '/@/store/apiTestStore';
 import useIpcOn from '/@/hooks/useIpcOn';
 import { Header } from '/@/pages/ApiTest/Body/Header';
 import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
@@ -19,6 +24,7 @@ const Body = () => {
   const setFormatType = useUpdateAtom(apiTestBodyFormatAtom);
   const setBodyAction = useUpdateAtom(apiTestBodyActionAtom);
   const setResData = useUpdateAtom(apiTestResDataAtom);
+  const setErrObj = useUpdateAtom(apiTestErrAtom);
   const listenerRef = useRef<Emittery.UnsubscribeFn>();
   const [dimmer, setDimmer] = useState(false);
 
@@ -30,10 +36,19 @@ const Body = () => {
     }
     setBodyAction('Pretty');
     setResData(res);
+    setErrObj(undefined);
+    setDimmer(false);
+  };
+
+  const errListener = (e: IpcRendererEvent, res: ReqError) => {
+    setErrObj(res);
+    setResData(undefined);
+    setDimmer(false);
   };
 
   //监听接收到请求数据
   useIpcOn(ApiTest_Channel.Response, listen);
+  useIpcOn(ApiTest_Channel.ReqError, errListener);
 
   useEffect(() => {
     listenerRef.current = Emitter.on('apiTest.bodyDimmer', (data) => {

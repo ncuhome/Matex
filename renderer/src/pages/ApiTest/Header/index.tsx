@@ -8,13 +8,12 @@ import { useSendReq } from '/@/message/apiTest';
 import Tabs from './Tabs';
 import { ToastContainer } from 'react-toastify';
 import { useAtom } from 'jotai';
-import { apiTestMethodAtom, apiTestResDataAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
+import { apiTestMethodAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
 import { menuOptions } from '/@/pages/ApiTest/Header/contextMenu';
 import { useContextMenu } from '/@/hooks/useContextMenu';
 import { MatexWin } from '/@/global';
 import { Emitter } from '/@/utils/EventEmiter';
 import Emittery from 'emittery';
-import { useAtomValue } from 'jotai/utils';
 
 const countryOptions = MethodsOptions.map((item) => {
   return { key: item, value: item, text: item };
@@ -23,12 +22,9 @@ const countryOptions = MethodsOptions.map((item) => {
 const Header = () => {
   const [method, setMethod] = useAtom(apiTestMethodAtom);
   const [url, setUrl] = useAtom(apiTestUrlAtom);
-  const resData = useAtomValue(apiTestResDataAtom);
   const listenerRef = useRef<Emittery.UnsubscribeFn>();
-  const reqListenerRef = useRef<Emittery.UnsubscribeFn>();
   const selectedTextRef = useRef<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const [loading, setLoading] = useState(false);
 
   const onSelect = (index: number, text: string) => {
     Emitter.emit('apiTest.select', { index, text });
@@ -71,28 +67,6 @@ const Header = () => {
   const handleChange = (event: SyntheticEvent, { value }: any) => {
     setMethod(value);
   };
-
-  useEffect(() => {
-    if (loading) {
-      Emitter.emit('apiTest.bodyDimmer', true);
-    }
-  }, [loading]);
-
-  useEffect(() => {
-    reqListenerRef.current = Emitter.on('apiTest.sendReq', () => {
-      setLoading(true);
-    });
-    return () => {
-      reqListenerRef.current?.();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (resData) {
-      setLoading(false);
-      Emitter.emit('apiTest.bodyDimmer', false);
-    }
-  }, [resData]);
 
   const doFetch = () => {
     url.trim() && sendReq();

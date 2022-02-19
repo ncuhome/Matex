@@ -27,7 +27,7 @@ export const useSendReq = () => {
 
   const sendReq = () => {
     if (checkUrl(url)) {
-      Emitter.emit('apiTest.sendReq', true);
+      Emitter.emit('apiTest.bodyDimmer', true);
       switch (method) {
         case 'Get':
           doGet();

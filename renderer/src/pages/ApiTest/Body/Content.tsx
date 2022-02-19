@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import star from '/@/assets/icon/star.svg';
 import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
-import { apiTestResDataAtom, apiTestBodyFormatAtom, apiTestBodyActionAtom } from '/@/store/apiTestStore';
+import {
+  apiTestResDataAtom,
+  apiTestBodyFormatAtom,
+  apiTestBodyActionAtom,
+  apiTestErrAtom
+} from '/@/store/apiTestStore';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
@@ -11,6 +16,7 @@ import { judgementType } from '/@/utils/typeUtils';
 import { useEditors, useEditorValue } from '/@/store/commonStore';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 import { Editor, EditorLanguage } from '/@cmp/MonacoEditor/type';
+import ReqError from '/@cmp/ReqError';
 
 const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
@@ -20,6 +26,7 @@ const Content = () => {
   const { setValue, changeLanguage } = useEditorAction({ readOnly: true });
   const editorRef = React.useRef<Editor | null>();
   const { addEditor, deleteEditor } = useEditors();
+  const errorObj = useAtomValue(apiTestErrAtom);
 
   const language: EditorLanguage = LanguageMapper.get(formatType.toLowerCase()) ?? 'text/plain';
 
@@ -75,6 +82,11 @@ const Content = () => {
       );
     }
   };
+
+  if (errorObj) {
+    return <ReqError />;
+  }
+
   if (!resData) {
     return <img src={star} className={styles.idleImg} alt={'等待请求'} />;
   } else {
