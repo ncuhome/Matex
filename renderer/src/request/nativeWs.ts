@@ -33,7 +33,7 @@ export const useNativeWs = () => {
       setConn(ws);
       serStatus('connecting');
       ws.onopen = (e) => {
-        console.log('ws open', e);
+        console.log('ws connected');
         serStatus('connected');
       };
       ws.onmessage = (event) => {
@@ -43,7 +43,7 @@ export const useNativeWs = () => {
       };
 
       ws.onclose = (event) => {
-        console.log('ws close', event);
+        console.log('ws closed');
         setConn(undefined);
         serStatus('closed');
       };
@@ -58,7 +58,9 @@ export const useNativeWs = () => {
     wsConn && wsConn.close();
     setConn(undefined);
     serStatus('closed');
-    connect({ url, protocols, binaryType });
+    setTimeout(() => {
+      connect({ url, protocols, binaryType });
+    }, 10);
   };
 
   const close = (code?: number, reason?: string) => {

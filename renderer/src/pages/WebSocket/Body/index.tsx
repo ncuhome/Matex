@@ -11,7 +11,7 @@ const Body = () => {
   const { msgList, addMsg } = useMsgList();
   const [inputContent, setContent] = useState('');
   const ws = useAtomValue(websocketNativeConnAtom);
-
+  console.log(msgList);
   useEffect(() => {
     const msgEndEle = document.getElementById('msgCon') as HTMLDivElement;
     msgEndEle.scrollTo(0, msgEndEle.scrollHeight);
@@ -23,6 +23,7 @@ const Body = () => {
       message: inputContent,
       time: matexTime().format('YYYY-MM-DD HH:mm:ss')
     });
+    ws?.send(inputContent);
     setContent('');
   };
 

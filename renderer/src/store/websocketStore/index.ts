@@ -1,6 +1,8 @@
 import { atom, useAtom } from 'jotai';
 import { WebsocketType, WsMessage } from '/@/type/websocketPage';
 import { produce } from 'immer';
+import { checkIndex } from '/@/store/utils';
+import { useUpdateAtom } from 'jotai/utils';
 
 const testList: WsMessage[] = Array.from({ length: 10 }).map((_, index) => {
   return {
@@ -17,15 +19,16 @@ export const websocketMsgListAtom = atom<WsMessage[]>(testList);
 export const websocketNativeConnAtom = atom<WebSocket | undefined>(undefined);
 export const websocketUrlAtom = atom<string>('ws://localhost:8080');
 
+const addMsgListAtom = atom(null, (get, set, param: Omit<WsMessage, 'index'>) => {
+  const tempList = produce(get<WsMessage[]>(websocketMsgListAtom), (draft) => {
+    draft.push({ index: draft.length, ...param });
+  });
+  set(websocketMsgListAtom, checkIndex(tempList));
+});
+
 export const useMsgList = () => {
   const [msgList, updateMsgList] = useAtom(websocketMsgListAtom);
-
-  const addMsg = (msg: Omit<WsMessage, 'index'>) => {
-    const tempList = produce(msgList, (draft) => {
-      draft.push({ index: draft.length, ...msg });
-    });
-    updateMsgList(tempList);
-  };
+  const addMsgListFn = useUpdateAtom(addMsgListAtom);
 
   const clearList = () => {
     updateMsgList([]);
@@ -33,7 +36,7 @@ export const useMsgList = () => {
 
   return {
     msgList,
-    addMsg,
+    addMsg: addMsgListFn,
     clearList
   };
 };
