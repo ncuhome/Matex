@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Icon } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import { WsMessage } from '/@/type/websocketPage';
@@ -30,7 +30,7 @@ const MsgList: React.FC<MsgListProps> = ({ list }) => {
           <div className={styles.descTime}>{msgObj.time}</div>
         </div>
         <div className={styles.iconRight}>
-          <Icon circular name={'tv'} size={'large'} />
+          <Icon circular name={'desktop'} size={'large'} />
         </div>
       </div>
     );
@@ -40,12 +40,11 @@ const MsgList: React.FC<MsgListProps> = ({ list }) => {
     <div className={styles.msgList} id={'msgCon'}>
       {list.map((item) => {
         if (item.type === 'client') {
-          return renderRight(item);
+          return <Fragment key={item.index}>{renderRight(item)}</Fragment>;
         } else {
-          return renderLeft(item);
+          return <Fragment key={item.index}>{renderLeft(item)}</Fragment>;
         }
       })}
-      {/*<span  className={styles.msgEnd} />*/}
     </div>
   );
 };

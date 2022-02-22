@@ -7,13 +7,14 @@
   border-radius: 10px;
   display: flex;
   align-items: center;
+  padding-left: 10px;
 
   .input{
     flex: 1;
     border-radius: 5px;
     height: 45px;
     border: #C4C4C6 2px solid;
-    margin: 0 15px 0 5px;
+    margin: 0 15px 0 10px;
     position: relative;
     letter-spacing: 0.5px;
     padding-left: 10px;

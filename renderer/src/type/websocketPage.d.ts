@@ -4,3 +4,5 @@ export interface WsMessage {
   message: any;
   time: string;
 }
+
+export type WebsocketType = 'native' | 'socket.io';
