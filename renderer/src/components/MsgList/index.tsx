@@ -37,9 +37,24 @@ const MsgList: React.FC<MsgListProps> = ({ list }) => {
   };
 
   const renderSystemInfo = (msgObj: WsMessage) => {
+    let color = '#DAE0E7';
+    if (msgObj.flag) {
+      switch (msgObj.flag) {
+        case 'good':
+          color = '#3FDB0C';
+          break;
+        case 'bad':
+          color = '#F987A3';
+          break;
+        default:
+          color = '#DAE0E7';
+          break;
+      }
+    }
+
     return (
       <div className={styles.systemInfo}>
-        <div className={styles.info}>
+        <div className={styles.info} style={{ backgroundColor: color }}>
           <div className={styles.systemInfoText}>{msgObj.message}</div>
           <div className={styles.systemInfoTime}>{msgObj.time}</div>
         </div>
