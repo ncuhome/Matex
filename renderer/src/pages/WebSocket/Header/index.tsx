@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import { Button, Dropdown, Label } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { useAtom } from 'jotai';
-import { websocketTypeAtom } from '/@/store/websocketStore';
+import { websocketTypeAtom, websocketUrlAtom } from '/@/store/websocketStore';
 import { wsClientOptions } from '/@/model/ws.model';
 import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
 
@@ -17,6 +17,7 @@ const Header = () => {
   const [wsClient, setWsClient] = useAtom(websocketTypeAtom);
   const { connectWs } = useNativeWs();
   const status = useNativeWsStatus();
+  const [url, setUrl] = useAtom(websocketUrlAtom);
 
   const loading = status === 'connecting';
   const connected = status === 'connected';
@@ -27,8 +28,7 @@ const Header = () => {
   };
 
   const doConnect = (e) => {
-    console.log('do connect');
-    connectWs({ url: 'ws://localhost:8080' });
+    connectWs({ url });
   };
 
   return (
@@ -43,7 +43,7 @@ const Header = () => {
           trigger={<></>}
         />
       </Button.Group>
-      <input className={styles.input} />
+      <input value={url} onChange={(e) => setUrl(e.target.value)} className={styles.input} />
       <Button
         loading={loading}
         disabled={connected}

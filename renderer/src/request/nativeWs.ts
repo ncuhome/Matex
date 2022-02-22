@@ -54,6 +54,13 @@ export const useNativeWs = () => {
     }
   };
 
+  const reConnect = ({ url, protocols, binaryType }: NativeWsProps) => {
+    wsConn && wsConn.close();
+    setConn(undefined);
+    serStatus('closed');
+    connect({ url, protocols, binaryType });
+  };
+
   const close = (code?: number, reason?: string) => {
     if (wsConn) {
       wsConn.close(code, reason);
@@ -64,8 +71,8 @@ export const useNativeWs = () => {
   };
   return {
     connectWs: connect,
-    closeWs: close,
-    status
+    reConnectWs: reConnect,
+    closeWs: close
   };
 };
 

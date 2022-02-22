@@ -15,6 +15,7 @@ export const websocketTypeAtom = atom<WebsocketType>('native');
 export const websocketSideAtom = atom<'client' | 'server'>('client');
 export const websocketMsgListAtom = atom<WsMessage[]>(testList);
 export const websocketNativeConnAtom = atom<WebSocket | undefined>(undefined);
+export const websocketUrlAtom = atom<string>('ws://localhost:8080');
 
 export const useMsgList = () => {
   const [msgList, updateMsgList] = useAtom(websocketMsgListAtom);
