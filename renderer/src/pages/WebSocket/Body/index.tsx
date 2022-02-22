@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useAtom } from 'jotai';
 import { useMsgList, websocketSocketIoAtom } from '/@/store/websocketStore';
 import MsgList from '/@cmp/MsgList';
-import { Button } from 'semantic-ui-react';
+import { Button, Form, Icon, Input, TextArea } from 'semantic-ui-react';
 
 const Body = () => {
   const [isSocketIo, setSocket] = useAtom(websocketSocketIoAtom);
@@ -55,7 +55,22 @@ const Body = () => {
         </div>
       </div>
       <div className={styles.inputCon}>
-        <Button onClick={addItem}>add</Button>
+        <div className={styles.textArea}>
+          <Input
+            fluid
+            size={'large'}
+            icon={{ name: 'file outline', circular: true, link: true }}
+            placeholder="Search..."
+          />
+        </div>
+        <div className={styles.ops}>
+          <Button animated color={'green'}>
+            <Button.Content hidden>发送</Button.Content>
+            <Button.Content visible>
+              <Icon name="send" />
+            </Button.Content>
+          </Button>
+        </div>
       </div>
     </div>
   );
