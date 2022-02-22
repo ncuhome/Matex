@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { useAtom } from 'jotai';
 import { websocketTypeAtom } from '/@/store/websocketStore';
 import { wsClientOptions } from '/@/model/ws.model';
-import { useNativeWs } from '/@/request/nativeWs';
+import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
 
 const clientOptions = wsClientOptions.map((item) => ({
   key: item,
@@ -16,6 +16,11 @@ const clientOptions = wsClientOptions.map((item) => ({
 const Header = () => {
   const [wsClient, setWsClient] = useAtom(websocketTypeAtom);
   const { connectWs } = useNativeWs();
+  const status = useNativeWsStatus();
+
+  const loading = status === 'connecting';
+  const connected = status === 'connected';
+  const btnText = connected ? '已连接' : '连接';
 
   const handleChange = (event: SyntheticEvent, { value }: any) => {
     setWsClient(value);
@@ -39,8 +44,15 @@ const Header = () => {
         />
       </Button.Group>
       <input className={styles.input} />
-      <Button onClick={doConnect} color={'black'} size={'large'} style={{ marginRight: 15 }}>
-        连接
+      <Button
+        loading={loading}
+        disabled={connected}
+        onClick={doConnect}
+        secondary={!connected}
+        size={'large'}
+        style={{ marginRight: 15 }}
+      >
+        {btnText}
       </Button>
     </div>
   );

@@ -11,10 +11,12 @@ interface NativeWsProps {
   binaryType?: 'blob' | 'arraybuffer';
 }
 
+type WsStatus = 'connecting' | 'connected' | 'closing' | 'closed';
+
 export const useNativeWs = () => {
   const [wsConn, setConn] = useAtom(websocketNativeConnAtom);
   const { addMsg } = useMsgList();
-  const [status, serStatus] = useState(wsConn?.readyState ?? 'closed');
+  const [status, serStatus] = useState<WsStatus>('closed');
 
   useEffect(() => {
     Emitter.emit('ws-native-status', status);
@@ -68,7 +70,7 @@ export const useNativeWs = () => {
 };
 
 export const useNativeWsStatus = () => {
-  const [status, setStatus] = useState('closed');
+  const [status, setStatus] = useState<WsStatus>('closed');
   const listenerRef = useRef<Emittery.UnsubscribeFn>();
 
   useEffect(() => {
