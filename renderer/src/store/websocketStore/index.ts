@@ -15,7 +15,7 @@ const testList: WsMessage[] = Array.from({ length: 10 }).map((_, index) => {
 
 export const websocketTypeAtom = atom<WebsocketType>('native');
 export const websocketSideAtom = atom<'client' | 'server'>('client');
-export const websocketMsgListAtom = atom<WsMessage[]>(testList);
+export const websocketMsgListAtom = atom<WsMessage[]>([]);
 export const websocketNativeConnAtom = atom<WebSocket | undefined>(undefined);
 export const websocketUrlAtom = atom<string>('ws://localhost:8080');
 

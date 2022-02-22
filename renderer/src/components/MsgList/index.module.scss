@@ -53,6 +53,30 @@
       }
     }
   }
+
+  .systemInfo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .info{
+      padding: 3px 10px;
+      text-align: center;
+      background-color: #DAE0E7;
+      border-radius: 5px;
+
+      .systemInfoText{
+        font-size: 14px;
+        color: #2C2E3A;
+      }
+      .systemInfoTime{
+        font-size: 14px;
+        color: #F9FAFB;
+      }
+    }
+  }
 }
 
 .descText{

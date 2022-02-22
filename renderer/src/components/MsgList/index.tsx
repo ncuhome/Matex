@@ -36,13 +36,26 @@ const MsgList: React.FC<MsgListProps> = ({ list }) => {
     );
   };
 
+  const renderSystemInfo = (msgObj: WsMessage) => {
+    return (
+      <div className={styles.systemInfo}>
+        <div className={styles.info}>
+          <div className={styles.systemInfoText}>{msgObj.message}</div>
+          <div className={styles.systemInfoTime}>{msgObj.time}</div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.msgList} id={'msgCon'}>
       {list.map((item) => {
         if (item.type === 'client') {
           return <Fragment key={item.index}>{renderRight(item)}</Fragment>;
-        } else {
+        } else if (item.type === 'server') {
           return <Fragment key={item.index}>{renderLeft(item)}</Fragment>;
+        } else {
+          return <Fragment key={item.index}>{renderSystemInfo(item)}</Fragment>;
         }
       })}
     </div>

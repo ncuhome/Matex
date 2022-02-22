@@ -34,6 +34,8 @@ export const useNativeWs = () => {
       serStatus('connecting');
       ws.onopen = (e) => {
         console.log('ws connected');
+        const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
+        addMsg({ type: 'system', message: '建立连接', time });
         serStatus('connected');
       };
       ws.onmessage = (event) => {
@@ -44,6 +46,8 @@ export const useNativeWs = () => {
 
       ws.onclose = (event) => {
         console.log('ws closed');
+        const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
+        addMsg({ type: 'system', message: '断开连接', time });
         setConn(undefined);
         serStatus('closed');
       };

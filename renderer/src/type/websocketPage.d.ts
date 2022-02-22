@@ -1,6 +1,6 @@
 export interface WsMessage {
   index: number;
-  type: 'server' | 'client';
+  type: 'server' | 'client' | 'system';
   message: any;
   time: string;
 }
