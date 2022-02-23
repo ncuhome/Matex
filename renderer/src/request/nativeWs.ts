@@ -1,11 +1,12 @@
 import { useAtom } from 'jotai';
-import { useMsgList, websocketNativeConnAtom } from '/@/store/websocketStore';
+import { useMsgList, websocketConnAtom } from '/@/store/websocketStore';
 import { matexTime } from '/@/utils/time';
-import { useEffect, useRef, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import { Emitter } from '/@/utils/EventEmiter';
 import Emittery from 'emittery';
 import { getStatusText } from '/@/pages/WebSocket/utils';
 import { useAtomValue } from 'jotai/utils';
+import { WsStatus } from '/@/type/websocketPage';
 
 interface NativeWsProps {
   url: string;
@@ -13,10 +14,10 @@ interface NativeWsProps {
   binaryType?: 'blob' | 'arraybuffer';
 }
 
-type WsStatus = 'connecting' | 'connected' | 'closing' | 'closed';
+type WsConnNativeAtom = [WebSocket, (update?: SetStateAction<WebSocket>) => void];
 
 export const useNativeWs = () => {
-  const [wsConn, setConn] = useAtom(websocketNativeConnAtom);
+  const [wsConn, setConn] = useAtom(websocketConnAtom) as WsConnNativeAtom;
   const initStatus = wsConn ? getStatusText(wsConn?.readyState) : 'closed';
   const { addMsg } = useMsgList();
   const [status, setStatus] = useState<WsStatus>(initStatus);
@@ -31,7 +32,6 @@ export const useNativeWs = () => {
     }
     const ws = new WebSocket(url, protocols);
     if (binaryType) ws.binaryType = binaryType;
-
     if (ws) {
       setConn(ws);
       setStatus('connecting');
@@ -61,15 +61,6 @@ export const useNativeWs = () => {
     }
   };
 
-  const reConnect = ({ url, protocols, binaryType }: NativeWsProps) => {
-    wsConn && wsConn.close();
-    setConn(undefined);
-    setStatus('closed');
-    setTimeout(() => {
-      connect({ url, protocols, binaryType });
-    }, 10);
-  };
-
   const close = (code?: number, reason?: string) => {
     if (wsConn) {
       wsConn.close(code, reason);
@@ -78,15 +69,15 @@ export const useNativeWs = () => {
       setStatus('closed');
     }
   };
+
   return {
     connectWs: connect,
-    reConnectWs: reConnect,
     closeWs: close
   };
 };
 
 export const useNativeWsStatus = () => {
-  const wsConn = useAtomValue(websocketNativeConnAtom);
+  const wsConn = useAtomValue(websocketConnAtom) as WebSocket;
   const initStatus = wsConn ? getStatusText(wsConn?.readyState) : 'closed';
   const [status, setStatus] = useState<WsStatus>(initStatus);
   const listenerRef = useRef<Emittery.UnsubscribeFn>();

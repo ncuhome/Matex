@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useMsgList, websocketNativeConnAtom } from '/@/store/websocketStore';
+import { useMsgList, websocketConnAtom, websocketTypeAtom } from '/@/store/websocketStore';
 import MsgList from '/@cmp/MsgList';
 import { Button, Icon } from 'semantic-ui-react';
 import Title from '/@/pages/WebSocket/Body/Title';
@@ -12,7 +12,8 @@ import toast from 'react-hot-toast';
 const Body = () => {
   const { msgList, addMsg } = useMsgList();
   const [inputContent, setContent] = useState('');
-  const ws = useAtomValue(websocketNativeConnAtom);
+  const ws = useAtomValue(websocketConnAtom);
+  const wsType = useAtomValue(websocketTypeAtom);
 
   useEffect(() => {
     const msgEndEle = document.getElementById('msgCon') as HTMLDivElement;
@@ -20,16 +21,18 @@ const Body = () => {
   }, [msgList]);
 
   const sendMsg = () => {
-    if (ws && ws.readyState === 1) {
-      addMsg({
-        type: 'client',
-        message: inputContent,
-        time: matexTime().format('YYYY-MM-DD HH:mm:ss')
-      });
-      ws?.send(inputContent);
-      setContent('');
-    } else {
-      toast.error('请先连接websocket服务器');
+    if (wsType === 'native') {
+      if (ws && (ws as WebSocket).readyState === 1) {
+        addMsg({
+          type: 'client',
+          message: inputContent,
+          time: matexTime().format('YYYY-MM-DD HH:mm:ss')
+        });
+        ws?.send(inputContent);
+        setContent('');
+      } else {
+        toast.error('请先连接websocket服务器');
+      }
     }
   };
 
@@ -53,7 +56,6 @@ const Body = () => {
       <div className={styles.inputCon}>
         <div className={styles.textArea}>
           <input
-            disabled={!ws}
             className={styles.input}
             value={inputContent}
             onChange={handleChange}

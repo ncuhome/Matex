@@ -3,14 +3,15 @@ import styles from './index.module.scss';
 import { Icon } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { useAtom } from 'jotai';
-import { websocketNativeConnAtom, websocketSideAtom } from '/@/store/websocketStore';
+import { websocketSideAtom, websocketTypeAtom } from '/@/store/websocketStore';
 import { useAtomValue } from 'jotai/utils';
 import waitImg from '/@/assets/icon/wait_conn.svg';
+import NativeInfoCard from '/@/pages/WebSocket/Side/NativeInfoCard';
+import SocketIoInfoCard from '/@/pages/WebSocket/Side/SocketIoInfoCard';
 
 const WsSide = () => {
   const [wsSide, setWsSide] = useAtom(websocketSideAtom);
-  const ws = useAtomValue(websocketNativeConnAtom);
-
+  const wsType = useAtomValue(websocketTypeAtom);
   const isClient = wsSide === 'client';
 
   const changeSide = (client: boolean) => {
@@ -22,41 +23,11 @@ const WsSide = () => {
   };
 
   const renderInfoCard = () => {
-    if (ws) {
-      const url = new URL(ws.url);
-      console.log(url);
-      return (
-        <>
-          <h4 className={styles.infoTitle}>连接信息</h4>
-          <div className={styles.infoLine}>
-            <div className={styles.infoKey}>type：</div>
-            <div className={styles.infoVal}>{'native'}</div>
-          </div>
-          <div className={styles.infoLine}>
-            <div className={styles.infoKey}>hostname：</div>
-            <div className={styles.infoVal}>{url.hostname}</div>
-          </div>
-          <div className={styles.infoLine}>
-            <div className={styles.infoKey}>port:</div>
-            <div className={styles.infoVal}>{url.port}</div>
-          </div>
-          <div className={styles.infoLine}>
-            <div className={styles.infoKey}>protocols:</div>
-            <div className={styles.infoVal}>{ws.protocol ? ws.protocol : '无'}</div>
-          </div>
-          <div className={styles.infoLine}>
-            <div className={styles.infoKey}>binaryType:</div>
-            <div className={styles.infoVal}>{ws.binaryType}</div>
-          </div>
-        </>
-      );
+    if (wsType === 'native') {
+      return <NativeInfoCard />;
+    } else {
+      return <SocketIoInfoCard />;
     }
-    return (
-      <>
-        <img src={waitImg} alt={'waitImg'} className={styles.waitImg} />
-        <div className={styles.waitText}>等待连接</div>
-      </>
-    );
   };
 
   return (

@@ -1,5 +1,5 @@
 import { atom, useAtom } from 'jotai';
-import { WebsocketType, WsMessage } from '/@/type/websocketPage';
+import { WebsocketType, WsMessage, WsSocket } from '/@/type/websocketPage';
 import { produce } from 'immer';
 import { checkIndex } from '/@/store/utils';
 import { useUpdateAtom } from 'jotai/utils';
@@ -7,7 +7,7 @@ import { useUpdateAtom } from 'jotai/utils';
 export const websocketTypeAtom = atom<WebsocketType>('native');
 export const websocketSideAtom = atom<'client' | 'server'>('client');
 export const websocketMsgListAtom = atom<WsMessage[]>([]);
-export const websocketNativeConnAtom = atom<WebSocket | undefined>(undefined);
+export const websocketConnAtom = atom<WsSocket>(undefined);
 export const websocketUrlAtom = atom<string>('ws://localhost:8080');
 
 const addMsgListAtom = atom(null, (get, set, param: Omit<WsMessage, 'index'>) => {

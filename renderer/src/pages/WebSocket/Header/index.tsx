@@ -6,6 +6,8 @@ import { useAtom } from 'jotai';
 import { websocketTypeAtom, websocketUrlAtom } from '/@/store/websocketStore';
 import { wsClientOptions } from '/@/model/ws.model';
 import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
+import { useSocketIo } from '/@/request/socketIo';
+import { useAtomValue } from 'jotai/utils';
 
 const clientOptions = wsClientOptions.map((item) => ({
   key: item,
@@ -16,19 +18,23 @@ const clientOptions = wsClientOptions.map((item) => ({
 const Header = () => {
   const [wsClient, setWsClient] = useAtom(websocketTypeAtom);
   const { connectWs } = useNativeWs();
+  const { connSocketIo } = useSocketIo();
   const status = useNativeWsStatus();
   const [url, setUrl] = useAtom(websocketUrlAtom);
+  const wsType = useAtomValue(websocketTypeAtom);
 
   const loading = status === 'connecting';
   const connected = status === 'connected';
   const btnText = connected ? '已连接' : '连接';
+
+  const conn = wsType === 'native' ? connectWs : connSocketIo;
 
   const handleChange = (event: SyntheticEvent, { value }: any) => {
     setWsClient(value);
   };
 
   const doConnect = (e) => {
-    connectWs({ url });
+    conn({ url });
   };
 
   return (
