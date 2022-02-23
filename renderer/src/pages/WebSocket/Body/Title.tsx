@@ -4,12 +4,13 @@ import { Button, Icon } from 'semantic-ui-react';
 import { getConnStatus } from '/@/pages/WebSocket/Body/utils';
 import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
 import { useAtomValue } from 'jotai/utils';
-import { websocketUrlAtom } from '/@/store/websocketStore';
+import { useMsgList, websocketUrlAtom } from '/@/store/websocketStore';
 
 const Title = () => {
   const status = useNativeWsStatus();
   const { closeWs, reConnectWs } = useNativeWs();
   const url = useAtomValue(websocketUrlAtom);
+  const { clearList } = useMsgList();
 
   const { color, text } = getConnStatus(status);
 
@@ -35,6 +36,12 @@ const Title = () => {
             <Button.Content hidden>重连</Button.Content>
             <Button.Content visible>
               <Icon name="linkify" />
+            </Button.Content>
+          </Button>
+          <Button animated={'vertical'} size={'small'} onClick={() => clearList()}>
+            <Button.Content hidden>清空</Button.Content>
+            <Button.Content visible>
+              <Icon name="trash" />
             </Button.Content>
           </Button>
         </Button.Group>
