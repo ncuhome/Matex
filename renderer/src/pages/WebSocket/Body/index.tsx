@@ -6,6 +6,7 @@ import { Button, Icon } from 'semantic-ui-react';
 import Title from '/@/pages/WebSocket/Body/Title';
 import { matexTime } from '/@/utils/time';
 import { useAtomValue } from 'jotai/utils';
+import clsx from 'clsx';
 
 const Body = () => {
   const { msgList, addMsg } = useMsgList();
@@ -37,7 +38,7 @@ const Body = () => {
         () => (
           <div className={styles.msgWin}>
             <Title />
-            <div className={styles.chatWin}>
+            <div className={clsx([msgList.length === 0 && styles.blankBg, styles.chatWin])}>
               <MsgList list={msgList} />
             </div>
           </div>
