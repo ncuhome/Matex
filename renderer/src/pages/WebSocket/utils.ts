@@ -3,7 +3,7 @@ interface StatusObj {
   color: string;
 }
 
-export const getConnStatus = (status: string) => {
+export const getStatusColor = (status: string) => {
   let res: StatusObj = { text: '', color: '' };
   switch (status) {
     case 'connecting':
@@ -32,4 +32,19 @@ export const getConnStatus = (status: string) => {
       break;
   }
   return res;
+};
+
+export const getStatusText = (code: number) => {
+  switch (code) {
+    case 0:
+      return 'connecting';
+    case 1:
+      return 'connected';
+    case 2:
+      return 'closing';
+    case 3:
+      return 'closed';
+    default:
+      return 'closed';
+  }
 };

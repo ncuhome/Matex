@@ -4,6 +4,8 @@ import { matexTime } from '/@/utils/time';
 import { useEffect, useRef, useState } from 'react';
 import { Emitter } from '/@/utils/EventEmiter';
 import Emittery from 'emittery';
+import { getStatusText } from '/@/pages/WebSocket/utils';
+import { useAtomValue } from 'jotai/utils';
 
 interface NativeWsProps {
   url: string;
@@ -15,8 +17,9 @@ type WsStatus = 'connecting' | 'connected' | 'closing' | 'closed';
 
 export const useNativeWs = () => {
   const [wsConn, setConn] = useAtom(websocketNativeConnAtom);
+  const initStatus = wsConn ? getStatusText(wsConn?.readyState) : 'closed';
   const { addMsg } = useMsgList();
-  const [status, serStatus] = useState<WsStatus>('closed');
+  const [status, setStatus] = useState<WsStatus>(initStatus);
 
   useEffect(() => {
     Emitter.emit('ws-native-status', status);
@@ -31,12 +34,12 @@ export const useNativeWs = () => {
 
     if (ws) {
       setConn(ws);
-      serStatus('connecting');
+      setStatus('connecting');
       ws.onopen = (e) => {
         console.log('ws connected');
         const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
         addMsg({ type: 'system', flag: 'good', message: '建立连接', time });
-        serStatus('connected');
+        setStatus('connected');
       };
       ws.onmessage = (event) => {
         console.log('ws message', event);
@@ -49,7 +52,7 @@ export const useNativeWs = () => {
         const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
         addMsg({ type: 'system', flag: 'bad', message: '断开连接', time });
         setConn(undefined);
-        serStatus('closed');
+        setStatus('closed');
       };
 
       ws.onerror = (event) => {
@@ -61,7 +64,7 @@ export const useNativeWs = () => {
   const reConnect = ({ url, protocols, binaryType }: NativeWsProps) => {
     wsConn && wsConn.close();
     setConn(undefined);
-    serStatus('closed');
+    setStatus('closed');
     setTimeout(() => {
       connect({ url, protocols, binaryType });
     }, 10);
@@ -70,9 +73,9 @@ export const useNativeWs = () => {
   const close = (code?: number, reason?: string) => {
     if (wsConn) {
       wsConn.close(code, reason);
-      serStatus('closing');
+      setStatus('closing');
     } else {
-      serStatus('closed');
+      setStatus('closed');
     }
   };
   return {
@@ -83,7 +86,9 @@ export const useNativeWs = () => {
 };
 
 export const useNativeWsStatus = () => {
-  const [status, setStatus] = useState<WsStatus>('closed');
+  const wsConn = useAtomValue(websocketNativeConnAtom);
+  const initStatus = wsConn ? getStatusText(wsConn?.readyState) : 'closed';
+  const [status, setStatus] = useState<WsStatus>(initStatus);
   const listenerRef = useRef<Emittery.UnsubscribeFn>();
 
   useEffect(() => {

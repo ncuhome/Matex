@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { Button, Icon } from 'semantic-ui-react';
-import { getConnStatus } from '/@/pages/WebSocket/Body/utils';
+import { getStatusColor } from '/@/pages/WebSocket/utils';
 import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
 import { useAtomValue } from 'jotai/utils';
 import { useMsgList, websocketUrlAtom } from '/@/store/websocketStore';
@@ -12,7 +12,7 @@ const Title = () => {
   const url = useAtomValue(websocketUrlAtom);
   const { clearList } = useMsgList();
 
-  const { color, text } = getConnStatus(status);
+  const { color, text } = getStatusColor(status);
 
   return (
     <div className={styles.titleCon}>

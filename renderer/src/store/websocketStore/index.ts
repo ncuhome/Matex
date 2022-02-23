@@ -4,15 +4,6 @@ import { produce } from 'immer';
 import { checkIndex } from '/@/store/utils';
 import { useUpdateAtom } from 'jotai/utils';
 
-const testList: WsMessage[] = Array.from({ length: 10 }).map((_, index) => {
-  return {
-    index: index,
-    type: index % 2 === 0 ? 'client' : 'server',
-    message: index % 2 === 0 ? '你好啊' : '欢迎你',
-    time: '2020-01-0' + index
-  };
-});
-
 export const websocketTypeAtom = atom<WebsocketType>('native');
 export const websocketSideAtom = atom<'client' | 'server'>('client');
 export const websocketMsgListAtom = atom<WsMessage[]>([]);

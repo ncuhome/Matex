@@ -7,6 +7,7 @@ import Title from '/@/pages/WebSocket/Body/Title';
 import { matexTime } from '/@/utils/time';
 import { useAtomValue } from 'jotai/utils';
 import clsx from 'clsx';
+import toast from 'react-hot-toast';
 
 const Body = () => {
   const { msgList, addMsg } = useMsgList();
@@ -19,13 +20,17 @@ const Body = () => {
   }, [msgList]);
 
   const sendMsg = () => {
-    addMsg({
-      type: 'client',
-      message: inputContent,
-      time: matexTime().format('YYYY-MM-DD HH:mm:ss')
-    });
-    ws?.send(inputContent);
-    setContent('');
+    if (ws && ws.readyState === 1) {
+      addMsg({
+        type: 'client',
+        message: inputContent,
+        time: matexTime().format('YYYY-MM-DD HH:mm:ss')
+      });
+      ws?.send(inputContent);
+      setContent('');
+    } else {
+      toast.error('请先连接websocket服务器');
+    }
   };
 
   const handleChange = (e) => {
@@ -48,6 +53,7 @@ const Body = () => {
       <div className={styles.inputCon}>
         <div className={styles.textArea}>
           <input
+            disabled={!ws}
             className={styles.input}
             value={inputContent}
             onChange={handleChange}
