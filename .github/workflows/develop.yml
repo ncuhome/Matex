@@ -3,7 +3,8 @@ name: Development/Test
 on:
   push:
     branches:
-      - '*'
+      - 'master'
+      - 'refactor/**'
 
 
 jobs:
