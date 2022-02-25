@@ -12,11 +12,12 @@ import {
 } from '/@/store/apiTestStore';
 import { useAtom } from 'jotai';
 import useAction from '/@/pages/ApiTest/Header/Tabs/useAction';
-import styles from './index.module.scss';
+import dropDownStyle from '/@/style/apitest/index.module.scss';
+import clsx from 'clsx';
 
 const activeStyle = {
-  background: '#66578F',
-  color: '#CFCADC'
+  background: 'var(--active-bg)',
+  color: 'var(--text-color)'
 };
 
 const Tabs = () => {
@@ -58,7 +59,7 @@ const Tabs = () => {
                 <Menu.Item
                   key={item}
                   name={item}
-                  style={active ? activeStyle : { color: '#CFCADC' }}
+                  style={active ? activeStyle : { color: 'var(--text-color)' }}
                   active={active}
                   onClick={() => handleItemClick(item)}
                 />
@@ -68,10 +69,10 @@ const Tabs = () => {
           {showBodyType && (
             <Menu.Menu position="right" style={{ marginRight: 15 }}>
               <Menu.Item>
-                <Button.Group size={'small'}>
-                  <Button>{activeBody}</Button>
+                <Button.Group className={dropDownStyle.dropDown} size={'small'}>
+                  <Button className={dropDownStyle.btn}>{activeBody}</Button>
                   <Dropdown
-                    className="button icon"
+                    className={clsx(['button', 'icon', dropDownStyle.select])}
                     onChange={handleChangeBodyType}
                     options={bodyTypeOptions}
                     trigger={<></>}

@@ -29,7 +29,7 @@ const SideBarTab: React.FC<TabProps> = ({ text = '', route = '', active = false 
     <div
       ref={tabRef}
       onClick={handleClick}
-      style={{ width: collapse ? '50px' : '130px' }}
+      style={{ width: collapse ? '50px' : '200px' }}
       className={clsx([styles.tab, active && styles.active])}
     >
       <div className={clsx([styles.tabIcon])}>{getIcon(route)}</div>
@@ -44,13 +44,13 @@ const getIcon = (route: string) => {
   let res;
   switch (route) {
     case '/apiTest':
-      res = <Icon disabled name="world" />;
+      res = <Icon className={styles.icon} disabled name="world" />;
       break;
     case '/websocket':
-      res = <Icon disabled name="linkify" />;
+      res = <Icon className={styles.icon} disabled name="linkify" />;
       break;
     case '/benchmark':
-      res = <Icon disabled name="rocket" />;
+      res = <Icon className={styles.icon} disabled name="rocket" />;
       break;
     case '/ok':
       res = <Icon disabled name="find" />;

@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import clsx from 'clsx';
 import { resizeAble } from './resize';
 import { useEditor } from './create';
-import {Editor, MonacoEditorProps} from '/@cmp/MonacoEditor/type';
+import { Editor, MonacoEditorProps } from '/@cmp/MonacoEditor/type';
 
 const MonacoEditor: FC<MonacoEditorProps> = ({
   height = 200,
@@ -20,8 +20,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
 }) => {
   const monacoEl = useRef(null);
   const editorRef = useRef<Editor>();
-  const { createEditor,destroyEditor } = useEditor(
-    {enabledMinMap, language, readOnly });
+  const { createEditor, destroyEditor } = useEditor({ enabledMinMap, language, readOnly });
 
   useEffect(() => {
     resizeAble();
@@ -37,7 +36,6 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     }
   }, [monacoEl]);
 
-
   useEffect(() => {
     return () => {
       const res = destroyEditor();
@@ -45,17 +43,16 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     };
   }, []);
 
-  useEffect(()=>{
-    if (editorRef.current){
+  useEffect(() => {
+    if (editorRef.current) {
       editorRef.current.onDidChangeModelContent((e) => {
-        onChange && onChange(e,editorRef.current?.getValue());
+        onChange && onChange(e, editorRef.current?.getValue());
       });
     }
-
-  },[editorRef.current]);
+  }, [editorRef.current]);
 
   return (
-    <div className={clsx([styles.con, shadow && styles.shadow])} style={{ border }}>
+    <div className={clsx([styles.con])} style={{ border }}>
       <div
         id={'monacoEditor'}
         style={{ height }}

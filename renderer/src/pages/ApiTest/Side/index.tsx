@@ -2,10 +2,11 @@ import React from 'react';
 import styles from './index.module.scss';
 import { ApiList } from '/@cmp/ApiList';
 import { Button, Icon, Label } from 'semantic-ui-react';
-
+import normalStyle from '/@/style/apitest/index.module.scss';
 const style = {
-  background: '#706193',
-  color: '#CFCADC'
+  background: '#466085',
+  color: '#8ADDFF',
+  marginLeft: 10
 };
 
 const CollectSide = () => {
@@ -13,8 +14,8 @@ const CollectSide = () => {
     <div className={styles.side}>
       <div className={styles.list}>
         <div className={styles.header}>
-          <Label tag color={'grey'} size={'tiny'}>
-            请求历史<span style={{ color: 'white', display: 'inline-block', marginLeft: 10 }}>79</span>
+          <Label style={style} size={'small'}>
+            请求历史<span style={{ color: '#8ADDFF', display: 'inline-block', marginLeft: 10 }}>79</span>
           </Label>
         </div>
         <div className={styles.recordList}>
@@ -30,14 +31,13 @@ const CollectSide = () => {
         </div>
       </div>
       <div className={styles.ops}>
-        <Button icon style={style}>
-          <Icon name="save" />
+        <Button icon className={styles.btn}>
+          <Icon className={styles.icon} name="save" />
+          &nbsp;保存
         </Button>
-        <Button icon style={style}>
-          <Icon name="tag" />
-        </Button>
-        <Button icon style={style}>
-          <Icon name="trash alternate" />
+        <Button icon className={styles.btn}>
+          <Icon className={styles.icon} name="trash alternate" />
+          &nbsp; 删除
         </Button>
       </div>
     </div>

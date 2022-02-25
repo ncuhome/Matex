@@ -21,13 +21,14 @@ import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 import { editorsAtom } from '/@/store/commonStore';
 import { EditorLanguage } from '/@cmp/MonacoEditor/type';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
+import dropDownStyle from '/@/style/apitest/index.module.scss';
 
 const formatOptions = FormatOptions.map((item) => {
   return { key: item, value: item, text: item };
 });
 
 const style = {
-  background: '#40437B',
+  background: '#40497D',
   color: '#CFCADC'
 };
 
@@ -94,7 +95,7 @@ export const Header = () => {
         position={'bottom center'}
         pinned
         trigger={
-          <Label size={'small'} ribbon as="a" color={'blue'} style={{ marginLeft: 32, height: 24 }}>
+          <Label ribbon size={'small'} as="a" color={'blue'} style={{ marginLeft: 30, height: 24 }}>
             {getLabel(displayItem)}
           </Label>
         }
@@ -154,9 +155,13 @@ export const Header = () => {
                   );
                 })}
                 <Menu.Item>
-                  <Button.Group size={'small'} style={{ borderRadius: 3 }}>
-                    <Button>{formatType}</Button>
-                    <Dropdown className="button icon" floating trigger={<></>}>
+                  <Button.Group size={'small'} className={dropDownStyle.dropDown}>
+                    <Button className={dropDownStyle.btn}>{formatType}</Button>
+                    <Dropdown
+                      className={clsx(['button', 'icon', dropDownStyle.select])}
+                      floating
+                      trigger={<></>}
+                    >
                       <Dropdown.Menu>
                         {formatOptions.map((item) => {
                           return (
@@ -180,11 +185,11 @@ export const Header = () => {
               <Menu.Menu style={{ marginLeft: -18 }}>
                 <Menu.Item>
                   <Button.Group size={'small'}>
-                    <Button icon onClick={handleCopy}>
-                      <Icon name="copy outline" />
+                    <Button className={dropDownStyle.IconBtn} icon onClick={handleCopy}>
+                      <Icon className={dropDownStyle.icon} name="copy outline" />
                     </Button>
-                    <Button icon onClick={handleFind}>
-                      <Icon name="search" />
+                    <Button className={dropDownStyle.IconBtn} icon onClick={handleFind}>
+                      <Icon className={dropDownStyle.icon} name="search" />
                     </Button>
                   </Button.Group>
                 </Menu.Item>

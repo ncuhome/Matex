@@ -30,8 +30,10 @@ const ParamsTable = () => {
     return (
       <div className={styles.warningCon}>
         <Header icon>
-          <Icon name={'warning sign'} color={'red'} style={{ marginBottom: 10 }} />
-          &nbsp;{method}请求时,请使用Body传递参数
+          <Icon name={'warning sign'} color={'olive'} style={{ marginBottom: 10 }} />
+          <span style={{ color: 'var(--text-color)' }}>
+            &nbsp;<span style={{ color: '#51B6F1' }}>{method}</span>&nbsp;请求时,请使用Body传递参数
+          </span>
         </Header>
       </div>
     );

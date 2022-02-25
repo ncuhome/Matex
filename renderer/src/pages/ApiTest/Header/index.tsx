@@ -14,8 +14,7 @@ import { useContextMenu } from '/@/hooks/useContextMenu';
 import { MatexWin } from '/@/global';
 import { Emitter } from '/@/utils/EventEmiter';
 import Emittery from 'emittery';
-import { DropDownOptions, useDropdown } from '/@/hooks/useDropdown';
-
+import dropDownStyle from '/@/style/apitest/index.module.scss';
 const reqOptions = MethodsOptions.map((item) => {
   return { key: item, value: item, text: item };
 });
@@ -82,21 +81,17 @@ const Header = () => {
     showMenu(e);
   };
 
-  // const handleClick = (e: any) => {
-  //   showDropdown(e);
-  // };
-
   return (
     <>
       <div className={styles.url}>
         <ToastContainer style={{ color: 'red' }} />
-        <Button.Group style={{ background: 'transparent' }} className={styles.leftSelect}>
-          <Button className={styles.selectBtn}>{method}</Button>
+        <Button.Group style={{ background: 'transparent' }} className={dropDownStyle.dropDown}>
+          <Button className={dropDownStyle.btn}>{method}</Button>
           <Dropdown
-            className={clsx(['button', 'icon', styles.selectDropdown])}
+            className={clsx(['button', 'icon', dropDownStyle.select])}
             onChange={handleChange}
             floating
-            style={{ background: 'transparent', color: '#CEC3D9' }}
+            // style={{ background: 'transparent', color: '#EDF0F5' }}
             options={reqOptions}
             trigger={<></>}
           />

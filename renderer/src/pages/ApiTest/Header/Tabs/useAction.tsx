@@ -10,6 +10,8 @@ import {
 import { useAtom } from 'jotai';
 import { BodyRawType } from '/@/type/apiTest';
 import { RawOptions } from '/@/model/apiTest.model';
+import dropDownStyle from '/@/style/apitest/index.module.scss';
+import clsx from 'clsx';
 
 const useAction = () => {
   const urlencodedList = useAtomValue(apiTestBodyUrlencodedAtom);
@@ -60,10 +62,10 @@ const useAction = () => {
     case 'raw':
       return (
         <Menu.Item style={{ marginLeft: -5 }}>
-          <Button.Group size={'small'}>
-            <Button>{activeRawType}</Button>
+          <Button.Group className={dropDownStyle.dropDown} size={'small'}>
+            <Button className={dropDownStyle.btn}>{activeRawType}</Button>
             <Dropdown
-              className="button icon"
+              className={clsx([dropDownStyle.select, 'button', 'icon'])}
               onChange={handleChangeRawType}
               options={rawOptions}
               trigger={<></>}

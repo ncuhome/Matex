@@ -10,11 +10,11 @@
   margin-bottom: 15px;
   margin-left: 20px;
   user-select: none;
-  border: 1px solid #4D4D4D;
+  border: 1px solid transparent;
 
   &:hover {
     cursor: pointer;
-    background-color: #565A5D;
+    background-color: var(--active-bg);
     border-color: transparent;
     color: #FFF;
   }
@@ -22,37 +22,10 @@
   .url {
     margin-left:-8px;
     flex: 1;
-    color: #000;
+    color: var(--text-color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    .urlInfo{
-      line-height: 40px;
-      font-size: 20px;
-
-      .label{
-        display: inline-block;
-        text-align: center;
-        width: 50px;
-        color: #6C63FF;
-        line-height: 30px;
-        font-size: 20px;
-        margin-right: 10px;
-        user-select: none;
-      }
-
-      .path{
-        display: inline-block;
-        text-align: center;
-        background-color: #FFFFFF;
-        border-radius: 4px;
-        width: 50px;
-        color: #3C30FF;
-        line-height: 30px;
-        font-size: 16px;
-      }
-    }
   }
 }
 

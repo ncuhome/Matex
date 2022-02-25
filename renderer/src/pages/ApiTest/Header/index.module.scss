@@ -22,7 +22,7 @@
     position: relative;
     letter-spacing: 0.5px;
     padding-left: 10px;
-    color: #CEC4D8;
+    color: var(--text-color);
     font-family: "JetBrains Mono NL", serif;
     border: transparent 1px solid;
     background-color: transparent;
@@ -32,7 +32,7 @@
     }
 
     &::placeholder{
-      color: #CEC4D8;
+      color: var(--text-color);
     }
 
     &:focus{
@@ -75,37 +75,37 @@
   cursor: pointer;
   padding: 12px 17px;
   border-radius: 5px;
-  color: #CEC4D8;
+  color: var(--text-color);
   font-weight: bolder;
   font-size: 15px;
 
   &:hover{
-    background-color: #685790;
+    background-color: var(--active-bg);
   }
 }
 
 .reqOption{
-  color: #CEC4D8;
+  color: var(--text-color);
   cursor: pointer;
 }
 
 .leftSelect{
 
   &:hover{
-    background-color: #685790!important;
+    background-color: var(--active-bg)!important;
     border-radius: 6px;
   }
 
   .selectBtn{
     background-color: transparent!important;
-    color: #CEC3D9!important;
+    color: var(--text-color)!important;
     width: fit-content!important;
     letter-spacing: 1px!important;
   }
 
   .selectDropdown{
     background-color: transparent!important;
-    color: #CEC3D9!important;
+    color: var(--text-color)!important;
   }
 }
 

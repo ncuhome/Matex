@@ -3,6 +3,8 @@ import { Button, Icon, Table } from 'semantic-ui-react';
 import React, { Fragment, useEffect } from 'react';
 import styles from './index.module.scss';
 import FormDataInput from '/@cmp/FormDataInput';
+import { tableStyle } from '/@/style/apitest';
+const style = tableStyle;
 
 export const BodyFormData = () => {
   const { formData, updateFormDataKey, updateFormDataValue, addFormData, deleteFormData } =
@@ -30,12 +32,14 @@ export const BodyFormData = () => {
   };
 
   return (
-    <Table celled compact size={'small'}>
+    <Table celled compact size={'small'} style={style}>
       <Table.Header>
-        <Table.Row style={{ background: '#FFF' }}>
-          <Table.HeaderCell width={3}>键</Table.HeaderCell>
-          <Table.HeaderCell>值</Table.HeaderCell>
-          <Table.HeaderCell width={3} textAlign={'center'}>
+        <Table.Row>
+          <Table.HeaderCell style={style} width={3}>
+            键
+          </Table.HeaderCell>
+          <Table.HeaderCell style={style}>值</Table.HeaderCell>
+          <Table.HeaderCell style={style} width={3} textAlign={'center'}>
             操作
           </Table.HeaderCell>
         </Table.Row>
@@ -45,7 +49,7 @@ export const BodyFormData = () => {
           return (
             <Fragment key={item.index}>
               <Table.Row>
-                <Table.Cell textAlign={'center'}>
+                <Table.Cell style={style} textAlign={'center'}>
                   <input
                     className={styles.input}
                     value={item.key}
@@ -54,7 +58,7 @@ export const BodyFormData = () => {
                     }}
                   />
                 </Table.Cell>
-                <Table.Cell textAlign={'center'}>
+                <Table.Cell style={style} textAlign={'center'}>
                   <FormDataInput
                     onClick={handleFileInputClick}
                     onChange={onFileInputChange}
@@ -64,7 +68,7 @@ export const BodyFormData = () => {
                     updateStrData={updateFormDataValue}
                   />
                 </Table.Cell>
-                <Table.Cell textAlign={'center'}>
+                <Table.Cell style={style} textAlign={'center'}>
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                     <Button icon compact>
                       <Icon name="expand arrows alternate" />

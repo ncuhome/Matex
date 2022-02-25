@@ -27,7 +27,7 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'string.key.json',
-    foreground: '#A3A5DB'
+    foreground: '#F2721B'
   },
   {
     token: 'string.value.json',

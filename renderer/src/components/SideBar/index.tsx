@@ -21,7 +21,7 @@ const SideBar = () => {
   return (
     <>
       <div className={styles.sideBar}>
-        <div className={styles.title} onClick={handleClick}>
+        <div className={styles.title}>
           <img src={logo} className={styles.logo} alt={'logo'} />
           {!collapse && <h3 className={styles.titleText}>Matex</h3>}
         </div>

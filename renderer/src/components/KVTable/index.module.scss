@@ -13,7 +13,7 @@
   color: #CEC3D9;
 
   &:hover{
-    background-color: #685990;
+    background-color: var(--active-bg);
   }
 }
 .bodyCell{
@@ -23,7 +23,7 @@
 
 .btn{
   &:hover{
-    background-color: #685990!important;
+    background-color: var(--active-bg)!important;
   }
 }
 

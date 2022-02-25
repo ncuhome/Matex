@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useRef } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import { ApiTestFormData, ApiTestKVProps } from '/@/store/apiTestStore/type';
+import { tableStyle } from '/@/style/apitest';
+const style = tableStyle;
 
 interface KVTableProps {
   data: ApiTestKVProps[] | ApiTestFormData[];
@@ -10,8 +12,6 @@ interface KVTableProps {
   onChangeValue?: (index: number, value: string) => void;
   onDeleteLine?: (index: number) => void;
 }
-
-const style = { background: 'transparent', color: '#CEC3D9', border: '1px solid #6F558A' };
 
 const KVTable: React.FC<KVTableProps> = ({
   data,

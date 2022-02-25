@@ -1,39 +1,46 @@
 
 .activeStyle{
   color: #FFF;
-  background-color: #2CB5AD;
+  background-color: #5B729B;
 }
 
 
 .tab{
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-wrap: nowrap;
   flex-shrink: 1;
-  height: 40px;
+  height: 35px;
+  width: 100%;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 6px;
   cursor: pointer;
   border: 1px solid transparent;
   color: #FFF;
   font-size: 14px;
   transition: all 0.3s ease-out;
-  margin-top: 15px;
+  margin-bottom: 10px;
+  padding-left: 10px;
 
   &:hover{
     color: #000;
-    background-color: rgba(67,209,201,0.8);
+    background-color: rgba(115,104,159,0.6);
   }
 
   .tabIcon{
     transition: all 0.3s ease-out;
+
+    .icon{
+      color: #FFF!important;
+    }
   }
 
   .text{
     text-wrap: none;
     margin-left: 10px;
     font-weight: bold;
+    font-size: 13px;
   }
 
 }

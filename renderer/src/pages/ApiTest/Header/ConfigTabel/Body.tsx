@@ -12,11 +12,11 @@ import {
 import KVTable from '/@cmp/KVTable';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import MonacoEditor from '/@cmp/MonacoEditor';
-import {useEditors, useEditorValue} from '/@/store/commonStore';
+import { useEditors, useEditorValue } from '/@/store/commonStore';
 import styles from './index.module.scss';
 import { BodyFormData } from '/@/pages/ApiTest/Header/ConfigTabel/BodyFormData';
-import {Editor} from '/@cmp/MonacoEditor/type';
-import {useEditorAction} from '/@cmp/MonacoEditor/editorAction';
+import { Editor } from '/@cmp/MonacoEditor/type';
+import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 
 const BodyTable = () => {
   const [
@@ -29,22 +29,22 @@ const BodyTable = () => {
   const method = useAtomValue(apiTestMethodAtom);
   const activeBody = useAtomValue(apiTestActiveBodyTypeAtom);
   const activeRawType = useAtomValue(apiTestBodyRawAtom);
-  const {editorValue,setEditorValue} = useEditorValue('configBody');
-  const editorRef = React.useRef<Editor|null>();
-  const { addEditor,deleteEditor } = useEditors();
-  const { setValue,changeLanguage } = useEditorAction({readOnly: false});
+  const { editorValue, setEditorValue } = useEditorValue('configBody');
+  const editorRef = React.useRef<Editor | null>();
+  const { addEditor, deleteEditor } = useEditors();
+  const { setValue, changeLanguage } = useEditorAction({ readOnly: false });
 
   const language = LanguageMapper.get(activeRawType) ?? 'text/plain';
 
   const onCreated = (editor: Editor) => {
-    if (editor){
+    if (editor) {
       setValue({
         editor,
-        value: editorValue??'',
+        value: editorValue ?? '',
         language
       });
       editorRef.current = editor;
-      addEditor({name:'configBody',editor});
+      addEditor({ name: 'configBody', editor });
     }
   };
 
@@ -53,11 +53,11 @@ const BodyTable = () => {
     deleteEditor('apiTest');
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (editorRef.current) {
-      changeLanguage(editorRef.current,language);
+      changeLanguage(editorRef.current, language);
     }
-  },[activeRawType]);
+  }, [activeRawType]);
 
   useEffect(() => {
     const len = urlencodedList.length;
@@ -70,8 +70,10 @@ const BodyTable = () => {
     return (
       <div className={styles.warningCon}>
         <Header icon>
-          <Icon name={'warning sign'} color={'red'} style={{ marginBottom: 10 }} />
-          &nbsp;当为{method}请求时,请使用Params传递参数
+          <Icon name={'warning sign'} color={'olive'} style={{ marginBottom: 10 }} />
+          <span style={{ color: 'var(--text-color)' }}>
+            当为&nbsp;<span style={{ color: '#51B6F1' }}>{method}</span>&nbsp;请求时,请使用Params传递参数
+          </span>
         </Header>
       </div>
     );

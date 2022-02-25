@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg,#9E77BC,#816B9D,#525083,#41447C);
+  background: linear-gradient(180deg,#678FC4,#5670A5,#3C4277);
   display: flex;
   flex-direction: column;
   margin-left: 100px;
@@ -26,10 +26,10 @@
     .sideBar{
       border-radius: 15px;
       position: relative;
-      background: linear-gradient(180deg,#9F7DBD 20%,#8C71AE 30%,#6E6997 70%,#6E6996,#5B5E8D);
+      background: linear-gradient(180deg,#7599CD 30%,#657FB2 60%,#525A8E 100%);
       transition: all 0.3s ease-out;
       margin-left: -40px;
-      margin-bottom: 40px;
+      margin-bottom: 25px;
       width: 220px;
     }
 

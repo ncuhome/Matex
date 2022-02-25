@@ -6,13 +6,17 @@
   border-radius: 10px;
   position: relative;
   margin-top: -5px;
+  border: #99A8C3 1px solid;
 
   .content {
     flex: 1;
-    background-color: transparent;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
     border-radius: 8px;
     position: relative;
-    overflow: hidden;
+
+    //overflow: hidden;
   }
 }
 
@@ -157,7 +161,7 @@
 }
 
 .loading {
-  color: #3f3d56 !important;
+  color: #E0E1E2 !important;
 
   .loadingContent {
     display: flex;
@@ -167,7 +171,7 @@
   }
 
   &::after {
-    border-color: #3f3d56 transparent transparent !important;
+    border-color: #E0E1E2 transparent transparent !important;
   }
 }
 

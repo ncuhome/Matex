@@ -68,18 +68,19 @@ const Body = () => {
     border: 'none',
     margin: 0,
     padding: 0,
+    boxShadow: 'none',
     borderRadius: 10
   };
 
   return (
-    <Dimmer.Dimmable style={stylesDimmer} blurring as={Segment} dimmed={dimmer}>
+    <Dimmer.Dimmable blurring style={stylesDimmer} as={Segment} dimmed={dimmer}>
       <div className={styles.con}>
         <Header />
         <div className={styles.content}>
           <Content />
         </div>
       </div>
-      <Dimmer inverted active={dimmer} onClickOutside={() => {}} verticalAlign="top">
+      <Dimmer active={dimmer} onClickOutside={() => {}} verticalAlign="top">
         <Loader className={styles.loading} size="medium">
           <div className={styles.loadingContent}>
             <div style={{ marginBottom: 15, marginTop: 5 }}>发送请求中...</div>

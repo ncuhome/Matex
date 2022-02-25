@@ -15,7 +15,6 @@
     flex-direction: column;
     background: transparent;
     border-radius: 10px;
-    //box-shadow: 0 2px 5px #BEC0BE;
     overflow: hidden auto;
     padding-bottom: 10px;
 
@@ -23,12 +22,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 10px -10px;
+      margin: 5px -10px;
       padding: 0 20px;
     }
 
     .recordList{
-      padding: 10px 20px;
+      padding: 10px 0;
       overflow: hidden auto;
       border-radius: 10px;
     }
@@ -40,10 +39,22 @@
   margin-top: 20px;
   margin-bottom: 5px;
   border-radius: 10px;
-  //box-shadow: 0 2px 5px #BEC0BE;
   display: flex;
   align-items: center;
   justify-content: space-around;
   justify-items: center;
-  padding: 10px 0;
+  padding: 10px 2px;
+
+  .btn{
+    background: transparent!important;
+    color: var(--text-color)!important;
+
+    &:hover{
+      background-color: #1181C8!important;
+    }
+
+    .icon{
+      color: #CEC4D8!important;
+    }
+  }
 }
