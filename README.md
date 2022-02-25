@@ -1,8 +1,8 @@
 # Matex   基于electron的万能工具软件
 #
-![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/master/test/screenshot/dev.png)
+![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/dev.png)
 ###
-![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/master/test/screenshot/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/screenshot.png)
 ###
 ![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/master/test/screenshot/websocket.png)
 
