@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
-import { TabProps } from '../../model/sidebar.model';
+import { TabProps } from '/@/model/sidebar.model';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';

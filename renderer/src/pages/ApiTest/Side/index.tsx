@@ -3,6 +3,11 @@ import styles from './index.module.scss';
 import { ApiList } from '/@cmp/ApiList';
 import { Button, Icon, Label } from 'semantic-ui-react';
 
+const style = {
+  background: '#706193',
+  color: '#CFCADC'
+};
+
 const CollectSide = () => {
   return (
     <div className={styles.side}>
@@ -25,13 +30,13 @@ const CollectSide = () => {
         </div>
       </div>
       <div className={styles.ops}>
-        <Button icon>
+        <Button icon style={style}>
           <Icon name="save" />
         </Button>
-        <Button icon>
+        <Button icon style={style}>
           <Icon name="tag" />
         </Button>
-        <Button icon>
+        <Button icon style={style}>
           <Icon name="trash alternate" />
         </Button>
       </div>

@@ -9,12 +9,12 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'delimiter.bracket.json',
-    foreground: '#FA6C37'
+    foreground: '#7F81CC'
   },
   //冒号
   {
     token: 'delimiter.colon.json',
-    foreground: '#090821'
+    foreground: '#49B2D3'
   },
   //中括号
   {
@@ -27,11 +27,11 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'string.key.json',
-    foreground: '#CC0ECC'
+    foreground: '#A3A5DB'
   },
   {
     token: 'string.value.json',
-    foreground: '#1B9540'
+    foreground: '#4ED26D'
   },
   {
     token: 'custom-highlight',

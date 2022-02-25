@@ -11,6 +11,8 @@ interface KVTableProps {
   onDeleteLine?: (index: number) => void;
 }
 
+const style = { background: 'transparent', color: '#CEC3D9', border: '1px solid #6F558A' };
+
 const KVTable: React.FC<KVTableProps> = ({
   data,
   file = false,
@@ -21,12 +23,14 @@ const KVTable: React.FC<KVTableProps> = ({
   const [isFile, setFile] = React.useState(false);
 
   return (
-    <Table celled compact size={'small'}>
+    <Table celled compact style={style} size={'small'}>
       <Table.Header>
-        <Table.Row style={{ background: '#FFF' }}>
-          <Table.HeaderCell width={3}>键</Table.HeaderCell>
-          <Table.HeaderCell>值</Table.HeaderCell>
-          <Table.HeaderCell width={3} textAlign={'center'}>
+        <Table.Row>
+          <Table.HeaderCell style={style} width={3}>
+            键
+          </Table.HeaderCell>
+          <Table.HeaderCell style={style}>值</Table.HeaderCell>
+          <Table.HeaderCell style={style} width={3} textAlign={'center'}>
             操作
           </Table.HeaderCell>
         </Table.Row>
@@ -36,7 +40,7 @@ const KVTable: React.FC<KVTableProps> = ({
           return (
             <Fragment key={item.index}>
               <Table.Row>
-                <Table.Cell textAlign={'center'}>
+                <Table.Cell textAlign={'center'} style={style}>
                   <input
                     className={styles.input}
                     value={item.key}
@@ -45,7 +49,7 @@ const KVTable: React.FC<KVTableProps> = ({
                     }}
                   />
                 </Table.Cell>
-                <Table.Cell textAlign={'center'}>
+                <Table.Cell textAlign={'center'} style={style}>
                   <div className={styles.bodyCell}>
                     {file && isFile ? (
                       <input
@@ -80,12 +84,18 @@ const KVTable: React.FC<KVTableProps> = ({
                     )}
                   </div>
                 </Table.Cell>
-                <Table.Cell textAlign={'center'}>
+                <Table.Cell textAlign={'center'} style={style}>
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <Button icon compact>
+                    <Button className={styles.btn} style={style} icon compact>
                       <Icon name="expand arrows alternate" />
                     </Button>
-                    <Button icon compact onClick={() => onDeleteLine && onDeleteLine(item.index)}>
+                    <Button
+                      style={style}
+                      className={styles.btn}
+                      icon
+                      compact
+                      onClick={() => onDeleteLine && onDeleteLine(item.index)}
+                    >
                       <Icon name="delete" />
                     </Button>
                   </div>

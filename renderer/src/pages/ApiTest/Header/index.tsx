@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
-import { Button, Dropdown } from 'semantic-ui-react';
+import { Button, Dropdown, Icon } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { Outlet } from 'react-router-dom';
 import { MethodsOptions } from '/@/model/apiTest.model';
@@ -14,8 +14,9 @@ import { useContextMenu } from '/@/hooks/useContextMenu';
 import { MatexWin } from '/@/global';
 import { Emitter } from '/@/utils/EventEmiter';
 import Emittery from 'emittery';
+import { DropDownOptions, useDropdown } from '/@/hooks/useDropdown';
 
-const countryOptions = MethodsOptions.map((item) => {
+const reqOptions = MethodsOptions.map((item) => {
   return { key: item, value: item, text: item };
 });
 
@@ -28,6 +29,10 @@ const Header = () => {
 
   const onSelect = (index: number, text: string) => {
     Emitter.emit('apiTest.select', { index, text });
+  };
+
+  const onselectReq = (index: number, text: string) => {
+    console.log(index, text);
   };
 
   const { showMenu } = useContextMenu({ options: menuOptions, onSelect });
@@ -77,17 +82,22 @@ const Header = () => {
     showMenu(e);
   };
 
+  // const handleClick = (e: any) => {
+  //   showDropdown(e);
+  // };
+
   return (
     <>
       <div className={styles.url}>
         <ToastContainer style={{ color: 'red' }} />
-        <Button.Group color="teal" className={styles.leftSelect}>
-          <Button>{method}</Button>
+        <Button.Group style={{ background: 'transparent' }} className={styles.leftSelect}>
+          <Button className={styles.selectBtn}>{method}</Button>
           <Dropdown
-            className={clsx(['button', 'icon'])}
+            className={clsx(['button', 'icon', styles.selectDropdown])}
             onChange={handleChange}
             floating
-            options={countryOptions}
+            style={{ background: 'transparent', color: '#CEC3D9' }}
+            options={reqOptions}
             trigger={<></>}
           />
         </Button.Group>
@@ -96,14 +106,15 @@ const Header = () => {
           onSelect={() => {
             selectedTextRef.current = window.getSelection()!.toString().trim();
           }}
+          placeholder={'请输入url'}
           onContextMenu={handleContextMenu}
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           className={styles.input}
         />
-        <Button primary size={'large'} onClick={doFetch}>
+        <button className={styles.sendBtn} onClick={doFetch}>
           发送
-        </Button>
+        </button>
       </div>
       <div className={styles.config}>
         <div className={styles.option}>

@@ -1,8 +1,8 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import {suggestions} from '/@cmp/MonacoEditor/suggestions';
-import {htmlRules, jsonRules} from '/@cmp/MonacoEditor/theme';
-import {defaultSchema} from '/@cmp/MonacoEditor/schema';
-import {languages} from 'monaco-editor/esm/vs/editor/editor.api';
+import { suggestions } from '/@cmp/MonacoEditor/suggestions';
+import { htmlRules, jsonRules } from '/@cmp/MonacoEditor/theme';
+import { defaultSchema } from '/@cmp/MonacoEditor/schema';
+import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 import ProviderResult = languages.ProviderResult;
 import CompletionList = languages.CompletionList;
 
@@ -16,6 +16,8 @@ monaco.editor.defineTheme('my-theme', {
   inherit: true,
   colors: {
     'editor.lineHighlightBorder': '#00000000',
+    'editorLineNumber.foreground': '#A491B8',
+    'editorLineNumber.activeForeground': '#237893',
     'editor.background': '#00000000',
     'scrollbar.shadow': '#00000000',
     'scrollbarSlider.background': '#00000000',

@@ -12,10 +12,11 @@ import {
 } from '/@/store/apiTestStore';
 import { useAtom } from 'jotai';
 import useAction from '/@/pages/ApiTest/Header/Tabs/useAction';
+import styles from './index.module.scss';
 
-const style = {
-  background: '#2CB5AD',
-  color: '#FFF'
+const activeStyle = {
+  background: '#66578F',
+  color: '#CFCADC'
 };
 
 const Tabs = () => {
@@ -45,9 +46,10 @@ const Tabs = () => {
   return useMemo(() => {
     return (
       <>
-        <Label size={'small'} ribbon as="a" color={'orange'} style={{ marginTop: 5 }}>
-          请求选项
-        </Label>
+        {/*<span className={styles.title}>请求选项</span>*/}
+        {/*<Label size={'small'} as="a" color={'orange'} style={{ marginTop: 16, marginRight: 10 }}>*/}
+        {/*  */}
+        {/*</Label>*/}
         <Menu size={'small'} secondary style={{ marginLeft: -10 }}>
           {TabsItem.map((item) => {
             const active = activeTab === item;
@@ -56,7 +58,7 @@ const Tabs = () => {
                 <Menu.Item
                   key={item}
                   name={item}
-                  style={active ? style : {}}
+                  style={active ? activeStyle : { color: '#CFCADC' }}
                   active={active}
                   onClick={() => handleItemClick(item)}
                 />

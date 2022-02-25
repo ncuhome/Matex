@@ -2,7 +2,6 @@
 .input{
   height: 25px;
   font-size: 13px;
-  color: #5A5A5A;
   outline: none;
   border: none;
   border-radius: 3px;
@@ -10,10 +9,11 @@
   min-width: 0;
   width: 100%;
   margin-right: 5px;
+  background-color: transparent;
+  color: #CEC3D9;
 
   &:hover{
-    background-color: #E0E1E2;
-    color: black;
+    background-color: #685990;
   }
 }
 .bodyCell{
@@ -21,4 +21,9 @@
   align-items: center;
 }
 
+.btn{
+  &:hover{
+    background-color: #685990!important;
+  }
+}
 

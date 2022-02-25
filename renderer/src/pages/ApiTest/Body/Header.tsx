@@ -25,9 +25,10 @@ import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 const formatOptions = FormatOptions.map((item) => {
   return { key: item, value: item, text: item };
 });
+
 const style = {
-  background: '#228C86',
-  color: '#FFF'
+  background: '#40437B',
+  color: '#CFCADC'
 };
 
 export const Header = () => {
@@ -142,7 +143,7 @@ export const Header = () => {
                   return (
                     <Fragment key={item}>
                       <Menu.Item
-                        style={active ? style : {}}
+                        style={active ? style : { color: '#CFCADC' }}
                         name={item}
                         active={active}
                         onClick={(e: any, { name }: any) => {

@@ -6,8 +6,6 @@
   border-radius: 10px;
   position: relative;
   margin-top: -5px;
-  border: #e0e1e2 1px solid;
-  box-shadow: var(--dark-shadow);
 
   .content {
     flex: 1;
@@ -32,7 +30,7 @@
   height: 60px;
 
   .operationCon {
-    background-color: #f9fafb;
+    background-color: transparent;
     box-shadow: 0 2px 5px #bec0be!important;
     border-radius: 10px;
     margin: 20px;
@@ -44,7 +42,7 @@
     align-items: center;
     justify-content: start;
     position: relative;
-    background-color: #f9fafb;
+    background-color:transparent;
     border-radius: 10px 10px 0 0;
   }
 }
@@ -61,7 +59,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 13px;
-  border: 2px solid #e0e1e2;
+  border: #41447C 1px solid;
   color: #2cb5ad;
 
   .statusCode:hover,
