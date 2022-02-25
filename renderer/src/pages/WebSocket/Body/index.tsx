@@ -63,10 +63,10 @@ const Body = () => {
           />
         </div>
         <div className={styles.ops}>
-          <Button animated color={'teal'} onClick={sendMsg}>
+          <Button animated style={{ background: '#6C63FF' }} onClick={sendMsg}>
             <Button.Content hidden>发送</Button.Content>
             <Button.Content visible>
-              <Icon name="send" />
+              <Icon style={{ color: '#FFF' }} name="send" />
             </Button.Content>
           </Button>
         </div>

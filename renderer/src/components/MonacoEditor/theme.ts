@@ -14,7 +14,7 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'delimiter.bracket.json',
-    foreground: '#7F81CC'
+    foreground: '#8ADDFF'
   },
   //冒号
   {

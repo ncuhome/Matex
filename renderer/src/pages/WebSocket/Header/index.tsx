@@ -8,6 +8,7 @@ import { wsClientOptions } from '/@/model/ws.model';
 import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
 import { useSocketIo } from '/@/request/socketIo';
 import { useAtomValue } from 'jotai/utils';
+import dropdownStyle from '/@/style/apitest/index.module.scss';
 
 const clientOptions = wsClientOptions.map((item) => ({
   key: item,
@@ -39,10 +40,10 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      <Button.Group color="blue">
-        <Button>{wsClient}</Button>
+      <Button.Group className={dropdownStyle.dropDown} color="blue">
+        <Button className={dropdownStyle.btn}>{wsClient}</Button>
         <Dropdown
-          className={clsx(['button', 'icon'])}
+          className={clsx(['button', 'icon', dropdownStyle.select])}
           onChange={handleChange}
           floating
           options={clientOptions}
@@ -50,16 +51,17 @@ const Header = () => {
         />
       </Button.Group>
       <input value={url} onChange={(e) => setUrl(e.target.value)} className={styles.input} />
-      <Button
-        loading={loading}
+      <button
+        // loading={loading}
         disabled={connected}
         onClick={doConnect}
-        secondary={!connected}
-        size={'large'}
+        className={styles.sendBtn}
+        // secondary={!connected}
+        // size={'large'}
         style={{ marginRight: 15 }}
       >
         {btnText}
-      </Button>
+      </button>
     </div>
   );
 };

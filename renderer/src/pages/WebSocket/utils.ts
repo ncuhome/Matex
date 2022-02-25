@@ -15,7 +15,7 @@ export const getStatusColor = (status: string) => {
     case 'connected':
       res = {
         text: 'connected',
-        color: 'green'
+        color: '#7DC3F3'
       };
       break;
     case 'closing':
@@ -27,7 +27,7 @@ export const getStatusColor = (status: string) => {
     case 'closed':
       res = {
         text: 'closed',
-        color: 'black'
+        color: '#BAC3D6'
       };
       break;
   }

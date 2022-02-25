@@ -10,7 +10,6 @@
   .msgWin{
     flex: 1;
     width: 100%;
-    box-shadow: 0 2px 10px #D8D9D8;
     margin-bottom:10px;
     border-radius: 10px;
     padding: 5px;
@@ -18,11 +17,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: transparent;
+    border: 1px solid #99A8C3;
 
     .titleCon{
       height: 45px;
       width: 100%;
-      border-bottom: #F5F5F5 1px solid;
+      border-bottom: #99A8C3 1px solid;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -62,12 +63,13 @@
   .inputCon{
     width: 100%;
     height: 60px;
-    background: #FFFFFF;
-    box-shadow: 0 2px 10px #D8D9D8;
+    margin-bottom: 10px;
+    background: transparent;
     border-radius: 10px;
     padding: 5px;
     display: flex;
     align-items: center;
+    border: 1px solid #99A8C3;
 
     .textArea{
       flex: 1;
@@ -80,16 +82,17 @@
         width: 100%;
         border-radius: 5px;
         height: 45px;
-        border: #C4C4C6 1px solid;
         margin: 0 10px 0 0;
         position: relative;
         letter-spacing: 0.5px;
         padding-left: 10px;
-        color: black;
-        font-family: "JetBrains Mono NL", serif;
+        color: var(--text-color);
+        border: transparent 1px solid;
+        background-color: transparent;
+        outline: none;
 
-        &:focus{
-          outline: #439DE1 1.5px solid;
+        &::placeholder{
+          color: var(--text-color);
         }
       }
     }
@@ -109,4 +112,13 @@
 .blankBg{
   background: url("../../../assets/icon/blank.svg") no-repeat 50% 50%;
   background-size: 390px 300px;
+}
+
+.opBtn{
+  background: transparent!important;
+  color: var(--text-color)!important;
+
+  &:hover{
+    background: var(--active-bg)!important;
+  }
 }

@@ -21,13 +21,13 @@ const Title = () => {
     <div className={styles.titleCon}>
       <div className={styles.options}>
         <Button.Group>
-          <Button animated={'vertical'} size={'small'} onClick={() => close()}>
+          <Button className={styles.opBtn} animated={'vertical'} size={'small'} onClick={() => close()}>
             <Button.Content hidden>断开</Button.Content>
             <Button.Content visible>
               <Icon name="power off" />
             </Button.Content>
           </Button>
-          <Button animated={'vertical'} size={'small'} onClick={() => clearList()}>
+          <Button className={styles.opBtn} animated={'vertical'} size={'small'} onClick={() => clearList()}>
             <Button.Content hidden>清空</Button.Content>
             <Button.Content visible>
               <Icon name="trash" />

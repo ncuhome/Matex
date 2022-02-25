@@ -12,7 +12,7 @@ const MsgList: React.FC<MsgListProps> = ({ list }) => {
     return (
       <div className={styles.conLeft}>
         <div className={styles.iconLeft}>
-          <Icon color={'brown'} circular name={'server'} size={'large'} />
+          <Icon style={{ color: '#F5904C' }} circular name={'server'} size={'large'} />
         </div>
         <div className={styles.descLeft}>
           <div className={styles.descTextLeft}>{msgObj.message}</div>
@@ -30,7 +30,7 @@ const MsgList: React.FC<MsgListProps> = ({ list }) => {
           <div className={styles.descTime}>{msgObj.time}</div>
         </div>
         <div className={styles.iconRight}>
-          <Icon circular name={'desktop'} size={'large'} />
+          <Icon circular style={{ color: '#1F9CF0' }} name={'desktop'} size={'large'} />
         </div>
       </div>
     );
