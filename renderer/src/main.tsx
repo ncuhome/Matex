@@ -8,6 +8,7 @@ import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './useWorker';
 import { MatexWin } from './global';
+import 'sweetalert2/src/sweetalert2.scss';
 
 const isDev = MatexWin.NODE_ENV === 'development';
 

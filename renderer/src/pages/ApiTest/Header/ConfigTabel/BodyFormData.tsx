@@ -4,6 +4,7 @@ import React, { Fragment, useEffect } from 'react';
 import styles from './index.module.scss';
 import FormDataInput from '/@cmp/FormDataInput';
 import { tableStyle } from '/@/style/apitest';
+import dropdownStyle from '/@/style/apitest/index.module.scss';
 const style = tableStyle;
 
 export const BodyFormData = () => {
@@ -70,10 +71,16 @@ export const BodyFormData = () => {
                 </Table.Cell>
                 <Table.Cell style={style} textAlign={'center'}>
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <Button icon compact>
+                    <Button className={dropdownStyle.dropDown} style={style} icon compact>
                       <Icon name="expand arrows alternate" />
                     </Button>
-                    <Button icon compact onClick={() => deleteFormData(item.index)}>
+                    <Button
+                      className={dropdownStyle.dropDown}
+                      style={style}
+                      icon
+                      compact
+                      onClick={() => deleteFormData(item.index)}
+                    >
                       <Icon name="delete" />
                     </Button>
                   </div>

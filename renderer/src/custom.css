@@ -2,6 +2,12 @@
     color: #2CB5AD;
 }
 
+.filepond--root .filepond--drop-label{
+    background: #4C6094;
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
 .custom-context-menu {
     position: fixed;
     border: 1px solid #ccc;

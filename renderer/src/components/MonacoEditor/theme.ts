@@ -3,6 +3,11 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 // !!! Tokens can be inspected using F1 > Developer: Inspect Tokens !!!
 export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   {
+    token: '',
+    foreground: '#0ECCCC',
+    fontStyle: 'italic'
+  },
+  {
     token: 'number.json',
     foreground: '#0ECCCC',
     fontStyle: 'italic'
