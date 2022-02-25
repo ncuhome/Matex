@@ -4,7 +4,7 @@
 ###
 ![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/screenshot.png)
 ###
-![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/master/test/screenshot/websocket.png)
+![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/websocket.png)
 
 ## 预期功能
 
