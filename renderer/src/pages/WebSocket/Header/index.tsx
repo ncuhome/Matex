@@ -1,9 +1,9 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useRef } from 'react';
 import styles from './index.module.scss';
 import { Button, Dropdown, Label } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { useAtom } from 'jotai';
-import { websocketTypeAtom, websocketUrlAtom } from '/@/store/websocketStore';
+import { useMsgList, websocketConnAtom, websocketTypeAtom, websocketUrlAtom } from '/@/store/websocketStore';
 import { wsClientOptions } from '/@/model/ws.model';
 import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
 import { useSocketIo } from '/@/request/socketIo';
@@ -18,20 +18,38 @@ const clientOptions = wsClientOptions.map((item) => ({
 
 const Header = () => {
   const [wsClient, setWsClient] = useAtom(websocketTypeAtom);
-  const { connectWs } = useNativeWs();
-  const { connSocketIo } = useSocketIo();
+  const { connectWs, closeWs } = useNativeWs();
+  const { closeSocketIo, connSocketIo } = useSocketIo();
   const status = useNativeWsStatus();
   const [url, setUrl] = useAtom(websocketUrlAtom);
   const wsType = useAtomValue(websocketTypeAtom);
+  const { clearList } = useMsgList();
+  const [ws, setWs] = useAtom(websocketConnAtom);
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const loading = status === 'connecting';
   const connected = status === 'connected';
   const btnText = connected ? '已连接' : '连接';
 
   const conn = wsType === 'native' ? connectWs : connSocketIo;
 
   const handleChange = (event: SyntheticEvent, { value }: any) => {
+    if (ws) {
+      if (wsClient === 'socket.io') {
+        closeSocketIo();
+      } else {
+        closeWs();
+      }
+      setWs(undefined);
+    }
     setWsClient(value);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = undefined;
+    }
+    timeoutRef.current = setTimeout(() => {
+      timeoutRef.current = undefined;
+      clearList();
+    }, 0);
   };
 
   const doConnect = (e) => {
