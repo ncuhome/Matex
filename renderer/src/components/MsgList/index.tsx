@@ -54,7 +54,7 @@ const MsgList: React.FC<MsgListProps> = ({ list }) => {
 
     return (
       <div className={styles.systemInfo}>
-        <div className={styles.info} style={{ backgroundColor: color }}>
+        <div className={styles.info} style={{ borderColor: color, color }}>
           <div className={styles.systemInfoText}>{msgObj.message}</div>
           <div className={styles.systemInfoTime}>{msgObj.time}</div>
         </div>

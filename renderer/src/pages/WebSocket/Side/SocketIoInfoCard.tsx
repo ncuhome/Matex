@@ -9,7 +9,6 @@ import { WsSocketIo } from '/@/type/websocketPage';
 const SocketIoInfoCard = () => {
   const ws = useAtomValue(websocketConnAtom) as WsSocketIo;
   const [id] = useSocketIoInfo();
-  console.log(id);
   if (ws) {
     const url = new URL(ws.io.uri);
     const nsp = ws.nsp;

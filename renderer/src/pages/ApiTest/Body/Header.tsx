@@ -22,6 +22,7 @@ import { editorsAtom } from '/@/store/commonStore';
 import { EditorLanguage } from '/@cmp/MonacoEditor/type';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import dropDownStyle from '/@/style/apitest/index.module.scss';
+import toast from 'react-hot-toast';
 
 const formatOptions = FormatOptions.map((item) => {
   return { key: item, value: item, text: item };
@@ -82,6 +83,7 @@ export const Header = () => {
     } else {
       MatexWin.Clipboard.writeText(JSON.stringify(resData!.headers));
     }
+    toast.success('复制成功');
   };
 
   const handleFind = () => {

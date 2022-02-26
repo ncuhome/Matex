@@ -1,6 +1,11 @@
 import styles from './index.module.scss';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useMsgList, websocketConnAtom, websocketTypeAtom } from '/@/store/websocketStore';
+import {
+  useMsgList,
+  websocketChannelAtom,
+  websocketConnAtom,
+  websocketTypeAtom
+} from '/@/store/websocketStore';
 import MsgList from '/@cmp/MsgList';
 import { Button, Icon } from 'semantic-ui-react';
 import Title from '/@/pages/WebSocket/Body/Title';
@@ -8,12 +13,14 @@ import { matexTime } from '/@/utils/time';
 import { useAtomValue } from 'jotai/utils';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
+import { Socket } from 'socket.io-client';
 
 const Body = () => {
   const { msgList, addMsg } = useMsgList();
   const [inputContent, setContent] = useState('');
   const ws = useAtomValue(websocketConnAtom);
   const wsType = useAtomValue(websocketTypeAtom);
+  const socketIoEv = useAtomValue(websocketChannelAtom);
 
   useEffect(() => {
     const msgEndEle = document.getElementById('msgCon') as HTMLDivElement;
@@ -29,6 +36,22 @@ const Body = () => {
           time: matexTime().format('YYYY-MM-DD HH:mm:ss')
         });
         ws?.send(inputContent);
+        setContent('');
+      } else {
+        toast.error('请先连接websocket服务器');
+      }
+    } else {
+      if (ws && (ws as unknown as Socket).connected) {
+        if (socketIoEv.trim() === '') {
+          (ws as unknown as Socket).send(inputContent);
+        } else {
+          (ws as unknown as Socket).emit(socketIoEv, inputContent);
+        }
+        addMsg({
+          type: 'client',
+          message: inputContent,
+          time: matexTime().format('YYYY-MM-DD HH:mm:ss')
+        });
         setContent('');
       } else {
         toast.error('请先连接websocket服务器');

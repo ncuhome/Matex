@@ -35,6 +35,14 @@ export const useSocketIo = () => {
       Emitter.emit('ws-socketio-status', socket);
     });
 
+    socket.on('ping', (ev) => {
+      console.log('ping', ev);
+    });
+
+    socket.onAny((event, ...args) => {
+      console.log(event, args);
+    });
+
     socket.on('message', (data: any) => {
       console.log('message', data);
       const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
@@ -57,8 +65,8 @@ export const useSocketIo = () => {
   const closeSocketIo = () => {
     const ws = wsSocket as Socket;
     if (ws) {
-      ws.close();
       setStatus('closing');
+      ws.close();
     } else {
       setStatus('closed');
     }
