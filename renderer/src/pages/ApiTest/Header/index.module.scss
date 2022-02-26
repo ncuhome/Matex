@@ -1,6 +1,6 @@
 .cardStyle{
   background: transparent;
-  border-radius: 10px;
+  //border-radius: 10px;
 }
 
 .url {
@@ -11,8 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  padding-left: 15px;
-  padding-right: 15px;
+  //padding-left: 15px;
+  //padding-right: 15px;
 
   .input{
     flex: 1;
@@ -45,7 +45,8 @@
   overflow: hidden;
   flex: 1;
   display: flex;
-  padding: 0 8px 5px 15px;
+  //padding: 0 8px 5px 15px;
+  padding-bottom: 5px;
   width: 100%;
   flex-direction: column;
   @extend .cardStyle;

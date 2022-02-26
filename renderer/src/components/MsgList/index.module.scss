@@ -63,18 +63,20 @@
     margin: 10px 0;
 
     .info{
-      padding: 3px 10px;
+      padding: 4px 10px;
       text-align: center;
-      background-color: #DAE0E7;//#3FDB0C // #F987A3
+      background-color: transparent;//#3FDB0C // #F987A3
       border-radius: 5px;
+      border: 1px solid transparent;
 
       .systemInfoText{
-        font-size: 14px;
-        color: #2C2E3A;
+        font-size: 15px;
+        font-weight: bolder;
+        //color: #2C2E3A;
       }
       .systemInfoTime{
         font-size: 14px;
-        color: #F9FAFB;
+        color: var(--text-color);
       }
     }
   }
