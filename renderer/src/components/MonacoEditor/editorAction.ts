@@ -1,6 +1,7 @@
 import monaco from './monaco';
 import { EditorActionProps, SetValueProps, Editor, EditorLanguage } from '/@cmp/MonacoEditor/type';
 import { useThrottleFn } from 'ahooks';
+import toast from 'react-hot-toast';
 
 export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
   //设置编辑器的值
@@ -19,7 +20,7 @@ export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
         });
       }
     },
-    { wait: 500 }
+    { wait: 1000 }
   );
 
   //获取编辑器的值

@@ -3,8 +3,8 @@ import styles from './index.module.scss';
 import { Button, Icon } from 'semantic-ui-react';
 import { getStatusColor } from '/@/pages/WebSocket/utils';
 import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
-import { useAtomValue } from 'jotai/utils';
-import { useMsgList, websocketTypeAtom, websocketUrlAtom } from '/@/store/websocketStore';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
+import { useMsgList, websocketChannelAtom, websocketTypeAtom } from '/@/store/websocketStore';
 import { useSocketIo } from '/@/request/socketIo';
 
 const Title = () => {
@@ -13,6 +13,7 @@ const Title = () => {
   const { closeSocketIo } = useSocketIo();
   const { clearList } = useMsgList();
   const wsType = useAtomValue(websocketTypeAtom);
+  const setSocketIoEv = useUpdateAtom(websocketChannelAtom);
 
   const close = wsType === 'native' ? closeWs : closeSocketIo;
   const { color, text } = getStatusColor(status);
@@ -34,8 +35,18 @@ const Title = () => {
             </Button.Content>
           </Button>
         </Button.Group>
+        {wsType === 'socket.io' && (
+          <div className={styles.channel}>
+            <span className={styles.label}>频道</span>
+            <input
+              onChange={(e) => setSocketIoEv(e.target.value)}
+              className={styles.channelInput}
+              placeholder={'输入eventName'}
+            />
+          </div>
+        )}
       </div>
-      <div className={styles.statusCon} style={{ color, borderColor: color }}>
+      <div className={styles.statusCon} style={{ color }}>
         {text}
       </div>
     </div>
