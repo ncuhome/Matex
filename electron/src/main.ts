@@ -29,7 +29,6 @@ const { port1, port2 } = new MessageChannelMain();
 async function createWindow() {
   try {
     loadWindow = await createLoadWin();
-    mainWindow = await createMainWin();
 
     os === 'mac' && loadWindow?.setWindowButtonVisibility(false);
     await loadWindow?.loadURL(loadingPath);
@@ -37,6 +36,7 @@ async function createWindow() {
     loadWindow?.once('ready-to-show', () => {
       loadWindow?.show();
     });
+    mainWindow = await createMainWin();
     loadWindow?.on('closed', () => {
       loadWindow = undefined;
     });

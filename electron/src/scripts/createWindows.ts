@@ -18,7 +18,7 @@ export const createMainWin = async (): Promise<BrowserWindow> => {
         resizable: false,
         titleBarStyle: os === 'win' ? 'default' : 'hidden',
         trafficLightPosition: {
-          x: 120,
+          x: 90,
           y: 20
         },
         webPreferences: {
