@@ -26,7 +26,7 @@ const gotTheLock = app.requestSingleInstanceLock();
 const { port1, port2 } = new MessageChannelMain();
 
 //创建窗口
-async function createWindow() {
+async function init() {
   try {
     loadWindow = await createLoadWin();
 
@@ -36,9 +36,14 @@ async function createWindow() {
     loadWindow?.once('ready-to-show', () => {
       loadWindow?.show();
     });
-    mainWindow = await createMainWin();
     loadWindow?.on('closed', () => {
       loadWindow = undefined;
+    });
+    mainWindow = await createMainWin();
+    mainWindow?.on('ready-to-show', () => {
+      loadWindow?.close();
+      loadWindow?.destroy();
+      mainWindow?.show();
     });
 
     await mainWindow?.loadURL(mainPath);
@@ -68,12 +73,12 @@ if (!gotTheLock) {
 app.on('ready', async () => {
   PortChannel.setPort(port1);
   PortChannel.startListening();
-  await createWindow();
-  if (mainWindow) {
-    loadWindow?.close();
-    loadWindow?.destroy();
-    mainWindow.show();
-  }
+  await init();
+  // if (mainWindow) {
+  //   loadWindow?.close();
+  //   loadWindow?.destroy();
+  //   mainWindow.show();
+  // }
 });
 
 //当窗口加载完成调用
