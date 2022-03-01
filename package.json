@@ -5,6 +5,7 @@
   "private": true,
   "author": "lqd1434",
   "license": "ISC",
+  "main": "./.dev/main/main.js",
   "keywords": [
     "electron",
     "Matex-app"
@@ -14,8 +15,9 @@
     "url": "https://github.com/ncuhome/Matex.git"
   },
   "scripts": {
+    "electron": "electron .",
     "dev": "node ./scripts/watch.js",
-    "dev:react": "vite",
+    "dev:react": "vite -c ./renderer/vite.config.ts",
     "codgen": "npx playwright codegen http://localhost:3000/",
     "test:playwright": "ts-node test/preview.test.ts",
     "build": "concurrently \"npm run build:react\" \"npm run build:main_preload\"",
@@ -42,6 +44,7 @@
     "@types/wait-on": "^5.3.1",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
+    "@vercel/nft": "^0.17.5",
     "@vitejs/plugin-react-refresh": "^1.3.6",
     "chalk": "^5.0.0",
     "concurrently": "^6.3.0",
@@ -50,6 +53,8 @@
     "electron-builder": "^22.14.5",
     "electron-debug": "^3.2.0",
     "electron-rebuild": "^3.2.7",
+    "esbuild": "^0.14.23",
+    "esbuild-node-externals": "^1.4.1",
     "eslint": "^8.2.0",
     "eslint-plugin-react": "^7.27.0",
     "glob": "^7.2.0",
@@ -59,6 +64,7 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.4.1",
     "sass": "^1.42.1",
+    "trace-deps": "^0.4.10",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4",
     "vite": "2.6.3",
