@@ -2,12 +2,14 @@ module.exports = {
   'env': {
     'browser': true,
     'commonjs': true,
+    'node': true,
     'es6': true
   },
   'parser':'@typescript-eslint/parser',
   'extends': [
     'eslint:recommended',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
   'plugins': ['@typescript-eslint','react'],
   'rules': {
@@ -17,7 +19,7 @@ module.exports = {
     '@typescript-eslint/indent': ['error', 2],
     'import/extensions': 'off',
     'linebreak-style': [0, 'error', 'windows'],
-    'indent': ['error', 2, { SwitchCase: 1 }], // error类型，缩进2个空格
+    // 'indent': ['error', 2, { SwitchCase: 1 }], // error类型，缩进2个空格
     'space-before-function-paren': 0, // 在函数左括号的前面是否有空格
     'eol-last': 0, // 不检测新文件末尾是否有空行
     'semi': ['error', 'always'], // 在语句后面加分号
