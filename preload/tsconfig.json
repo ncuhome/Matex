@@ -9,8 +9,9 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
-    "types" : [],
-    "baseUrl": "."
+    "noImplicitAny": false,
+    "types": [],
+    "baseUrl": "./src"
   },
   "include": [
     "src/**/*.ts"
