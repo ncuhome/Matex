@@ -1,11 +1,11 @@
 import { createServer } from 'vite';
 import { resolve } from 'path';
 import WaitOn from 'wait-on';
-import { startWatchMainAndPreload } from './parcel-dev.js';
+import { startWatchMainAndPreload } from './esbuild.dev.js';
 import { ColorLog } from './colorLog.js';
 import * as DotEnv from 'dotenv';
 
-DotEnv.config({ path: resolve(process.cwd(), './dev.env'), debug: true });
+DotEnv.config({ path: resolve(process.cwd(), './dev.env') });
 
 /**
  * @param {string|number} port
