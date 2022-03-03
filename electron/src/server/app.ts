@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
 import type { Server } from 'http';
 import { DBServer } from './db';
-import { MatexLog } from '../scripts/log';
+import { MatexLog } from '../core/log';
 
 const isDev = process.env.NODE_ENV === 'development';
 

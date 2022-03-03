@@ -18,6 +18,7 @@ module.exports = {
     'no-extra-semi': 'error',
     '@typescript-eslint/indent': ['error', 2],
     'import/extensions': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'linebreak-style': [0, 'error', 'windows'],
     // 'indent': ['error', 2, { SwitchCase: 1 }], // error类型，缩进2个空格
     'space-before-function-paren': 0, // 在函数左括号的前面是否有空格

@@ -73,6 +73,7 @@
     "clsx": "^1.1.1",
     "dayjs": "^1.10.7",
     "dotenv": "^14.2.0",
+    "electron-updater": "^4.6.5",
     "emittery": "^0.10.1",
     "entities": "^3.0.1",
     "express": "^4.17.1",

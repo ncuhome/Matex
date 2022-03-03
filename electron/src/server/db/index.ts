@@ -1,7 +1,7 @@
 import path from 'path';
 import { DataTypes, Sequelize } from 'sequelize';
 import { resourcesPath } from '../../utils/path';
-import { MatexLog } from '../../scripts/log';
+import { MatexLog } from '../../core/log';
 
 const isDev = process.env.NODE_ENV === 'development';
 let dbPath: string;

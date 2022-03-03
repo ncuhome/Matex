@@ -1,17 +1,11 @@
 import { app, BrowserWindow, MessageChannelMain, Notification } from 'electron';
 import { PortChannel } from './request';
 import { documentsPath, isDev, loadingPath, mainPath } from './utils/path';
-import { MatexLog } from './scripts/log';
+import { MatexLog } from './core/log';
 import * as Sentry from '@sentry/electron';
-import isLeapYear from 'dayjs/plugin/isLeapYear'; // 导入插件
-import 'dayjs/locale/zh-cn'; // 导入本地化语言
-import dayjs from 'dayjs';
 import { getOsType } from './utils/system';
-import { createLoadWin, createMainWin } from './scripts/createWindows';
+import { createLoadWin, createMainWin } from './core/createWindows';
 import { writeFileSync } from 'fs';
-
-dayjs.extend(isLeapYear); // 使用插件
-dayjs.locale('zh-cn');
 
 const os = getOsType();
 MatexLog.debug(`当前系统为:${os}`);

@@ -1,6 +1,6 @@
 import { mockserver } from './app';
 import { myEmitter } from '../utils/EventEmiter';
-import { MatexLog } from '../scripts/log';
+import { MatexLog } from '../core/log';
 
 export const startServer = async () => {
   MatexLog.start('等待服务器启动');

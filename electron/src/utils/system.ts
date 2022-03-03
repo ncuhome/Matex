@@ -1,5 +1,5 @@
 import os from 'os';
-import { MatexLog } from '../scripts/log';
+import { MatexLog } from '../core/log';
 
 export const getOsType = () => {
   MatexLog.debug(os.type());
