@@ -1,9 +1,7 @@
-import jsonfile from 'jsonfile';
 import { resolve } from 'path';
 import { builtinModules } from 'module';
-import { ColorLog } from './colorLog.js';
-import { exec } from 'child_process';
 import { readFile } from 'fs';
+import {formatJson, readJson, writeJson} from './utils.js';
 
 const rootFile = resolve(process.cwd(), './package.json');
 const appFile = resolve(process.cwd(), './release/app/package.json');
@@ -20,43 +18,6 @@ const regexp2 = /\(([^)]*)\)/;
 export const verifyDep = (buildDep) => {
   const reg = /(^(\.+|\/@|\/))|(\.[tj]s$)/;
   return !!(buildDep && builtinModules.indexOf(buildDep) < 0 && !reg.test(buildDep));
-};
-
-/**
- *
- * @param {string} path
- * @returns {Promise<Object>}
- */
-const readJson = async (path) => {
-  return new Promise((resolve, reject) => {
-    jsonfile.readFile(path, function (err, obj) {
-      if (err) reject(err);
-      resolve(obj);
-    });
-  });
-};
-/**
- *
- * @param {string} path
- * @param {Object} obj
- * @returns {Promise<boolean>}
- */
-const writeJson = async (path, obj) => {
-  try {
-    await jsonfile.writeFile(path, obj);
-    return true;
-  } catch (e) {
-    ColorLog.error(e);
-    return false;
-  }
-};
-
-const formatJson = () => {
-  try {
-    exec(`prettier --write ${appFile}`);
-  } catch (e) {
-    ColorLog.error(e);
-  }
 };
 
 const readFileContent = async (path) => {
@@ -105,7 +66,7 @@ export const syncDependencies = async () => {
   const appJson = await readJson(appFile);
   appJson['dependencies'] = usedDependencies;
   await writeJson(appFile, appJson);
-  formatJson();
+  await formatJson(appFile);
   return usedDependencies;
 };
 
