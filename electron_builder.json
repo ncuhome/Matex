@@ -1,7 +1,7 @@
 {
   "productName": "Matex",
   "appId": "org.Matex.com",
-  "asar": true,
+  "asar": false,
   "directories": {
     "app": "./release/app",
     "buildResources": "./assets",
@@ -16,7 +16,11 @@
   ],
   "mac": {
     "icon": "./assets/icon/icon.png",
-    "hardenedRuntime": true
+    "hardenedRuntime": true,
+    "electronLanguages": [
+      "en",
+      "zh"
+    ]
   },
   "win": {
     "icon": "./assets/icon/icon.ico",
