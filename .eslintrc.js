@@ -16,6 +16,8 @@ module.exports = {
     'no-var': 'error',// 不能使用var声明变量
     'no-unused-vars':0,
     'no-extra-semi': 'error',
+    'prefer-const': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/indent': ['error', 2],
     'import/extensions': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
