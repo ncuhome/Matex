@@ -29,7 +29,7 @@
     "copy": "node scripts/copyFile.js",
     "sync:meta": "node scripts/syncMeta.js",
     "prerelease": "concurrently \"npm run copy\" \"npm run sync:meta\"",
-    "release": "cross-env NODE_ENV=production electron-builder build --config electron_builder.json --publish never"
+    "release": "cross-env NODE_ENV=production USE_HARD_LINKS=false electron-builder build --config electron_builder.json --publish never"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.34",
