@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: setEnv
-        if: ${{ matrix.os == 'macos-latest' }} 
+        if: ${{ matrix.os == 'macos-latest' }}
         run: export USE_HARD_LINKS=false
 
       - name: install dependencies
@@ -59,6 +59,6 @@ jobs:
       - name: Package Electron app
         run: |
           echo Package Electron app
-          yarn release
+          cross-env USE_HARD_LINKS=false yarn release
 
 
