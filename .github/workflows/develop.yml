@@ -35,9 +35,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      name: setEnv
-      if: ${{ matrix.os }} == 'macos-latest'
-      run: export USE_HARD_LINKS=false
+      - name: setEnv
+        if: ${{ matrix.os }} == 'macos-latest'
+        run: export USE_HARD_LINKS=false
 
       - name: install dependencies
         run: |
