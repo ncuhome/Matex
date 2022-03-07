@@ -20,7 +20,6 @@
     "winston": "^3.3.3",
     "signale": "^1.4.0",
     "@sentry/electron": "^2.5.4",
-    "dayjs": "^1.10.7",
     "entities": "^3.0.1"
   }
 }

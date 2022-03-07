@@ -1,12 +1,11 @@
-import { Manager, io } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useAtom } from 'jotai';
 import { useMsgList, websocketConnAtom } from '/@/store/websocketStore';
 import { SetStateAction, useEffect, useState } from 'react';
-import { WsSocketIo, WsStatus } from '/@/type/websocketPage';
+import { WsStatus } from '/@/type/websocketPage';
 import { Socket } from 'socket.io-client';
 import { matexTime } from '/@/utils/time';
 import { Emitter } from '/@/utils/EventEmiter';
-import { useAtomValue } from 'jotai/utils';
 
 type WsConnSocketIoAtom = [Socket | undefined, (update?: SetStateAction<Socket>) => void];
 

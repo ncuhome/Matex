@@ -6,7 +6,7 @@ interface ChannelEvents_ {
 
 export type ChannelEvents = keyof ChannelEvents_;
 
-export interface ChannelData<T extends any> {
+export interface ChannelData<T> {
   type: ChannelEvents;
   data: T;
 }

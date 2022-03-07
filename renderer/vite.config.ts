@@ -1,6 +1,5 @@
 /* eslint-env node */
 import { defineConfig } from 'vite';
-import { chrome } from '../version.json';
 import { join, resolve } from 'path';
 import { builtinModules } from 'module';
 import reactRefresh from '@vitejs/plugin-react-refresh';
@@ -26,7 +25,7 @@ export default defineConfig({
   },
   build: {
     sourcemap: false,
-    target: `chrome${chrome}`,
+    target: `chrome${96}`,
     outDir: '../release/app/dist/render',
     rollupOptions: {
       input,

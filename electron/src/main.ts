@@ -9,7 +9,7 @@ import { writeFileSync } from 'fs';
 
 const os = getOsType();
 MatexLog.debug(`当前系统为:${os}`);
-MatexLog.debug(process.env.NODE_ENV ?? '环境未注入');
+MatexLog.debug(process.env.NODE_ENV ?? '环境未注入1');
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 

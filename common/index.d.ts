@@ -16,7 +16,7 @@ export interface FormDataReq {
   value: string;
 }
 
-export interface ApiTestReqProps { 
+export interface ApiTestReqProps {
   url: string;
   method: 'Get' | 'Post' | 'Put' | 'Delete';
   headers: {
@@ -37,7 +37,7 @@ export interface ApiTestReqProps {
   };
 }
 
-export interface ApiTestResProps<T = never> {
+export interface ApiTestResProps<T = any> {
   type:
   | 'text/html'
   | 'text/plain'
