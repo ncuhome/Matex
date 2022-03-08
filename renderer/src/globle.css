@@ -60,6 +60,13 @@ input{
   --greyLight-2: #FBFCFF;
   --greyLight-3: #c1d9f0;
   --greyDark: #646b8c;
-  --text-color: #CCD4E4;
-  --active-bg:rgba(64,73,125,0.6);
+  --text-color: #8ADDFF;
+  --white-main-bg:#F9F9FB;
+  --white-side-bg:#FFFFFF;
+  --blue-main-bg:linear-gradient(180deg,#678FC4,#5670A5,#3C4277);
+  --blue-side-bg:linear-gradient(180deg,#7599CD 30%,#657FB2 60%,#525A8E 100%);
+  --main-bg:var(--blue-main-bg);
+  --sideBar-bg:var(--blue-side-bg);
+  --text-color-2: #C0C0C0;
+  --active-bg: #466085;
 }

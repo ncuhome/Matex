@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg,#678FC4,#5670A5,#3C4277);
+  background: var(--main-bg);
   display: flex;
   flex-direction: column;
   margin-left: 41px;
@@ -26,7 +26,7 @@
     .sideBar{
       border-radius: 15px;
       position: relative;
-      background: linear-gradient(180deg,#7599CD 30%,#657FB2 60%,#525A8E 100%);
+      background: var(--sideBar-bg);
       transition: all 0.3s ease-out;
       margin-left: -40px;
       margin-bottom: 25px;

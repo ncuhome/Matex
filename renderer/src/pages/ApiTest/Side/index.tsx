@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.scss';
 import { ApiList } from '/@cmp/ApiList';
 import { Button, Icon, Label } from 'semantic-ui-react';
-import normalStyle from '/@/style/apitest/index.module.scss';
+
 const style = {
   background: '#466085',
   color: '#8ADDFF',

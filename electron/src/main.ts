@@ -68,11 +68,6 @@ app.on('ready', async () => {
   PortChannel.setPort(port1);
   PortChannel.startListening();
   await init();
-  // if (mainWindow) {
-  //   loadWindow?.close();
-  //   loadWindow?.destroy();
-  //   mainWindow.show();
-  // }
 });
 
 //当窗口加载完成调用

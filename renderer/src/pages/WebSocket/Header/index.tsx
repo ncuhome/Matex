@@ -53,6 +53,7 @@ const Header = () => {
   };
 
   const doConnect = (e) => {
+    console.log(document.documentElement.style.getPropertyValue('--dark-shadow'));
     conn({ url });
   };
 

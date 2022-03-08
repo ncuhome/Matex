@@ -8,7 +8,7 @@ export const websocketTypeAtom = atom<WebsocketType>('native');
 export const websocketSideAtom = atom<'client' | 'server'>('client');
 export const websocketMsgListAtom = atom<WsMessage[]>([]);
 export const websocketConnAtom = atom<WsSocket>(undefined);
-export const websocketUrlAtom = atom<string>('ws://localhost:8080');
+export const websocketUrlAtom = atom<string>('ws://localhost:8000');
 export const websocketChannelAtom = atom<string>('message');
 
 const addMsgListAtom = atom(null, (get, set, param: Omit<WsMessage, 'index'>) => {

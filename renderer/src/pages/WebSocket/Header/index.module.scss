@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   padding-left: 10px;
-  border: 1px solid #99A8C3;
+  border: 1px solid var(--text-color-2);
 
   .input{
     flex: 1;
@@ -27,7 +27,7 @@
     }
 
     &::placeholder{
-      color: var(--text-color);
+      color: var(--text-color-2);
     }
 
     &:focus{

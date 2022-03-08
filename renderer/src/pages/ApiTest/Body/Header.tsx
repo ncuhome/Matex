@@ -30,7 +30,7 @@ const formatOptions = FormatOptions.map((item) => {
 
 const style = {
   background: '#40497D',
-  color: '#CFCADC'
+  color: 'var(--text-color)'
 };
 
 export const Header = () => {
@@ -146,7 +146,7 @@ export const Header = () => {
                   return (
                     <Fragment key={item}>
                       <Menu.Item
-                        style={active ? style : { color: '#CFCADC' }}
+                        style={active ? style : { color: 'var(--text-color)' }}
                         name={item}
                         active={active}
                         onClick={(e: any, { name }: any) => {
