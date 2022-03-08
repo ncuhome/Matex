@@ -5,6 +5,7 @@ import { BodyItemType, BodyRawType } from '../renderer/src/type/apiTest';
 export interface NodeApiProps {
   NODE_ENV: 'development' | 'production' | string|undefined;
   ipc: IpcRenderer | null;
+  OS:'mac'|'win'
   Clipboard: Electron.Clipboard;
   MessagePort: MessagePort | null;
   decodeHTML5: (str: string ) => string;
