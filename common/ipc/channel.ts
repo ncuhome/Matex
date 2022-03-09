@@ -3,3 +3,7 @@ export enum ApiTest_Channel {
   ReqError = 'ApiTest_Request_error',
   Response = 'ApiTest_Response'
 }
+
+export enum Global_Channel{
+  TrafficLights = 'Global_TrafficLights'
+}

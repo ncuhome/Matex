@@ -8,6 +8,7 @@ export const collapseAtom = atom(false);
 //editor
 export const editorsAtom = atom(new Map<string, editor.IStandaloneCodeEditor | null>());
 export const editorValueAtom = atom(new Map<string, string>());
+export const fullscreenAtom = atom(false);
 
 export const addEditorsAtom = atom(null, (get, set, { name, editor }: EditorProps) => {
   const tempMap = new Map<string, editor.IStandaloneCodeEditor | null>(get(editorsAtom));

@@ -1,11 +1,11 @@
-import { app, BrowserWindow, MessageChannelMain, Notification } from 'electron';
+import { app, BrowserWindow, MessageChannelMain, Notification,ipcMain } from 'electron';
 import { PortChannel } from './request';
-import { documentsPath, isDev, loadingPath, mainPath } from './utils/path';
+import { isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './core/log';
 import * as Sentry from '@sentry/electron';
 import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
-import { writeFileSync } from 'fs';
+import {Global_Channel} from '../../common/ipc/channel';
 
 const os = getOsType();
 MatexLog.debug(`当前系统为:${os}`);
@@ -15,6 +15,7 @@ if (!isDev)
 
 let mainWindow: BrowserWindow | undefined;
 let loadWindow: BrowserWindow | undefined;
+let isFullscreen = false;
 
 const gotTheLock = app.requestSingleInstanceLock();
 const { port1, port2 } = new MessageChannelMain();
@@ -47,6 +48,9 @@ async function init() {
     mainWindow?.on('closed', () => {
       mainWindow = undefined;
     });
+
+
+
   } catch (e) {
     MatexLog.error(e);
   }
@@ -73,9 +77,27 @@ app.on('ready', async () => {
 //当窗口加载完成调用
 app.whenReady().then(async () => {
   try {
-    writeFileSync(documentsPath, '999');
-    MatexLog.debug(process.env.NODE_ENV ?? '');
-    MatexLog.debug(process.env.LOADING_PATH ?? '');
+    ipcMain.on(Global_Channel.TrafficLights,(e,type)=>{
+      const op = type as 'close'|'minimize'|'fullscreen';
+      switch (type) {
+        case 'close':{
+          mainWindow?.close();
+        }break;
+        case 'minimize':{
+          mainWindow?.minimize();
+        }break;
+        case 'fullscreen':{
+          if (isFullscreen){
+            mainWindow?.setFullScreen(false);
+            isFullscreen = false;
+          } else {
+            mainWindow?.setFullScreen(true);
+            isFullscreen = true;
+          }
+        }break;
+
+      }
+    });
   } catch (e) {
     new Notification({
       title: '错误',
