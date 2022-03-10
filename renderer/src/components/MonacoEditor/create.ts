@@ -1,5 +1,5 @@
 import monaco from './monaco';
-import {useEffect, useRef} from 'react';
+import {useRef} from 'react';
 import {Editor, UseEditorProps} from '/@cmp/MonacoEditor/type';
 
 
@@ -21,7 +21,7 @@ export const useEditor = ({
       readOnly,
       automaticLayout: false,
       fontSize: 14,
-      fontFamily: 'JetBrains Mono NL Light',
+      fontFamily: 'JetBrains Mono Regular',
       scrollbar: {
         verticalScrollbarSize: 10,
         verticalSliderSize: 12

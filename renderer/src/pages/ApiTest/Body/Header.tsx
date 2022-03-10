@@ -92,6 +92,7 @@ export const Header = () => {
 
   const renderLabel = () => {
     return (
+      // <Button labelPosition='right' size={'mini'} icon='right chevron' content='Forward' />
       <Popup
         on="click"
         position={'bottom center'}
@@ -212,7 +213,7 @@ export const Header = () => {
 };
 
 const getLabel = (item: ResDisplayItemsType) => {
-  let labelText = '';
+  let labelText;
   switch (item) {
     case 'Body':
       labelText = '响应数据';

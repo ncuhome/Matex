@@ -8,6 +8,9 @@ import { ColorLog } from './colorLog.js';
 //注入环境变量
 DotEnv.config({ path: resolve(process.cwd(), './dev.env'), debug: true });
 
+
+const filterLog = /Font/gi;
+
 const mainOptions = {
   sourcemap: 'inline',
   minify: true, // 压缩代码
@@ -40,7 +43,9 @@ const preloadOptions = {
 const Log = (spawnProcess) =>{
   spawnProcess.stdout.on('data', d => d.toString().trim() && ColorLog.info(d.toString()));
   spawnProcess.stderr.on('data', d => {
-    ColorLog.error(d.toString());
+    if (!filterLog.test(d)){
+      ColorLog.error(d.toString());
+    }
   });
 };
 
@@ -66,6 +71,11 @@ const killProcess = async (processController,spawnProcess) => {
     }, 100);
   });
 };
+
+/**
+ * @param {string} url
+ * @return {Promise<void>}
+ */
 
 export const startWatchMainAndPreload = async (url)=>{
   const main_path = process.env.MAIN_PATH;

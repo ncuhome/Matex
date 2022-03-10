@@ -41,3 +41,7 @@
 .custom-context-menu li:active {
     background-color: #f0f2f7;
 }
+
+.dropdown .menu{
+    background: #8ADDFF!important;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import star from '/@/assets/icon/star.svg';
 import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
@@ -27,17 +27,22 @@ const Content = () => {
   const editorRef = React.useRef<Editor | null>();
   const { addEditor, deleteEditor } = useEditors();
   const errorObj = useAtomValue(apiTestErrAtom);
+  const firstRef = useRef(false);
 
   const language: EditorLanguage = LanguageMapper.get(formatType.toLowerCase()) ?? 'text/plain';
 
   useEffect(() => {
     if (resData && editorRef) {
-      setValue({
-        editor: editorRef.current!,
-        value: resData.body,
-        language
-      });
-      setEditorValue(resData.body);
+      if (firstRef.current){
+        setValue({
+          editor: editorRef.current!,
+          value: resData.body,
+          language
+        });
+        setEditorValue(resData.body);
+      } else {
+        firstRef.current = true;
+      }
     }
   }, [resData, editorRef.current]);
 
