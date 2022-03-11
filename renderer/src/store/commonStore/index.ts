@@ -2,6 +2,7 @@ import { atom } from 'jotai';
 import { editor } from 'monaco-editor';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { EditorProps } from '/@/store/commonStore/type';
+import { EditorLanguage } from '/@cmp/MonacoEditor/type';
 
 export const preRouteAtom = atom('');
 export const collapseAtom = atom(false);

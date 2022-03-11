@@ -3,6 +3,7 @@ import { EditorActionProps, SetValueProps, Editor, EditorLanguage } from '/@cmp/
 import { useThrottleFn } from 'ahooks';
 
 export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
+
   //设置编辑器的值
   const { run } = useThrottleFn(
     async ({ editor, language, value }: SetValueProps) => {
@@ -12,10 +13,16 @@ export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
             readOnly: false
           });
         }
-        editor.setModel(monaco.editor.createModel(value, language));
-        await editor.getAction('editor.action.formatDocument')?.run();
-        editor?.updateOptions({
-          readOnly: readOnly
+        const model = editor.getModel();
+        if (model){
+          model.setValue(value);
+        } else {
+          editor.setModel(monaco.editor.createModel(value, language));
+        }
+        editor.getAction('editor.action.formatDocument')?.run().then(() => {
+          editor?.updateOptions({
+            readOnly: readOnly
+          });
         });
       }
     },

@@ -10,6 +10,8 @@ export interface SetValueProps {
 }
 
 export interface EditorActionProps {
+  id:string;
+  watch?: boolean;
   readOnly?:boolean
 }
 

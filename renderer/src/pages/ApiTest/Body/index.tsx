@@ -80,7 +80,7 @@ const Body = () => {
           <Content />
         </div>
       </div>
-      <Dimmer active={dimmer} onClickOutside={() => {}} verticalAlign="top">
+      <Dimmer active={dimmer} verticalAlign="top">
         <Loader className={styles.loading} size="medium">
           <div className={styles.loadingContent}>
             <div style={{ marginBottom: 15, marginTop: 5 }}>发送请求中...</div>

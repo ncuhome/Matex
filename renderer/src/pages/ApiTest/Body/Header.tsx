@@ -19,8 +19,6 @@ import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
 import { MatexWin } from '/@/global';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 import { editorsAtom } from '/@/store/commonStore';
-import { EditorLanguage } from '/@cmp/MonacoEditor/type';
-import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import dropDownStyle from '/@/style/apitest/index.module.scss';
 import toast from 'react-hot-toast';
 
@@ -39,11 +37,11 @@ export const Header = () => {
   const [displayItem, setDisplayItem] = useAtom(apiTestBodyDisplayAtom);
   const resData = useAtomValue(apiTestResDataAtom);
   const [actionStatus, setActionStatus] = useState(0);
-  const { setValue, executeFind } = useEditorAction({ readOnly: true });
+  const { executeFind } = useEditorAction({ id:'apiTest',readOnly: true });
   const editorMap = useAtomValue(editorsAtom);
   const editor = editorMap.get('apiTest');
   const errorObj = useAtomValue(apiTestErrAtom);
-  const language: EditorLanguage = LanguageMapper.get(formatType.toLowerCase()) ?? 'text/plain';
+
 
   useEffect(() => {
     if (resData) {
@@ -60,20 +58,8 @@ export const Header = () => {
     setDisplayItem(item);
     if (item === 'Body') {
       actionStatus !== 2 && setActionStatus(2);
-      editor &&
-        setValue({
-          value: resData?.body,
-          language,
-          editor: editor
-        });
     } else {
       actionStatus !== 1 && setActionStatus(1);
-      editor &&
-        setValue({
-          value: JSON.stringify(resData?.headers),
-          language: 'json',
-          editor: editor
-        });
     }
   };
 
@@ -92,7 +78,6 @@ export const Header = () => {
 
   const renderLabel = () => {
     return (
-      // <Button labelPosition='right' size={'mini'} icon='right chevron' content='Forward' />
       <Popup
         on="click"
         position={'bottom center'}

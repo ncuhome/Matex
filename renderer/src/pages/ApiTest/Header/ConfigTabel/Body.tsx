@@ -32,7 +32,7 @@ const BodyTable = () => {
   const { editorValue, setEditorValue } = useEditorValue('configBody');
   const editorRef = React.useRef<Editor | null>();
   const { addEditor, deleteEditor } = useEditors();
-  const { setValue, changeLanguage } = useEditorAction({ readOnly: false });
+  const { setValue, changeLanguage } = useEditorAction({ id:'configBody',readOnly: false });
 
   const language = LanguageMapper.get(activeRawType) ?? 'text/plain';
 
@@ -50,7 +50,7 @@ const BodyTable = () => {
 
   const onDestroyed = () => {
     editorRef.current = null;
-    deleteEditor('apiTest');
+    deleteEditor('configBody');
   };
 
   useEffect(() => {
