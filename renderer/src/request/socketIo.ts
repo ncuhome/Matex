@@ -9,6 +9,11 @@ import { Emitter } from '/@/utils/EventEmiter';
 
 type WsConnSocketIoAtom = [Socket | undefined, (update?: SetStateAction<Socket>) => void];
 
+
+const getNowTime = () => {
+  return matexTime().format('YYYY-MM-DD HH:mm:ss');
+};
+
 export const useSocketIo = () => {
   const [wsSocket, setSocket] = useAtom(websocketConnAtom) as WsConnSocketIoAtom;
   const [status, setStatus] = useState<WsStatus>(wsSocket?.connected ? 'connected' : 'closed');
@@ -17,6 +22,18 @@ export const useSocketIo = () => {
   useEffect(() => {
     Emitter.emit('ws-native-status', status);
   }, [status]);
+
+
+
+  const addEVListener = (ev:string)=>{
+    wsSocket?.on(ev, (data:any) => {
+      addMsg({
+        type: 'server',
+        message: data,
+        time: getNowTime()
+      });
+    });
+  };
 
   const connSocketIo = () => {
     const socket = io('http://localhost:9090?name=lqd', {
@@ -72,6 +89,7 @@ export const useSocketIo = () => {
   };
 
   return {
+    addEVListener,
     closeSocketIo,
     connSocketIo
   };

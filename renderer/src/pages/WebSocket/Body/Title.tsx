@@ -6,17 +6,22 @@ import { useNativeWs, useNativeWsStatus } from '/@/request/nativeWs';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { useMsgList, websocketChannelAtom, websocketTypeAtom } from '/@/store/websocketStore';
 import { useSocketIo } from '/@/request/socketIo';
+import { useAtom } from 'jotai';
 
 const Title = () => {
   const status = useNativeWsStatus();
   const { closeWs } = useNativeWs();
-  const { closeSocketIo } = useSocketIo();
+  const { closeSocketIo,addEVListener } = useSocketIo();
   const { clearList } = useMsgList();
   const wsType = useAtomValue(websocketTypeAtom);
-  const setSocketIoEv = useUpdateAtom(websocketChannelAtom);
+  const [socketIoEv,setSocketIoEv] = useAtom(websocketChannelAtom);
 
   const close = wsType === 'native' ? closeWs : closeSocketIo;
   const { color, text } = getStatusColor(status);
+
+  const addEvListener = () => {
+    addEVListener(socketIoEv);
+  };
 
   return (
     <div className={styles.titleCon}>
@@ -43,6 +48,7 @@ const Title = () => {
               className={styles.channelInput}
               placeholder={'输入eventName'}
             />
+            <button onClick={addEvListener} className={styles.lisBtn}>监听</button>
           </div>
         )}
       </div>

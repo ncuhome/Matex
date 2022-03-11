@@ -44,6 +44,20 @@
             color: var(--text-color);
           }
 
+          .lisBtn{
+            background: transparent;
+            border: 1px solid var(--active-bg);
+            padding: 6px 10px;
+            color: #F3F3F3;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+
+            &:hover{
+              background-color: #2C3550;
+            }
+          }
+
           .channelInput{
             margin-left: 10px;
             outline: none;
