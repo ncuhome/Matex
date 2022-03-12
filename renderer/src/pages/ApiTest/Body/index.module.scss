@@ -6,7 +6,7 @@
   border-radius: 10px;
   position: relative;
   margin-top: -5px;
-  border: #99A8C3 1px solid;
+  border: #99a8c3 1px solid;
 
   .content {
     flex: 1;
@@ -35,9 +35,13 @@
 
   .operationCon {
     background-color: transparent;
-    box-shadow: 0 2px 5px #bec0be!important;
+    box-shadow: 0 2px 5px #bec0be !important;
     border-radius: 10px;
-    margin: 20px;
+
+    .opbtn {
+      display: block;
+      width: 100%;
+    }
   }
 
   .actionsCon {
@@ -46,7 +50,7 @@
     align-items: center;
     justify-content: start;
     position: relative;
-    background-color:transparent;
+    background-color: transparent;
     border-radius: 10px 10px 0 0;
   }
 }
@@ -63,7 +67,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 13px;
-  border: #41447C 1px solid;
+  border: #41447c 1px solid;
   color: #2cb5ad;
 
   .statusCode:hover,
@@ -75,7 +79,7 @@
   .statusSize {
     margin: 0 12px 0 0;
   }
-  .statusCopy{
+  .statusCopy {
     margin: 0 10px;
     border-left: 2px solid #e0e1e2;
     height: 110%;
@@ -161,7 +165,7 @@
 }
 
 .loading {
-  color: #E0E1E2 !important;
+  color: #e0e1e2 !important;
 
   .loadingContent {
     display: flex;
@@ -171,21 +175,26 @@
   }
 
   &::after {
-    border-color: #E0E1E2 transparent transparent !important;
+    border-color: #e0e1e2 transparent transparent !important;
   }
 }
 
 .active {
-  background-color: #2185D0 !important;
+  background-color: #40497D !important;
   color: white !important;
 }
 
-.hidden{
+.normal{
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.hidden {
   width: 0;
   height: 0;
   overflow: hidden;
 }
 
-.show{
+.show {
   width: 100%;
 }

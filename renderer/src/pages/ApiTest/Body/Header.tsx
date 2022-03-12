@@ -38,11 +38,10 @@ export const Header = () => {
   const [displayItem, setDisplayItem] = useAtom(apiTestBodyDisplayAtom);
   const resData = useAtomValue(apiTestResDataAtom);
   const [actionStatus, setActionStatus] = useState<ActionStatus>(ActionStatus.AllHidden);
-  const { executeFind } = useEditorAction({ id:'apiTest',readOnly: true });
+  const { executeFind } = useEditorAction({ id: 'apiTest', readOnly: true });
   const editorMap = useAtomValue(editorsAtom);
   const editor = editorMap.get('apiTest');
   const errorObj = useAtomValue(apiTestErrAtom);
-
 
   useEffect(() => {
     if (resData) {
@@ -65,7 +64,7 @@ export const Header = () => {
   };
 
   const onChangeDisplayItem = (item: ResDisplayItemsType) => {
-    if (resData){
+    if (resData) {
       setDisplayItem(item);
       if (item === 'Headers') {
         actionStatus !== 2 && setActionStatus(ActionStatus.ShowOp);
@@ -73,7 +72,6 @@ export const Header = () => {
         _setActionStatus();
       }
     }
-
   };
 
   const onChangeFormatType = (item: FormatType) => {
@@ -108,15 +106,13 @@ export const Header = () => {
       >
         {resData ? (
           <div className={styles.operationCon}>
-            <Button.Group vertical size={'small'}>
+            <Button.Group vertical>
               {ResDisplayItems.map((item) => {
                 const active = item === displayItem;
                 return (
                   <Fragment key={item}>
                     <Button
-                      size={'small'}
-                      style={{ boxShadow: '2px 2px 2px #8684A8' }}
-                      className={clsx([active && styles.active])}
+                      className={clsx([styles.opbtn, active ? styles.active : styles.normal])}
                       onClick={() => onChangeDisplayItem(item)}
                     >
                       {item}&nbsp;&nbsp;
@@ -172,7 +168,7 @@ export const Header = () => {
                         {formatOptions.map((item) => {
                           return (
                             <Dropdown.Item
-                              onClick={() =>onChangeFormatType(item.text as FormatType)}
+                              onClick={() => onChangeFormatType(item.text as FormatType)}
                               key={item.value}
                               value={item.value}
                               active={item.text === formatType}

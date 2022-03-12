@@ -45,3 +45,14 @@
 .dropdown .menu{
     background: #8ADDFF!important;
 }
+
+.popup{
+    background: #7599CD!important;
+    border-color: transparent!important;
+}
+
+.popup:before{
+    background-color: #40497D!important;
+    border-color: transparent!important;
+    content: none!important;
+}
