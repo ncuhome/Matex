@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { Icon, Label, Popup } from 'semantic-ui-react';
+import { Label, Popup } from 'semantic-ui-react';
 
 interface ApiListProps {
   type?: 'get' | 'post';

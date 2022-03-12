@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -11,10 +11,7 @@ import 'filepond/dist/filepond.min.css';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-import { FilePondFile } from 'filepond';
-import { Button, Icon, Label, Modal, Segment } from 'semantic-ui-react';
-import PreviewFile from '../PreviewFile';
-import { apiTestBinaryAtom, useUpdateBinary } from '/@/store/apiTestStore';
+import { useUpdateBinary } from '/@/store/apiTestStore';
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
