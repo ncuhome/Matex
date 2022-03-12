@@ -19,6 +19,7 @@ monaco.editor.defineTheme('my-theme', {
     'editorLineNumber.foreground': '#A491B8',
     'editorLineNumber.activeForeground': '#237893',
     'editor.background': '#00000000',
+    'editorCursor.foreground': '#8ADDFF',
     'scrollbar.shadow': '#00000000',
     'scrollbarSlider.background': '#00000000',
     'scrollbarSlider.hoverBackground': '#00000000',
