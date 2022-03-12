@@ -47,7 +47,15 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
 export const htmlRules: monaco.editor.ITokenThemeRule[] = [
   {
     token: 'tag.html',
-    foreground: '#F84806'
+    foreground: '#F27293'
+  },
+  {
+    token: 'metatag.content.html',
+    foreground: '#3FDA0D'
+  },
+  {
+    token: 'metatag.html',
+    foreground: '#2CB6AD'
   },
   {
     token: 'delimiter.html',
@@ -55,7 +63,7 @@ export const htmlRules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'attribute.name.html',
-    foreground: '#3B46CC'
+    foreground: '#8ADDFF'
   },
   {
     token: 'attribute.value.html',

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import star from '/@/assets/icon/star.svg';
 import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
@@ -18,6 +18,11 @@ import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 import { Editor, EditorLanguage } from '/@cmp/MonacoEditor/type';
 import ReqError from '/@cmp/ReqError';
 import clsx from 'clsx';
+import { Emitter } from '/@/utils/EventEmiter';
+import Emittery from 'emittery';
+import { editor } from 'monaco-editor';
+import IStandaloneCodeEditor = editor.IStandaloneCodeEditor;
+import { FormatType } from '/@/type/apiTest';
 
 const Content = () => {
   const resData = useAtomValue(apiTestResDataAtom);
@@ -29,40 +34,61 @@ const Content = () => {
   const { addEditor, deleteEditor } = useEditors();
   const errorObj = useAtomValue(apiTestErrAtom);
   const displayItem = useAtomValue(apiTestBodyDisplayAtom);
-  const firstRef = useRef(false);
+  const [showEditor,setShowEditor] = useState(false);
+  const listenerRef = useRef<Emittery.UnsubscribeFn>();
 
   const language: EditorLanguage = LanguageMapper.get(formatType.toLowerCase()) ?? 'text/plain';
 
-  useEffect(() => {
-    if (resData && editorRef) {
-      if (firstRef.current){
-        if (displayItem==='Body'){
-          setValue({
-            editor: editorRef.current!,
-            value: resData.body,
-            language
-          });
-          setEditorValue(resData.body);
-        } else {
-          setValue({
-            editor: editorRef.current!,
-            value: JSON.stringify(resData.headers),
-            language
-          });
-          setEditorValue(JSON.stringify(resData.headers));
-        }
 
+  useEffect(() => {
+    if (resData){
+      if (displayItem ==='Headers'){
+        setShowEditor(true);
       } else {
-        firstRef.current = true;
+        if (bodyAction !== 'Pretty') {
+          setShowEditor(false);
+        } else {
+          const resType = judgementType(resData!.type);
+          setShowEditor(isEditorAble(resType));
+        }
       }
     }
-  }, [resData, editorRef.current,displayItem]);
+  }, [resData, displayItem,bodyAction]);
+
 
   useEffect(() => {
-    if (editorRef.current) {
-      changeLanguage(editorRef.current, language);
+    if (resData&&showEditor) {
+      if (displayItem==='Body'){
+        setValue({
+          editor: editorRef.current!,
+          value: resData.body,
+          language
+        });
+        setEditorValue(resData.body);
+      } else {
+        setValue({
+          editor: editorRef.current!,
+          value: JSON.stringify(resData.headers),
+          language
+        });
+        setEditorValue(JSON.stringify(resData.headers));
+      }
     }
-  }, [formatType]);
+  }, [resData,showEditor,displayItem]);
+
+
+  useEffect(() => {
+    listenerRef.current?.();
+    if (editorRef.current){
+      listenerRef.current = Emitter.on('apiTest.format', (data: FormatType) => {
+        const _language: EditorLanguage = LanguageMapper.get(data.toLowerCase()) ?? 'text/plain';
+        changeLanguage(editorRef.current as IStandaloneCodeEditor, _language);
+      });
+    }
+    return () => {
+      listenerRef.current?.();
+    };
+  }, [editorRef.current]);
 
   const onCreated = (editor: Editor) => {
     if (editor) {
@@ -76,41 +102,27 @@ const Content = () => {
     deleteEditor('apiTest');
   };
 
-  const prettyRender = () => {
-    const resType = judgementType(resData!.type);
-    if (displayItem ==='Headers') {
-      return (
-        <MonacoEditor
-          onCreated={onCreated}
-          onDestroyed={onDestroyed}
-          shadow={false}
-          readOnly
-          language={language}
-          defaultVal={''}
-          height={255}
-          width={'100%'}
-        />
-      );
-    }
-    if (!isEditorAble(resType)) {
-      if (isPreviewAble(resType)) {
-        return <PreviewRes src={getPreviewSrc(resData!.body, resData!.type)} />;
-      } else {
-        return <div>无法预览</div>;
-      }
+  const renderContent = () => {
+    if (!resData) {
+      return <img src={star} className={clsx([styles.idleImg])} alt={'等待请求'} />;
     } else {
-      return (
-        <MonacoEditor
-          onCreated={onCreated}
-          onDestroyed={onDestroyed}
-          shadow={false}
-          readOnly
-          language={language}
-          defaultVal={''}
-          height={255}
-          width={'100%'}
-        />
-      );
+      const resType = judgementType(resData!.type);
+      if (bodyAction !== 'Pretty') {
+        return <PreviewRes src={getPreviewSrc(resData.body, resData!.type)} />;
+      } else {
+        if (displayItem ==='Headers') {
+          return null;
+        }
+        if (!isEditorAble(resType)) {
+          if (isPreviewAble(resType)) {
+            return <PreviewRes src={getPreviewSrc(resData!.body, resData!.type)} />;
+          } else {
+            return <div>无法预览</div>;
+          }
+        } else {
+          return null;
+        }
+      }
     }
   };
 
@@ -118,15 +130,23 @@ const Content = () => {
     return <ReqError />;
   }
 
-  if (!resData) {
-    return <img src={star} className={clsx([styles.idleImg])} alt={'等待请求'} />;
-  } else {
-    if (bodyAction === 'Pretty') {
-      return <>{prettyRender()}</>;
-    } else {
-      return <PreviewRes src={getPreviewSrc(resData.body, resData!.type)} />;
-    }
-  }
+  return (
+    <>
+      <div className={clsx([showEditor ? styles.show:styles.hidden])}>
+        <MonacoEditor
+          onCreated={onCreated}
+          onDestroyed={onDestroyed}
+          shadow={false}
+          readOnly
+          language={language}
+          defaultVal={''}
+          height={255}
+          width={'100%'}
+        />
+      </div>
+      {renderContent()}
+    </>
+  );
 };
 
 export default React.memo(Content);

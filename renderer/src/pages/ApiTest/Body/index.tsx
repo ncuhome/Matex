@@ -32,7 +32,9 @@ const Body = () => {
     const resType = judgementType(res.type);
     const canEditor = isEditorAble(resType);
     if (canEditor) {
-      setFormatType(resType.toUpperCase() as FormatType);
+      const type = resType.toUpperCase() as FormatType;
+      setFormatType(type);
+      Emitter.emit('apiTest.format', type);
     }
     setBodyAction('Pretty');
     setResData(res);

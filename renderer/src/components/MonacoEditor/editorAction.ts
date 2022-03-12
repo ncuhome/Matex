@@ -19,10 +19,9 @@ export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
         } else {
           editor.setModel(monaco.editor.createModel(value, language));
         }
-        editor.getAction('editor.action.formatDocument')?.run().then(() => {
-          editor?.updateOptions({
-            readOnly: readOnly
-          });
+        await editor.getAction('editor.action.formatDocument')?.run();
+        editor?.updateOptions({
+          readOnly: readOnly
         });
       }
     },

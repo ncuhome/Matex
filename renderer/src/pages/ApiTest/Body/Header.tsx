@@ -1,6 +1,6 @@
 import { Button, Dropdown, Icon, Label, Menu, Popup } from 'semantic-ui-react';
 import styles from './index.module.scss';
-import { Actions, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model';
+import { Actions, ActionStatus, FormatOptions, ResDisplayItems } from '/@/model/apiTest.model';
 import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { FormatType, ResDisplayItemsType } from '/@/type/apiTest';
@@ -21,6 +21,7 @@ import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 import { editorsAtom } from '/@/store/commonStore';
 import dropDownStyle from '/@/style/apitest/index.module.scss';
 import toast from 'react-hot-toast';
+import { Emitter } from '/@/utils/EventEmiter';
 
 const formatOptions = FormatOptions.map((item) => {
   return { key: item, value: item, text: item };
@@ -36,7 +37,7 @@ export const Header = () => {
   const [activeAction, setActiveAction] = useAtom(apiTestBodyActionAtom);
   const [displayItem, setDisplayItem] = useAtom(apiTestBodyDisplayAtom);
   const resData = useAtomValue(apiTestResDataAtom);
-  const [actionStatus, setActionStatus] = useState(0);
+  const [actionStatus, setActionStatus] = useState<ActionStatus>(ActionStatus.AllHidden);
   const { executeFind } = useEditorAction({ id:'apiTest',readOnly: true });
   const editorMap = useAtomValue(editorsAtom);
   const editor = editorMap.get('apiTest');
@@ -45,22 +46,39 @@ export const Header = () => {
 
   useEffect(() => {
     if (resData) {
-      const resType = judgementType(resData.type);
-      setActionStatus(isEditorAble(resType) ? 2 : 0);
+      _setActionStatus();
     }
 
     if (errorObj) {
-      setActionStatus(0);
+      setActionStatus(ActionStatus.AllHidden);
     }
   }, [resData, errorObj]);
 
-  const onChangeDisplayItem = (item: ResDisplayItemsType) => {
-    setDisplayItem(item);
-    if (item === 'Body') {
-      actionStatus !== 2 && setActionStatus(2);
+  const _setActionStatus = () => {
+    const resType = judgementType(resData!.type);
+    const canEditorAble = isEditorAble(resType);
+    if (canEditorAble) {
+      setActionStatus(ActionStatus.AllShow);
     } else {
-      actionStatus !== 1 && setActionStatus(1);
+      setActionStatus(ActionStatus.AllHidden);
     }
+  };
+
+  const onChangeDisplayItem = (item: ResDisplayItemsType) => {
+    if (resData){
+      setDisplayItem(item);
+      if (item === 'Headers') {
+        actionStatus !== 2 && setActionStatus(ActionStatus.ShowOp);
+      } else {
+        _setActionStatus();
+      }
+    }
+
+  };
+
+  const onChangeFormatType = (item: FormatType) => {
+    setFormatType(item);
+    Emitter.emit('apiTest.format', item);
   };
 
   const handleCopy = () => {
@@ -125,7 +143,7 @@ export const Header = () => {
       <div className={styles.actionsCon}>
         <div>
           <Menu secondary size={'small'}>
-            {actionStatus === 2 && (
+            {actionStatus === 1 && (
               <Menu.Menu>
                 {Actions.map((item) => {
                   const active = activeAction === item;
@@ -154,7 +172,7 @@ export const Header = () => {
                         {formatOptions.map((item) => {
                           return (
                             <Dropdown.Item
-                              onClick={() => setFormatType(item.text as FormatType)}
+                              onClick={() =>onChangeFormatType(item.text as FormatType)}
                               key={item.value}
                               value={item.value}
                               active={item.text === formatType}

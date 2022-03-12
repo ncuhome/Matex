@@ -22,3 +22,11 @@ export const InitHeaders = [
   { index: 0, key: 'Accept', value: '*/*' },
   { index: 1, key: 'Connection', value: 'keep-alive' }
 ];
+
+
+export enum ActionStatus {
+  AllHidden = 0,
+  AllShow = 1,
+  ShowOp = 2
+
+}

@@ -18,7 +18,7 @@ export const useEditor = ({
       model:null,
       language,
       readOnly,
-      automaticLayout: false,
+      automaticLayout: true,
       fontSize: 14,
       fontFamily: 'JetBrains Mono Regular',
       scrollbar: {
