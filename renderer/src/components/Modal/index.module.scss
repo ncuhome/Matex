@@ -1,0 +1,149 @@
+
+.btn{
+  height: 30px;
+  width: 50px;
+  margin-right: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #DCDDDC;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #A9AAA9;
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+  transition: all 0.3s ease-in-out;
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+  }
+
+  .con {
+    width: 500px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 10px #2a2f54;
+    z-index: 1;
+
+    .header {
+      height: 30px;
+      background: #dcdddc;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 13px;
+
+      .title {
+        flex: 1;
+        text-align: center;
+      }
+
+      .close {
+        height: 13px;
+        width: 13px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: -1px 1px 2px #3d4379;
+        background-color: #fa6058;
+        justify-content: space-between;
+      }
+    }
+
+    .body {
+      padding: 10px;
+      min-height: 100px;
+    }
+
+    .footer {
+      height: 50px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+
+      .cancel {
+        @extend .btn;
+      }
+
+      .confirm {
+        @extend .btn;
+      }
+    }
+  }
+}
+
+.iconCon {
+  & .icon {
+    visibility: hidden;
+    font-weight: 100 !important;
+    font-size: 10px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  &:hover .icon {
+    visibility: visible;
+    font-weight: 100 !important;
+    font-size: 10px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.proCon{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 20px;
+
+  .progress {
+    border-radius: 22px;
+    background-color: #eee; //总体的背景色
+    height: 15px;
+    width: 90%;
+    overflow: hidden;
+
+    &::-webkit-progress-bar {
+      background-color: #dae0e7;
+      border-radius:  22px;
+    }
+    /* 表示已完成进度背景色 */
+    &::-webkit-progress-value {
+      background: teal;
+      border-radius: 1px;
+    }
+  }
+
+}
+
+
+.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
