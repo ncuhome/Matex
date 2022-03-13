@@ -57,4 +57,15 @@ jobs:
           echo Package Electron app
           yarn release
 
+      - name: upload zip
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-avzr --delete"
+          SOURCE: "/release/build/zip/"
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          TARGET: /Matex_Be/public
+#          EXCLUDE: "/dist/, /node_modules/"
+
 
