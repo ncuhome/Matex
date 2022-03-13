@@ -30,7 +30,7 @@ const useModal = ({ onConfirm, onCancel }: UseModalProps) => {
     setContent(content);
   };
 
-  const ToastView = () => {
+  const ToastView = ({ title = '' }: { title?: string }) => {
     return (
       <Portal>
         <Modal
@@ -41,7 +41,7 @@ const useModal = ({ onConfirm, onCancel }: UseModalProps) => {
           content={_content}
           visible={isOpen}
           closeToast={closePortal}
-          title={'title'}
+          title={title}
         />
       </Portal>
     );

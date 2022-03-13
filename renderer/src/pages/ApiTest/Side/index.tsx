@@ -56,7 +56,7 @@ const CollectSide = () => {
           &nbsp; 删除
         </Button>
       </div>
-      <ToastView />
+      <ToastView title={'更新'} />
     </div>
   );
 };

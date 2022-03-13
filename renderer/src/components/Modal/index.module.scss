@@ -70,7 +70,6 @@
 
     .body {
       padding: 10px;
-      min-height: 100px;
     }
 
     .footer {
@@ -79,6 +78,7 @@
       display: flex;
       align-items: center;
       justify-content: end;
+      margin-top: 10px;
 
       .cancel {
         @extend .btn;
@@ -109,6 +109,12 @@
   }
 }
 
+.desc{
+  margin-top: 20px;
+  text-align: start;
+  margin-left: 22px;
+}
+
 .proCon{
   width: 100%;
   display: flex;
@@ -121,8 +127,9 @@
     border-radius: 22px;
     background-color: #eee; //总体的背景色
     height: 15px;
-    width: 90%;
+    width: 70%;
     overflow: hidden;
+    margin-right: 10px;
 
     &::-webkit-progress-bar {
       background-color: #dae0e7;
