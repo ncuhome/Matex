@@ -62,11 +62,11 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          ARGS: "-avzr --delete"
-          SOURCE: "/release/build/zip/"
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "release/build/zip/"
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-          TARGET: /web/Matex_Be/public/zip
+          TARGET: /web/Matex_Be/public/zip/
 #          EXCLUDE: "/dist/, /node_modules/"
 
 
