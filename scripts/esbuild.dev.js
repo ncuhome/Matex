@@ -1,35 +1,37 @@
 import esbuild from 'esbuild';
-import {nodeExternalsPlugin} from 'esbuild-node-externals';
+import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import { exec } from 'child_process';
 import { resolve } from 'path';
 import * as DotEnv from 'dotenv';
 import { ColorLog } from './colorLog.js';
+import net from 'net';
+import fs from 'fs';
+import { EventEmitter } from 'events';
 
 //注入环境变量
 DotEnv.config({ path: resolve(process.cwd(), './dev.env'), debug: true });
-
-
 const filterLog = /Font/gi;
+const pipeFile = process.platform === 'win32' ? '\\\\.\\pipe\\matexPip' : '/tmp/unix.sock';
+const ev = new EventEmitter();
 
-const mainOptions = {
+const commonOption = {
   sourcemap: 'inline',
   minify: true, // 压缩代码
   bundle: true, // 打包模块
   format: 'cjs', // 输出为 common JS
   platform: 'node', // 平台 node
+  plugins: [nodeExternalsPlugin()] // 不把主进程代码中引用的 node_modules 包代码打进主进程代码里
+};
+
+const mainOptions = {
+  ...commonOption,
   outdir: '.dev/main', // 输出到 build 文件夹
-  plugins: [nodeExternalsPlugin()], // 不把主进程代码中引用的 node_modules 包代码打进主进程代码里
   entryPoints: ['electron/src/main.ts'] // 入口文件
 };
 
 const preloadOptions = {
-  sourcemap: 'inline',
-  minify: true, // 压缩代码
-  bundle: true, // 打包模块
-  format: 'cjs', // 输出为 common JS
-  platform: 'node', // 平台 node
+  ...commonOption,
   outdir: '.dev/preload', // 输出到 build 文件夹
-  plugins: [nodeExternalsPlugin()], // 不把主进程代码中引用的 node_modules 包代码打进主进程代码里
   entryPoints: ['preload/src/index.ts'], // 入口文件
   watch: {
     onRebuild: (err) => {
@@ -40,35 +42,51 @@ const preloadOptions = {
   }
 };
 
-const Log = (spawnProcess) =>{
-  spawnProcess.stdout.on('data', d => d.toString().trim() && ColorLog.info(d.toString()));
-  spawnProcess.stderr.on('data', d => {
-    if (!filterLog.test(d)){
+const Log = (spawnProcess) => {
+  spawnProcess.stdout.on('data', (d) => d.toString().trim() && ColorLog.info(d.toString()));
+  spawnProcess.stderr.on('data', (d) => {
+    if (!filterLog.test(d)) {
       ColorLog.error(d.toString());
     }
   });
 };
 
+const createPip = () => {
+  const server = net.createServer((connection) => {
+    ColorLog.success('主进程已经启动');
+    ev.emit('pipe', connection);
+    connection.on('end', () => {
+      ColorLog.start('主进程已经关闭');
+    });
+    connection.on('error', (err) => console.error(err.message));
+  });
+  try {
+    if (fs.existsSync(pipeFile)) {
+      fs.unlinkSync(pipeFile);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  server.listen(pipeFile);
+};
+
 /**
  *
- * @param {AbortController} processController
- * @param {ChildProcess} spawnProcess
+ * @param {net.Socket} pipConnection
  * @return {Promise<unknown>}
  */
-const killProcess = async (processController,spawnProcess) => {
+const killProcess = async (pipConnection) => {
   let timer = null;
   return new Promise((resolve) => {
     timer = setInterval(() => {
-      if (spawnProcess.killed) {
+      if (pipConnection.destroyed) {
         clearInterval(timer);
-        console.log('前一个进程已经被杀死');
         resolve();
       } else {
-        spawnProcess.off('exit', process.exit);
-        processController.abort();
-        spawnProcess.kill('SIGINT');
+        pipConnection.end();
+        pipConnection.destroy();
       }
-    }, 100);
+    }, 10);
   });
 };
 
@@ -77,33 +95,39 @@ const killProcess = async (processController,spawnProcess) => {
  * @return {Promise<void>}
  */
 
-export const startWatchMainAndPreload = async (url)=>{
+export const startWatchMainAndPreload = async (url) => {
   const main_path = process.env.MAIN_PATH;
   const execStr = `cross-env VITE_DEV_SERVER_URL=${url} electron ${main_path}`;
-  let processController = null;
+  //electron进程控制变量
   let spawnProcess = null;
+  let pipConnection = null;
+  //监听主进程连接
+  ev.on('pipe', (data) => {
+    pipConnection = data;
+  });
+  // preload打包
   await esbuild.build(preloadOptions);
   ColorLog.success('preload打包完成');
-  await esbuild.build({...mainOptions,watch: {
-    onRebuild: async (err) => {
-      if (!err) {
-        if (spawnProcess!== null) {
-          await killProcess(processController,spawnProcess);
-          processController = null;
-          spawnProcess = null;
-          ColorLog.start('重启主进程');
+  //主进程打包
+  await esbuild.build({
+    ...mainOptions,
+    watch: {
+      onRebuild: async (err) => {
+        if (!err) {
+          if (spawnProcess !== null) {
+            await killProcess(pipConnection);
+            spawnProcess = null;
+            pipConnection = null;
+            ColorLog.start('重启主进程');
+          }
+          spawnProcess = await exec(execStr);
+          Log(spawnProcess);
         }
-        processController = new AbortController();
-        spawnProcess = await exec(execStr,{signal:processController.signal});
-        Log(spawnProcess);
-        spawnProcess.on('exit', process.exit);
       }
     }
-  }});
+  });
   ColorLog.success('main打包完成');
-  processController = new AbortController();
-  spawnProcess =await exec(execStr,{signal:processController.signal});
+  spawnProcess = await exec(execStr);
   Log(spawnProcess);
+  createPip();
 };
-
-

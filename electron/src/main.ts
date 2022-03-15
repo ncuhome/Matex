@@ -1,11 +1,12 @@
-import { app, BrowserWindow, MessageChannelMain, Notification,ipcMain } from 'electron';
+import { app, BrowserWindow, MessageChannelMain, Notification, ipcMain } from 'electron';
 import { PortChannel } from './request';
 import { isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './core/log';
 import * as Sentry from '@sentry/electron';
 import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
-import {Global_Channel} from '../../common/ipc/channel';
+import { Global_Channel } from '../../common/ipc/channel';
+import { listenPip } from './utils/dev';
 
 const os = getOsType();
 MatexLog.debug(`当前系统为:${os}`);
@@ -48,9 +49,6 @@ async function init() {
     mainWindow?.on('closed', () => {
       mainWindow = undefined;
     });
-
-
-
   } catch (e) {
     MatexLog.error(e);
   }
@@ -77,25 +75,31 @@ app.on('ready', async () => {
 //当窗口加载完成调用
 app.whenReady().then(async () => {
   try {
-    ipcMain.on(Global_Channel.TrafficLights,(e,type)=>{
-      const op = type as 'close'|'minimize'|'fullscreen';
+    isDev && listenPip();
+    ipcMain.on(Global_Channel.TrafficLights, (e, type) => {
+      const op = type as 'close' | 'minimize' | 'fullscreen';
       switch (type) {
-        case 'close':{
-          mainWindow?.close();
-        }break;
-        case 'minimize':{
-          mainWindow?.minimize();
-        }break;
-        case 'fullscreen':{
-          if (isFullscreen){
-            mainWindow?.setFullScreen(false);
-            isFullscreen = false;
-          } else {
-            mainWindow?.setFullScreen(true);
-            isFullscreen = true;
+        case 'close':
+          {
+            mainWindow?.close();
           }
-        }break;
-
+          break;
+        case 'minimize':
+          {
+            mainWindow?.minimize();
+          }
+          break;
+        case 'fullscreen':
+          {
+            if (isFullscreen) {
+              mainWindow?.setFullScreen(false);
+              isFullscreen = false;
+            } else {
+              mainWindow?.setFullScreen(true);
+              isFullscreen = true;
+            }
+          }
+          break;
       }
     });
   } catch (e) {
