@@ -10,7 +10,7 @@ import { listenPip } from './utils/dev';
 
 const os = getOsType();
 MatexLog.debug(`当前系统为:${os}`);
-MatexLog.debug(process.env.NODE_ENV ?? '环境未注入1');
+MatexLog.debug(process.env.NODE_ENV ?? '环境未注入');
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 
@@ -58,7 +58,7 @@ async function init() {
 if (!gotTheLock) {
   app.quit();
 } else {
-  app.on('second-instance', (event, commandLine, workingDirectory) => {
+  app.on('second-instance', () => {
     if (mainWindow) {
       if (mainWindow.isMinimized()) mainWindow.restore();
       mainWindow.focus();
