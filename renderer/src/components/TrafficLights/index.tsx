@@ -18,17 +18,17 @@ const TrafficLights = () => {
   return (
     <div className={styles.con}>
       <div className={styles.close} onClick={()=>onClickLights('close')}>
-        <div style={{marginTop:'-2px'}} className={styles.iconCon}>
+        <div style={{marginTop:'2px'}} className={styles.iconCon}>
           <Icon className={styles.icon}  name={'close'}/>
         </div>
       </div>
       <div className={styles.minimize} onClick={()=>onClickLights('minimize')}>
-        <div style={{marginTop:'-8px'}} className={styles.iconCon}>
+        <div style={{marginTop:'-6px'}} className={styles.iconCon}>
           <Icon className={styles.icon}  name={'window minimize'}/>
         </div>
       </div>
       <div className={styles.fullscreen} onClick={()=>onClickLights('fullscreen')}>
-        <div style={{marginTop:'6px',marginLeft:8}} className={styles.iconCon}>
+        <div style={{marginTop:'10px',marginLeft:8}} className={styles.iconCon}>
           <Icon className={clsx([styles.icon,styles.rotate])}  name={'sort'}/>
         </div>
       </div>

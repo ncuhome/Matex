@@ -1,10 +1,10 @@
 # Matex   基于electron的万能工具软件
 #
 ![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/dev.png)
-###
+### Mac
 ![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/screenshot.png)
-###
-![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/websocket.png)
+### Windows
+![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/win_screenshot.png)
 
 ## 预期功能
 
