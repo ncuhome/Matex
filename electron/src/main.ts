@@ -9,6 +9,7 @@ import { Global_Channel } from '../../common/ipc/channel';
 import { listenPip } from './utils/dev';
 
 const os = getOsType();
+const isReload = isDev && process.env.RELOAD_MAIN === 'true';
 MatexLog.debug(`当前系统为:${os}`);
 MatexLog.debug(process.env.NODE_ENV ?? '环境未注入');
 if (!isDev)
@@ -24,21 +25,24 @@ const { port1, port2 } = new MessageChannelMain();
 //创建窗口
 async function init() {
   try {
-    loadWindow = await createLoadWin();
+    if (!isReload) {
+      loadWindow = await createLoadWin();
+      os === 'mac' && loadWindow?.setWindowButtonVisibility(false);
+      await loadWindow?.loadURL(loadingPath);
+      loadWindow?.once('ready-to-show', () => {
+        loadWindow?.show();
+      });
+      loadWindow?.on('closed', () => {
+        loadWindow = undefined;
+      });
+    }
 
-    os === 'mac' && loadWindow?.setWindowButtonVisibility(false);
-    await loadWindow?.loadURL(loadingPath);
-
-    loadWindow?.once('ready-to-show', () => {
-      loadWindow?.show();
-    });
-    loadWindow?.on('closed', () => {
-      loadWindow = undefined;
-    });
     mainWindow = await createMainWin();
     mainWindow?.on('ready-to-show', () => {
-      loadWindow?.close();
-      loadWindow?.destroy();
+      if (!isReload) {
+        loadWindow?.close();
+        loadWindow?.destroy();
+      }
       mainWindow?.show();
     });
 
@@ -78,7 +82,7 @@ app.whenReady().then(async () => {
     isDev && listenPip();
     ipcMain.on(Global_Channel.TrafficLights, (e, type) => {
       const op = type as 'close' | 'minimize' | 'fullscreen';
-      switch (type) {
+      switch (op) {
         case 'close':
           {
             mainWindow?.close();

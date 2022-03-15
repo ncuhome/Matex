@@ -120,7 +120,12 @@ export const startWatchMainAndPreload = async (url) => {
             pipConnection = null;
             ColorLog.start('重启主进程');
           }
-          spawnProcess = await exec(execStr);
+          spawnProcess = await exec(execStr, {
+            env: {
+              ...process.env,
+              RELOAD_MAIN: 'true'
+            }
+          });
           Log(spawnProcess);
         }
       }
