@@ -30,7 +30,7 @@
     "sync:meta": "node scripts/syncMeta.js",
     "prerelease": "concurrently \"npm run copy\" \"npm run sync:meta\"",
     "release": "cross-env NODE_ENV=production USE_HARD_LINKS=false electron-builder build --config electron_builder.json --publish never",
-    "postrelease": "node ./scripts/generateZip.js"
+    "uploadZip": "node ./scripts/generateZip.js"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.34",

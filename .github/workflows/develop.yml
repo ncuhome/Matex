@@ -58,15 +58,22 @@ jobs:
           yarn release
 
       - name: upload zip
-        if: ${{ matrix.os == 'macos-latest' }}
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "release/build/zip/"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-          TARGET: ${{ secrets.SSH_TARGET }}
-#          EXCLUDE: "/dist/, /node_modules/"
+      run: |
+        echo upload zip
+        yarn uploadZip ${{ secrets.SERVER }}
+          
+      
+
+#      - name: upload zip
+#        if: ${{ matrix.os == 'macos-latest' }}
+#        uses: easingthemes/ssh-deploy@main
+#        env:
+#          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+#          ARGS: "-rltgoDzvO --delete"
+#          SOURCE: "release/build/zip/"
+#          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+#          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+#          TARGET: ${{ secrets.SSH_TARGET }}
+##          EXCLUDE: "/dist/, /node_modules/"
 
 
