@@ -58,11 +58,9 @@ jobs:
           yarn release
 
       - name: upload zip
-      run: |
-        echo upload zip
-        yarn uploadZip ${{ secrets.SERVER }}
-          
-      
+        run: |
+          echo upload zip
+          yarn uploadZip ${{ secrets.SERVER }}
 
 #      - name: upload zip
 #        if: ${{ matrix.os == 'macos-latest' }}
