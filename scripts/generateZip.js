@@ -3,10 +3,9 @@ import os from 'os';
 import { resolve } from 'path';
 import { ColorLog } from './colorLog.js';
 import fs from 'fs';
-import {promisify} from 'util';
+import { promisify } from 'util';
 import matexhttp from 'matexhttp';
 const ReqAsync = promisify(matexhttp);
-
 
 const server = process.argv[2];
 (async () => {
@@ -15,13 +14,13 @@ const server = process.argv[2];
     const zip = new AdmZip();
     zip.addLocalFolder(dir, 'app');
     const zipPath = resolve(process.cwd(), './release/build/zip/mac.zip');
-    zip.writeZip(zipPath,async (err)=>{
+    zip.writeZip(zipPath, async (err) => {
       if (err) {
         ColorLog.error('❤ win创建zip失败 ❤');
       } else {
         ColorLog.success('❤ win创建zip成功 ❤');
         const response = await ReqAsync({
-          url:`${server}/update/uploadMac`,
+          url: `${server}update/uploadMac`,
           method: 'POST',
           body: fs.readFileSync(zipPath)
         });
@@ -29,18 +28,18 @@ const server = process.argv[2];
       }
     });
     ColorLog.success('❤ mac创建zip成功 ❤');
-  } else if(os.platform() === 'win32') {
+  } else if (os.platform() === 'win32') {
     const dir = resolve(process.cwd(), './release/build/win-unpacked/resources/app');
     const zip = new AdmZip();
     zip.addLocalFolder(dir, 'app');
     const zipPath = resolve(process.cwd(), './release/build/zip/win.zip');
-    await zip.writeZip(zipPath,async (err) => {
+    await zip.writeZip(zipPath, async (err) => {
       if (err) {
         ColorLog.error('❤ win创建zip失败 ❤');
       } else {
         ColorLog.success('❤ win创建zip成功 ❤');
         const response = await ReqAsync({
-          url:`${server}/update/uploadWin`,
+          url: `${server}update/uploadWin`,
           method: 'POST',
           body: fs.readFileSync(zipPath)
         });
