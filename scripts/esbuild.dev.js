@@ -41,10 +41,14 @@ const preloadOptions = {
     }
   }
 };
-
-const Log = (spawnProcess) => {
-  spawnProcess.stdout.on('data', (d) => d.toString().trim() && ColorLog.info(d.toString()));
-  spawnProcess.stderr.on('data', (d) => {
+/**
+ *
+ * @param {ChildProcess} childProcess
+ * @constructor
+ */
+const Log = (childProcess) => {
+  childProcess.stdout.on('data', (d) => d.toString().trim() && ColorLog.info(d.toString()));
+  childProcess.stderr.on('data', (d) => {
     if (!filterLog.test(d)) {
       ColorLog.error(d.toString());
     }
@@ -76,6 +80,10 @@ const createPip = () => {
  * @return {Promise<unknown>}
  */
 const killProcess = async (pipConnection) => {
+  if (!pipConnection) {
+    ev.emit('noChild', null);
+    return;
+  }
   let timer = null;
   return new Promise((resolve) => {
     timer = setInterval(() => {
@@ -89,21 +97,41 @@ const killProcess = async (pipConnection) => {
     }, 10);
   });
 };
+/**
+ *
+ * @param {string} execPath
+ * @param {NodeJS.ProcessEnv?} env
+ * return {Promise<unknown>}
+ */
+const startElectron = async (execPath, env) => {
+  const childProcess = await exec(execPath, {
+    env: {
+      ...process.env,
+      ...env
+    }
+  });
+  Log(childProcess);
+  return childProcess;
+};
 
 /**
  * @param {string} url
  * @return {Promise<void>}
  */
-
 export const startWatchMainAndPreload = async (url) => {
   const main_path = process.env.MAIN_PATH;
   const execStr = `cross-env VITE_DEV_SERVER_URL=${url} electron ${main_path}`;
   //electron进程控制变量
-  let spawnProcess = null;
+  let childProcess = null;
   let pipConnection = null;
   //监听主进程连接
   ev.on('pipe', (data) => {
     pipConnection = data;
+  });
+  ev.on('noChild', async () => {
+    childProcess = await startElectron(execStr, {
+      RELOAD_MAIN: 'true'
+    });
   });
   // preload打包
   await esbuild.build(preloadOptions);
@@ -114,25 +142,20 @@ export const startWatchMainAndPreload = async (url) => {
     watch: {
       onRebuild: async (err) => {
         if (!err) {
-          if (spawnProcess !== null) {
+          if (childProcess !== null) {
             await killProcess(pipConnection);
-            spawnProcess = null;
+            childProcess = null;
             pipConnection = null;
             ColorLog.start('重启主进程');
           }
-          spawnProcess = await exec(execStr, {
-            env: {
-              ...process.env,
-              RELOAD_MAIN: 'true'
-            }
+          childProcess = await startElectron(execStr, {
+            RELOAD_MAIN: 'true'
           });
-          Log(spawnProcess);
         }
       }
     }
   });
   ColorLog.success('main打包完成');
-  spawnProcess = await exec(execStr);
-  Log(spawnProcess);
+  childProcess = await startElectron(execStr);
   createPip();
 };
