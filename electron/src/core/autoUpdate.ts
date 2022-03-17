@@ -1,13 +1,14 @@
 import { EventEmitter } from 'events';
-import {app, dialog} from 'electron';
+import { app, dialog } from 'electron';
 import matexHttp from 'matexhttp';
-import {promisify} from 'util';
+import { promisify } from 'util';
 import AdmZip from 'adm-zip';
 import path from 'path';
 import fs from 'fs';
+import RP from 'request-progress';
 
 const ReqAsync = promisify(matexHttp);
-class HotUpdate extends EventEmitter{
+class HotUpdate extends EventEmitter {
   oldVer: string;
   latestVer: string | undefined;
   constructor() {
@@ -22,15 +23,15 @@ class HotUpdate extends EventEmitter{
       method: 'GET'
     });
     const data = JSON.parse(res.strBody as string);
-    if (data.status === '1'){
-      this.emit('after-check',true);
+    if (data.status === '1') {
+      this.emit('after-check', true);
       this.latestVer = data.version;
       const res = await this.downFile();
-      if (res){
+      if (res) {
         app.relaunch();
         app.exit(0);
       } else {
-        dialog.showMessageBox({
+        await dialog.showMessageBox({
           type: 'error',
           title: '提示',
           message: '更新失败',
@@ -38,12 +39,12 @@ class HotUpdate extends EventEmitter{
         });
       }
     } else {
-      this.emit('after-check',false);
+      this.emit('after-check', false);
       console.log('没有更新');
     }
   }
 
-  async downFile(){
+  async downFile() {
     return new Promise((resolve) => {
       try {
         const dirPath = path.join(__dirname, '../');
@@ -53,28 +54,38 @@ class HotUpdate extends EventEmitter{
         } else {
           console.log('文件夹已存在');
         }
-        let fileName = 'app.zip' ;
-        let url = 'http://localhost:8080/' + fileName;
+        let fileName = 'app.zip';
+        let url = 'http://159.75.220.253:7888/mac/mac.zip';
         let stream = fs.createWriteStream(path.join(dirPath, fileName));
-        matexHttp(url).pipe(stream).on('close', function (err: any) {
-          if (err) {
-            console.log(err);
-            resolve(false);
-          } else {
+
+        RP(matexHttp(url))
+          .on('progress', function (state: any) {
+            console.log('progress', state);
+          })
+          .on('error', function (err: any) {
+            console.log('error', err);
+          })
+          .on('end', function () {
             console.log('文件[' + fileName + ']下载完毕');
             const admZip = new AdmZip(path.join(dirPath, fileName));
-            admZip.extractAllTo(path.join(dirPath, './'),true);
+            admZip.extractAllTo(path.join(dirPath, './'), true);
             fs.unlinkSync(path.join(dirPath, fileName));
             resolve(true);
-          }
-        });
+          })
+          .pipe(stream);
+        // .on('close', function (err: any) {
+        //   if (err) {
+        //     console.log(err);
+        //     resolve(false);
+        //   } else {
+        //
+        //   }
+        // });
       } catch (e) {
         console.log(e);
         resolve(false);
       }
-
     });
-
   }
 }
 

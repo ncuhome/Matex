@@ -5686,6 +5686,13 @@ registry-url@^5.0.0:
   dependencies:
     rc "^1.2.8"
 
+request-progress@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/request-progress/-/request-progress-3.0.0.tgz#4ca754081c7fec63f505e4faa825aa06cd669dbe"
+  integrity sha1-TKdUCBx/7GP1BeT6qCWqBs1mnb4=
+  dependencies:
+    throttleit "^1.0.0"
+
 request@^2.87.0:
   version "2.88.2"
   resolved "https://registry.npmjs.org/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"
@@ -6402,6 +6409,11 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+
+throttleit@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/throttleit/-/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"
+  integrity sha1-nnhYNtr0Z0MUWlmEtiaNgoUorGw=
 
 tmp-promise@^3.0.2:
   version "3.0.3"

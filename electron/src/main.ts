@@ -1,4 +1,4 @@
-import { app, BrowserWindow, MessageChannelMain, Notification, ipcMain } from 'electron';
+import { app, BrowserWindow, MessageChannelMain, Notification, ipcMain, dialog } from 'electron';
 import { PortChannel } from './request';
 import { isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './core/log';
@@ -7,11 +7,12 @@ import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
 import { Global_Channel } from '../../common/ipc/channel';
 import { listenPip } from './utils/dev';
+import HotUpdateInstance from './core/autoUpdate';
 
 const os = getOsType();
 const isReload = isDev && process.env.RELOAD_MAIN === 'true';
 MatexLog.debug(`当前系统为:${os}`);
-MatexLog.debug(process.env.NODE_ENV ?? '环境未注入');
+MatexLog.debug(process.env.NODE_ENV ?? '环境未注入1');
 if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 
@@ -80,6 +81,7 @@ app.on('ready', async () => {
 app.whenReady().then(async () => {
   try {
     isDev && listenPip();
+    !isDev && (await HotUpdateInstance.checkUpdate());
     ipcMain.on(Global_Channel.TrafficLights, (e, type) => {
       const op = type as 'close' | 'minimize' | 'fullscreen';
       switch (op) {
