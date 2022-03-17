@@ -29,9 +29,9 @@ const Modal: React.FC<ModalOpt> = React.forwardRef(
         <div className={styles.background} />
         <div className={styles.con}>
           <div className={styles.header}>
-            <div className={styles.title}>{title}</div>
+            <div className={styles.title} />
             <div className={styles.close} onClick={() => closeToast && closeToast()}>
-              <div style={{ marginTop: 0, marginLeft: 1 }} className={styles.iconCon}>
+              <div style={{ marginTop: -1, marginLeft: 1 }} className={styles.iconCon}>
                 <Icon className={styles.icon} name={'close'} />
               </div>
             </div>
