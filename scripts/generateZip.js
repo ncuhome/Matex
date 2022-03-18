@@ -30,6 +30,7 @@ const updateMetaData = async (os, zipPath) => {
   try {
     const res = await ReqAsync({
       url: `${server}update/metadata`,
+      // url: 'http://localhost:7888/update/metadata',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -60,7 +61,7 @@ const uploadZip = async (mac) => {
     uploadUrl = `${server}update/uploadWin`;
   }
   const zip = new AdmZip();
-  zip.addLocalFolder(sourceDir, 'app');
+  zip.addLocalFolder(sourceDir, '');
 
   return new Promise((resolve) => {
     zip.writeZip(targetPath, async (err) => {
