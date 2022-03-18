@@ -3,11 +3,20 @@ import { app, dialog } from 'electron';
 import matexHttp from 'matexhttp';
 import { promisify } from 'util';
 import AdmZip from 'adm-zip';
-import path from 'path';
+import { resolve } from 'path';
 import fs from 'fs';
-import RP from 'request-progress';
+import stream from 'stream';
+import got from 'got';
 
 const ReqAsync = promisify(matexHttp);
+const pipeline = promisify(stream.pipeline);
+
+interface MetaData {
+  version: string;
+  size: string;
+  os: 'win' | 'mac';
+}
+
 class HotUpdate extends EventEmitter {
   oldVer: string;
   latestVer: string | undefined;
@@ -15,75 +24,85 @@ class HotUpdate extends EventEmitter {
     super();
     this.oldVer = app.getVersion();
   }
-
   async checkUpdate() {
-    console.log('checkUpdate');
+    console.log('开始检查更新');
     const res = await ReqAsync({
-      url: 'http://localhost:8080/update?version=' + app.getVersion(),
+      url: 'http://159.75.220.253:7888/update/check',
       method: 'GET'
     });
-    const data = JSON.parse(res.strBody as string);
-    if (data.status === '1') {
-      this.emit('after-check', true);
-      this.latestVer = data.version;
-      const res = await this.downFile();
-      if (res) {
-        app.relaunch();
-        app.exit(0);
+    const resData = JSON.parse(res.strBody as string);
+    console.log(resData);
+    if (resData.code === 200) {
+      const metadata = resData.data as MetaData;
+      if (metadata.version !== app.getVersion()) {
+        this.emit('after-check', true);
+        const res = await this.downFile();
+        if (res) {
+          console.log('更新完成,即将重启');
+          app.relaunch();
+          app.exit(0);
+        } else {
+          await dialog.showMessageBox({
+            type: 'error',
+            title: '提示',
+            message: '更新失败',
+            buttons: ['确定']
+          });
+        }
       } else {
-        await dialog.showMessageBox({
-          type: 'error',
-          title: '提示',
-          message: '更新失败',
-          buttons: ['确定']
-        });
+        this.emit('after-check', false);
+        console.log('暂无更新');
       }
     } else {
       this.emit('after-check', false);
-      console.log('没有更新');
+      console.log('获取更新信息失败');
+      console.log(resData.data);
     }
   }
 
-  async downFile() {
-    return new Promise((resolve) => {
+  downFile(): Promise<boolean> {
+    return new Promise((rsv) => {
+      console.log('开始下载更新文件');
       try {
-        const dirPath = path.join(__dirname, '../');
+        const dirPath = resolve(__dirname, '../../');
         if (!fs.existsSync(dirPath)) {
           fs.mkdirSync(dirPath);
           console.log('文件夹创建成功');
-        } else {
-          console.log('文件夹已存在');
         }
         let fileName = 'app.zip';
-        let url = 'http://159.75.220.253:7888/mac/mac.zip';
-        let stream = fs.createWriteStream(path.join(dirPath, fileName));
+        let url = 'http://159.75.220.253:7888/assets/mac/mac.zip';
+        const targetPath = resolve(dirPath, fileName);
+        let zipStream = fs.createWriteStream(targetPath);
 
-        RP(matexHttp(url))
-          .on('progress', function (state: any) {
-            console.log('progress', state);
-          })
-          .on('error', function (err: any) {
-            console.log('error', err);
-          })
-          .on('end', function () {
-            console.log('文件[' + fileName + ']下载完毕');
-            const admZip = new AdmZip(path.join(dirPath, fileName));
-            admZip.extractAllTo(path.join(dirPath, './'), true);
-            fs.unlinkSync(path.join(dirPath, fileName));
-            resolve(true);
-          })
-          .pipe(stream);
-        // .on('close', function (err: any) {
-        //   if (err) {
-        //     console.log(err);
-        //     resolve(false);
-        //   } else {
-        //
-        //   }
-        // });
+        const gotStream = got.stream(url, { throwHttpErrors: false });
+
+        gotStream.on('downloadProgress', (progress) => {
+          console.log(progress);
+        });
+
+        gotStream.on('error', (err) => {
+          console.log('出现错误:', err);
+          rsv(false);
+        });
+        gotStream.on('end', () => {
+          console.log('文件[' + fileName + ']下载完毕');
+          setTimeout(() => {
+            try {
+              const admZip = new AdmZip(targetPath);
+              admZip.extractAllTo(resolve(dirPath, './'), true);
+              console.log('文件[' + fileName + ']解压完毕');
+              fs.unlinkSync(targetPath);
+              rsv(true);
+            } catch (e) {
+              console.log(e);
+              rsv(false);
+            }
+          }, 1000);
+        });
+        pipeline(gotStream, zipStream);
       } catch (e) {
         console.log(e);
-        resolve(false);
+        rsv(false);
       }
     });
   }

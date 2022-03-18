@@ -21,7 +21,7 @@
     "signale": "^1.4.0",
     "@sentry/electron": "^2.5.4",
     "adm-zip": "^0.5.9",
-    "request-progress": "^3.0.0",
+    "got": "11.8.2",
     "entities": "^3.0.1"
   }
 }
