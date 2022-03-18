@@ -1,0 +1,10 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "download": "node download.test.js"
+  },
+  "dependencies": {
+  }
+}
