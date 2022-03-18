@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.scss';
 import { ApiList } from '/@cmp/ApiList';
 import { Button, Icon, Label } from 'semantic-ui-react';
-import useModal from '/@cmp/Modal/useModal';
-import Progress from '/@cmp/Modal/progress';
+import useModal from '/@cmp/UpdateModal/useModal';
 
 const style = {
   background: '#466085',
@@ -12,18 +11,14 @@ const style = {
 };
 
 const CollectSide = () => {
-  const onConfirm = () => {
-    let i = 0;
-    setInterval(() => {
-      i++;
-      updateContent(<Progress progress={i} />);
-    }, 1000);
-  };
-
-  const { ToastView, openToast, updateContent } = useModal({ onConfirm });
+  const [progress, setProgress] = useState(0);
+  const { ToastView, openToast } = useModal();
 
   const handleClick = () => {
-    openToast({ content: <p>有更新可用, 是否更新 ?</p> });
+    openToast();
+    setInterval(() => {
+      setProgress((pre) => pre + 1);
+    }, 1000);
   };
 
   return (
@@ -56,7 +51,7 @@ const CollectSide = () => {
           &nbsp; 删除
         </Button>
       </div>
-      <ToastView title={'更新'} />
+      <ToastView progress={progress} />
     </div>
   );
 };

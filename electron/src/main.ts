@@ -7,7 +7,7 @@ import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
 import { Global_Channel } from '../../common/ipc/channel';
 import { listenPip } from './utils/dev';
-import HotUpdateInstance from './core/autoUpdate';
+import { handleUpdate } from './core/handleUpdate';
 
 const os = getOsType();
 const isReload = isDev && process.env.RELOAD_MAIN === 'true';
@@ -39,12 +39,13 @@ async function init() {
     }
 
     mainWindow = await createMainWin();
-    mainWindow?.on('ready-to-show', () => {
+    mainWindow?.on('ready-to-show', async () => {
       if (!isReload) {
         loadWindow?.close();
         loadWindow?.destroy();
       }
       mainWindow?.show();
+      mainWindow && handleUpdate(mainWindow);
     });
 
     await mainWindow?.loadURL(mainPath);
@@ -79,35 +80,36 @@ app.on('ready', async () => {
 
 //当窗口加载完成调用
 app.whenReady().then(async () => {
+  isDev && listenPip();
   try {
-    isDev && listenPip();
-    !isDev && (await HotUpdateInstance.checkUpdate());
-    ipcMain.on(Global_Channel.TrafficLights, (e, type) => {
-      const op = type as 'close' | 'minimize' | 'fullscreen';
-      switch (op) {
-        case 'close':
-          {
-            mainWindow?.close();
-          }
-          break;
-        case 'minimize':
-          {
-            mainWindow?.minimize();
-          }
-          break;
-        case 'fullscreen':
-          {
-            if (isFullscreen) {
-              mainWindow?.setFullScreen(false);
-              isFullscreen = false;
-            } else {
-              mainWindow?.setFullScreen(true);
-              isFullscreen = true;
+    if (os === 'win') {
+      ipcMain.on(Global_Channel.TrafficLights, (e, type) => {
+        const op = type as 'close' | 'minimize' | 'fullscreen';
+        switch (op) {
+          case 'close':
+            {
+              mainWindow?.close();
             }
-          }
-          break;
-      }
-    });
+            break;
+          case 'minimize':
+            {
+              mainWindow?.minimize();
+            }
+            break;
+          case 'fullscreen':
+            {
+              if (isFullscreen) {
+                mainWindow?.setFullScreen(false);
+                isFullscreen = false;
+              } else {
+                mainWindow?.setFullScreen(true);
+                isFullscreen = true;
+              }
+            }
+            break;
+        }
+      });
+    }
   } catch (e) {
     new Notification({
       title: '错误',
