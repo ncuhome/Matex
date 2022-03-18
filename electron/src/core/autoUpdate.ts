@@ -70,9 +70,19 @@ class HotUpdate extends EventEmitter {
           console.log('文件夹创建成功');
         }
         let fileName = 'app.zip';
-        let url = 'http://159.75.220.253:7888/assets/mac/mac.zip';
+        let macUrl = 'http://159.75.220.253:7888/assets/mac/mac.zip';
+        let winUrl = 'http://159.75.220.253:7888/assets/win/win.zip';
         const targetPath = resolve(dirPath, fileName);
         let zipStream = fs.createWriteStream(targetPath);
+        let url = '';
+        if (process.platform === 'darwin') {
+          url = macUrl;
+        } else if (process.platform === 'win32') {
+          url = winUrl;
+        } else {
+          console.log('不支持的操作系统');
+          rsv(false);
+        }
 
         const gotStream = got.stream(url, { throwHttpErrors: false });
 
