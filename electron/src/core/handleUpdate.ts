@@ -3,12 +3,15 @@ import { isDev } from '../utils/path';
 import HotUpdateInstance from './autoUpdate';
 import { AfterCheckRes } from '../type/update';
 import { Progress } from 'got';
+import { DownloadProgress } from '../../../common';
+import fileSize from 'filesize';
+import { Update_Channel } from '../../../common/ipc/channel';
 
 export const handleUpdate = async (mainWindow: BrowserWindow) => {
   if (isDev) {
     return;
   } else {
-    HotUpdateInstance.on('after-check-update', async (res: AfterCheckRes) => {
+    HotUpdateInstance.on(Update_Channel.AfterCheck, async (res: AfterCheckRes) => {
       if (res.isUpdate) {
         const result = await dialog.showMessageBox({
           type: 'info',
@@ -17,15 +20,28 @@ export const handleUpdate = async (mainWindow: BrowserWindow) => {
           buttons: ['立即更新', '下次再说']
         });
         if (result.response === 0) {
-          ipcMain.on('cancel-update', () => {
-            HotUpdateInstance.emit('cancel-update');
+          mainWindow.webContents.send(Update_Channel.StartDownload);
+
+          ipcMain.on(Update_Channel.CancelUpdate, () => {
+            HotUpdateInstance.emit(Update_Channel.CancelUpdate);
           });
-          HotUpdateInstance.on('download-progress', (pro: Progress) => {
-            mainWindow.webContents.postMessage('download-progress', pro);
+
+          HotUpdateInstance.on(Update_Channel.UpdateCanceled, () => {
+            mainWindow.webContents.send(Update_Channel.UpdateCanceled);
           });
-          HotUpdateInstance.on('update-downloaded', () => {
-            finishedUpdate();
-            mainWindow.webContents.postMessage('update-downloaded', null);
+
+          HotUpdateInstance.on(Update_Channel.DownloadProgress, (pro: Progress) => {
+            const progress = {
+              percent: Math.floor(pro.percent * 100),
+              transferred: fileSize(pro.transferred),
+              total: fileSize(pro.total ?? 1024)
+            } as DownloadProgress;
+            mainWindow.webContents.postMessage(Update_Channel.DownloadProgress, progress);
+          });
+
+          HotUpdateInstance.on(Update_Channel.UpdateDownloaded, async () => {
+            mainWindow.webContents.postMessage(Update_Channel.UpdateDownloaded, null);
+            await finishedUpdate(mainWindow);
           });
           await HotUpdateInstance.downFile();
         }
@@ -35,20 +51,22 @@ export const handleUpdate = async (mainWindow: BrowserWindow) => {
   }
 };
 
-const finishedUpdate = async () => {
+const finishedUpdate = async (mainWindow: BrowserWindow) => {
+  const res = await HotUpdateInstance.extractZip();
   const result = await dialog.showMessageBox({
-    type: 'success',
+    type: 'info',
     title: '更新提示',
-    message: '下载更新完成,是否立即解压安装并重启?',
+    message: '下载更新完成,是否立即安装并重启?',
     buttons: ['确定', '取消']
   });
   if (result.response === 0) {
-    const res = await HotUpdateInstance.extractZip();
     if (res) {
       app.relaunch();
       app.exit(0);
     } else {
       await dialog.showErrorBox('更新失败', '解压更新包失败,请重试');
     }
+  } else {
+    mainWindow.webContents.send(Update_Channel.RelaunchDelay, null);
   }
 };

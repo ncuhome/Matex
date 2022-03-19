@@ -3,12 +3,12 @@ import type { IncomingHttpHeaders } from 'http';
 import { BodyItemType, BodyRawType } from '../renderer/src/type/apiTest';
 
 export interface NodeApiProps {
-  NODE_ENV: 'development' | 'production' | string|undefined;
+  NODE_ENV: 'development' | 'production' | string | undefined;
   ipc: IpcRenderer | null;
-  OS:'mac'|'win'
+  OS: 'mac' | 'win';
   Clipboard: Electron.Clipboard;
   MessagePort: MessagePort | null;
-  decodeHTML5: (str: string ) => string;
+  decodeHTML5: (str: string) => string;
 }
 
 export interface FormDataReq {
@@ -40,13 +40,13 @@ export interface ApiTestReqProps {
 
 export interface ApiTestResProps<T = any> {
   type:
-  | 'text/html'
-  | 'text/plain'
-  | 'application/xml'
-  | 'application/json'
-  | 'application/pdf'
-  | 'application/msword'
-  | string;
+    | 'text/html'
+    | 'text/plain'
+    | 'application/xml'
+    | 'application/json'
+    | 'application/pdf'
+    | 'application/msword'
+    | string;
   statusCode: number;
   desc: string;
   size: string;
@@ -65,4 +65,10 @@ export interface ReqError {
   syscall: string;
   address: string;
   port: number;
+}
+
+export interface DownloadProgress {
+  percent: number;
+  transferred: string;
+  total: string;
 }

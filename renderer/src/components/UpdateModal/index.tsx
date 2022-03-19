@@ -7,18 +7,23 @@ import Progress from '/@cmp/UpdateModal/progress';
 interface ModalOpt {
   visible: boolean;
   progress: number;
+  done: string;
+  total: string;
   onClose?: () => void;
   onConfirm?: () => void;
   onCancel?: () => void;
   wantCancel?: boolean;
 }
 const Modal: React.FC<ModalOpt> = React.forwardRef(
-  ({ visible = false, wantCancel = false, onCancel, onConfirm, progress, onClose }, ref: any) => {
+  (
+    { visible = false, wantCancel = false, done, total, onCancel, onConfirm, progress, onClose },
+    ref: any
+  ) => {
     const handleClose = () => {
       onClose && onClose();
     };
 
-    const renderFooter = () => {
+    const renderFooter = (done: string, total: string) => {
       if (wantCancel) {
         return (
           <div className={styles.btns}>
@@ -31,7 +36,11 @@ const Modal: React.FC<ModalOpt> = React.forwardRef(
           </div>
         );
       } else {
-        return <div className={styles.footer}>10mb / 20mb</div>;
+        return (
+          <div className={styles.footer}>
+            {done} / {total}
+          </div>
+        );
       }
     };
 
@@ -51,7 +60,7 @@ const Modal: React.FC<ModalOpt> = React.forwardRef(
             <div className={styles.desc}>{wantCancel ? '取消更新?' : '正在更新'}</div>
             {!wantCancel && <Progress progress={progress} />}
           </div>
-          {renderFooter()}
+          {renderFooter(done, total)}
         </div>
       </div>
     );

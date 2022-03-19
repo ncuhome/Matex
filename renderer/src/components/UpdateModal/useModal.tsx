@@ -3,14 +3,21 @@ import usePortal from 'react-useportal';
 import Modal from './index';
 import { MatexWin } from '/@/global';
 
-const useModal = () => {
+interface ViewProps {
+  done: string;
+  total: string;
+  progress: number;
+}
+
+const useUpdateModal = () => {
+  const [wantCancel, setWantCancel] = React.useState(false);
+
   const { isOpen, openPortal, closePortal, Portal, ref } = usePortal({
     isOpen: false,
     onClose: () => {
-      console.log('onClose');
+      setWantCancel(false);
     }
   });
-  const [wantCancel, setWantCancel] = React.useState(false);
 
   const openToast = () => {
     if (isOpen) return;
@@ -31,12 +38,14 @@ const useModal = () => {
     closePortal();
   };
 
-  const ToastView = ({ progress }: { progress: number }) => {
+  const ToastView = ({ progress, done, total }: ViewProps) => {
     return (
       <Portal>
         <Modal
           // @ts-ignore
           ref={ref}
+          done={done}
+          total={total}
           wantCancel={wantCancel}
           progress={progress}
           visible={isOpen}
@@ -51,9 +60,10 @@ const useModal = () => {
   return {
     ToastView,
     openToast,
+    closePortal,
     ref,
     isOpen
   };
 };
 
-export default useModal;
+export default useUpdateModal;

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './index.module.scss';
 import { ApiList } from '/@cmp/ApiList';
 import { Button, Icon, Label } from 'semantic-ui-react';
-import useModal from '/@cmp/UpdateModal/useModal';
 
 const style = {
   background: '#466085',
@@ -11,21 +10,11 @@ const style = {
 };
 
 const CollectSide = () => {
-  const [progress, setProgress] = useState(0);
-  const { ToastView, openToast } = useModal();
-
-  const handleClick = () => {
-    openToast();
-    setInterval(() => {
-      setProgress((pre) => pre + 1);
-    }, 1000);
-  };
-
   return (
     <div className={styles.side}>
       <div className={styles.list}>
         <div className={styles.header}>
-          <Label style={style} size={'small'} onClick={handleClick}>
+          <Label style={style} size={'small'}>
             请求历史<span style={{ color: '#8ADDFF', display: 'inline-block', marginLeft: 10 }}>79</span>
           </Label>
         </div>
@@ -51,7 +40,6 @@ const CollectSide = () => {
           &nbsp; 删除
         </Button>
       </div>
-      <ToastView progress={progress} />
     </div>
   );
 };

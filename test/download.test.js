@@ -4,11 +4,13 @@ import stream from 'node:stream';
 import fs from 'node:fs';
 import got from 'got';
 import AdmZip from 'adm-zip';
-
 const pipeline = promisify(stream.pipeline);
+import pkg from 'bluebird';
+const { Promise } = pkg;
+Promise.config({ cancellation: true });
 
 const downFile = () => {
-  return new Promise((rsv) => {
+  return new Promise((rsv, reject, onCancel) => {
     try {
       const dirPath = resolve(process.cwd(), './');
       if (!fs.existsSync(dirPath)) {
@@ -21,14 +23,36 @@ const downFile = () => {
       let zipStream = fs.createWriteStream(targetPath);
 
       const gotStream = got.stream(url, { throwHttpErrors: false });
+      let request;
+      gotStream.on('request', (req) => {
+        console.log(req);
+        request = req;
+      });
+
+      onCancel(() => {
+        console.log('cancel');
+        request.abort();
+      });
 
       gotStream.on('downloadProgress', (progress) => {
         console.log(progress);
       });
 
+      process.on('uncaughtException', (err) => {
+        console.log('uncaughtException:=' + err);
+      });
+
+      process.on('unhandledRejection', (err) => {
+        console.log('unhandledRejection:=' + err);
+      });
+
+      process.on('uncaughtExceptionMonitor', (err) => {
+        console.log('uncaughtExceptionMonitor:=' + err);
+      });
+
       gotStream.on('error', (err) => {
-        console.log('error:', err);
-        rsv(false);
+        console.log('错误:', err);
+        reject(err);
       });
       gotStream.on('end', () => {
         console.log('文件[' + fileName + ']下载完毕');
@@ -54,6 +78,14 @@ const downFile = () => {
 };
 
 (async () => {
-  const result = await downFile();
-  console.log(result);
+  try {
+    const result = downFile();
+    // setTimeout(() => {
+    //   result.cancel();
+    // }, 2000);
+    console.log(result);
+  } catch (e) {
+    console.log('错误:1234', e);
+    console.log(e);
+  }
 })();
