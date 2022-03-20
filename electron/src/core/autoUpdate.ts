@@ -10,6 +10,7 @@ import got from 'got';
 import { AfterCheckRes, MetaData } from '../type/update';
 import fileSize from 'filesize';
 import { Update_Channel } from '../../../common/ipc/channel';
+import { getOsType } from '../utils/system';
 
 const ReqAsync = promisify(matexHttp);
 const pipeline = promisify(stream.pipeline);
@@ -26,28 +27,26 @@ class HotUpdate extends EventEmitter {
   }
   async checkUpdate() {
     console.log('开始检查更新');
+    const os = getOsType();
     const res = await ReqAsync({
-      url: 'http://159.75.220.253:7888/update/check',
+      url: 'http://159.75.220.253:7888/update/check?os=' + os,
       method: 'GET'
     });
     const resData = JSON.parse(res.strBody as string);
     console.log(resData);
     const metadata = resData.data as MetaData;
     if (resData.code === 200) {
+      const res = {
+        isUpdate: true,
+        version: metadata.version,
+        size: metadata.size,
+        os: metadata.os,
+        update_time: metadata.update_time
+      };
       if (metadata.version !== app.getVersion()) {
-        this.emit(Update_Channel.AfterCheck, {
-          isUpdate: true,
-          version: metadata.version,
-          size: metadata.size,
-          os: metadata.os
-        } as AfterCheckRes);
+        this.emit(Update_Channel.AfterCheck, res as AfterCheckRes);
       } else {
-        this.emit(Update_Channel.AfterCheck, {
-          isUpdate: false,
-          version: metadata.version,
-          size: fileSize(parseInt(metadata.size)),
-          os: metadata.os
-        } as AfterCheckRes);
+        this.emit(Update_Channel.AfterCheck, res as AfterCheckRes);
         console.log('没有更新');
       }
     } else {
@@ -134,7 +133,7 @@ class HotUpdate extends EventEmitter {
         //防止解压错误
         setTimeout(() => {
           const admZip = new AdmZip(targetPath);
-          admZip.extractAllTo(resolve(dirPath, '../'), true);
+          admZip.extractAllTo(resolve(dirPath, './'), true);
           console.log('文件[' + fileName + ']解压完毕');
           fs.unlinkSync(targetPath);
           rsv(true);

@@ -1,7 +1,14 @@
 import jsonfile from 'jsonfile';
-import {ColorLog} from './colorLog.js';
-import {exec} from 'child_process';
+import { ColorLog } from './colorLog.js';
+import { exec } from 'child_process';
+import 'dayjs/locale/zh-cn.js'; // 导入本地化语言
+import dayjs from 'dayjs';
+import isLeapYear from 'dayjs/plugin/isLeapYear.js'; // 导入插件
 
+dayjs.extend(isLeapYear); // 使用插件
+dayjs.locale('zh-cn');
+
+export const matexTime = dayjs;
 
 /**
  *

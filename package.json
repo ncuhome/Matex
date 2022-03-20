@@ -27,10 +27,9 @@
     "preview": "vite preview -c ./renderer/vite.config.ts",
     "postinstall": "electron-builder install-app-deps",
     "copy": "node scripts/copyFile.js",
-    "sync:meta": "node scripts/syncMeta.js",
-    "prerelease": "concurrently \"npm run copy\" \"npm run sync:meta\"",
+    "prerelease": "npm run copy",
     "release": "cross-env NODE_ENV=production USE_HARD_LINKS=false electron-builder build --config electron_builder.json --publish never",
-    "uploadZip": "node ./scripts/generateZip.js"
+    "uploadZip": "node ./scripts/generateZip.js http://159.75.220.253:7888/"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.34",

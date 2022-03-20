@@ -5,7 +5,7 @@ import { ColorLog } from './colorLog.js';
 import fs from 'fs';
 import { promisify } from 'util';
 import matexhttp from 'matexhttp';
-import { readJson } from './utils.js';
+import { matexTime, readJson } from './utils.js';
 const ReqAsync = promisify(matexhttp);
 import fileSize from 'filesize';
 
@@ -25,7 +25,8 @@ const updateMetaData = async (os, zipPath) => {
   const metadata = JSON.stringify({
     version,
     size,
-    os
+    os,
+    update_time: matexTime().format('YYYY-MM-DD HH:mm:ss')
   });
   try {
     const res = await ReqAsync({
