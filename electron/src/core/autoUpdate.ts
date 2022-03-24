@@ -8,7 +8,6 @@ import fs from 'fs';
 import stream from 'stream';
 import got from 'got';
 import { AfterCheckRes, MetaData } from '../type/update';
-import fileSize from 'filesize';
 import { Update_Channel } from '../../../common/ipc/channel';
 import { getOsType } from '../utils/system';
 

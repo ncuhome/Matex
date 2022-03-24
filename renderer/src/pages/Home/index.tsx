@@ -12,7 +12,6 @@ import { Update_Channel } from '/@common/ipc/channel';
 import { IpcRendererEvent } from 'electron';
 import type { DownloadProgress } from '/@common/index';
 import toast from 'react-hot-toast';
-import { Icon } from 'semantic-ui-react';
 
 const Home: React.FC<any> = () => {
   const navigate = useNavigate();

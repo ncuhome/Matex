@@ -10,7 +10,7 @@ export const sidebarModel: TabProps[] = [
     route: '/apiTest'
   },
   {
-    text: 'websocket',
+    text: '长连接',
     route: '/websocket'
   },
   {
