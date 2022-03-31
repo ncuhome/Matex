@@ -1,0 +1,38 @@
+.commStyle{
+  height: 82px;
+  width: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.startBtn{
+  position: absolute;
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  background: #777EA8;
+  bottom: -40px;
+  left: 60%;
+  box-shadow:0 0 10px #2D3259;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  .startBtnNormal{
+    @extend .commStyle;
+    border: 3px solid #56D9FF;
+    box-shadow: 0 0 3px #89E5FF;
+
+    &:hover{
+      box-shadow: 0 0 10px #89E5FF;
+    }
+
+    .text{
+      color: white;
+      font-size: 16px;
+    }
+  }
+}

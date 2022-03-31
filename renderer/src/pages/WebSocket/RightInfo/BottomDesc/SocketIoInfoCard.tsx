@@ -1,19 +1,21 @@
 import React from 'react';
-import styles from '/@/pages/WebSocket/Side/index.module.scss';
 import { useAtomValue } from 'jotai/utils';
-import { websocketConnAtom } from '/@/store/websocketStore';
+import { socketIoConnAtom } from '/@/store/websocketStore';
+import styles from './index.module.scss';
 import waitImg from '/@/assets/icon/wait_conn.svg';
 
-const NativeInfoCard = () => {
-  const ws = useAtomValue(websocketConnAtom);
+const SocketIoInfoCard = () => {
+  const ws = useAtomValue(socketIoConnAtom);
   if (ws) {
-    const url = new URL((ws as WebSocket).url);
+    const url = new URL(ws.io.uri);
+    const nsp = ws.nsp;
+    const id = ws.id;
     return (
       <>
         <h4 className={styles.infoTitle}>连接信息</h4>
         <div className={styles.infoLine}>
           <div className={styles.infoKey}>type：</div>
-          <div className={styles.infoVal}>{'native'}</div>
+          <div className={styles.infoVal}>{'socketio'}</div>
         </div>
         <div className={styles.infoLine}>
           <div className={styles.infoKey}>hostname：</div>
@@ -24,14 +26,14 @@ const NativeInfoCard = () => {
           <div className={styles.infoVal}>{url.port}</div>
         </div>
         <div className={styles.infoLine}>
-          <div className={styles.infoKey}>protocols:</div>
-          <div className={styles.infoVal}>
-            {(ws as WebSocket).protocol ? (ws as WebSocket).protocol : '无'}
-          </div>
+          <div className={styles.infoKey}>nsp:</div>
+          <div className={styles.infoVal}>{nsp}</div>
         </div>
         <div className={styles.infoLine}>
-          <div className={styles.infoKey}>binaryType:</div>
-          <div className={styles.infoVal}>{(ws as WebSocket).binaryType}</div>
+          <div className={styles.infoKey}>id:</div>
+          <div className={styles.infoVal} style={{ fontSize: 12.5 }}>
+            {id ?? ''}
+          </div>
         </div>
       </>
     );
@@ -45,4 +47,4 @@ const NativeInfoCard = () => {
   }
 };
 
-export default NativeInfoCard;
+export default SocketIoInfoCard;

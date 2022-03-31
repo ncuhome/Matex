@@ -7,6 +7,10 @@
   overflow-x: hidden;
   scroll-behavior: smooth;
 
+  & div{
+    transition: all 0.3s ease-in-out;
+  }
+
 
   .conLeft{
     display: flex;

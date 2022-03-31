@@ -1,22 +1,16 @@
 import React from 'react';
 import styles from './index.module.scss';
-import WsSide from '/@/pages/WebSocket/Side';
-import Header from './Header';
-import Body from '/@/pages/WebSocket/Body';
+import MsgWin from '/@/pages/WebSocket/MsgWin';
+import RightInfo from '/@/pages/WebSocket/RightInfo';
 
 const WebSocketPage = () => {
   return (
     <div className={styles.webSocket}>
-      <div className={styles.chat}>
-        <div className={styles.header}>
-          <Header />
-        </div>
-        <div className={styles.body}>
-          <Body />
-        </div>
+      <div className={styles.left}>
+        <MsgWin />
       </div>
-      <div className={styles.side}>
-        <WsSide />
+      <div className={styles.right}>
+        <RightInfo />
       </div>
     </div>
   );

@@ -1,0 +1,153 @@
+.topForm {
+  height: 250px;
+  width: 250px;
+
+  .sideSelect {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px 9px;
+
+    .sideBtn {
+      font-size: 16px;
+      color: #65b2de;
+      font-weight: 500;
+      border-bottom: transparent 2px solid;
+      padding-bottom: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .activeSideBtn {
+      color: #66dcff;
+    }
+
+    .activeSideBtn.sideBtn::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      content: '';
+      height: 3px;
+      border-radius: 2px;
+      width: 100%;
+      background: #66dcff;
+    }
+  }
+  .sideIconCon {
+    margin-top: 15px;
+    height: 80px;
+    width: 80px;
+    margin-left: calc((100% - 80px) / 2);
+    background: #586aaa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .sideIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      color: #dadfe9;
+    }
+  }
+
+  .connSelect {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding: 0 10px;
+
+    .typeText {
+      font-size: 12px;
+      color: white;
+      font-weight: 500;
+      padding: 2px 10px;
+      display: inline-block;
+      background: #2cb6ad;
+      border-radius: 5px;
+    }
+
+    .connType {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #3f477b;
+      height: 35px;
+      border-radius: 5px;
+      padding: 0 5px;
+
+      .typeBtn {
+        color: white;
+        width: 45%;
+        height: 75%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #668cc1;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .channel {
+    display: flex;
+    align-items: center;
+    padding: 0 5px 0 10px;
+    justify-content: space-between;
+
+    .channelNum {
+      margin-right: 5px;
+      margin-top: 5px;
+
+      .number {
+        display: inline-block;
+        margin-right: 8px;
+        color: #8addff;
+      }
+    }
+  }
+}
+
+.channelList {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .addChannel{
+    background: #2cb6ad;
+    padding: 3px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 12px;
+
+    &:hover{
+      background: #414A7F;
+    }
+  }
+
+  .channelItem {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    .channelIndex {
+      color: #424B80;
+      margin-right: 10px;
+    }
+
+    .channelContent {
+      outline: none;
+      border: none;
+      background: #424B80;
+      border-radius: 5px;
+      color: #7ab9e7;
+      height: 25px;
+      padding-left: 5px;
+    }
+  }
+}

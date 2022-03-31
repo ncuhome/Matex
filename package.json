@@ -29,7 +29,7 @@
     "copy": "node scripts/copyFile.js",
     "prerelease": "npm run copy",
     "release": "cross-env NODE_ENV=production USE_HARD_LINKS=false electron-builder build --config electron_builder.json --publish never",
-    "uploadZip": "node ./scripts/generateZip.js http://159.75.220.253:7888/"
+    "uploadZip": "node ./scripts/generateZip.js"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.34",

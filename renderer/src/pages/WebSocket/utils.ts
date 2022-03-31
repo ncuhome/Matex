@@ -6,25 +6,25 @@ interface StatusObj {
 export const getStatusColor = (status: string) => {
   let res: StatusObj = { text: '', color: '' };
   switch (status) {
-    case 'connecting':
+    case '连接中':
       res = {
         text: 'connecting',
         color: '#F8AD7C'
       };
       break;
-    case 'connected':
+    case '已连接':
       res = {
         text: 'connected',
         color: '#3FDA0D'
       };
       break;
-    case 'closing':
+    case '关闭中':
       res = {
         text: 'closing',
         color: '#E5E5E5'
       };
       break;
-    case 'closed':
+    case '未连接':
       res = {
         text: 'closed',
         color: '#BAC3D6'
@@ -37,14 +37,14 @@ export const getStatusColor = (status: string) => {
 export const getStatusText = (code: number) => {
   switch (code) {
     case 0:
-      return 'connecting';
+      return '连接中';
     case 1:
-      return 'connected';
+      return '已连接';
     case 2:
-      return 'closing';
+      return '关闭中';
     case 3:
-      return 'closed';
+      return '未连接';
     default:
-      return 'closed';
+      return '未连接';
   }
 };

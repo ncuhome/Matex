@@ -1,0 +1,88 @@
+.footer {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+
+  .msgCon {
+    flex: 1;
+
+    .msgInput {
+      background: transparent;
+      outline: none;
+      border-radius: 5px;
+      border: none;
+      color: #00abdf;
+      width: 70%;
+      height: 90px;
+      margin: 27px 10px;
+    }
+  }
+
+  .ops {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+    align-items: end;
+
+    .channelName {
+      border-radius: 5px;
+      background: transparent;
+      outline: none;
+      line-height: 30px;
+      border: #9c96ff 1px solid;
+      color: #9c96ff;
+      padding-left: 5px;
+
+      &::placeholder {
+        color: #9c96ff;
+      }
+
+      &:hover,
+      &:focus {
+        border-color: #6c63ff;
+        color: #6c63ff;
+      }
+
+      &:hover::placeholder,
+      &:focus::placeholder{
+        color: #6c63ff;
+      }
+    }
+
+    .clear {
+      margin-top: 10px;
+      width: 80px;
+      border: #f96d6d 1px solid;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 30px;
+      color: #f96d6d;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        border-color: #f73c3c;
+        color: #f73c3c;
+      }
+    }
+
+    .send {
+      width: 80px;
+      margin-top: 10px;
+      border: #2cb5ad 1px solid;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 30px;
+      color: #2cb5ad;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        border-color: #43d1c9;
+        color: #43d1c9;
+      }
+    }
+  }
+}

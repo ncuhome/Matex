@@ -45,7 +45,7 @@ async function init() {
         loadWindow?.destroy();
       }
       mainWindow?.show();
-      mainWindow && handleUpdate(mainWindow);
+      mainWindow && (await handleUpdate(mainWindow));
     });
 
     await mainWindow?.loadURL(mainPath);

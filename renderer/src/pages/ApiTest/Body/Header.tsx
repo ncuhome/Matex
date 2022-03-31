@@ -99,7 +99,12 @@ export const Header = () => {
         position={'bottom center'}
         pinned
         trigger={
-          <Label ribbon size={'small'} as="a" color={'blue'} style={{ marginLeft: 30, height: 24 }}>
+          <Label
+            size={'small'}
+            as="a"
+            color={'blue'}
+            style={{ marginLeft: 10, height: 24, width: 70, textAlign: 'center', marginRight: 10 }}
+          >
             {getLabel(displayItem)}
           </Label>
         }

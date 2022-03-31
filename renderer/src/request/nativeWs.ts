@@ -1,12 +1,10 @@
 import { useAtom } from 'jotai';
 import { useMsgList, websocketConnAtom } from '/@/store/websocketStore';
 import { matexTime } from '/@/utils/time';
-import { SetStateAction, useEffect, useRef, useState } from 'react';
-import { Emitter } from '/@/utils/EventEmiter';
-import Emittery from 'emittery';
+import { useEffect, useState } from 'react';
 import { getStatusText } from '/@/pages/WebSocket/utils';
-import { useAtomValue } from 'jotai/utils';
 import { WsStatus } from '/@/type/websocketPage';
+import { Emitter } from '/@/utils/EventEmiter';
 
 interface NativeWsProps {
   url: string;
@@ -14,15 +12,14 @@ interface NativeWsProps {
   binaryType?: 'blob' | 'arraybuffer';
 }
 
-type WsConnNativeAtom = [WebSocket, (update?: SetStateAction<WebSocket>) => void];
-
 export const useNativeWs = () => {
-  const [wsConn, setConn] = useAtom(websocketConnAtom) as WsConnNativeAtom;
-  const initStatus = wsConn ? getStatusText(wsConn?.readyState) : 'closed';
+  const [wsConn, setConn] = useAtom(websocketConnAtom);
+  const initStatus = wsConn ? getStatusText(wsConn?.readyState) : '未连接';
   const { addMsg } = useMsgList();
   const [status, setStatus] = useState<WsStatus>(initStatus);
 
   useEffect(() => {
+    localStorage.setItem('ws-native-status', status);
     Emitter.emit('ws-native-status', status);
   }, [status]);
 
@@ -34,17 +31,17 @@ export const useNativeWs = () => {
     if (binaryType) ws.binaryType = binaryType;
     if (ws) {
       setConn(ws);
-      setStatus('connecting');
+      setStatus('连接中');
       ws.onopen = (e) => {
         console.log('ws connected');
         const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
         addMsg({ type: 'system', flag: 'good', message: '建立连接', time });
-        setStatus('connected');
+        setStatus('已连接');
       };
       ws.onmessage = (event) => {
         console.log('ws message', event);
         const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
-        addMsg({ type: 'server', message: event.data, time });
+        addMsg({ ev: 'message', type: 'server', message: event.data, time });
       };
 
       ws.onclose = (event) => {
@@ -52,7 +49,7 @@ export const useNativeWs = () => {
         const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
         addMsg({ type: 'system', flag: 'bad', message: '断开连接', time });
         setConn(undefined);
-        setStatus('closed');
+        setStatus('未连接');
       };
 
       ws.onerror = (event) => {
@@ -64,9 +61,9 @@ export const useNativeWs = () => {
   const close = (code?: number, reason?: string) => {
     if (wsConn) {
       wsConn.close(code, reason);
-      setStatus('closing');
+      setStatus('关闭中');
     } else {
-      setStatus('closed');
+      setStatus('未连接');
     }
   };
 
@@ -74,23 +71,4 @@ export const useNativeWs = () => {
     connectWs: connect,
     closeWs: close
   };
-};
-
-export const useNativeWsStatus = () => {
-  const wsConn = useAtomValue(websocketConnAtom) as WebSocket;
-  const initStatus = wsConn ? getStatusText(wsConn?.readyState) : 'closed';
-  const [status, setStatus] = useState<WsStatus>(initStatus);
-  const listenerRef = useRef<Emittery.UnsubscribeFn>();
-
-  useEffect(() => {
-    listenerRef.current?.();
-    listenerRef.current = Emitter.on('ws-native-status', (status) => {
-      setStatus(status);
-    });
-    return () => {
-      listenerRef.current?.();
-    };
-  }, []);
-
-  return status;
 };

@@ -5,16 +5,16 @@ export type WsSystemInfoFlag = 'good' | 'bad' | 'normal';
 
 export interface WsMessage {
   index: number;
+  ev?: string;
   type: 'server' | 'client' | 'system';
   message: any | WsSystemInfo;
   flag?: WsSystemInfoFlag;
   time: string;
 }
 
-export type WebsocketType = 'native' | 'socket.io';
+export type WebsocketType = 'native ws' | 'socket io';
 
-export type WsSocket = WsSocketIo | WebSocket | undefined;
-export type WsStatus = 'connecting' | 'connected' | 'closing' | 'closed';
+export type WsStatus = '连接中' | '已连接' | '关闭中' | '未连接';
 
 export interface WsSocketIo extends Socket {
   nsp: string;

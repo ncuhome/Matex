@@ -1,33 +1,28 @@
 import { io } from 'socket.io-client';
 import { useAtom } from 'jotai';
-import { useMsgList, websocketConnAtom } from '/@/store/websocketStore';
-import { SetStateAction, useEffect, useState } from 'react';
-import { WsStatus } from '/@/type/websocketPage';
-import { Socket } from 'socket.io-client';
+import { socketIoConnAtom, useMsgList } from '/@/store/websocketStore';
+import { useEffect, useState } from 'react';
+import { WsSocketIo, WsStatus } from '/@/type/websocketPage';
 import { matexTime } from '/@/utils/time';
 import { Emitter } from '/@/utils/EventEmiter';
-
-type WsConnSocketIoAtom = [Socket | undefined, (update?: SetStateAction<Socket>) => void];
-
 
 const getNowTime = () => {
   return matexTime().format('YYYY-MM-DD HH:mm:ss');
 };
 
 export const useSocketIo = () => {
-  const [wsSocket, setSocket] = useAtom(websocketConnAtom) as WsConnSocketIoAtom;
-  const [status, setStatus] = useState<WsStatus>(wsSocket?.connected ? 'connected' : 'closed');
+  const [wsSocket, setSocket] = useAtom(socketIoConnAtom);
+  const [status, setStatus] = useState<WsStatus>(wsSocket?.connected ? '已连接' : '未连接');
   const { addMsg } = useMsgList();
 
   useEffect(() => {
-    Emitter.emit('ws-native-status', status);
+    Emitter.emit('ws-socketio-status', status);
   }, [status]);
 
-
-
-  const addEVListener = (ev:string)=>{
-    wsSocket?.on(ev, (data:any) => {
+  const addEVListener = (ev: string) => {
+    wsSocket?.on(ev, (data: any) => {
       addMsg({
+        ev,
         type: 'server',
         message: data,
         time: getNowTime()
@@ -40,15 +35,16 @@ export const useSocketIo = () => {
       transports: ['websocket', 'polling'],
       reconnection: false
     });
-    setSocket(socket);
-    setStatus('connecting');
+    setSocket(socket as unknown as WsSocketIo);
+    setStatus('连接中');
 
     socket.on('connect', () => {
       console.log('connect success');
       const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
       addMsg({ type: 'system', flag: 'good', message: '建立连接', time });
-      setStatus('connected');
-      Emitter.emit('ws-socketio-status', socket);
+      setTimeout(() => {
+        setStatus('已连接');
+      }, 100);
     });
 
     socket.on('ping', (ev) => {
@@ -62,12 +58,12 @@ export const useSocketIo = () => {
     socket.on('message', (data: any) => {
       console.log('message', data);
       const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
-      addMsg({ type: 'server', message: data, time });
+      addMsg({ ev: 'message', type: 'server', message: data, time });
     });
 
     socket.on('disconnect', () => {
       console.log('disconnect');
-      setStatus('closed');
+      setStatus('未连接');
       const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
       addMsg({ type: 'system', flag: 'bad', message: '断开连接', time });
       setSocket(undefined);
@@ -79,12 +75,12 @@ export const useSocketIo = () => {
   };
 
   const closeSocketIo = () => {
-    const ws = wsSocket as Socket;
+    const ws = wsSocket;
     if (ws) {
-      setStatus('closing');
+      setStatus('关闭中');
       ws.close();
     } else {
-      setStatus('closed');
+      setStatus('未连接');
     }
   };
 
@@ -93,19 +89,4 @@ export const useSocketIo = () => {
     closeSocketIo,
     connSocketIo
   };
-};
-
-export const useSocketIoInfo = () => {
-  const [socketId, setSocketId] = useState('');
-
-  useEffect(() => {
-    Emitter.on('ws-socketio-status', (data) => {
-      const { id } = data as Socket;
-      if (data instanceof Socket) {
-        setSocketId(id);
-      }
-    });
-  }, []);
-
-  return [socketId];
 };

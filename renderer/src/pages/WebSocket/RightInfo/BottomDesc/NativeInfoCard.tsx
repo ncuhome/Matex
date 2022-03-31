@@ -1,23 +1,19 @@
 import React from 'react';
+import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
-import { websocketConnAtom, websocketUrlAtom } from '/@/store/websocketStore';
-import styles from '/@/pages/WebSocket/Side/index.module.scss';
+import { websocketConnAtom } from '/@/store/websocketStore';
 import waitImg from '/@/assets/icon/wait_conn.svg';
-import { useSocketIoInfo } from '/@/request/socketIo';
-import { WsSocketIo } from '/@/type/websocketPage';
 
-const SocketIoInfoCard = () => {
-  const ws = useAtomValue(websocketConnAtom) as WsSocketIo;
-  const [id] = useSocketIoInfo();
+const NativeInfoCard = () => {
+  const ws = useAtomValue(websocketConnAtom);
   if (ws) {
-    const url = new URL(ws.io.uri);
-    const nsp = ws.nsp;
+    const url = new URL((ws as WebSocket).url);
     return (
       <>
         <h4 className={styles.infoTitle}>连接信息</h4>
         <div className={styles.infoLine}>
           <div className={styles.infoKey}>type：</div>
-          <div className={styles.infoVal}>{'socketio'}</div>
+          <div className={styles.infoVal}>{'native'}</div>
         </div>
         <div className={styles.infoLine}>
           <div className={styles.infoKey}>hostname：</div>
@@ -28,14 +24,14 @@ const SocketIoInfoCard = () => {
           <div className={styles.infoVal}>{url.port}</div>
         </div>
         <div className={styles.infoLine}>
-          <div className={styles.infoKey}>nsp:</div>
-          <div className={styles.infoVal}>{nsp}</div>
+          <div className={styles.infoKey}>protocols:</div>
+          <div className={styles.infoVal}>
+            {(ws as WebSocket).protocol ? (ws as WebSocket).protocol : '无'}
+          </div>
         </div>
         <div className={styles.infoLine}>
-          <div className={styles.infoKey}>id:</div>
-          <div className={styles.infoVal} style={{ fontSize: 12.5 }}>
-            {id}
-          </div>
+          <div className={styles.infoKey}>binaryType:</div>
+          <div className={styles.infoVal}>{(ws as WebSocket).binaryType}</div>
         </div>
       </>
     );
@@ -49,4 +45,4 @@ const SocketIoInfoCard = () => {
   }
 };
 
-export default SocketIoInfoCard;
+export default NativeInfoCard;

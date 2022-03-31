@@ -22,7 +22,7 @@ export default class MyEmitter {
     return emitter.on(eventName, callback);
   }
 
-  on(eventName: string, callback: (value: any) => void): Emittery.UnsubscribeFn {
+  on<T>(eventName: string, callback: (value: T) => void): Emittery.UnsubscribeFn {
     return emitter.on(eventName, callback);
   }
 
@@ -34,7 +34,7 @@ export default class MyEmitter {
     emitter.clearListeners(eventName);
   }
 
-  emit(eventName: string, value: any) {
+  emit<T>(eventName: string, value: T) {
     if (!this.consume) {
       this.caches.set(eventName, value);
     }
