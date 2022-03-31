@@ -42,6 +42,10 @@ jobs:
           npm config set scripts-prepend-node-path true
           yarn install --network-timeout 100000
 
+      - name: upload zip
+        run: |
+          echo 注入更新服务器地址
+          yarn injection ${{ secrets.SERVER }}
 
       - name: build main and preload
         run: |
@@ -61,7 +65,7 @@ jobs:
       - name: upload zip
         run: |
           echo upload zip
-          yarn uploadZip ${{ secrets.SERVER }}
+          yarn uploadZip
 
 #      - name: upload zip
 #        if: ${{ matrix.os == 'macos-latest' }}

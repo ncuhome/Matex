@@ -20,6 +20,7 @@
     "dev:react": "vite -c ./renderer/vite.config.ts",
     "codgen": "npx playwright codegen http://localhost:3000/",
     "test:playwright": "ts-node test/preview.test.ts",
+    "injection": "node ./scripts/injection.js",
     "build": "concurrently \"npm run build:react\" \"npm run build:main_preload\"",
     "build:react": "vite build --config renderer/vite.config.ts",
     "build:main_preload": "cross-env NODE_ENV=production node ./scripts/esbuild.prod.js",

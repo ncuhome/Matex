@@ -8,9 +8,11 @@ import matexhttp from 'matexhttp';
 import { matexTime, readJson } from './utils.js';
 const ReqAsync = promisify(matexhttp);
 import fileSize from 'filesize';
+import * as DotEnv from 'dotenv';
 
+DotEnv.config({ path: resolve(process.cwd(), './prod.env'), debug: false });
 //服务器地址
-const server = process.argv[2];
+const server = process.env.UPDATE_SERVER_URL;
 
 /**
  *
@@ -89,6 +91,9 @@ const uploadZip = async (mac) => {
 };
 
 (async () => {
+  if (!server) {
+    return;
+  }
   let targetPath;
   let osType;
   if (os.platform() === 'darwin') {

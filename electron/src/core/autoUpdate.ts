@@ -14,17 +14,21 @@ import { getOsType } from '../utils/system';
 const ReqAsync = promisify(matexHttp);
 const pipeline = promisify(stream.pipeline);
 
+const server = process.env.UPDATE_SERVER_URL;
 const dirPath = resolve(__dirname, '../../');
 let fileName = 'app.zip';
 const targetPath = resolve(dirPath, fileName);
-const macUrl = 'http://159.75.220.253:7888/assets/mac/mac.zip';
-const winUrl = 'http://159.75.220.253:7888/assets/win/win.zip';
+const macUrl = `${server}assets/mac/mac.zip`;
+const winUrl = `${server}assets/win/win.zip`;
 
 class HotUpdate extends EventEmitter {
   constructor() {
     super();
   }
   async checkUpdate() {
+    if (!server) {
+      dialog.showErrorBox('提示', '请正确配置服务器更新地址');
+    }
     console.log('开始检查更新');
     const os = getOsType();
     const res = await ReqAsync({
