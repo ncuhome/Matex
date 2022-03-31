@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './index.module.scss';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar';
 import Header from '../../components/Header';
 import { useAtom } from 'jotai';
@@ -12,9 +12,11 @@ import { Update_Channel } from '/@common/ipc/channel';
 import { IpcRendererEvent } from 'electron';
 import type { DownloadProgress } from '/@common/index';
 import toast from 'react-hot-toast';
+import StartBtn from '/@cmp/StartBtn';
 
 const Home: React.FC<any> = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [collapse] = useAtom(collapseAtom);
   const [updateProgress, setUpdateProgress] = useAtom(updateProgressAtom);
   const isFullscreen = useAtomValue(fullscreenAtom);
@@ -47,8 +49,13 @@ const Home: React.FC<any> = () => {
     navigate('/apiTest', { replace: true });
   }, []);
 
+  const rootStyle = {
+    marginLeft: isFullscreen ? 0 : 41,
+    marginBottom: 30
+  };
+
   return (
-    <div className={styles.rootCon} style={{ marginLeft: isFullscreen ? 0 : 41 }}>
+    <div className={styles.rootCon} style={rootStyle}>
       <div className={styles.header}>
         <Header />
       </div>
@@ -61,6 +68,11 @@ const Home: React.FC<any> = () => {
         </div>
         <div className={styles.body}>
           <Outlet />
+          {location.pathname.includes('websocket') && (
+            <div className={styles.startBtn}>
+              <StartBtn />
+            </div>
+          )}
         </div>
       </div>
       {updateProgress && (

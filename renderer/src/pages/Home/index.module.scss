@@ -7,14 +7,12 @@
   background: var(--main-bg);
   display: flex;
   flex-direction: column;
-  //margin-left: 41px;
   border-radius: 15px;
-  //border-bottom-left-radius: 15px;
 
   .header{
     height: 50px;
     background: transparent;
-    //box-shadow: 0 2px 10px #D8D9D8;
+    -webkit-app-region: drag;
   }
 
   .con{
@@ -38,6 +36,12 @@
       background-color: transparent;
       position: relative;
       margin-top: -10px;
+
+      .startBtn{
+        position: absolute;
+        bottom: 10px;
+        left: 35%;
+      }
     }
   }
 }
