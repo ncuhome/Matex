@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 import { Button, Dropdown, Icon, Label, Popup } from 'semantic-ui-react';
@@ -9,6 +9,7 @@ import { useSocketIoChannels, websocketTypeAtom } from '/@/store/websocketStore'
 import type { WebsocketType } from '/@/type/websocketPage';
 import { useNativeWs } from '/@/request/nativeWs';
 import { useSocketIo } from '/@/request/socketIo';
+import { ChannelStatus } from '/@/type/websocketPage';
 
 const clientOptions = wsClientOptions.map((item) => ({
   key: item,
@@ -20,17 +21,27 @@ const TopForm = () => {
   const [wsType, setWsType] = useAtom(websocketTypeAtom);
   const { closeWs } = useNativeWs();
   const { closeSocketIo } = useSocketIo();
-  const { channels: socketIoChan, addChannel, changeChannel } = useSocketIoChannels();
+  const {
+    channels: socketIoChan,
+    addChannel,
+    listenChannel,
+    changeChannel,
+    deleteChannel
+  } = useSocketIoChannels();
+  const isSocketIo = wsType === 'socket io';
 
-  const channels = wsType === 'socket io' ? socketIoChan : ['message'];
-
+  const channels: ChannelStatus[] = isSocketIo ? socketIoChan : [{ val: 'message', listen: true }];
   useEffect(() => {
-    if (wsType === 'native ws') {
+    if (!isSocketIo) {
       closeSocketIo();
     } else {
       closeWs();
     }
   }, [wsType]);
+
+  const addListen = (index: number) => {
+    listenChannel(index);
+  };
 
   return (
     <div className={styles.topForm}>
@@ -72,23 +83,41 @@ const TopForm = () => {
           >
             <div className={styles.channelList}>
               {channels.map((item, index) => (
-                <div key={item} className={styles.channelItem}>
+                <div key={index} className={styles.channelItem}>
                   <div className={styles.channelIndex}>{index + 1}.</div>
                   <input
                     className={styles.channelContent}
-                    value={item}
+                    value={item.val}
                     onChange={(e) => {
                       changeChannel(index, e.target.value);
                     }}
                   />
+                  {item.val !== 'message' && (
+                    <div
+                      className={styles.closeBtn}
+                      onClick={() => (item.listen ? deleteChannel(index) : addListen(index))}
+                    >
+                      {item.listen ? (
+                        <Icon name={'close'} className={styles.closeIcon} />
+                      ) : (
+                        <Icon name={'add'} className={styles.closeIcon} color={'orange'} />
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
-              <div className={styles.addChannel} onClick={() => addChannel('')}>
-                添加频道
-              </div>
+              {isSocketIo && (
+                <div className={styles.addChannel} onClick={() => addChannel('')}>
+                  添加频道
+                </div>
+              )}
             </div>
           </Popup>
         </div>
+      </div>
+      <div className={styles.more}>
+        <Icon name={'arrow right'} />
+        更多配置
       </div>
     </div>
   );

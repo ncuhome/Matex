@@ -1,30 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styles from './index.module.scss';
 import { Label } from 'semantic-ui-react';
-import { useSocketIo } from '/@/request/socketIo';
-import { Emitter } from '/@/utils/EventEmiter';
-import { StartBtnProps } from '/@/store/commonStore/type';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import { websocketTypeAtom, websocketUrlAtom } from '/@/store/websocketStore';
-import Emittery from 'emittery';
 import { useWsStatus } from '/@/pages/WebSocket/MsgWin/Header/useWsStatus';
+import { WsStatus } from '/@/type/websocketPage';
 
 const MsgWinHeader = () => {
-  const { connSocketIo } = useSocketIo();
   const wsType = useAtomValue(websocketTypeAtom);
   const updateUrl = useUpdateAtom(websocketUrlAtom);
-  const listenerRef = useRef<Emittery.UnsubscribeFn>();
   const getStatus = useWsStatus();
-
-  useEffect(() => {
-    listenerRef.current = Emitter.on<StartBtnProps['className']>('startBtn.click', (status) => {
-      wsType === 'socket io' ? connSocketIo() : connSocketIo();
-    });
-
-    return () => {
-      listenerRef.current?.();
-    };
-  }, []);
 
   return (
     <div className={styles.header}>
@@ -38,11 +23,25 @@ const MsgWinHeader = () => {
       </Label>
       <input className={styles.input} placeholder={'请输入url'} onChange={(e) => updateUrl(e.target.value)} />
       <div className={styles.status}>
+        <div className={styles.dot} style={{ background: getDotColor(getStatus(wsType)) }} />
         <div className={styles.statusTitle}>状态:</div>
         <div className={styles.statusText}>{getStatus(wsType)}</div>
       </div>
     </div>
   );
+};
+
+const getDotColor = (status: WsStatus) => {
+  switch (status) {
+    case '未连接':
+      return '#F96D6D';
+    case '连接中':
+      return '#FBBF0E';
+    case '已连接':
+      return '#43D1C9';
+    case '关闭中':
+      return '#6487BB';
+  }
 };
 
 export default MsgWinHeader;

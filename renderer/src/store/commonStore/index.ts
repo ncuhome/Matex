@@ -3,7 +3,6 @@ import { editor } from 'monaco-editor';
 import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import type { EditorProps } from '/@/store/commonStore/type';
 import type { DownloadProgress } from '/@common/index';
-import { StartBtnProps } from '/@/store/commonStore/type';
 
 export const preRouteAtom = atom('');
 export const collapseAtom = atom(false);
@@ -12,7 +11,6 @@ export const editorsAtom = atom(new Map<string, editor.IStandaloneCodeEditor | n
 export const editorValueAtom = atom(new Map<string, string>());
 export const fullscreenAtom = atom(false);
 export const updateProgressAtom = atom<DownloadProgress | undefined>(undefined);
-export const startBtnAtom = atom<StartBtnProps>({ text: '开始', className: 'startBtnNormal' });
 
 export const addEditorsAtom = atom(null, (get, set, { name, editor }: EditorProps) => {
   const tempMap = new Map<string, editor.IStandaloneCodeEditor | null>(get(editorsAtom));

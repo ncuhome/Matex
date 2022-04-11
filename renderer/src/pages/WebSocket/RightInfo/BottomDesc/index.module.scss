@@ -1,17 +1,18 @@
 
 
 .infoCon {
-  width: 230px;
+  width: 250px;
   flex: 1;
   background: transparent;
-  border-top: 1px solid #65B2DE;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "JetBrains Mono Regular",sans-serif;
   font-size: 13px;
-  padding: 15px 10px 10px;
+  padding: 15px 0;
   overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(180deg,rgba(135,163,196,0.1),rgba(86,112,165,0.1));
 
   .waitImg{
     width: 215px;
@@ -30,7 +31,7 @@
   }
 
   .infoTitle{
-    color: #4EB1F3;
+    color: #2CB5AD;
   }
 
   .infoLine {
@@ -49,9 +50,10 @@
       color: #BAC3D6;
     }
     .infoVal {
-      color: #C1BDFF;
+      color: #8ADDFF;
       font-weight: bolder;
       cursor: pointer;
+      user-select: text;
     }
   }
 }

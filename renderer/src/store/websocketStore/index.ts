@@ -1,17 +1,20 @@
 import { atom, useAtom } from 'jotai';
-import { WebsocketType, WsMessage, WsSocketIo } from '/@/type/websocketPage';
+import type { WebsocketType, WsMessage, WsSocketIo } from '/@/type/websocketPage';
 import { produce } from 'immer';
 import { checkIndex } from '/@/store/utils';
 import { useUpdateAtom } from 'jotai/utils';
+import type { StartBtnProps } from '/@/pages/WebSocket/MsgWin/Footer/StartBtn';
+import { ChannelStatus } from '/@/type/websocketPage';
 
 export const websocketTypeAtom = atom<WebsocketType>('socket io');
 export const websocketSideAtom = atom<'client' | 'server'>('client');
 export const websocketMsgListAtom = atom<WsMessage[]>([]);
 export const websocketConnAtom = atom<WebSocket | undefined>(undefined);
 export const socketIoConnAtom = atom<WsSocketIo | undefined>(undefined);
-export const websocketUrlAtom = atom<string>('ws://localhost:8000');
-export const socketIoChannelsAtom = atom<string[]>(['message']);
+export const websocketUrlAtom = atom<string>('');
+export const socketIoChannelsAtom = atom<ChannelStatus[]>([{ val: 'message', listen: true }]);
 export const socketIoSendChannelAtom = atom<string>('');
+export const StartBtnAtom = atom<Pick<StartBtnProps, 'status' | 'text'>>({ text: '启动', status: 'normal' });
 
 const addMsgListAtom = atom(null, (get, set, param: Omit<WsMessage, 'index'>) => {
   const tempList = produce(get<WsMessage[]>(websocketMsgListAtom), (draft) => {
@@ -36,15 +39,32 @@ export const useMsgList = () => {
 };
 
 const addChannelAtom = atom(null, (get, set, channel: string) => {
-  const tempList = produce(get<string[]>(socketIoChannelsAtom), (draft) => {
-    draft.push(channel);
+  const tempList = produce(get<ChannelStatus[]>(socketIoChannelsAtom), (draft) => {
+    draft.push({ val: channel, listen: false });
+  });
+  set(socketIoChannelsAtom, tempList);
+});
+
+const deleteChannelAtom = atom(null, (get, set, index: number) => {
+  const tempList = produce(get<ChannelStatus[]>(socketIoChannelsAtom), (draft) => {
+    draft.splice(index, 1);
   });
   set(socketIoChannelsAtom, tempList);
 });
 
 const updateChannelAtom = atom(null, (get, set, props: { index: number; channel: string }) => {
-  const tempList = produce(get<string[]>(socketIoChannelsAtom), (draft) => {
-    draft.splice(props.index, 1, props.channel);
+  const tempList = produce(get<ChannelStatus[]>(socketIoChannelsAtom), (draft) => {
+    draft[props.index].val = props.channel;
+  });
+  console.log(tempList);
+  set(socketIoChannelsAtom, tempList);
+});
+
+const listenChannelAtom = atom(null, (get, set, index: number) => {
+  const tempList = produce(get<ChannelStatus[]>(socketIoChannelsAtom), (draft) => {
+    if (draft[index].val.trim().length !== 0) {
+      draft.splice(index, 1, { val: draft[index].val, listen: true });
+    }
   });
   set(socketIoChannelsAtom, tempList);
 });
@@ -52,20 +72,26 @@ const updateChannelAtom = atom(null, (get, set, props: { index: number; channel:
 export const useSocketIoChannels = () => {
   const [channels, updateChannel] = useAtom(socketIoChannelsAtom);
   const addChannel = useUpdateAtom(addChannelAtom);
-  const changeChannelContent = useUpdateAtom(updateChannelAtom);
+  const deleteChannel = useUpdateAtom(deleteChannelAtom);
+  const listenChannel = useUpdateAtom(listenChannelAtom);
 
   const clearChannels = () => {
     updateChannel([]);
   };
 
   const changeChannel = (index: number, channel: string) => {
-    changeChannelContent({ index, channel });
+    const tempList = produce(channels, (draft) => {
+      draft[index].val = channel;
+    });
+    updateChannel(tempList);
   };
 
   return {
     channels,
     changeChannel,
-    addChannel: addChannel,
+    addChannel,
+    deleteChannel,
+    listenChannel,
     clearChannels
   };
 };

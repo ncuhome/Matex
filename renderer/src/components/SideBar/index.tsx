@@ -22,7 +22,7 @@ const SideBar = () => {
     <>
       <div className={styles.sideBar}>
         <div className={styles.title}>
-          <img src={logo} className={styles.logo} alt={'logo'} />
+          {/*<img src={logo} className={styles.logo} alt={'logo'} />*/}
           {!collapse && <h3 className={styles.titleText}>Matex</h3>}
         </div>
         {sidebarModel.map(({ route, text }) => {

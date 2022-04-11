@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { Fragment } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import { ApiTestFormData, ApiTestKVProps } from '/@/store/apiTestStore/type';

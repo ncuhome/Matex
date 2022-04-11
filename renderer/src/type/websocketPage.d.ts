@@ -24,3 +24,8 @@ export interface WsSocketIo extends Socket {
 interface IO extends Manager {
   uri: string;
 }
+
+export interface ChannelStatus {
+  val: string;
+  listen?: boolean;
+}

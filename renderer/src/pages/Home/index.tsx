@@ -12,7 +12,6 @@ import { Update_Channel } from '/@common/ipc/channel';
 import { IpcRendererEvent } from 'electron';
 import type { DownloadProgress } from '/@common/index';
 import toast from 'react-hot-toast';
-import StartBtn from '/@cmp/StartBtn';
 
 const Home: React.FC<any> = () => {
   const navigate = useNavigate();
@@ -51,7 +50,7 @@ const Home: React.FC<any> = () => {
 
   const rootStyle = {
     marginLeft: isFullscreen ? 0 : 41,
-    marginBottom: 30
+    marginBottom: 0
   };
 
   return (
@@ -68,11 +67,6 @@ const Home: React.FC<any> = () => {
         </div>
         <div className={styles.body}>
           <Outlet />
-          {location.pathname.includes('websocket') && (
-            <div className={styles.startBtn}>
-              <StartBtn />
-            </div>
-          )}
         </div>
       </div>
       {updateProgress && (

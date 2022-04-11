@@ -1,6 +1,9 @@
 .topForm {
   height: 250px;
   width: 250px;
+  border-radius: 10px;
+  background: rgba(135,163,196,0.1);
+  padding-top: 10px;
 
   .sideSelect {
     display: flex;
@@ -33,9 +36,9 @@
     }
   }
   .sideIconCon {
-    margin-top: 15px;
-    height: 80px;
-    width: 80px;
+    margin-top: 5px;
+    height: 70px;
+    width: 70px;
     margin-left: calc((100% - 80px) / 2);
     background: #586aaa;
     border-radius: 50%;
@@ -47,7 +50,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 40px;
+      font-size: 35px;
       color: #dadfe9;
     }
   }
@@ -108,6 +111,18 @@
       }
     }
   }
+
+  .more {
+    margin-top: 10px;
+    margin-right: 20px;
+    float: right;
+    cursor: pointer;
+    color: #66dcff;
+
+    &:hover{
+      color: #00C5FF;
+    }
+  }
 }
 
 .channelList {
@@ -116,7 +131,7 @@
   flex-direction: column;
   align-items: center;
 
-  .addChannel{
+  .addChannel {
     background: #2cb6ad;
     padding: 3px 10px;
     border-radius: 5px;
@@ -124,30 +139,53 @@
     color: white;
     font-size: 12px;
 
-    &:hover{
-      background: #414A7F;
+    &:hover {
+      background: #414a7f;
     }
   }
 
   .channelItem {
-    width: 100%;
+    width: 200px;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    justify-content: start;
 
     .channelIndex {
-      color: #424B80;
+      color: #424b80;
       margin-right: 10px;
     }
 
     .channelContent {
       outline: none;
       border: none;
-      background: #424B80;
+      background: #424b80;
       border-radius: 5px;
       color: #7ab9e7;
       height: 25px;
       padding-left: 5px;
+      width: 150px;
+    }
+
+    .closeBtn {
+      height: 25px;
+      width: 25px;
+      margin-left: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+
+      .addListen{
+
+      }
+
+      .closeIcon{
+        display: block;
+        text-align: center;
+        font-size: 17px;
+      }
     }
   }
 }

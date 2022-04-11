@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import styles from './index.module.scss';
 import { Label } from 'semantic-ui-react';
 import { useAtom } from 'jotai';
-import { socketIoSendChannelAtom, useMsgList } from '/@/store/websocketStore';
-import { matexTime } from '/@/utils/time';
-import toast from 'react-hot-toast';
-import { Socket } from 'socket.io-client';
+import { socketIoSendChannelAtom, websocketTypeAtom } from '/@/store/websocketStore';
+import StartBtn from '/@/pages/WebSocket/MsgWin/Footer/StartBtn';
+import { useAtomValue } from 'jotai/utils';
+import clsx from 'clsx';
 
 const labelStyle = {
   width: 70,
   textAlign: 'center',
   position: 'absolute',
+  marginTop: 5,
   left: 10
 };
 
 const MsgWinFooter = () => {
   const [channel, setChannel] = useAtom(socketIoSendChannelAtom);
-  const { msgList, addMsg } = useMsgList();
   const [inputContent, setContent] = useState('');
+  const wsType = useAtomValue(websocketTypeAtom);
 
   const sendMsg = () => {
     // if (wsType === 'native') {
@@ -58,24 +59,36 @@ const MsgWinFooter = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.msgCon}>
-        <Label size={'small'} as="a" color={'violet'} style={labelStyle}>
-          消息输入
-        </Label>
-        <textarea value={inputContent} className={styles.msgInput} onChange={handleChange} />
+        <div className={styles.top}>
+          <Label size={'small'} as="a" color={'violet'} style={labelStyle}>
+            发送消息
+          </Label>
+          <input
+            value={channel}
+            className={clsx([styles.channelName, wsType === 'native ws' && styles.hidden])}
+            onChange={(e) => setChannel(e.target.value)}
+            placeholder={'通道名'}
+          />
+        </div>
+        <div className={styles.body}>
+          <textarea
+            placeholder={'请输入要发送的消息'}
+            value={inputContent}
+            className={styles.msgInput}
+            onChange={handleChange}
+          />
+        </div>
       </div>
       <div className={styles.ops}>
-        <input
-          value={channel}
-          className={styles.channelName}
-          onChange={(e) => setChannel(e.target.value)}
-          placeholder={'通道名'}
-        />
         <div className={styles.clear} onClick={() => setContent('')}>
           清除
         </div>
         <div className={styles.send} onClick={sendMsg}>
           发送
         </div>
+      </div>
+      <div className={styles.startBtn}>
+        <StartBtn />
       </div>
     </div>
   );
