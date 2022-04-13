@@ -1,17 +1,18 @@
 # Matex   基于electron的万能工具软件
 #
 ![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/dev.png)
-### Mac
+### 接口测试页面
 ![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/screenshot.png)
-### Windows
-![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/win_screenshot.png)
+### 长连接测试页面
+![screenshot](https://raw.githubusercontent.com/ncuhome/Matex/refactor/mac-style/test/screenshot/websocket.png)
 
 ## 预期功能
 
 - [x] 数据请求与格式化显示
 - [x] 响应图片预览与响应html文档渲染
-- [ ] 提供websocket调试
-- [ ] 本地mock(动态启动本地express服务器,可自由配置api接口,取代手写mockjs)
+- [x] 提供websocket调试
+- [ ] 自动化测试
+- [ ] 本地mock
 - [ ] 更多功能...
 
 ## 开发步骤
