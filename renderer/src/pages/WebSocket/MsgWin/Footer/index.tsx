@@ -6,6 +6,8 @@ import { socketIoSendChannelAtom, websocketTypeAtom } from '/@/store/websocketSt
 import StartBtn from '/@/pages/WebSocket/MsgWin/Footer/StartBtn';
 import { useAtomValue } from 'jotai/utils';
 import clsx from 'clsx';
+import { useNativeWs } from '/@/request/nativeWs';
+import { useSocketIo } from '/@/request/socketIo';
 
 const labelStyle = {
   width: 70,
@@ -19,37 +21,16 @@ const MsgWinFooter = () => {
   const [channel, setChannel] = useAtom(socketIoSendChannelAtom);
   const [inputContent, setContent] = useState('');
   const wsType = useAtomValue(websocketTypeAtom);
+  const { sendMsg } = useNativeWs();
+  const { senMsg:socketIoSend } = useSocketIo();
 
-  const sendMsg = () => {
-    // if (wsType === 'native') {
-    //   if (ws && (ws as WebSocket).readyState === 1) {
-    //     addMsg({
-    //       type: 'client',
-    //       message: inputContent,
-    //       time: matexTime().format('YYYY-MM-DD HH:mm:ss')
-    //     });
-    //     ws?.send(inputContent);
-    //     setContent('');
-    //   } else {
-    //     toast.error('请先连接websocket服务器');
-    //   }
-    // } else {
-    //   if (ws && (ws as unknown as Socket).connected) {
-    //     if (socketIoEv.trim() === '') {
-    //       (ws as unknown as Socket).send(inputContent);
-    //     } else {
-    //       (ws as unknown as Socket).emit(socketIoEv, inputContent);
-    //     }
-    //     addMsg({
-    //       type: 'client',
-    //       message: inputContent,
-    //       time: matexTime().format('YYYY-MM-DD HH:mm:ss')
-    //     });
-    //     setContent('');
-    //   } else {
-    //     toast.error('请先连接websocket服务器');
-    //   }
-    // }
+  const send = () => {
+    if (wsType === 'native ws') {
+      sendMsg(inputContent);
+    } else {
+      socketIoSend(channel, inputContent);
+    }
+    setContent('');
   };
 
   const handleChange = (e) => {
@@ -83,7 +64,7 @@ const MsgWinFooter = () => {
         <div className={styles.clear} onClick={() => setContent('')}>
           清除
         </div>
-        <div className={styles.send} onClick={sendMsg}>
+        <div className={styles.send} onClick={send}>
           发送
         </div>
       </div>

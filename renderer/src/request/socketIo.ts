@@ -99,6 +99,7 @@ export const useSocketIo = () => {
         const time = matexTime().format('YYYY-MM-DD HH:mm:ss');
         addMsg({ type: 'system', flag: 'bad', message: '断开连接', time });
         setSocket(undefined);
+        setStatus('未连接');
       });
 
       socket.on('connect_error', (err) => {
@@ -107,6 +108,20 @@ export const useSocketIo = () => {
         resolve(false);
       });
     });
+  };
+
+  const senMsg = (channel: string, content: string) => {
+    if (wsSocket && wsSocket.connected) {
+      wsSocket.emit(channel, content);
+      addMsg({
+        ev: channel,
+        type: 'client',
+        message: content,
+        time: matexTime().format('YYYY-MM-DD HH:mm:ss')
+      });
+    } else {
+      toast.error('未连接');
+    }
   };
 
   const closeSocketIo = () => {
@@ -120,6 +135,7 @@ export const useSocketIo = () => {
   };
 
   return {
+    senMsg,
     addEVListener,
     closeSocketIo,
     connSocketIo

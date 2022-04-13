@@ -29,3 +29,8 @@ export interface ChannelStatus {
   val: string;
   listen?: boolean;
 }
+
+export interface ExternalWsConfig {
+  binaryType?:'blob' | 'arraybuffer';
+  protocols?: string;
+}

@@ -4,7 +4,7 @@ import { produce } from 'immer';
 import { checkIndex } from '/@/store/utils';
 import { useUpdateAtom } from 'jotai/utils';
 import type { StartBtnProps } from '/@/pages/WebSocket/MsgWin/Footer/StartBtn';
-import { ChannelStatus } from '/@/type/websocketPage';
+import { ChannelStatus, ExternalWsConfig } from '/@/type/websocketPage';
 
 export const websocketTypeAtom = atom<WebsocketType>('socket io');
 export const websocketSideAtom = atom<'client' | 'server'>('client');
@@ -15,6 +15,10 @@ export const websocketUrlAtom = atom<string>('');
 export const socketIoChannelsAtom = atom<ChannelStatus[]>([{ val: 'message', listen: true }]);
 export const socketIoSendChannelAtom = atom<string>('');
 export const StartBtnAtom = atom<Pick<StartBtnProps, 'status' | 'text'>>({ text: '启动', status: 'normal' });
+export const externalWsAtom = atom<ExternalWsConfig>({
+  binaryType: 'arraybuffer',
+  protocols:''
+});
 
 const addMsgListAtom = atom(null, (get, set, param: Omit<WsMessage, 'index'>) => {
   const tempList = produce(get<WsMessage[]>(websocketMsgListAtom), (draft) => {

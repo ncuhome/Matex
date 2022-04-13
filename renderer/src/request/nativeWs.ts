@@ -17,9 +17,10 @@ interface NativeWsProps {
 export const useNativeWs = () => {
   const [wsConn, setConn] = useAtom(websocketConnAtom);
   const initStatus = wsConn ? getStatusText(wsConn?.readyState) : '未连接';
-  const { addMsg } = useMsgList();
   const url = useAtomValue(websocketUrlAtom);
   const [status, setStatus] = useState<WsStatus>(initStatus);
+  const { addMsg } = useMsgList();
+
 
   useEffect(() => {
     Emitter.emit('ws-native-status', status);
@@ -70,6 +71,19 @@ export const useNativeWs = () => {
     });
   };
 
+  const sendMsg = (content:string) => {
+    if (wsConn&&wsConn.readyState === 1) {
+      wsConn.send(content);
+      addMsg({
+        type: 'client',
+        message: content,
+        time: matexTime().format('YYYY-MM-DD HH:mm:ss')
+      });
+    } else {
+      toast.error('未连接');
+    }
+  };
+
   const close = (code?: number, reason?: string) => {
     if (wsConn) {
       wsConn.close(code, reason);
@@ -80,6 +94,7 @@ export const useNativeWs = () => {
   };
 
   return {
+    sendMsg,
     connectWs: connect,
     closeWs: close
   };

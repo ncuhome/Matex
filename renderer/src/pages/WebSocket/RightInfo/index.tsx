@@ -4,6 +4,7 @@ import TopForm from '/@/pages/WebSocket/RightInfo/TopForm';
 import BottomDesc from '/@/pages/WebSocket/RightInfo/BottomDesc';
 
 const RightInfo = () => {
+
   return (
     <div className={styles.rightInfo}>
       <div className={styles.top}>

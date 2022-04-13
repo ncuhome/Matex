@@ -4,6 +4,8 @@
   border-radius: 10px;
   background: rgba(135,163,196,0.1);
   padding-top: 10px;
+  overflow: hidden;
+  position: relative;
 
   .sideSelect {
     display: flex;
@@ -112,7 +114,7 @@
     }
   }
 
-  .more {
+  .moreBtn {
     margin-top: 10px;
     margin-right: 20px;
     float: right;
@@ -177,14 +179,80 @@
       border-radius: 50%;
       cursor: pointer;
 
-      .addListen{
-
-      }
-
       .closeIcon{
         display: block;
         text-align: center;
         font-size: 17px;
+      }
+    }
+  }
+}
+
+.tranProp {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.slideDown {
+  transform: translate3d(0, 250px, 0); //优化
+}
+
+.more{
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 250px;
+  width: 250px;
+  top: -250px;
+  z-index: 2000;
+  color: black;
+  @extend .tranProp;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  .backBtn{
+    margin-top: 10px;
+    margin-left: 20px;
+    float: right;
+    cursor: pointer;
+    color: #6CDBD5;
+
+    &:hover{
+      color: #62BAE6;
+    }
+  }
+
+  .configLine{
+    padding: 0 15px;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .key{
+      padding: 3px 10px;
+      //background: #586AAA;
+      font-weight: 400;
+      border-radius: 3px;
+      color: #DADFE9;
+    }
+
+    .value{
+      text-align: center;
+      width: 80px;
+      height: 25px;
+      border: none;
+      border-bottom: #00abdf solid 1px;
+      outline: none;
+      background: transparent;
+      color: #66dcff;
+
+      &::placeholder{
+        color: #87A2C8;
       }
     }
   }
