@@ -6,3 +6,11 @@ dayjs.extend(isLeapYear); // 使用插件
 dayjs.locale('zh-cn');
 
 export const matexTime = dayjs;
+
+class _Delay {
+  time(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+}
+
+export const Delay = new _Delay();

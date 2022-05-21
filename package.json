@@ -40,9 +40,11 @@
     "@types/history": "^4.7.9",
     "@types/nedb": "^1.8.12",
     "@types/node": "^16.11.7",
+    "@types/object-inspect": "^1.8.1",
     "@types/react": "17.0.21",
     "@types/react-dom": "17.0.9",
     "@types/signale": "^1.4.2",
+    "@types/stringify-object": "^4.0.1",
     "@types/wait-on": "^5.3.1",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
@@ -98,6 +100,8 @@
     "matexhttp": "^1.0.5",
     "monaco-editor": "^0.32.1",
     "nedb": "^1.8.0",
+    "node-gyp": "^9.0.0",
+    "object-inspect": "^1.12.0",
     "object-sizeof": "^1.6.2",
     "qs": "^6.10.1",
     "react": "^17.0.2",
@@ -105,6 +109,7 @@
     "react-filepond": "^7.1.1",
     "react-hot-toast": "^2.2.0",
     "react-router-dom": "^6.0.2",
+    "react-spring": "^9.4.5",
     "react-toastify": "^8.1.0",
     "react-useportal": "^1.0.16",
     "request-progress": "^3.0.0",
@@ -113,9 +118,12 @@
     "sequelize": "^6.12.0-beta.3",
     "signale": "^1.4.0",
     "socket.io-client": "^4.4.1",
+    "speedtest-net": "^2.2.0",
     "sqlite3": "^5.0.2",
+    "stringify-object": "^4.0.1",
     "sweetalert2": "^11.4.4",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "xterm": "^4.18.0"
   },
   "engines": {
     "node": "^12.20.0 || >=14.13.1"

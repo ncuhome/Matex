@@ -11,9 +11,9 @@ import {
   apiTestResDataAtom
 } from '/@/store/apiTestStore';
 import useIpcOn from '/@/hooks/useIpcOn';
-import { Header } from '/@/pages/ApiTest/Body/Header';
-import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
-import Content from '/@/pages/ApiTest/Body/Content';
+import { Header } from '/@/pages/ApiTest/SingleTest/Body/Header';
+import { isEditorAble } from '/@/pages/ApiTest/SingleTest/Body/utils';
+import Content from '/@/pages/ApiTest/SingleTest/Body/Content';
 import { useUpdateAtom } from 'jotai/utils';
 import { judgementType } from '/@/utils/typeUtils';
 import { Emitter } from '/@/utils/EventEmiter';
@@ -53,7 +53,7 @@ const Body = () => {
   useIpcOn(ApiTest_Channel.ReqError, errListener);
 
   useEffect(() => {
-    listenerRef.current = Emitter.on('apiTest.bodyDimmer', (data) => {
+    listenerRef.current = Emitter.on('apiTest.bodyDimmer', (data: any) => {
       setDimmer(data);
     });
     return () => {

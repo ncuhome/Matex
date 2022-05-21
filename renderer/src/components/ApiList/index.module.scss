@@ -6,17 +6,14 @@
   justify-content: space-around;
   background-color: transparent;
   border-radius: 5px;
-  padding: 5px 0;
+  padding: 5px 10px;
   margin-bottom: 15px;
-  margin-left: 20px;
+  margin-left: 15px;
   user-select: none;
-  border: 1px solid transparent;
 
   &:hover {
     cursor: pointer;
-    background-color: var(--active-bg);
-    border-color: transparent;
-    color: #FFF;
+    background-color: var(--globalBg-blue);
   }
 
   .url {
@@ -27,8 +24,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-}
-
-.apiList:hover .url{
-  color: #FFF;
 }

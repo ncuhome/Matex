@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useApiTestConfig, apiTestParamsAtom, apiTestMethodAtom } from '/@/store/apiTestStore';
 import KVTable from '/@cmp/KVTable';
 import { useAtomValue } from 'jotai/utils';
-import styles from '/@/pages/ApiTest/Header/ConfigTabel/index.module.scss';
+import styles from '/@/pages/ApiTest/SingleTest/Header/ConfigTabel/index.module.scss';
 import { Header, Icon } from 'semantic-ui-react';
 
 const ParamsTable = () => {

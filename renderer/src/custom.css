@@ -47,8 +47,9 @@
 }
 
 .popup{
-    background: #7599CD!important;
+    background: var(--light-bg)!important;
     border-color: transparent!important;
+    color: var(--active-text)!important;
 }
 
 .popup:before{
@@ -56,3 +57,5 @@
     border-color: transparent!important;
     content: none!important;
 }
+
+

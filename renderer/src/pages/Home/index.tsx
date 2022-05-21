@@ -4,18 +4,20 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar';
 import Header from '../../components/Header';
 import { useAtom } from 'jotai';
-import { collapseAtom, fullscreenAtom, updateProgressAtom } from '/@/store/commonStore';
-import { useAtomValue } from 'jotai/utils';
+import { collapseAtom, fullscreenAtom, terminalAtom, updateProgressAtom } from '/@/store/commonStore';
+import { useAtomValue, useUpdateAtom } from 'jotai/utils';
 import useUpdateModal from '/@cmp/UpdateModal/useModal';
 import useIpcOn from '/@/hooks/useIpcOn';
 import { Update_Channel } from '/@common/ipc/channel';
 import { IpcRendererEvent } from 'electron';
 import type { DownloadProgress } from '/@common/index';
 import toast from 'react-hot-toast';
+import { Terminal } from 'xterm';
 
 const Home: React.FC<any> = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const setTerminal = useUpdateAtom(terminalAtom);
   const [collapse] = useAtom(collapseAtom);
   const [updateProgress, setUpdateProgress] = useAtom(updateProgressAtom);
   const isFullscreen = useAtomValue(fullscreenAtom);
@@ -45,24 +47,29 @@ const Home: React.FC<any> = () => {
   useIpcOn(Update_Channel.UpdateDownloaded, finishedListener);
 
   useEffect(() => {
-    navigate('/apiTest', { replace: true });
+    navigate('/api');
   }, []);
 
-  const rootStyle = {
-    marginLeft: isFullscreen ? 0 : 41,
-    marginBottom: 0
-  };
+  useEffect(() => {
+    const term = new Terminal({
+      rows: 17,
+      cols: 53,
+      cursorStyle: 'bar',
+      theme: {
+        background: '#34598D'
+      },
+      fontFamily: '"Fira Code", "Fira Mono", "Fira Mono for Powerline", monospace'
+    });
+    setTerminal(term);
+  }, []);
 
   return (
-    <div className={styles.rootCon} style={rootStyle}>
+    <div className={styles.rootCon}>
       <div className={styles.header}>
         <Header />
       </div>
       <div className={styles.con}>
-        <div
-          className={styles.sideBar}
-          style={{ width: collapse ? '70px' : '220px', marginLeft: isFullscreen ? 0 : -40 }}
-        >
+        <div className={styles.sideBar}>
           <SideBar />
         </div>
         <div className={styles.body}>

@@ -2,14 +2,14 @@ import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import { Button, Dropdown, Icon } from 'semantic-ui-react';
 import clsx from 'clsx';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { MethodsOptions } from '/@/model/apiTest.model';
 import { useSendReq } from '/@/message/apiTest';
 import Tabs from './Tabs';
 import { ToastContainer } from 'react-toastify';
 import { useAtom } from 'jotai';
 import { apiTestMethodAtom, apiTestUrlAtom } from '/@/store/apiTestStore';
-import { menuOptions } from '/@/pages/ApiTest/Header/contextMenu';
+import { menuOptions } from '/@/pages/ApiTest/SingleTest/Header/contextMenu';
 import { useContextMenu } from '/@/hooks/useContextMenu';
 import { MatexWin } from '/@/global';
 import { Emitter } from '/@/utils/EventEmiter';
@@ -25,13 +25,14 @@ const Header = () => {
   const listenerRef = useRef<Emittery.UnsubscribeFn>();
   const selectedTextRef = useRef<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/api/single/params');
+  }, []);
 
   const onSelect = (index: number, text: string) => {
     Emitter.emit('apiTest.select', { index, text });
-  };
-
-  const onselectReq = (index: number, text: string) => {
-    console.log(index, text);
   };
 
   const { showMenu } = useContextMenu({ options: menuOptions, onSelect });
@@ -72,17 +73,13 @@ const Header = () => {
     setMethod(value);
   };
 
-  const doFetch = () => {
-    url.trim() && sendReq();
-  };
-
   const handleContextMenu = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
     showMenu(e);
   };
 
   return (
-    <>
+    <div className={styles.header}>
       <div className={styles.url}>
         <ToastContainer style={{ color: 'red' }} />
         <Button.Group style={{ background: 'transparent' }} className={dropDownStyle.dropDown}>
@@ -91,7 +88,6 @@ const Header = () => {
             className={clsx(['button', 'icon', dropDownStyle.select])}
             onChange={handleChange}
             floating
-            // style={{ background: 'transparent', color: '#EDF0F5' }}
             options={reqOptions}
             trigger={<></>}
           />
@@ -107,9 +103,9 @@ const Header = () => {
           onChange={(e) => setUrl(e.target.value)}
           className={styles.input}
         />
-        <button className={styles.sendBtn} onClick={doFetch}>
-          发送
-        </button>
+        <div className={styles.clear} onClick={() => setUrl('')}>
+          <Icon name={'close'}></Icon>
+        </div>
       </div>
       <div className={styles.config}>
         <div className={styles.option}>
@@ -119,7 +115,7 @@ const Header = () => {
           <Outlet />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
