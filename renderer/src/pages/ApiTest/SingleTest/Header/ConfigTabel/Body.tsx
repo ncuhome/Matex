@@ -1,6 +1,6 @@
 import { Header, Icon } from 'semantic-ui-react';
 import React, { useEffect } from 'react';
-import UploadFile from '../../../../components/UploadFile';
+import UploadFile from '/@cmp/UploadFile';
 import { useAtomValue } from 'jotai/utils';
 import {
   apiTestActiveBodyTypeAtom,
@@ -14,7 +14,7 @@ import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { useEditors, useEditorValue } from '/@/store/commonStore';
 import styles from './index.module.scss';
-import { BodyFormData } from '/@/pages/ApiTest/Header/ConfigTabel/BodyFormData';
+import { BodyFormData } from '/@/pages/ApiTest/SingleTest/Header/ConfigTabel/BodyFormData';
 import { Editor } from '/@cmp/MonacoEditor/type';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 
@@ -32,7 +32,7 @@ const BodyTable = () => {
   const { editorValue, setEditorValue } = useEditorValue('configBody');
   const editorRef = React.useRef<Editor | null>();
   const { addEditor, deleteEditor } = useEditors();
-  const { setValue, changeLanguage } = useEditorAction({ id:'configBody',readOnly: false });
+  const { setValue, changeLanguage } = useEditorAction({ id: 'configBody', readOnly: false });
 
   const language = LanguageMapper.get(activeRawType) ?? 'text/plain';
 

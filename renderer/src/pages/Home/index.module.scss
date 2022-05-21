@@ -4,14 +4,15 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--main-bg);
+  background: var(--globalBg-blue);
   display: flex;
   flex-direction: column;
-  border-radius: 15px;
+  border-radius: 20px;
+  overflow: hidden;
 
   .header{
-    height: 50px;
-    background: transparent;
+    height: 60px;
+    background: var(--cardBg-blue);
     -webkit-app-region: drag;
   }
 
@@ -22,13 +23,10 @@
     background: transparent;
 
     .sideBar{
-      border-radius: 15px;
       position: relative;
-      background: var(--sideBar-bg);
+      background: var(--cardBg-blue);
       transition: all 0.3s ease-out;
-      //margin-left: -40px;
-      margin-bottom: 25px;
-      width: 220px;
+      width: 80px;
     }
 
     .body{

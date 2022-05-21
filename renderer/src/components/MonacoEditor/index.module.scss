@@ -1,8 +1,8 @@
 
 
 .con{
-  border-radius: 10px;
-  background: transparent;
+  border-radius: 20px;
+  padding:0 15px 10px 15px;
 
   .operate{
     height: 50px;
@@ -15,9 +15,10 @@
   }
 
   .editor{
+    background: var(--globalBg-blue);
     width: 100%;
     overflow: hidden;
-    border-radius: 3px;
+    border-radius: 10px;
   }
 }
 

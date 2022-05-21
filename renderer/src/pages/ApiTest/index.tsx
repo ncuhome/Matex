@@ -1,49 +1,17 @@
 import React, { useEffect } from 'react';
-import styles from './index.module.scss';
-import CollectSide from './Side';
-import Header from './Header';
-import Body from './Body';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAtom } from 'jotai';
-import { preRouteAtom } from '/@/store/commonStore';
-import { useUpdateAtom } from 'jotai/utils';
-import { apiTestFormDataAtom } from '/@/store/apiTestStore';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 
-const Collection = () => {
-  const [preRoute, setPreRoute] = useAtom(preRouteAtom);
-  const location = useLocation();
+const ApiTest = () => {
   const navigate = useNavigate();
-  const updateFormData = useUpdateAtom(apiTestFormDataAtom);
+  const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/apiTest') {
-      if (preRoute) {
-        navigate(preRoute);
-      } else {
-        navigate('/apiTest/params');
-      }
+    if (location.pathname === '/api') {
+      navigate('/api/single');
     }
-    return () => {
-      updateFormData([]);
-      if (location.pathname !== '/apiTest') {
-        setPreRoute(location.pathname);
-      }
-    };
   }, [location.pathname]);
 
-  return (
-    <div className={styles.collection}>
-      <div className={styles.header}>
-        <Header />
-      </div>
-      <div className={styles.body}>
-        <Body />
-      </div>
-      <div className={styles.side}>
-        <CollectSide />
-      </div>
-    </div>
-  );
+  return <Outlet />;
 };
 
-export default Collection;
+export default ApiTest;

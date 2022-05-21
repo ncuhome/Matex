@@ -6,11 +6,10 @@
   border-radius: 10px;
   position: relative;
   margin-top: -5px;
-  border: #99a8c3 1px solid;
+  background: var(--cardBg-blue);
 
   .content {
     flex: 1;
-    background: transparent;
     outline: none;
     box-shadow: none;
     border-radius: 8px;
@@ -21,7 +20,7 @@
 }
 
 .idleImg {
-  height: 250px;
+  height: 260px;
   padding: 20px;
   width: 100%;
   object-fit: contain;
@@ -61,13 +60,12 @@
   top: 11px;
   height: 36px;
   width: fit-content;
-  //background-color: #e0e1e2;
+  background-color: var(--globalBg-blue);
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 13px;
-  border: #41447c 1px solid;
   color: #2cb5ad;
 
   .statusCode:hover,

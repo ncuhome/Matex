@@ -12,16 +12,17 @@ import {
   apiTestResDataAtom
 } from '/@/store/apiTestStore';
 import { useAtomValue } from 'jotai/utils';
-import { StatusCard } from '/@/pages/ApiTest/Body/StatusCard';
+import { StatusCard } from '/@/pages/ApiTest/SingleTest/Body/StatusCard';
 import { useAtom } from 'jotai';
 import { judgementType } from '/@/utils/typeUtils';
-import { isEditorAble } from '/@/pages/ApiTest/Body/utils';
+import { isEditorAble } from '/@/pages/ApiTest/SingleTest/Body/utils';
 import { MatexWin } from '/@/global';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
 import { editorsAtom } from '/@/store/commonStore';
 import dropDownStyle from '/@/style/apitest/index.module.scss';
 import toast from 'react-hot-toast';
 import { Emitter } from '/@/utils/EventEmiter';
+import DropDown from '/@cmp/DropDown';
 
 const formatOptions = FormatOptions.map((item) => {
   return { key: item, value: item, text: item };
@@ -162,29 +163,30 @@ export const Header = () => {
                   );
                 })}
                 <Menu.Item>
-                  <Button.Group size={'small'} className={dropDownStyle.dropDown}>
-                    <Button className={dropDownStyle.btn}>{formatType}</Button>
-                    <Dropdown
-                      className={clsx(['button', 'icon', dropDownStyle.select])}
-                      floating
-                      trigger={<></>}
-                    >
-                      <Dropdown.Menu>
-                        {formatOptions.map((item) => {
-                          return (
-                            <Dropdown.Item
-                              onClick={() => onChangeFormatType(item.text as FormatType)}
-                              key={item.value}
-                              value={item.value}
-                              active={item.text === formatType}
-                            >
-                              {item.text}
-                            </Dropdown.Item>
-                          );
-                        })}
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Button.Group>
+                  {/*<Button.Group size={'small'} className={dropDownStyle.dropDown}>*/}
+                  {/*  <Button className={dropDownStyle.btn}>{formatType}</Button>*/}
+                  {/*  <Dropdown*/}
+                  {/*    className={clsx(['button', 'icon', dropDownStyle.select])}*/}
+                  {/*    floating*/}
+                  {/*    trigger={<></>}*/}
+                  {/*  >*/}
+                  {/*    <Dropdown.Menu>*/}
+                  {/*      {formatOptions.map((item) => {*/}
+                  {/*        return (*/}
+                  {/*          <Dropdown.Item*/}
+                  {/*            onClick={() => onChangeFormatType(item.text as FormatType)}*/}
+                  {/*            key={item.value}*/}
+                  {/*            value={item.value}*/}
+                  {/*            active={item.text === formatType}*/}
+                  {/*          >*/}
+                  {/*            {item.text}*/}
+                  {/*          </Dropdown.Item>*/}
+                  {/*        );*/}
+                  {/*      })}*/}
+                  {/*    </Dropdown.Menu>*/}
+                  {/*  </Dropdown>*/}
+                  {/*</Button.Group>*/}
+                  <DropDown options={FormatOptions} />
                 </Menu.Item>
               </Menu.Menu>
             )}

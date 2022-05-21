@@ -6,12 +6,13 @@ import {
   apiTestResDataAtom,
   apiTestBodyFormatAtom,
   apiTestBodyActionAtom,
-  apiTestErrAtom, apiTestBodyDisplayAtom
+  apiTestErrAtom,
+  apiTestBodyDisplayAtom
 } from '/@/store/apiTestStore';
 import MonacoEditor from '/@cmp/MonacoEditor';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
 import PreviewRes from '/@cmp/PreviewResponse';
-import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/Body/utils';
+import { getPreviewSrc, isEditorAble, isPreviewAble } from '/@/pages/ApiTest/SingleTest/Body/utils';
 import { judgementType } from '/@/utils/typeUtils';
 import { useEditors, useEditorValue } from '/@/store/commonStore';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
@@ -29,20 +30,19 @@ const Content = () => {
   const formatType = useAtomValue(apiTestBodyFormatAtom);
   const bodyAction = useAtomValue(apiTestBodyActionAtom);
   const { setEditorValue } = useEditorValue('apiTest');
-  const { setValue, changeLanguage } = useEditorAction({id:'apiTest', readOnly: true,watch:true });
+  const { setValue, changeLanguage } = useEditorAction({ id: 'apiTest', readOnly: true, watch: true });
   const editorRef = React.useRef<Editor | null>();
   const { addEditor, deleteEditor } = useEditors();
   const errorObj = useAtomValue(apiTestErrAtom);
   const displayItem = useAtomValue(apiTestBodyDisplayAtom);
-  const [showEditor,setShowEditor] = useState(false);
+  const [showEditor, setShowEditor] = useState(false);
   const listenerRef = useRef<Emittery.UnsubscribeFn>();
 
   const language: EditorLanguage = LanguageMapper.get(formatType.toLowerCase()) ?? 'text/plain';
 
-
   useEffect(() => {
-    if (resData){
-      if (displayItem ==='Headers'){
+    if (resData) {
+      if (displayItem === 'Headers') {
         setShowEditor(true);
       } else {
         if (bodyAction !== 'Pretty') {
@@ -53,12 +53,11 @@ const Content = () => {
         }
       }
     }
-  }, [resData, displayItem,bodyAction]);
-
+  }, [resData, displayItem, bodyAction]);
 
   useEffect(() => {
-    if (resData&&showEditor) {
-      if (displayItem==='Body'){
+    if (resData && showEditor) {
+      if (displayItem === 'Body') {
         setValue({
           editor: editorRef.current!,
           value: resData.body,
@@ -74,12 +73,11 @@ const Content = () => {
         setEditorValue(JSON.stringify(resData.headers));
       }
     }
-  }, [resData,showEditor,displayItem]);
-
+  }, [resData, showEditor, displayItem]);
 
   useEffect(() => {
     listenerRef.current?.();
-    if (editorRef.current){
+    if (editorRef.current) {
       listenerRef.current = Emitter.on('apiTest.format', (data: FormatType) => {
         const _language: EditorLanguage = LanguageMapper.get(data.toLowerCase()) ?? 'text/plain';
         changeLanguage(editorRef.current as IStandaloneCodeEditor, _language);
@@ -110,7 +108,7 @@ const Content = () => {
       if (bodyAction !== 'Pretty') {
         return <PreviewRes src={getPreviewSrc(resData.body, resData!.type)} />;
       } else {
-        if (displayItem ==='Headers') {
+        if (displayItem === 'Headers') {
           return null;
         }
         if (!isEditorAble(resType)) {
@@ -132,7 +130,7 @@ const Content = () => {
 
   return (
     <>
-      <div className={clsx([showEditor ? styles.show:styles.hidden])}>
+      <div className={clsx([showEditor ? styles.show : styles.hidden])}>
         <MonacoEditor
           onCreated={onCreated}
           onDestroyed={onDestroyed}

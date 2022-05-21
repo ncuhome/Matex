@@ -58,6 +58,7 @@ input{
   --primary-light: #39ddfa;
   --primary: #00abdf;
   --primary-dark: #008ada;
+
   --white: #FFFFFF;
   --greyLight-1: #FFFFFF;
   --sideBar-bg1:#000;
@@ -67,10 +68,28 @@ input{
   --text-color: #8ADDFF;
   --white-main-bg:#F9F9FB;
   --white-side-bg:#FFFFFF;
-  --blue-main-bg:linear-gradient(180deg,#678FC4,#5670A5,#3C4277);
-  --blue-side-bg:linear-gradient(180deg,#7599CD 30%,#657FB2 60%,#525A8E 100%);
+  --blue-main-bg:#202948;
+  --blue-side-bg:#2D3861;
   --main-bg:var(--blue-main-bg);
   --sideBar-bg:var(--blue-side-bg);
   --text-color-2: #C0C0C0;
   --active-bg: #466085;
+
+  /*背景相关*/
+  --globalBg-blue: #202948;
+  --cardBg-blue: #2D3861;
+  --light-bg: #3D4D84;
+
+  --speed--light:#6C63FF;
+  --speed--md:#2EECCC;
+  --speed--dart:#fff;
+
+  /*文字相关*/
+  --extremlyDart-text: #3D4D84;
+  --dart-text: #6C7DBB;
+  --grey-text:#8E9CCB;
+  --secondDart-text: #8F9CCB;
+  --light-text: #8ADDFF;
+  --active-text: #8ADDFF;
+
 }

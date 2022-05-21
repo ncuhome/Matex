@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
 import styles from './index.module.scss';
 import { ApiTestFormData, ApiTestKVProps } from '/@/store/apiTestStore/type';
-import { tableStyle } from '/@/style/apitest';
-const style = tableStyle;
+import clsx from 'clsx';
+import renderHeader from '/@cmp/KVTable/renderHeader';
 
-interface KVTableProps {
+export interface KVTableProps {
   data: ApiTestKVProps[] | ApiTestFormData[];
   file?: boolean;
   onChangeKey?: (index: number, value: string) => void;
@@ -23,24 +23,17 @@ const KVTable: React.FC<KVTableProps> = ({
   const [isFile, setFile] = React.useState(false);
 
   return (
-    <Table celled compact style={style} size={'small'}>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell style={style} width={3}>
-            键
-          </Table.HeaderCell>
-          <Table.HeaderCell style={style}>值</Table.HeaderCell>
-          <Table.HeaderCell style={style} width={3} textAlign={'center'}>
-            操作
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
+    <Table celled compact className={styles.table} size={'small'}>
+      {renderHeader()}
       <Table.Body>
         {data.map((item, index) => {
           return (
-            <Fragment key={item.index}>
+            <Fragment key={index}>
               <Table.Row>
-                <Table.Cell textAlign={'center'} style={style}>
+                <Table.Cell
+                  textAlign={'center'}
+                  className={clsx([styles.border, styles.hidTop, styles.cell])}
+                >
                   <input
                     className={styles.input}
                     value={item.key}
@@ -49,7 +42,10 @@ const KVTable: React.FC<KVTableProps> = ({
                     }}
                   />
                 </Table.Cell>
-                <Table.Cell textAlign={'center'} style={style}>
+                <Table.Cell
+                  textAlign={'center'}
+                  className={clsx([styles.border, styles.hidTop, styles.hidLeft, styles.cell])}
+                >
                   <div className={styles.bodyCell}>
                     {file && isFile ? (
                       <input
@@ -84,14 +80,16 @@ const KVTable: React.FC<KVTableProps> = ({
                     )}
                   </div>
                 </Table.Cell>
-                <Table.Cell textAlign={'center'} style={style}>
+                <Table.Cell
+                  textAlign={'center'}
+                  className={clsx([styles.border, styles.hidLeft, styles.hidTop, styles.cell])}
+                >
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <Button className={styles.btn} style={style} icon compact>
+                    <Button className={clsx([styles.btn, styles.table])} icon compact>
                       <Icon name="expand arrows alternate" />
                     </Button>
                     <Button
-                      style={style}
-                      className={styles.btn}
+                      className={clsx([styles.btn, styles.table])}
                       icon
                       compact
                       onClick={() => onDeleteLine && onDeleteLine(item.index)}

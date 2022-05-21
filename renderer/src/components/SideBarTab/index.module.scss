@@ -1,73 +1,35 @@
-
-.activeStyle{
-  color: #FFF;
-  background: #465489;
-}
-
-
 .tab{
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
-  flex-shrink: 1;
-  height: 35px;
-  width: 100%;
-  text-align: center;
+  height: 40px;
+  width: 40px;
   border-radius: 6px;
   cursor: pointer;
-  border: 1px solid transparent;
-  color: #FFF;
-  font-size: 14px;
   transition: all 0.3s ease-out;
-  margin-bottom: 10px;
-  padding-left: 10px;
+  margin-top: 20px;
 
   &:hover{
-    color: #000;
-    background-color: rgba(91,114,155,0.6);
-  }
-
-  .tabIcon{
-    transition: all 0.3s ease-out;
+    background-color: var(--light-bg);
 
     .icon{
-      color: #FFF!important;
+      color: #000!important;
     }
   }
 
-  .text{
-    text-wrap: none;
-    margin-left: 10px;
-    font-weight: bold;
-    font-size: 13px;
+  .icon{
+    margin: 0!important;
+    padding: 0!important;
+    font-size: 16px;
+    color: var(--secondDart-text)!important;
   }
-
-}
-
-.show{
-  transition: all 0.3s ease-out;
-  animation: left1 0.29s ease-out;
-}
-
-@keyframes left1 {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-35px);
-  }
-}
-
-.hidden{
-  transition: all 0.3s ease-out;
-  animation: left 0.3s ease-out;
 }
 
 .tab.active{
-  @extend .activeStyle;
+  background: var(--globalBg-blue);
 
-  &:hover{
-    @extend .activeStyle;
+
+  .icon{
+    color: var(--active-text)!important;
   }
 }

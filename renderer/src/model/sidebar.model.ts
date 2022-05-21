@@ -1,24 +1,24 @@
 export interface TabProps {
-  text: string;
+  icon: string;
   route: string;
   active?: boolean;
 }
 
 export const sidebarModel: TabProps[] = [
   {
-    text: '接口测试',
-    route: '/apiTest'
+    icon: 'world',
+    route: '/api'
   },
   {
-    text: '长连接',
+    icon: 'linkify',
     route: '/websocket'
   },
   {
-    text: '压力测试',
+    icon: 'rocket',
     route: '/benchmark'
   },
   {
-    text: '敬请期待',
+    icon: 'find',
     route: '/ok'
   }
 ];

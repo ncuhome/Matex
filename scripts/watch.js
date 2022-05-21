@@ -6,7 +6,6 @@ import { ColorLog } from './colorLog.js';
 import * as DotEnv from 'dotenv';
 
 DotEnv.config({ path: resolve(process.cwd(), './dev.env') });
-
 /**
  * @param {string|number} port
  * @returns {import('wait-on').WaitOnOptions}

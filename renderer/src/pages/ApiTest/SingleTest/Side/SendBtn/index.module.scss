@@ -1,0 +1,46 @@
+.footer {
+  height: 80px;
+  background: var(--cardBg-blue);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  .iconCon {
+    height: 100%;
+    width: 90px;
+    border-radius: 0 11px 11px 0;
+    background: #2a345a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .plane {
+      position: absolute;
+      width: 40px;
+    }
+  }
+
+  &:hover {
+    background: #2B365D;
+
+    .iconCon {
+      background: #273053;
+    }
+  }
+
+  .startBtn {
+    height: 88%;
+    width: 93%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--grey-text);
+    font-size: 22px;
+    font-weight: 500;
+  }
+}

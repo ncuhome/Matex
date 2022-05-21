@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 export const checkUrl = (url: string) => {
   const urlRegex = new RegExp(/^http(s)?:\/\/(.)*$/);
   let res;
-  if (url.trim() === '') {
+  if (url.trim().length === 0) {
     toast.error('url不能为空');
     res = false;
   } else if (!urlRegex.test(url)) {
@@ -14,5 +14,3 @@ export const checkUrl = (url: string) => {
   }
   return res;
 };
-
-export const checkBody = () => {};

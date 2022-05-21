@@ -39,6 +39,9 @@ export const useSendReq = () => {
           doPost();
           break;
       }
+      return true;
+    } else {
+      return false;
     }
   };
 

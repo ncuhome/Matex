@@ -1,5 +1,5 @@
 import { BrowserWindow, screen } from 'electron';
-import {isDev, preloadPath} from '../utils/path';
+import { isDev, preloadPath } from '../utils/path';
 import { getOsType } from '../utils/system';
 import { MatexLog } from './log';
 
@@ -16,16 +16,16 @@ export const createMainWin = async (): Promise<BrowserWindow> => {
         show: false,
         transparent: true,
         resizable: false,
-        titleBarStyle: os === 'win' ? (isDev? 'default':'hidden'): 'hidden',
+        titleBarStyle: os === 'win' ? (isDev ? 'default' : 'hidden') : 'hidden',
         trafficLightPosition: {
-          x: 90,
+          x: 16,
           y: 20
         },
         webPreferences: {
           preload: preloadPath,
           nodeIntegration: true,
           contextIsolation: false,
-          devTools:isDev,
+          devTools: isDev,
           plugins: true
         }
       });

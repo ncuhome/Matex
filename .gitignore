@@ -1,5 +1,6 @@
 .idea
-
+.fleet
+.vscode
 node_modules
 ./release/app/node_modules
 #dev production
@@ -20,6 +21,5 @@ asar
 
 #vscode
 .DS_Store
-.vscode
 .log
 

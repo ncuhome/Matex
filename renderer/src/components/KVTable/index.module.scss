@@ -1,4 +1,31 @@
 
+.table{
+  background: transparent!important;
+  color: var(--text-color)!important;
+}
+
+.cell{
+  background: transparent!important;
+  color: var(--text-color)!important;
+}
+
+.border{
+  border: 1px solid var(--extremlyDart-text)!important;
+}
+
+.hidLeft{
+  border-left: 0!important;
+}
+
+.hidRight{
+  border-right: 0!important;
+}
+
+.hidTop{
+  border-top: 0!important;
+}
+
+
 .input{
   height: 25px;
   font-size: 13px;
