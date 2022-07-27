@@ -9,8 +9,11 @@ const parsed = new URL(import.meta.url)
 const isDebug = parsed.searchParams.get('debug') // vscode
 const RootPath = process.cwd()
 
+
 /**
- * @type {(viteDevServer: import('vite').ViteDevServer) => Promise<import('rollup').RollupWatcher>}
+ *
+ * @param viteDevServer {import('vite').ViteDevServer}
+ * @returns {Promise<import('vite').RollupOutput | RollupOutput[] | RollupWatcher>}
  */
 function watchMain(viteDevServer) {
   const protocol = `http${viteDevServer.config.server.https ? 's' : ''}:`;
@@ -43,7 +46,9 @@ function watchMain(viteDevServer) {
 }
 
 /**
- * @type {(server: import('vite').ViteDevServer) => Promise<import('rollup').RollupWatcher>}
+ *
+ * @param server {import('vite').ViteDevServer}
+ * @returns {Promise<import('vite').RollupOutput | RollupOutput[] | RollupWatcher>}
  */
 function watchPreload(server) {
   return build({
@@ -61,9 +66,8 @@ function watchPreload(server) {
   })
 }
 
-// bootstrap
+// 启动
 const server = await createServer({ configFile: join(RootPath,'renderer/vite.config.ts') })
-
 await server.listen()
 await watchPreload(server)
 await watchMain(server)

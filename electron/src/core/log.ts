@@ -2,6 +2,7 @@ import * as winston from 'winston';
 import signale from 'signale';
 import { resourcesPath } from '../utils/path';
 import path from 'path';
+import dayjs from "dayjs";
 
 const errorLogPath = path.resolve(resourcesPath, './logs/error.log');
 const normalLogPath = path.resolve(resourcesPath, './logs/normal.log');
@@ -37,6 +38,14 @@ export class MatexLog {
       signale.info(message);
     } else {
       winstonLog.log({ level: 'info', message });
+    }
+  }
+
+  static time(){
+    if (isDev) {
+      signale.info(dayjs().format('YYYY-MM-DD-HH:mm:ss:SS'));
+    } else {
+      winstonLog.log({ level: 'info', message:dayjs().format('YYYY-MM-DD-HH:mm:ss:SS')+'' });
     }
   }
 

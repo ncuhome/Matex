@@ -7,7 +7,7 @@ export const isDev = process.env.NODE_ENV === 'development';
 
 export const rootDir = process.cwd();
 export const appDir = __dirname;
-
+console.log(__dirname)
 const envs = ['VITE_DEV_SERVER_URL', 'PRELOAD_PATH', 'LOADING_PATH'];
 
 if (isDev) {
@@ -30,7 +30,7 @@ export const loadingPath = isDev
 
 export const preloadPath = isDev
   ? path.resolve(process.cwd(), process.env.PRELOAD_PATH!)
-  : `${path.resolve(__dirname, process.env.PRELOAD_PATH ?? '../preload/index.js')}`;
+  : `${path.resolve(__dirname, process.env.PRELOAD_PATH ?? '../preload/index.cjs')}`;
 
 export const mainPath = isDev
   ? process.env.VITE_DEV_SERVER_URL!

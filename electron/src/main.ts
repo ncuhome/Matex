@@ -1,4 +1,4 @@
-import { app, BrowserWindow, MessageChannelMain, Notification, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, MessageChannelMain, Notification, ipcMain, Point } from 'electron';
 import { PortChannel } from './request';
 import { isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './core/log';
@@ -17,7 +17,7 @@ if (!isDev)
   Sentry.init({ dsn: 'https://a2beb50512ab48b180bf0c5a56d366a6@o1097702.ingest.sentry.io/6119380' });
 
 let mainWindow: BrowserWindow | undefined;
-let loadWindow: BrowserWindow | undefined;
+// let loadWindow: BrowserWindow | undefined;
 let isFullscreen = false;
 
 const gotTheLock = app.requestSingleInstanceLock();
@@ -26,26 +26,32 @@ const { port1, port2 } = new MessageChannelMain();
 //创建窗口
 async function init() {
   try {
-    if (!isReload) {
-      loadWindow = await createLoadWin();
-      os === 'mac' && loadWindow?.setWindowButtonVisibility(false);
-      await loadWindow?.loadURL(loadingPath);
-      loadWindow?.once('ready-to-show', () => {
-        loadWindow?.show();
-      });
-      loadWindow?.on('closed', () => {
-        loadWindow = undefined;
-      });
-    }
-
+    // if (!isReload) {
+    //   loadWindow = await createLoadWin();
+    //   os === 'mac' && loadWindow?.setWindowButtonVisibility(false);
+    //   await loadWindow?.loadURL(loadingPath);
+    //   loadWindow?.once('ready-to-show', () => {
+    //     loadWindow?.show();
+    //   });
+    //   loadWindow?.on('closed', () => {
+    //     loadWindow = undefined;
+    //   });
+    // }
+    MatexLog.time();
     mainWindow = await createMainWin();
-    mainWindow?.on('ready-to-show', async () => {
-      if (!isReload) {
-        loadWindow?.close();
-        loadWindow?.destroy();
-      }
-      mainWindow?.show();
+    mainWindow?.setWindowButtonVisibility(false);
+
+    ipcMain.on('loading',async ()=>{
+      mainWindow?.setWindowButtonVisibility(true);
       mainWindow && (await handleUpdate(mainWindow));
+    })
+    mainWindow?.on('ready-to-show', async () => {
+      // if (!isReload) {
+      //   loadWindow?.close();
+      //   loadWindow?.destroy();
+      // }
+      mainWindow?.show();
+      MatexLog.time();
     });
 
     await mainWindow?.loadURL(mainPath);
@@ -73,14 +79,14 @@ if (!gotTheLock) {
 }
 
 app.on('ready', async () => {
-  PortChannel.setPort(port1);
-  PortChannel.startListening();
+  // PortChannel.setPort(port1);
+  // PortChannel.startListening();
   await init();
 });
 
 //当窗口加载完成调用
 app.whenReady().then(async () => {
-  isDev && listenPip();
+  // isDev && listenPip();
   try {
     if (os === 'win') {
       ipcMain.on(Global_Channel.TrafficLights, (e, type) => {

@@ -13,3 +13,5 @@ const exposeThings: Omit<NodeApiProps, 'MessagePort'> = {
 Object.entries(exposeThings).forEach(([key, value]) => {
   window[key] = value;
 });
+
+

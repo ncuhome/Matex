@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 const Loading = ({ showBg = true }: { showBg?: boolean }) => {
   return (
-    <div className={styles.con} style={{ backgroundColor: showBg ? '#1d2630' : 'transparent' }}>
+    <div className={styles.con} style={{ backgroundColor: showBg ? 'transparent' : 'transparent' }}>
       <div className={styles.spinnerBox}>
         <div className={clsx([styles.blueOrbit, styles.leo])} />
         <div className={clsx([styles.greenOrbit, styles.leo])} />
