@@ -1,0 +1,26 @@
+.idea
+.fleet
+.vscode
+node_modules
+./release/app/node_modules
+#dev production
+.dev
+dist
+
+#build production
+release/build
+release/app/dist
+electron/dist
+preload/dist
+
+
+#parcel
+.cache
+.parcel-cache
+#electron
+asar
+
+#vscode
+.DS_Store
+.log
+

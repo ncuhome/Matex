@@ -1,0 +1,49 @@
+.rootCon{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--globalBg-blue);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+
+  .header{
+    height: 60px;
+    background: var(--cardBg-blue);
+    -webkit-app-region: drag;
+  }
+
+  .con{
+    flex: 1;
+    display: flex;
+    position: static;
+    background: transparent;
+
+    .sideBar{
+      position: relative;
+      background: var(--cardBg-blue);
+      transition: all 0.3s ease-out;
+      width: 80px;
+    }
+
+    .body{
+      flex: 1;
+      background-color: transparent;
+      position: relative;
+      margin-top: -10px;
+
+      .startBtn{
+        position: absolute;
+        bottom: 45px;
+        left: 35%;
+      }
+    }
+  }
+}
+
+
+
+

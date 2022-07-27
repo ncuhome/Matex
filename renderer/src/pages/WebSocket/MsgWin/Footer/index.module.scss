@@ -1,0 +1,110 @@
+.footer {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  position: relative;
+
+  .startBtn{
+    position: absolute;
+    bottom: -30px;
+    left: 48%;
+  }
+
+  .msgCon {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .top{
+      .hidden{
+        visibility: hidden;
+      }
+      .channelName {
+        border-radius: 5px;
+        background: transparent;
+        outline: none;
+        line-height: 30px;
+        border: #6487BB 1px solid;
+        color: #56D9FE;
+        padding-left: 5px;
+        margin-left: 85px;
+
+        &::placeholder {
+          color: #6487BB;
+        }
+
+        &:hover,
+        &:focus {
+          border-color: #56D9FE;
+        }
+      }
+    }
+
+    .body{
+      .msgInput {
+        background: transparent;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        color: #00abdf;
+        width: 70%;
+        height: 70px;
+        margin: 10px 10px 0 10px;
+        letter-spacing: 1px;
+
+        &::placeholder {
+          color: #31385E;
+        }
+
+        &:hover::placeholder,
+        &:focus::placeholder{
+          color: #31385E;
+        }
+      }
+    }
+  }
+
+  .ops {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+    align-items: end;
+
+    .clear {
+      margin-top: 10px;
+      width: 80px;
+      border: #f96d6d 1px solid;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 30px;
+      color: #f96d6d;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        border-color: #f73c3c;
+        color: #f73c3c;
+      }
+    }
+
+    .send {
+      width: 80px;
+      margin-top: 10px;
+      border: #2cb5ad 1px solid;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 30px;
+      color: #2cb5ad;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        border-color: #43d1c9;
+        color: #43d1c9;
+      }
+    }
+  }
+}
+

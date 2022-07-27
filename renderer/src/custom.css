@@ -1,0 +1,61 @@
+.filepond--label-action{
+    color: #2CB5AD;
+}
+
+.filepond--root .filepond--drop-label{
+    background: #4C6094;
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
+.custom-context-menu {
+    position: fixed;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 4px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px 2px #2099EA;
+    background-color: #40497D;
+    min-width: 90px;
+}
+.custom-context-menu.hidden {
+    display: none;
+}
+.custom-context-menu li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f2f5;
+    user-select: none;
+    transition: all 0.1s;
+    text-align: center;
+    border-radius: 3px;
+    color: var(--text-color);
+}
+.custom-context-menu li:last-child {
+    border-bottom: none;
+}
+.custom-context-menu li:hover {
+    cursor: pointer;
+    background-color: #209AEB;
+    color: var(--text-color);
+}
+.custom-context-menu li:active {
+    background-color: #f0f2f7;
+}
+
+.dropdown .menu{
+    background: #8ADDFF!important;
+}
+
+.popup{
+    background: var(--light-bg)!important;
+    border-color: transparent!important;
+    color: var(--active-text)!important;
+}
+
+.popup:before{
+    background-color: #40497D!important;
+    border-color: transparent!important;
+    content: none!important;
+}
+
+

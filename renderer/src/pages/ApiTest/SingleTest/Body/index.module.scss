@@ -1,0 +1,198 @@
+.con {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  border-radius: 10px;
+  position: relative;
+  margin-top: -5px;
+  background: var(--cardBg-blue);
+
+  .content {
+    flex: 1;
+    outline: none;
+    box-shadow: none;
+    border-radius: 8px;
+    position: relative;
+
+    //overflow: hidden;
+  }
+}
+
+.idleImg {
+  height: 260px;
+  padding: 20px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 60px;
+
+  .operationCon {
+    background-color: transparent;
+    box-shadow: 0 2px 5px #bec0be !important;
+    border-radius: 10px;
+
+    .opbtn {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .actionsCon {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+    background-color: transparent;
+    border-radius: 10px 10px 0 0;
+  }
+}
+
+.statusCard {
+  position: absolute;
+  right: 15px;
+  top: 11px;
+  height: 36px;
+  width: fit-content;
+  background-color: var(--globalBg-blue);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 13px;
+  color: #2cb5ad;
+
+  .statusCode:hover,
+  .statusDesc:hover,
+  .statusTiming:hover {
+    cursor: pointer;
+  }
+
+  .statusSize {
+    margin: 0 12px 0 0;
+  }
+  .statusCopy {
+    margin: 0 10px;
+    border-left: 2px solid #e0e1e2;
+    height: 110%;
+  }
+
+  .statusDesc {
+    margin: 0 12px 0 12px;
+    max-width: 130px;
+    overflow: auto;
+    word-wrap: break-word;
+    word-spacing: 5px;
+    white-space: nowrap;
+    -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
+    -webkit-box-orient: horizontal; /* 垂直排列 */
+    word-break: break-all; /* 内容自动换行 */
+  }
+}
+
+.timing {
+  display: flex;
+  width: 320px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+
+  .totalLine {
+    color: #141C1F;
+    margin-top: 20px;
+    text-transform: lowercase;
+
+    .total {
+      visibility: hidden;
+    }
+
+    .totalText {
+      color: teal;
+    }
+  }
+
+  .timingLine {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: start;
+    height: 20px;
+
+    .name {
+      margin: -2px;
+      font-size: 13px;
+      width: 150px;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .time {
+      height: 40px;
+      margin: -3px 12px 0;
+      font-size: 12px;
+      text-transform: lowercase;
+    }
+    .progressCon {
+      height: 40px;
+
+      .progress {
+        border-radius: 3px;
+        background-color: #eee; //总体的背景色
+        height: 15px;
+        width: 100px;
+
+        &::-webkit-progress-bar {
+          background-color: #dae0e7;
+          border-radius: 3px;
+        }
+        /* 表示已完成进度背景色 */
+        &::-webkit-progress-value {
+          background: teal;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+.loading {
+  color: #e0e1e2 !important;
+
+  .loadingContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &::after {
+    border-color: #e0e1e2 transparent transparent !important;
+  }
+}
+
+.active {
+  background-color: #40497D !important;
+  color: white !important;
+}
+
+.normal{
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.hidden {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.show {
+  width: 100%;
+}

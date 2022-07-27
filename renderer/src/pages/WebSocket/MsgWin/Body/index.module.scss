@@ -1,0 +1,28 @@
+
+.body {
+  height: 100%;
+  width: 100%;
+  border-bottom: #65B2DE 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .msgCon{
+    width: 100%;
+    position: relative;
+    z-index: 100;
+  }
+
+  .img{
+    height: 350px;
+    width: 270px;
+    position: absolute;
+    z-index: 1;
+    transition: opacity 0.3s ease-in;
+  }
+}
+
+.fade{
+  opacity: 0.7;
+}

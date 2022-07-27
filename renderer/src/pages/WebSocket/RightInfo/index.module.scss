@@ -1,0 +1,25 @@
+.rightInfo {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  .top{
+    height: 250px;
+  }
+
+  .bottomDesc {
+    margin-top: 20px;
+    width: 250px;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "JetBrains Mono Regular",sans-serif;
+  }
+}

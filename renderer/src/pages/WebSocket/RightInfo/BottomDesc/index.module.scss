@@ -1,0 +1,59 @@
+
+
+.infoCon {
+  width: 250px;
+  flex: 1;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "JetBrains Mono Regular",sans-serif;
+  font-size: 13px;
+  padding: 15px 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(180deg,rgba(135,163,196,0.1),rgba(86,112,165,0.1));
+
+  .waitImg{
+    width: 215px;
+    height: 215px;
+    margin:20px 0 ;
+  }
+
+  .waitText{
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: bolder;
+    background-color: #344068;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: #DADFE9;
+  }
+
+  .infoTitle{
+    color: #2CB5AD;
+  }
+
+  .infoLine {
+    width: 100%;
+    line-height: 40px;
+    margin-top: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .infoKey {
+      color: #BAC3D6;
+    }
+    .infoVal {
+      color: #8ADDFF;
+      font-weight: bolder;
+      cursor: pointer;
+      user-select: text;
+    }
+  }
+}

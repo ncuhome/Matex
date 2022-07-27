@@ -1,0 +1,50 @@
+.card {
+  height: 100%;
+  background: var(--greyLight-1);
+  box-shadow: var(--dark-shadow);
+  border: 1px white solid;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+
+  .con{
+    height: 200px;
+    width: 150px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    &:hover{
+      transition: all 0.4s ease-in-out;
+      transform: scale(1.1);
+    }
+
+    .imgCon{
+
+      .plane{
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    .buttonOuter {
+      width: 120px;
+      border-radius: 50%;
+      background: var(--greyLight-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #000;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-align: center;
+      font-size: 22px;
+    }
+  }
+}
