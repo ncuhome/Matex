@@ -1,14 +1,15 @@
-import { spawn } from 'child_process'
+import {spawn} from 'child_process'
 import { createServer, build } from 'vite'
 import electron from 'electron'
 import {join, resolve} from "path";
 import * as DotEnv from "dotenv";
+import {ColorLog} from "./colorLog.js";
+import {getDevPath} from "./util.js";
 
 DotEnv.config({ path: resolve(process.cwd(), './dev.env'), debug: true });
 const parsed = new URL(import.meta.url)
 const isDebug = parsed.searchParams.get('debug') // vscode
-const RootPath = process.cwd()
-
+const RootPath = resolve(process.cwd(),'packages')
 
 /**
  *
@@ -16,12 +17,8 @@ const RootPath = process.cwd()
  * @returns {Promise<import('vite').RollupOutput | RollupOutput[] | RollupWatcher>}
  */
 function watchMain(viteDevServer) {
-  const protocol = `http${viteDevServer.config.server.https ? 's' : ''}:`;
-  const host = viteDevServer.config.server.host || 'localhost';
-  const port = viteDevServer.config.server.port;
-  const path = '/';
-  const url = `${protocol}//${host}:${port}${path}`;
-  const env = Object.assign(process.env, {
+  const url = getDevPath(viteDevServer);
+  let env = Object.assign(process.env, {
     VITE_DEV_SERVER_URL: url
   });
 
@@ -34,8 +31,12 @@ function watchMain(viteDevServer) {
         if (process.electronApp) {
           process.electronApp.removeAllListeners()
           process.electronApp.kill()
+          env = Object.assign(env,{
+            RELOAD_MAIN:'true'
+          })
+          ColorLog.start('主进程重新打包')
         }
-        process.electronApp = spawn(electron, ['.'], { stdio: 'inherit', env })
+        process.electronApp = spawn(electron,['.'], { stdio:'inherit',env })
         process.electronApp.once('exit', process.exit)
       },
     }].filter(Boolean),
@@ -57,6 +58,7 @@ function watchPreload(server) {
     plugins: [{
       name: 'electron-preload-watcher',
       writeBundle() {
+        ColorLog.start('渲染进程打包')
         server.ws.send({ type: 'full-reload' })
       },
     }],
@@ -69,5 +71,6 @@ function watchPreload(server) {
 // 启动
 const server = await createServer({ configFile: join(RootPath,'renderer/vite.config.ts') })
 await server.listen()
+ColorLog.logo(server.config.server.port)
 await watchPreload(server)
 await watchMain(server)

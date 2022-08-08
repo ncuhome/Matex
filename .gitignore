@@ -10,8 +10,8 @@ dist
 #build production
 release/build
 release/app/dist
-electron/dist
-preload/dist
+packages/electron/dist
+packages/preload/dist
 
 
 #parcel

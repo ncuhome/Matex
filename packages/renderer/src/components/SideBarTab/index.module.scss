@@ -1,0 +1,38 @@
+.tab{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  margin-top: 20px;
+
+  &:hover{
+    background-color: var(--light-bg1);
+
+    svg{
+      fill: var(--dart-text1);
+    }
+  }
+
+  svg{
+    fill: var(--light-text2);
+  }
+}
+
+
+.tab.active{
+  background: var(--dark-bg1);
+
+  &:hover{
+    svg{
+      fill: var(--light-text1);
+    }
+  }
+
+  svg{
+    fill: var(--light-text1);
+  }
+}
