@@ -1,7 +1,6 @@
 /* eslint-env node */
 import { defineConfig } from 'vite';
 import { join, resolve } from 'path';
-import { builtinModules } from 'module';
 import reactRefresh from '@vitejs/plugin-react';
 
 const PACKAGE_ROOT = __dirname;
@@ -19,31 +18,15 @@ export default defineConfig({
   resolve: {
     alias: {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
-      '/@cmp/': join(PACKAGE_ROOT, 'src/components') + '/',
-      '/@common/': join(APP_ROOT, 'common') + '/'
+      '/@cmp/': join(PACKAGE_ROOT, 'src/components') + '/'
     }
   },
   build: {
-    sourcemap: false,
-    target: `chrome${96}`,
+    sourcemap: true,
     outDir: resolve(APP_ROOT,'release/app/dist/render'),
     emptyOutDir: true,
     rollupOptions: {
-      input,
-      external: [...builtinModules.flatMap((p) => [p, `node:${p}`])],
-      output: {
-        compact: true,
-        assetFileNames: 'static/assets.[name].[ext]',
-        chunkFileNames: 'chunk.[name].js',
-        entryFileNames: 'entry.[name].js',
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          } else {
-            return 'bundle';
-          }
-        }
-      }
+      input
     },
   }
 });

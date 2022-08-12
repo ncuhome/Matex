@@ -5,7 +5,7 @@
   "private": true,
   "author": "lqd1434",
   "license": "ISC",
-  "main": "dist/main/main.cjs",
+  "main": "release/app/dist/main/main.cjs",
   "keywords": [
     "electron",
     "Matex-app"
@@ -18,8 +18,8 @@
     "dev": "node ./scripts/watch.mjs",
     "codgen": "npx playwright codegen http://localhost:3000/",
     "injection": "node ./scripts/injection.js",
-    "build": "cross-env NODE_ENV=production node ./scripts/build.mjs",
-    "build:react": "vite build --config packages/renderer/vite.config.ts",
+    "build": "cross-env NODE_ENV=production MODE=production node ./scripts/build.mjs",
+    "preview": "vite preview --config packages/renderer/vite.config.ts",
     "postinstall": "electron-builder install-app-deps",
     "copy": "node scripts/copyFile.js",
     "prerelease": "npm run copy",
@@ -43,18 +43,23 @@
     "prettier": "^2.7.1",
     "sass": "1.54.1",
     "typescript": "^4.7.4",
-    "vite": "^3.0.4"
+    "vite": "^3.0.5"
   },
   "dependencies": {
-    "@nextui-org/react": "^1.0.0-beta.9",
+    "@animxyz/core": "^0.6.6",
+    "@animxyz/react": "^0.6.7",
+    "@tanstack/react-table": "^8.5.11",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.4",
     "dotenv": "^16.0.1",
+    "jotai": "^1.7.8",
     "jsonfile": "^6.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
+    "react-use": "^17.4.0",
     "signale": "^1.4.0",
+    "validator-js": "^0.2.1",
     "winston": "^3.8.1"
   }
 }

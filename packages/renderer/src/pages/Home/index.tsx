@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './index.module.scss';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import SideBar from "/@/pages/Home/SiderBar";
 
 const Home = () => {

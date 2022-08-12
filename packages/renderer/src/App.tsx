@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {Button} from "@nextui-org/react";
 import styles from './app.module.scss'
 import AuthRouter from "/@/router";
 

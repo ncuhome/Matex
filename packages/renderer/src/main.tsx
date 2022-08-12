@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import App from './App';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
-import { MatexWin } from '/@/global';
+import { MatexWin } from '/@/Global/global';
 import { createRoot } from 'react-dom/client';
-import { NextUIProvider } from '@nextui-org/react';
-import {theme} from "./theme";
-import './global.css';
+import './Global/global.css';
+import './Global/custom.scss';
+
 
 const isDev = MatexWin.NODE_ENV === 'development';
 console.log('isDev',isDev)
@@ -21,10 +21,4 @@ function renderRoot(child: React.ReactNode) {
 // render
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-root.render(
-  renderRoot(
-    <NextUIProvider theme={theme}>
-      <App />
-    </NextUIProvider>
-  )
-);
+root.render(renderRoot(<App />));

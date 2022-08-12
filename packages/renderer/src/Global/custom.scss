@@ -1,0 +1,102 @@
+@import '@animxyz/core';
+
+// Add all the core/utilities selectors
+@include xyz-all;
+//// --- Or for more control and granularity ---
+//@include xyz-core;
+//@include xyz-utilities;
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+.overlayBox {
+  position: absolute;
+  background: var(--dart-color1);
+  box-shadow: 0 12px 20px 6px rgb(104 112 118 / 0.08);
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 0.5rem;
+  animation: scaleUp 0.3s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.overlayBox-item {
+  text-align: left;
+  width: 100%;
+  line-height: 35px;
+  padding: 0 10px;
+  color: var(--light-text1);
+  font-size: 14px;
+  border-radius: 8px;
+  &:hover {
+    background: var(--dark-bg2);
+    cursor: pointer;
+  }
+}
+
+.dropDownBox {
+  @extend .overlayBox;
+  min-width: 110px;
+
+  .dropDownList {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .dropDownItem {
+      @extend .overlayBox-item;
+    }
+
+    .activeItem {
+      position: relative;
+
+      &::after {
+        content: '✔︎';
+        position: absolute;
+        right: 10px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleDown {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+}
+
+.svgIcon {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+.custom-context-menu {
+  @extend .overlayBox;
+  list-style: none;
+  min-width: 90px;
+  line-height: 32px;
+
+  .custom-context-menu-item {
+    @extend .overlayBox-item;
+  }
+}

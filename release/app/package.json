@@ -10,18 +10,13 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
-    "electron": "16.0.8",
-    "electron-builder": "22.14.13"
+    "electron": "20.0.0",
+    "electron-builder": "^23.3.3"
   },
   "dependencies": {
-    "filesize": "^8.0.7",
-    "matexhttp": "^1.0.5",
-    "dotenv": "^14.2.0",
-    "winston": "^3.3.3",
+    "dotenv": "^16.0.1",
+    "winston": "^3.8.1",
     "signale": "^1.4.0",
-    "dayjs": "^1.10.7",
-    "adm-zip": "^0.5.9",
-    "got": "11.8.2",
-    "entities": "^3.0.1"
+    "dayjs": "^1.11.4"
   }
 }

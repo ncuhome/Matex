@@ -1,16 +1,16 @@
-import { join } from 'path'
+import {join, resolve} from 'path'
 import { builtinModules } from 'module'
 import { defineConfig } from 'vite'
 import pkg from '../../package.json'
 
 const isDev = process.env.MODE === 'development'||process.env.NODE_ENV === 'development';
-
+const ROOT = process.cwd();
 
 export default defineConfig({
   root: __dirname,
   logLevel: 'info',
   build: {
-    outDir: isDev ? '../../dist/preload':'../../release/app/dist/preload',
+    outDir: resolve(ROOT,'release/app/dist/preload'),
     emptyOutDir: true,
     minify: !isDev,
     sourcemap: 'inline',
