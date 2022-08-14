@@ -18,14 +18,14 @@
     grid-column: 1/2;
     grid-row: 2/3;
     padding-left: 5px;
-    margin-top: 15px;
+    margin-top: 10px;
   }
 
   .tableCon {
     grid-column: 2/3;
     grid-row: 2/3;
     padding-right: 18px;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 15px;
     overflow: auto;
   }
@@ -39,7 +39,7 @@
   .clearIcon {
     position: absolute;
     right: 10px;
-    top:12px;
+    top: 12px;
     transform: scale(1.2);
   }
 
@@ -53,7 +53,7 @@
     padding-left: 10px;
     padding-right: 30px;
 
-    &:focus{
+    &:focus {
       outline: none;
     }
 
@@ -63,8 +63,4 @@
   }
 }
 
-.opt {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+

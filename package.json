@@ -21,6 +21,7 @@
     "build": "cross-env NODE_ENV=production MODE=production node ./scripts/build.mjs",
     "preview": "vite preview --config packages/renderer/vite.config.ts",
     "postinstall": "electron-builder install-app-deps",
+    "postbuild": "npm run copy",
     "copy": "node scripts/copyFile.js",
     "prerelease": "npm run copy",
     "release": "cross-env NODE_ENV=production USE_HARD_LINKS=false electron-builder build --config electron_builder.json5 --publish never"
@@ -46,12 +47,11 @@
     "vite": "^3.0.5"
   },
   "dependencies": {
-    "@animxyz/core": "^0.6.6",
-    "@animxyz/react": "^0.6.7",
     "@tanstack/react-table": "^8.5.11",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.4",
     "dotenv": "^16.0.1",
+    "immer": "^9.0.15",
     "jotai": "^1.7.8",
     "jsonfile": "^6.1.0",
     "react": "^18.2.0",

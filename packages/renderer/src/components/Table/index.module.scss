@@ -10,8 +10,8 @@
     text-align: left;
     color: var(--light-text1);
     font-size: 13px;
-    line-height: 46.5px;
-    padding-left: 10px;
+    line-height: 40px;
+    padding-left: 15px;
   }
 
   .tableHeader{
@@ -50,8 +50,35 @@
 
   .tableRow{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
   }
 
+}
+
+.opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.cellInput {
+  height: 30px;
+  width: 90%;
+  padding-left: 5px;
+  border: none;
+  background: transparent;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-top: 1px;
+  color: var(--light-text1);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background: var(--dark-bg1);
+  }
 }

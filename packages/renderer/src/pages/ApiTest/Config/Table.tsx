@@ -1,12 +1,10 @@
-import {createColumnHelper, getCoreRowModel, useReactTable} from '@tanstack/react-table';
+import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import React from 'react';
 import { HerderConfig } from '/@/Model/ApiTest.model';
 import styles from '/@/pages/ApiTest/Config/index.module.scss';
-import {useAtomValue} from "jotai";
-import {HeaderConfigs} from "/@/store/ApiTest/config.store";
-import MyTable from "/@cmp/Table";
-import AmplifyIcon from "/@cmp/svg/AmplifyIcon";
-import DeleteIcon from "/@cmp/svg/DeleteIcon";
+import { ReqConfigType, useConfigList } from '/@/store/ApiTest/config.store';
+import MyTable from '/@cmp/Table';
+import { useAtomValue } from 'jotai';
 
 const columnHelper = createColumnHelper<HerderConfig>();
 
@@ -21,29 +19,30 @@ const columns = [
   }),
   columnHelper.accessor('opt', {
     header: () => <span>操作</span>,
-    cell: () => (
-        <div className={styles.opt}>
-          <AmplifyIcon fill={'var(--light-text1)'}/>
-          <div style={{width:40}}></div>
-          <DeleteIcon fill={'var(--light-text1)'} transform={'scale(1.3)'}></DeleteIcon>
-        </div>
-    )
+    cell: () => {}
   })
 ];
 
 const ConfigTable = () => {
-
-  const headerConfigs = useAtomValue(HeaderConfigs);
+  const selConfig = useAtomValue(ReqConfigType);
+  console.log(selConfig)
+  const { configList: headerConfigs, updateConfig: updateHeaderConfig } = useConfigList(selConfig);
+  console.log(headerConfigs);
 
   const table = useReactTable<HerderConfig>({
-    data:headerConfigs,
+    data: headerConfigs as HerderConfig[],
     columns,
     getCoreRowModel: getCoreRowModel()
   });
 
+  const onChangeCell = (rowIndex, colIndex, value) => {
+    const prop: 'key' | 'value' = colIndex === 0 ? 'key' : 'value';
+    updateHeaderConfig(rowIndex, prop, value);
+  };
+
   return (
     <div className={styles.tableCon}>
-      <MyTable table={table}/>
+      <MyTable table={table} onChangeCell={onChangeCell} />
     </div>
   );
 };

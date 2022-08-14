@@ -6,11 +6,14 @@ export const ReqMethods: ReqType[] = ['post', 'get', 'put'];
 export type ConfigType = 'params' | 'header' | 'body';
 export const SelConfigs: ConfigType[] = ['params', 'header', 'body'];
 
-export type HerderConfig = {
+export interface HerderConfig  {
   key: string;
   value: string;
   opt?: any;
 };
+
+export interface ParamsConfig extends HerderConfig{}
+export interface UrlEncodeConfig extends HerderConfig{}
 
 export const DefaultHerderConfig: HerderConfig[] = [
   { key: 'Accept', value: '*/*' },

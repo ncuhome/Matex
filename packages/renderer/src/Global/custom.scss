@@ -1,15 +1,3 @@
-@import '@animxyz/core';
-
-// Add all the core/utilities selectors
-@include xyz-all;
-//// --- Or for more control and granularity ---
-//@include xyz-core;
-//@include xyz-utilities;
-
-*::-webkit-scrollbar {
-  width: 0;
-}
-
 .overlayBox {
   position: absolute;
   background: var(--dart-color1);
