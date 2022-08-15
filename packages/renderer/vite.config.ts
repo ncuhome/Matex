@@ -13,7 +13,7 @@ export default defineConfig({
   root: PACKAGE_ROOT,
   plugins: [reactRefresh()],
   base: '',
-  logLevel: 'info',
+  logLevel: mode==='development'?'error':'info',
   publicDir: join(PACKAGE_ROOT, 'assets'),
   resolve: {
     alias: {

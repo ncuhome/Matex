@@ -8,7 +8,7 @@ const ROOT = process.cwd();
 
 export default defineConfig({
   root: __dirname,
-  logLevel: 'info',
+  logLevel: isDev?'error':'info',
   build: {
     outDir: resolve(ROOT,'release/app/dist/preload'),
     emptyOutDir: true,

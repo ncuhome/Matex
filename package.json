@@ -23,7 +23,7 @@
     "postinstall": "electron-builder install-app-deps",
     "postbuild": "npm run copy",
     "copy": "node scripts/copyFile.js",
-    "prerelease": "npm run copy",
+    "prerelease": "cd release/app && yarn",
     "release": "cross-env NODE_ENV=production USE_HARD_LINKS=false electron-builder build --config electron_builder.json5 --publish never"
   },
   "devDependencies": {
@@ -41,6 +41,7 @@
     "electron-rebuild": "^3.2.9",
     "eslint": "^8.21.0",
     "eslint-plugin-react": "^7.30.1",
+    "ora": "^6.1.2",
     "prettier": "^2.7.1",
     "sass": "1.54.1",
     "typescript": "^4.7.4",

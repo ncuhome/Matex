@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'JetBrains Mono NL Light';
+  src: url('../assets/font/JetBrainsMonoNL-Light.ttf');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono NL Bold';
+  src: url('../assets/font/JetBrainsMonoNL-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Regular';
+  src: url('../assets/font/JetBrainsMono-Regular.ttf');
+}
+
+body,
+html {
+  background-color: transparent;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+button,
+input {
+  -webkit-app-region: no-drag;
+}
+
+div,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+* {
+  user-select: none;
+  font-family: 'JetBrains Mono Regular', sans-serif;
+}
+
+:root {
+  /*bg*/
+  --dark-bg1: #202948;
+  --dark-bg2: #2d3861;
+  --light-bg1: #3d4d84;
+  --light-bg2: #4d61a7;
+
+  /*text*/
+  --light-text1: #57cfff;
+  --light-text2: #5a6591;
+  --dart-text1: var(--dark-bg1);
+
+  /*other*/
+  --dart-color1: #42538e;
+  --dart-color2: #475998;
+
+  --card-space: 18px;
+}
