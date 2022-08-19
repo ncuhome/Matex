@@ -47,6 +47,12 @@
       }
     }
   }
+
+}
+
+
+.dropDownBox.large{
+  min-width: 140px;
 }
 
 @keyframes scaleUp {
@@ -76,6 +82,11 @@
   width: 17px;
   height: 17px;
   cursor: pointer;
+}
+.svgIcon.hover{
+  &:hover{
+    opacity: 0.7;
+  }
 }
 
 .custom-context-menu {

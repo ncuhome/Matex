@@ -82,3 +82,54 @@
     background: var(--dark-bg1);
   }
 }
+
+.fileInput{
+  line-height: 40px;
+  width: 90%;
+  padding-left: 5px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .fileContent{
+    width: fit-content;
+    max-width: 250px;
+    line-height: 30px;
+    padding:0 15px;
+    border-radius: 5px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .selectBtn{
+      flex: 1;
+      margin-right: 15px;
+      overflow: hidden;
+      text-wrap: none;
+      word-wrap: break-word;
+      white-space: nowrap;
+    }
+
+    &:hover{
+      background: var(--dark-bg1);
+      cursor: pointer;
+    }
+  }
+
+  .input{
+    @extend .cellInput;
+    margin-right: 15px;
+    background: transparent;
+  }
+
+  input[type=file]{
+    display: none;
+  }
+
+  .icon{
+   transform: scale(1.2) translateY(5px);
+
+  }
+}

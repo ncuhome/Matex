@@ -5,6 +5,7 @@ import { MatexWin } from '/@/Global/global';
 import { createRoot } from 'react-dom/client';
 import './Global/global.css';
 import './Global/custom.scss';
+import './useWorker'
 
 
 const isDev = MatexWin.NODE_ENV === 'development';

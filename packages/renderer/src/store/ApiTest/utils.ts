@@ -1,13 +1,26 @@
-import {HeaderConfigs, ParamsConfigs, UrlEncodeConfigs} from "/@/store/ApiTest/config.store";
-import {ConfigType} from "/@/Model/ApiTest.model";
+import {
+  BinaryConfigs,
+  FormDataConfigs,
+  HeaderConfigs,
+  ParamsConfigs,
+  RawConfigs,
+  UrlEncodeConfigs
+} from '/@/store/ApiTest/config.store';
+import { BodyType, ConfigType } from '/@/Model/ApiTest.model';
 
-export const getStore = (type:ConfigType)=>{
-	switch (type) {
-		case "header":
-			return HeaderConfigs;
-		case "params":
-			return ParamsConfigs;
-		case "body":
-			return UrlEncodeConfigs;
-	}
-}
+export const getStore = (configType: ConfigType, bodyType: Exclude<BodyType, 'raw'|'binary'>) => {
+  switch (configType) {
+    case 'header':
+      return HeaderConfigs;
+    case 'params':
+      return ParamsConfigs;
+    case 'body': {
+      switch (bodyType) {
+        case 'urlencoded':
+          return UrlEncodeConfigs;
+        case 'form-data':
+          return FormDataConfigs;
+      }
+    }
+  }
+};

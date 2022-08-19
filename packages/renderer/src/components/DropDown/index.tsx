@@ -5,6 +5,8 @@ import { creatDropDown, hidden } from './util';
 
 export interface DropDownProps {
   menus: any[];
+  btnText?:string;
+  large?: boolean;
   selectedKey?: string;
   onSelectionChange?: (index: number, key: string) => void;
   width?: number;
@@ -12,7 +14,14 @@ export interface DropDownProps {
 
 type HandleHidden = (e) => void;
 
-const MyDropDown: React.FC<DropDownProps> = ({ width, menus, selectedKey, onSelectionChange = () => {} }) => {
+const MyDropDown: React.FC<DropDownProps> = ({
+  width,
+                                               btnText,
+  large = false,
+  menus,
+  selectedKey,
+  onSelectionChange = () => {}
+}) => {
   const showRef = React.useRef(false);
   const dropRef = React.useRef<HTMLDivElement | null>(null);
   const listenerRef = React.useRef<HandleHidden | null>(null);
@@ -29,13 +38,13 @@ const MyDropDown: React.FC<DropDownProps> = ({ width, menus, selectedKey, onSele
 
   const handleClick = (e: any) => {
     e.stopPropagation();
-    dropRef.current = creatDropDown({ event: e, menus, selectedKey, onSelectionChange });
+    dropRef.current = creatDropDown({ event: e, large, menus, selectedKey, onSelectionChange });
     showRef.current = true;
   };
 
   return (
     <div className={styles.dropDown} style={{ width }} onClick={handleClick}>
-      <div className={styles.btn}>{selectedKey}</div>
+      <div className={styles.btn}>{btnText?btnText:selectedKey}</div>
       <div className={styles.trigger}>
         <ArrowDownIcon className={styles.icon} fill={'var(--light-text1)'} />
       </div>

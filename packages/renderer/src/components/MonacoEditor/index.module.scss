@@ -1,0 +1,27 @@
+
+
+.con{
+  border-radius: 8px;
+  padding:0 10px 10px 0;
+
+  //.operate{
+  //  height: 50px;
+  //  display: flex;
+  //  align-items: center;
+  //  background-color: transparent;
+  //  width: 100%;
+  //  border-radius: 10px 10px 0 0;
+  //  padding-left: 16px;
+  //}
+
+  .editor{
+    background: var(--globalBg-blue);
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+}
+
+.shadow{
+  box-shadow: 0 2px 5px #BEC0BE;
+}

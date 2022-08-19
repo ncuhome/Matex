@@ -3,20 +3,33 @@ import styles from './index.module.scss';
 import clsx from 'clsx';
 import { flexRender } from '@tanstack/react-table';
 import CellInput from '/@cmp/Table/CellInput';
-import AmplifyIcon from "/@cmp/svg/AmplifyIcon";
-import DeleteIcon from "/@cmp/svg/DeleteIcon";
+import EyesIcon from '/@cmp/svg/EyesIcon';
+import DeleteIcon from '/@cmp/svg/DeleteIcon';
+import type { ConfigType } from '/@/Model/ApiTest.model';
+import FileInput from '/@cmp/Table/FileInput';
 
 export interface MyTableProps<T> {
+  type: ConfigType;
+  file?: boolean;
   table: any;
   onChangeCell: (rowIndex: number, colIndex: number, value: string) => void;
+  onLeftAction?: (e) => void;
+  onRightAction?: (e, index) => void;
 }
 
-const MyTable: React.FC<MyTableProps<any>> = ({ table, onChangeCell }) => {
-
+const KVTable: React.FC<MyTableProps<any>> = ({
+  type,
+  file = false,
+  table,
+  onChangeCell,
+  onRightAction = () => {},
+  onLeftAction = () => {}
+}) => {
   const handleChange = (rowIndex, colIndex, value) => {
     onChangeCell(rowIndex, colIndex, value);
   };
 
+  const isBody = type === 'body';
 
   return (
     <div className={styles.table}>
@@ -35,11 +48,27 @@ const MyTable: React.FC<MyTableProps<any>> = ({ table, onChangeCell }) => {
             {row.getVisibleCells().map((cell, colIndex) => (
               <div className={styles.tableCol} key={cell.id}>
                 {colIndex === 2 ? (
-                    <div className={styles.opt}>
-                      <AmplifyIcon fill={'var(--light-text1)'} />
-                      <div style={{ width: 40 }}></div>
-                      <DeleteIcon fill={'var(--light-text1)'} transform={'scale(1.3)'}></DeleteIcon>
-                    </div>
+                  <div className={styles.opt}>
+                    <EyesIcon
+                      onClick={(e) => onLeftAction(e)}
+                      fill={!isBody ? 'var(--dart-color2)' : 'var(--light-text1)'}
+                      className={clsx(['svgIcon', isBody && 'hover'])}
+                    />
+                    <div style={{ width: 40 }}></div>
+                    <DeleteIcon
+                      onClick={(e) => onRightAction(e, rowNumber)}
+                      className={clsx(['svgIcon', 'hover'])}
+                      fill={'var(--light-text1)'}
+                      transform={'scale(1.1)'}
+                    ></DeleteIcon>
+                  </div>
+                ) : file&&colIndex===1? (
+                  <FileInput
+                    colIndex={colIndex}
+                    rowIndex={rowNumber}
+                    value={cell.getValue()}
+                    onChange={handleChange}
+                  />
                 ) : (
                   <CellInput
                     value={cell.getValue()}
@@ -57,4 +86,4 @@ const MyTable: React.FC<MyTableProps<any>> = ({ table, onChangeCell }) => {
   );
 };
 
-export default MyTable;
+export default KVTable;

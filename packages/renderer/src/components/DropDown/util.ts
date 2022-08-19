@@ -2,9 +2,10 @@ import { DropDownProps } from '/@cmp/DropDown/index';
 
 interface CreatDropDownProps extends DropDownProps {
   event: any;
+  large?:boolean;
 }
 
-export const creatDropDown = ({ event, menus, selectedKey,onSelectionChange }: CreatDropDownProps) => {
+export const creatDropDown = ({ event, menus,large, selectedKey,onSelectionChange }: CreatDropDownProps) => {
   let DropDownEle: HTMLDivElement | null;
   const body = document.querySelector('body');
   DropDownEle = document.querySelector('#dropDown');
@@ -15,7 +16,8 @@ export const creatDropDown = ({ event, menus, selectedKey,onSelectionChange }: C
     const pos = tar.getBoundingClientRect();
     DropDownEle = document.createElement('div');
     DropDownEle.id = 'dropDown';
-    DropDownEle.className = 'dropDownBox';
+    DropDownEle.classList.add('dropDownBox');
+    large&&DropDownEle.classList.add('large');
     const top = pos.y + pos.height + 10;
     const left = pos.x;
     DropDownEle.style.top = `${top}px`;

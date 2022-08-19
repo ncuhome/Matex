@@ -1,40 +1,47 @@
 import { atom, useAtom } from 'jotai';
 import {
+  BodyRawType,
+  BodyType,
   ConfigType,
   DefaultHerderConfig,
-  HerderConfig,
-  ParamsConfig,
+  KVConfig,
   ReqType,
-  UrlEncodeConfig
 } from '/@/Model/ApiTest.model';
 import { atomWithImmer } from 'jotai/immer';
 import { useEffect } from 'react';
-import {getStore} from "/@/store/ApiTest/utils";
+import { getStore } from '/@/store/ApiTest/utils';
 
 //Header Config
 export const SelReq = atom<ReqType>('get');
 export const ReqUrl = atom<string>('');
 export const ReqConfigType = atom<ConfigType>('params');
+export const ReqBodyType = atom<BodyType>('urlencoded');
+export const RawTypeValue = atom<BodyRawType>('text');
 
-export const HeaderConfigs = atomWithImmer<HerderConfig[]>(DefaultHerderConfig);
-export const ParamsConfigs = atomWithImmer<ParamsConfig[]>([]);
-export const UrlEncodeConfigs = atomWithImmer<ParamsConfig[]>([]);
+export const HeaderConfigs = atomWithImmer<KVConfig[]>(DefaultHerderConfig);
+export const ParamsConfigs = atomWithImmer<KVConfig[]>([]);
+export const UrlEncodeConfigs = atomWithImmer<KVConfig[]>([]);
+export const FormDataConfigs = atomWithImmer<KVConfig[]>([]);
+export const RawConfigValue = atomWithImmer<string>('');
+export const BinaryConfigs = atomWithImmer<File[]>([]);
 
-
-
-export const useConfigList = <T extends HerderConfig>(type:ConfigType) => {
-  const [configList, setConfigList] = useAtom(getStore(type));
+export const useConfigList = (configType: ConfigType,bodyType:Exclude<BodyType, 'raw'|'binary'>) => {
+  const [configList, setConfigList] = useAtom(getStore(configType,bodyType));
 
   useEffect(() => {
     const len = configList.length;
-    if (len===0||configList[len - 1].key.trim() !== '' || configList[len - 1].value.trim() !== '') {
+    if (len === 0 || configList[len - 1].key.trim() !== '' || configList[len - 1].value) {
       addConfig();
     }
   }, [configList]);
 
-  const updateConfig = (index: number, type: 'key' | 'value', value: string) => {
+  const updateConfig = (index: number, type: 'key' | 'value', value: KVConfig['value']) => {
     setConfigList((draft) => {
-      draft[index][type] = value;
+      if (type==='key'){
+        draft[index].key = value as string
+      } else{
+        draft[index].value = value as KVConfig['value']
+      }
       return draft;
     });
   };
@@ -53,11 +60,10 @@ export const useConfigList = <T extends HerderConfig>(type:ConfigType) => {
     });
   };
 
-  // @ts-ignore
   return {
     configList,
     updateConfig,
     addConfig,
     deleteConfig
-  }  ;
+  };
 };

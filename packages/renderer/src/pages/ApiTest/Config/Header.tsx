@@ -6,6 +6,7 @@ import {InputContextMenus, ReqMethods} from '/@/Model/ApiTest.model';
 import ClearIcon from '/@cmp/svg/ClearIcon';
 import MyDropDown from '/@cmp/DropDown';
 import {useContextMenu} from "/@/Hooks/useContextMenu";
+import clsx from "clsx";
 
 const Header = () => {
   const [selReq, setSelReq] = useAtom(SelReq);
@@ -25,11 +26,11 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      <MyDropDown menus={ReqMethods} selectedKey={selReq} onSelectionChange={changeSelReq} />
+      <MyDropDown menus={ReqMethods}  width={98} selectedKey={selReq} onSelectionChange={changeSelReq} />
       <div className={styles.url}>
         <input ref={inputRef} className={styles.input} placeholder={'请输入测试接口地址'} value={reqUrl} onChange={changeUrl} />
         <div className={styles.clearIcon} onClick={() => setReqUrl('')}>
-          <ClearIcon fill={'var(--light-text1)'} />
+          <ClearIcon fill={'var(--light-text1)'} className={clsx(['svgIcon','hover'])}/>
         </div>
       </div>
     </div>
