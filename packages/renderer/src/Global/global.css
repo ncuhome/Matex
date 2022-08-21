@@ -53,11 +53,12 @@ p {
   /*text*/
   --light-text1: #57cfff;
   --light-text2: #5a6591;
-  --dart-text1: var(--dark-bg1);
+  --dark-text1: var(--dark-bg1);
 
   /*other*/
-  --dart-color1: #42538e;
-  --dart-color2: #475998;
+  --dark-color1: #42538e;
+  --dark-color2: #475998;
+  --error-color: #e086e0;
 
   --card-space: 18px;
 }

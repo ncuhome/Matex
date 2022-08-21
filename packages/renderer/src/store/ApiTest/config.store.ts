@@ -5,14 +5,15 @@ import {
   ConfigType,
   DefaultHerderConfig,
   KVConfig,
-  ReqType,
+  ReqType, ResDataType, ResDisplayType
 } from '/@/Model/ApiTest.model';
 import { atomWithImmer } from 'jotai/immer';
 import { useEffect } from 'react';
 import { getStore } from '/@/store/ApiTest/utils';
+import type { FilePondFile } from 'filepond';
 
 //Header Config
-export const SelReq = atom<ReqType>('get');
+export const SelReqType = atom<ReqType>('get');
 export const ReqUrl = atom<string>('');
 export const ReqConfigType = atom<ConfigType>('params');
 export const ReqBodyType = atom<BodyType>('urlencoded');
@@ -23,10 +24,14 @@ export const ParamsConfigs = atomWithImmer<KVConfig[]>([]);
 export const UrlEncodeConfigs = atomWithImmer<KVConfig[]>([]);
 export const FormDataConfigs = atomWithImmer<KVConfig[]>([]);
 export const RawConfigValue = atomWithImmer<string>('');
-export const BinaryConfigs = atomWithImmer<File[]>([]);
+export const BinaryConfigs = atomWithImmer<FilePondFile[]>([]);
 
-export const useConfigList = (configType: ConfigType,bodyType:Exclude<BodyType, 'raw'|'binary'>) => {
-  const [configList, setConfigList] = useAtom(getStore(configType,bodyType));
+//result Config
+export const ResDataTypeAtom = atom<ResDataType>('响应数据');
+export const ResDisplayTypeAtom = atom<ResDisplayType>('Pretty');
+
+export const useConfigList = (configType: ConfigType, bodyType: Exclude<BodyType, 'raw' | 'binary'>) => {
+  const [configList, setConfigList] = useAtom(getStore(configType, bodyType));
 
   useEffect(() => {
     const len = configList.length;
@@ -37,10 +42,10 @@ export const useConfigList = (configType: ConfigType,bodyType:Exclude<BodyType, 
 
   const updateConfig = (index: number, type: 'key' | 'value', value: KVConfig['value']) => {
     setConfigList((draft) => {
-      if (type==='key'){
-        draft[index].key = value as string
-      } else{
-        draft[index].value = value as KVConfig['value']
+      if (type === 'key') {
+        draft[index].key = value as string;
+      } else {
+        draft[index].value = value as KVConfig['value'];
       }
       return draft;
     });

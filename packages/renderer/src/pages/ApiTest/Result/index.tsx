@@ -1,42 +1,29 @@
-import React,{Suspense} from 'react';
+import React from 'react';
 import styles from './index.module.scss';
-import {useEditorAction} from "/@cmp/MonacoEditor/editorAction";
-import Loading from "/@cmp/Loading";
+import {NotifyIllustration} from "/@cmp/Illustration/notify";
+import {ResDataTypeAtom, ResDisplayTypeAtom} from "/@/store/ApiTest/config.store";
+import {ResDataType, ResDataTypeList, ResDisplayTypeList, SelConfigs} from "/@/Model/ApiTest.model";
+import MyDropDown from "/@cmp/DropDown";
+import {useAtom} from "jotai";
+import Tabs from "/@cmp/Tabs";
 
-const MonacoEditor = React.lazy(()=>import('/@/components/MonacoEditor'))
+// const MonacoEditor = React.lazy(()=>import('/@/components/MonacoEditor'))
 
 const ReqResult = () => {
-	const { setValue, changeLanguage } = useEditorAction({ id: 'reqResult', readOnly: false });
-
-	const onCreated = (editor) => {
-    console.log(editor.getValue());
-		if (editor){
-			setValue({
-				language:'json',
-				editor,
-				value:''
-			})
-		}
-  };
+  const [resDataType,setResDataType] = useAtom(ResDataTypeAtom)
+  const [ResDisplayType,setResDisplayType] = useAtom(ResDisplayTypeAtom)
 
   return (
     <div className={styles.result}>
-			<Suspense fallback={<Loading/>}>
-				<MonacoEditor
-						onChange={(changes, value) => {
-							console.log(value);
-						}}
-						onCreated={onCreated}
-						// onDestroyed={onDestroyed}
-						shadow={true}
-						readOnly={false}
-						// border={'#E0E1E2 1px solid'}
-						language={'json'}
-						defaultVal={'123'}
-						height={220}
-						width={'100%'}
-				/>
-			</Suspense>
+      <div className={styles.header}>
+        <MyDropDown
+            width={102}
+            menus={ResDataTypeList}
+            selectedKey={resDataType}
+            onSelectionChange={(_,sel)=>setResDataType(sel as ResDataType)}
+        />
+        <Tabs menus={ResDisplayTypeList} selectedKey={ResDisplayType} onSelect={(_,sel)=>setResDisplayType(sel)}/>
+      </div>
     </div>
   );
 };

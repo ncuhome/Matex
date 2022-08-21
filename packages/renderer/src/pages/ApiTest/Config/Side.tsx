@@ -28,7 +28,7 @@ const ConfigSide = () => {
             width={98}
             menus={BodyTypes}
             selectedKey={reqBodyType}
-            btnText={'Body-'+reqBodyType.slice(0,1)}
+            btnText={reqBodyType.slice(0,6)}
             onSelectionChange={changeBodyType}
           />
         </>

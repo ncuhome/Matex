@@ -24,7 +24,7 @@
   .tableCon {
     grid-column: 2/3;
     grid-row: 2/3;
-    padding-right: 18px;
+    margin-right: 18px;
     margin-top: 5px;
     margin-bottom: 15px;
     overflow: auto;
@@ -48,7 +48,7 @@
     color: var(--light-text1);
     height: 40px;
     width: 100%;
-    border: 1px solid var(--dart-color1);
+    border: 1px solid var(--dark-color1);
     border-radius: 7px;
     background: transparent;
     padding-left: 10px;
@@ -59,21 +59,17 @@
     }
 
     &::placeholder {
-      color: var(--dart-color2);
+      color: var(--dark-color2);
     }
   }
 }
 
-.editorCon{
-  position: relative;
-
-  .dropDownBox{
-    position: absolute;
-    right: 22px;
-    top: 10px;
-    border-radius: 7px;
-    border: 1px solid var(--dart-color1);
-  }
+.dropDownBox{
+  position: absolute;
+  right: 22px;
+  top: 10px;
+  border-radius: 7px;
+  border: 1px solid var(--dark-color1);
 }
 
 

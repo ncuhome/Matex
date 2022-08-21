@@ -34,63 +34,63 @@
   background-color: var(--dark-bg1);
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  align-items: center;
-}
 
-.spinnerBox {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-}
+  .spinnerBox {
+    width: 30%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
 
-.leo {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}
+    .leo {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
 
-.blue-Orbit {
-  width: 165px;
-  height: 165px;
-  border: 1px solid #91daffa5;
-  -webkit-animation: spin3D 3s linear .2s infinite;
-}
+    .blue-Orbit {
+      width: 165px;
+      height: 165px;
+      border: 1px solid #91daffa5;
+      -webkit-animation: spin3D 3s linear .2s infinite;
+    }
 
-.greenOrbit {
-  width: 120px;
-  height: 120px;
-  border: 1px solid #91ffbfa5;
-  -webkit-animation: spin3D 2s linear 0s infinite;
-}
+    .greenOrbit {
+      width: 120px;
+      height: 120px;
+      border: 1px solid #91ffbfa5;
+      -webkit-animation: spin3D 2s linear 0s infinite;
+    }
 
-.redOrbit {
-  width: 90px;
-  height: 90px;
-  border: 1px solid #ffca91a5;
-  -webkit-animation: spin3D 1s linear 0s infinite;
-}
+    .redOrbit {
+      width: 90px;
+      height: 90px;
+      border: 1px solid #ffca91a5;
+      -webkit-animation: spin3D 1s linear 0s infinite;
+    }
 
-.whiteOrbit {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #ffffff;
-  -webkit-animation: spin3D 10s linear 0s infinite;
-}
+    .whiteOrbit {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #ffffff;
+      -webkit-animation: spin3D 10s linear 0s infinite;
+    }
 
-.w1 {
-  transform: rotate3D(1, 1, 1, 90deg);
-}
+    .w1 {
+      transform: rotate3D(1, 1, 1, 90deg);
+    }
 
-.w2 {
-  transform: rotate3D(1, 2, .5, 90deg);
-}
+    .w2 {
+      transform: rotate3D(1, 2, .5, 90deg);
+    }
 
-.w3 {
-  transform: rotate3D(.5, 1, 2, 90deg);
+    .w3 {
+      transform: rotate3D(.5, 1, 2, 90deg);
+    }
+  }
 }

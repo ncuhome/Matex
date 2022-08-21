@@ -6,6 +6,7 @@ import {
   RawTypeValue,
   ReqBodyType,
   ReqConfigType,
+  SelReqType,
   useConfigList
 } from '/@/store/ApiTest/config.store';
 import KVTable from '/@cmp/Table';
@@ -17,10 +18,13 @@ import { Editor } from '/@cmp/MonacoEditor/type';
 import { columns } from '/@/pages/ApiTest/Config/utils';
 import MyDropDown from '/@cmp/DropDown';
 import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
+import UploadFile from '/@cmp/UploadFile';
+import { NotifyIllustration } from '/@cmp/Illustration/notify';
 
 const MonacoEditor = React.lazy(() => import('/@/components/MonacoEditor'));
 const ConfigTable = () => {
   const selConfig = useAtomValue(ReqConfigType);
+  const selReqType = useAtomValue(SelReqType);
   const reqBodyType = useAtomValue(ReqBodyType);
   const [rawTypeValue, setRawTypeValue] = useAtom(RawTypeValue);
   const [rawConfigValue, setRawConfigValue] = useAtom(RawConfigValue);
@@ -63,34 +67,36 @@ const ConfigTable = () => {
   };
 
   const renderComponent = () => {
+    if (selReqType === 'get' && selConfig === 'body') {
+      return <NotifyIllustration desc={'推荐使用params传递Get请求参数'} />;
+    }
+    if ((selReqType === 'post' || selReqType === 'put') && selConfig === 'params') {
+      return <NotifyIllustration desc={'推荐使用body传递Post|Put请求参数'} />;
+    }
     if (selConfig === 'body' && reqBodyType === 'raw') {
       return (
         <Suspense fallback={<Loading />}>
-          <div className={styles.editorCon}>
-            <MonacoEditor
-              onChange={(changes, value) => {
-                setRawConfigValue(value ?? '');
-              }}
-              onCreated={onCreated}
-              onDestroyed={() => (editorRef.current = null)}
-              shadow={true}
-              border={'1px solid var(--dart-color2)'}
-              readOnly={false}
-              language={language}
-              defaultVal={''}
-              height={130}
-              width={'100%'}
-            />
-            <div className={styles.dropDownBox}>
-              <MyDropDown
-                menus={BodyRawTypes}
-                selectedKey={rawTypeValue}
-                onSelectionChange={onChangeRawType}
-              />
-            </div>
+          <MonacoEditor
+            onChange={(changes, value) => {
+              setRawConfigValue(value ?? '');
+            }}
+            onCreated={onCreated}
+            onDestroyed={() => (editorRef.current = null)}
+            shadow={true}
+            border={'1px solid var(--dart-color2)'}
+            readOnly={false}
+            language={language}
+            defaultVal={''}
+            height={130}
+            width={'100%'}
+          />
+          <div className={styles.dropDownBox}>
+            <MyDropDown menus={BodyRawTypes} selectedKey={rawTypeValue} onSelectionChange={onChangeRawType} />
           </div>
         </Suspense>
       );
+    } else if (selConfig === 'body' && reqBodyType === 'binary') {
+      return <UploadFile />;
     } else {
       return (
         <KVTable

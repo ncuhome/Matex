@@ -5,7 +5,7 @@ import { creatDropDown, hidden } from './util';
 
 export interface DropDownProps {
   menus: any[];
-  btnText?:string;
+  btnText?: string;
   large?: boolean;
   selectedKey?: string;
   onSelectionChange?: (index: number, key: string) => void;
@@ -16,7 +16,7 @@ type HandleHidden = (e) => void;
 
 const MyDropDown: React.FC<DropDownProps> = ({
   width,
-                                               btnText,
+  btnText,
   large = false,
   menus,
   selectedKey,
@@ -44,7 +44,7 @@ const MyDropDown: React.FC<DropDownProps> = ({
 
   return (
     <div className={styles.dropDown} style={{ width }} onClick={handleClick}>
-      <div className={styles.btn}>{btnText?btnText:selectedKey}</div>
+      <div className={styles.btn}>{btnText ? btnText : selectedKey}</div>
       <div className={styles.trigger}>
         <ArrowDownIcon className={styles.icon} fill={'var(--light-text1)'} />
       </div>

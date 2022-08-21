@@ -51,7 +51,7 @@ const KVTable: React.FC<MyTableProps<any>> = ({
                   <div className={styles.opt}>
                     <EyesIcon
                       onClick={(e) => onLeftAction(e)}
-                      fill={!isBody ? 'var(--dart-color2)' : 'var(--light-text1)'}
+                      fill={!isBody ? 'var(--dark-color2)' : 'var(--light-text1)'}
                       className={clsx(['svgIcon', isBody && 'hover'])}
                     />
                     <div style={{ width: 40 }}></div>

@@ -1,3 +1,11 @@
 .result{
   position: relative;
+  padding: 10px;
+
+  .header{
+    line-height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
 }

@@ -1,6 +1,6 @@
 .overlayBox {
   position: absolute;
-  background: var(--dart-color1);
+  background: var(--dark-color1);
   box-shadow: 0 12px 20px 6px rgb(104 112 118 / 0.08);
   border-radius: 6px;
   z-index: 1000;
@@ -57,7 +57,7 @@
 
 @keyframes scaleUp {
   from {
-    opacity: 0.5;
+    opacity: 0;
     transform: scale(0);
   }
 
@@ -73,7 +73,7 @@
     opacity: 1;
   }
   to {
-    opacity: 0.5;
+    opacity: 0;
     transform: scale(0);
   }
 }
@@ -98,4 +98,19 @@
   .custom-context-menu-item {
     @extend .overlayBox-item;
   }
+}
+
+.filepond--label-action{
+  color: #2CB5AD;
+}
+
+.filepond--panel,.filepond--panel-root{
+  background: transparent!important;
+}
+
+
+.filepond--root .filepond--drop-label{
+  background: var(--dark-color1);
+  border-radius: 5px;
+  color: var(--light-text1);
 }

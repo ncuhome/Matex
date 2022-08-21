@@ -1,6 +1,6 @@
 .table{
   width: 100%;
-  border: 1px solid var(--dart-color1);
+  border: 1px solid var(--dark-color1);
   border-radius: 5px;
   border-collapse: collapse;
   display: flex;
@@ -15,10 +15,10 @@
   }
 
   .tableHeader{
-    border-bottom: 1px solid var(--dart-color1);
+    border-bottom: 1px solid var(--dark-color1);
 
     .tableCol{
-      border-right: 1px solid var(--dart-color1);
+      border-right: 1px solid var(--dark-color1);
 
       &:last-child{
         border-right: none;
@@ -30,10 +30,10 @@
   .tableBody{
 
     .tableRow{
-      border-bottom: 1px solid var(--dart-color1);
+      border-bottom: 1px solid var(--dark-color1);
 
       .tableCol{
-        border-right: 1px solid var(--dart-color1);
+        border-right: 1px solid var(--dark-color1);
         padding-left: 11px;
 
         &:last-child{
