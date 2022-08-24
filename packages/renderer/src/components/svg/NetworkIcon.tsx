@@ -1,7 +1,6 @@
 import * as React from "react"
-import {SvgType} from "/@cmp/svg/svg";
 
-const NetworkIcon = (props: SvgType) => (
+const NetworkIcon = (props) => (
 		<svg
 				className="svgIcon"
 				width={22}

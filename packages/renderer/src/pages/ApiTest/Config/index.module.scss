@@ -19,10 +19,9 @@
     grid-column: 1/2;
     grid-row: 2/3;
     padding-left: 5px;
-    margin-top: 5px;
   }
 
-  .configParamsCon{
+  .configParamsCon {
     grid-column: 2/3;
     grid-row: 2/3;
     margin-right: 18px;
@@ -34,17 +33,20 @@
     flex-direction: column;
     justify-content: center;
 
-    .title{
+    .text {
       height: 30px;
-      margin:2px 0 5px 0;
+      width: fit-content;
+      display: block;
+      border-radius: 7px;
       color: var(--light-text1);
+      font-size: 14px;
+      padding-left: 5px;
     }
 
     .tableCon {
       flex: 1;
       margin-right: 18px;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       overflow: auto;
       position: relative;
     }
@@ -83,12 +85,10 @@
   }
 }
 
-.dropDownBox{
+.dropDownBox {
   position: absolute;
   right: 22px;
   top: 10px;
   border-radius: 7px;
   border: 1px solid var(--dark-color1);
 }
-
-

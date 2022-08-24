@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { SvgType } from '/@cmp/svg/svg';
 
-const ArrowUpIcon = (props: SvgType) => (
+const ArrowUpIcon = (props) => (
   <svg
     className="svgIcon"
     viewBox="0 0 1024 1024"

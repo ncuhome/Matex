@@ -25,7 +25,7 @@ const UploadFile = () => {
   });
 
   return (
-    <div style={{background:'transparent'}}>
+    <div style={{ background: 'transparent' }}>
       <FilePond
         files={filePond}
         onaddfile={(_, file) => {
@@ -57,7 +57,7 @@ const UploadFile = () => {
         name="files"
         labelIdle={`拖拖拽上传文件或者 
         <span class="filepond--label-action">浏览</span>
-        <br> <span style="font-size: 12px;color: gray">点击文件预览</span>
+        <br> <span style="font-size: 12px;color: var(--dark-text2);">点击文件预览</span>
         `}
       />
     </div>

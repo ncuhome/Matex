@@ -1,0 +1,68 @@
+
+.iconBtn{
+  width: 35px;
+  height:35px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+
+
+.speedDial{
+  position: absolute;
+  top: 0;
+
+  .btn{
+    @extend .iconBtn;
+    border: 1px solid var(--dark-color1);
+
+    &:hover{
+      background: var(--dark-color1);
+      cursor: pointer;
+    }
+  }
+
+  .menu{
+    margin-top: 5px;
+    width: 35px;
+    background: var(--dark-color1);
+    box-shadow: 0 0 5px var(--dark-bg1);
+    border-radius: 5px;
+    color: var(--light-text1);
+
+    .menuItem{
+      @extend .iconBtn;
+      margin-top: 5px;
+
+
+      &:hover{
+        background: var(--dark-bg1);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.show{
+  display: block;
+  animation: scaleUp 0.3s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.hidden{
+  display: none;
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

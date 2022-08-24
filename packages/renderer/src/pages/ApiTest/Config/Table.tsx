@@ -1,12 +1,8 @@
 import React from 'react';
 import styles from '/@/pages/ApiTest/Config/index.module.scss';
-import {
-  ReqBodyType,
-  ReqConfigType,
-  SelReqType,
-} from '/@/store/ApiTest/config.store';
+import { ReqBodyType, ReqConfigType, SelReqType } from '/@/store/ApiTest/config.store';
 import { useAtom, useAtomValue } from 'jotai';
-import {BodyTypes, ConfigTableTitleMap} from '/@/Model/ApiTest.model';
+import { BodyTypes, ConfigTableTitleMap } from '/@/Model/ApiTest.model';
 import UploadFile from '/@cmp/UploadFile';
 import { NotifyIllustration } from '/@cmp/Illustration/notify';
 import Tabs from '/@cmp/Tabs';
@@ -34,27 +30,28 @@ const ConfigTable = () => {
   };
 
   const renderTitle = () => {
-    if ((reqType==='post'||reqType==='put')&&reqConfigType==='body'){
+    if ((reqType === 'post' || reqType === 'put') && reqConfigType === 'body') {
       return (
-          <Tabs
-              width={6}
-              menus={BodyTypes}
-              selectedKey={reqBodyType}
-              onSelect={(_, sel) => setReqBodyType(sel)}
-          />
-      )
+        <Tabs
+          style={{ margin: '1px 0px 10px -2px' }}
+          width={6}
+          menus={BodyTypes}
+          selectedKey={reqBodyType}
+          onSelect={(_, sel) => setReqBodyType(sel)}
+        />
+      );
     } else {
-      return ConfigTableTitleMap.get(reqType+'-' + reqConfigType)
+      if (ConfigTableTitleMap.get(reqType + '-' + reqConfigType)) {
+        return <div className={styles.text}>{ConfigTableTitleMap.get(reqType + '-' + reqConfigType)}:</div>;
+      } else {
+        return null;
+      }
     }
-  }
+  };
 
   return (
     <div className={styles.configParamsCon}>
-      <div className={styles.title}>
-        {
-          renderTitle()
-        }
-      </div>
+      {renderTitle()}
       <div className={styles.tableCon}>{renderComponent()}</div>
     </div>
   );

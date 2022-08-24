@@ -1,7 +1,7 @@
 import * as React from "react"
-import { SvgType } from "./svg"
+import {SVGProps} from "react";
 
-const CloseIcon = (props: SvgType) => (
+const CloseIcon = (props:SVGProps<SVGSVGElement>) => (
 		<svg
 				className="svgIcon"
 				viewBox="0 0 1024 1024"

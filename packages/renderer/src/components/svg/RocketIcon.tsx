@@ -1,8 +1,6 @@
 import * as React from "react"
-import { SVGProps } from "react"
-import {SvgType} from "/@cmp/svg/svg";
 
-const RocketIcon = (props: SvgType) => (
+const RocketIcon = (props) => (
 		<svg
 				className="svgIcon"
 				width={20}

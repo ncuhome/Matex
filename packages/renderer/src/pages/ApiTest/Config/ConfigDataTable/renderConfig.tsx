@@ -81,11 +81,11 @@ export const RenderMonacoEditor = () => {
             onCreated={onCreated}
             onDestroyed={() => (editorRef.current = null)}
             shadow={true}
-            border={'1px solid var(--dart-color2)'}
+            border={'1px solid var(--dark-color2)'}
             readOnly={false}
             language={language}
             defaultVal={''}
-            height={130}
+            height={120}
             width={'100%'}
         />
         <div className={styles.dropDownBox}>

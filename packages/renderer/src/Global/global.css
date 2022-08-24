@@ -54,6 +54,7 @@ p {
   --light-text1: #57cfff;
   --light-text2: #5a6591;
   --dark-text1: var(--dark-bg1);
+  --dark-text2: #5368AF;
 
   /*other*/
   --dark-color1: #42538e;

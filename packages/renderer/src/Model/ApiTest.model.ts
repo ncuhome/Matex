@@ -19,11 +19,10 @@ export const ConfigTableTitleMap = new Map<string, string>([
   ['get-body', ''],
   ['post-params', ''],
   ['post-header', 'Post请求头'],
-  ['post-body', ''],
   ['post-body-urlencoded', 'application/x-www-form-urlencoded'],
   ['post-body-form-data', 'multipart/form-data'],
   ['post-body-raw', '任意格式文本'],
-  ['post-body-binary', '二进制文件数据'],
+  ['post-body-binary', '二进制文件数据']
 ]);
 
 export interface KVConfig {
@@ -33,7 +32,8 @@ export interface KVConfig {
 }
 export const DefaultHerderConfig: KVConfig[] = [
   { key: 'Accept', value: '*/*' },
-  { key: 'Connection', value: 'keep-alive' }
+  { key: 'Connection', value: 'keep-alive' },
+  { key: 'Accept-Encoding', value: 'gzip, deflate, br' }
 ];
 export const InputContextMenus: Menus = [{ key: '复制' }, { key: '粘贴' }, { key: '清除' }];
 
@@ -42,4 +42,7 @@ export type ResDataType = '响应数据' | '响应头';
 export const ResDataTypeList = ['响应数据', '响应头'];
 
 export type ResDisplayType = 'Pretty' | 'Preview';
-export const ResDisplayTypeList = ['Pretty', 'Preview'];
+export const ResDisplayTypeList = ['Pretty', 'Preview', 'Visualize'];
+
+export type ResFormatType = 'json' | 'text' | 'html' | 'javascript' | 'xml';
+export const ResFormatTypeList = ['json', 'html', 'xml', 'text', 'javascript'];

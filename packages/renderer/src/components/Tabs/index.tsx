@@ -1,20 +1,21 @@
-import React, { Fragment } from 'react';
+import React, {CSSProperties, Fragment} from 'react';
 import styles from './index.module.scss';
 
 interface TabsProps {
   width?: number;
+  style?:CSSProperties | undefined
   menus: string[];
   selectedKey: string;
   onSelect?: (index, sel) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({ width = 5.85, menus, selectedKey, onSelect = () => {} }) => {
+const Tabs: React.FC<TabsProps> = ({ style,width = 5.85, menus, selectedKey, onSelect = () => {} }) => {
   const _count = menus.findIndex((item) => {
     return item === selectedKey;
   });
 
   return (
-    <div className={styles.tabCon}>
+    <div className={styles.tabCon} style={style}>
       {menus.map((menu, index) => {
         return (
           <Fragment key={menu}>

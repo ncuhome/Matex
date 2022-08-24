@@ -58,7 +58,7 @@ const FileInput: React.FC<FileInput> = ({ rowIndex, colIndex, value = '', onChan
       />
       <div onClick={() => setFile(!file)} className={styles.icon}>
         <FileIcon
-          fill={!file ? 'var(--dart-color2)' : 'var(--light-text1)'}
+          fill={!file ? 'var(--dark-color2)' : 'var(--light-text1)'}
           className={clsx(['svgIcon', 'hover'])}
         />
       </div>
