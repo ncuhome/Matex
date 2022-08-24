@@ -3,7 +3,6 @@ import {
   FormDataConfigs,
   HeaderConfigs,
   ParamsConfigs,
-  RawConfigs,
   UrlEncodeConfigs
 } from '/@/store/ApiTest/config.store';
 import { BodyType, ConfigType } from '/@/Model/ApiTest.model';

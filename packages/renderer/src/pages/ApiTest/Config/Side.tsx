@@ -7,10 +7,8 @@ import { ReqBodyType, ReqConfigType } from '/@/store/ApiTest/config.store';
 
 const ConfigSide = () => {
   const [reqConfigType, setReqConfigType] = useAtom(ReqConfigType);
-  const [reqBodyType, setReqBodyType] = useAtom(ReqBodyType);
 
   const changeSelConfig = (index, sel: any) => setReqConfigType(sel);
-  const changeBodyType = (index, sel: any) => setReqBodyType(sel);
   return (
     <div className={styles.side}>
       <MyDropDown
@@ -19,20 +17,6 @@ const ConfigSide = () => {
         selectedKey={reqConfigType}
         onSelectionChange={changeSelConfig}
       />
-
-      {reqConfigType === 'body' && (
-        <>
-          <div style={{ marginTop: 20 }} />
-          <MyDropDown
-            large
-            width={98}
-            menus={BodyTypes}
-            selectedKey={reqBodyType}
-            btnText={reqBodyType.slice(0,6)}
-            onSelectionChange={changeBodyType}
-          />
-        </>
-      )}
     </div>
   );
 };

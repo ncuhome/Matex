@@ -13,6 +13,19 @@ export const BodyTypes: BodyType[] = ['urlencoded', 'form-data', 'raw', 'binary'
 export type BodyRawType = 'json' | 'text' | 'html' | 'javascript';
 export const BodyRawTypes = ['json', 'text', 'html', 'javascript'];
 
+export const ConfigTableTitleMap = new Map<string, string>([
+  ['get-params', 'Get查询参数'],
+  ['get-header', 'Get请求头'],
+  ['get-body', ''],
+  ['post-params', ''],
+  ['post-header', 'Post请求头'],
+  ['post-body', ''],
+  ['post-body-urlencoded', 'application/x-www-form-urlencoded'],
+  ['post-body-form-data', 'multipart/form-data'],
+  ['post-body-raw', '任意格式文本'],
+  ['post-body-binary', '二进制文件数据'],
+]);
+
 export interface KVConfig {
   key: string;
   value: string | File;

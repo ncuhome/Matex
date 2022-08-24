@@ -9,8 +9,8 @@ export const createMainWin = async (): Promise<BrowserWindow> => {
     try {
       const { width, height } = screen.getPrimaryDisplay().workAreaSize;
       const mainWindow = new BrowserWindow({
-        width: width - 100,
-        height: height - 20,
+        width: width-30,
+        height: height,
         center: true,
         frame: os === 'win',
         show: false,

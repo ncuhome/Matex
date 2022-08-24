@@ -1,12 +1,11 @@
 
 .tabCon{
-  width: 20.4rem;
-  height: 40px;
+  width: 100%;
+  height: 30px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   position: relative;
-  margin-left: 10px;
 
   input { display: none; }
 
@@ -15,17 +14,19 @@
     color: var(--light-text1);
   }
 
-  .label__1, .label__2, .label__3 {
+  .label {
     width: 6rem;
-    height: 3.6rem;
+    height: 2.6rem;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #5368AF;
+    font-size: 14px;
     transition: all .5s ease;
     z-index: 100;
     user-select: none;
+    padding: 0 5px;
 
     &:hover { color: var(--light-text1);cursor: pointer; }
   }
@@ -34,25 +35,12 @@
     position: absolute;
     height: 35px;
     width: 5.85rem;
-    //max-width: 6.2rem;
+    max-width: 6.2rem;
     background: var(--dark-bg1);
-    //margin-left: .3rem;
+    margin-left: 0.1rem;
     border-radius: 7px;
     pointer-events: none;
     z-index: 1;
     transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 }
-
-//.tab1:checked ~ .overlay__color {
-//  transform: translateX(0);
-//  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-//}
-//.tab2:checked ~ .overlay__color {
-//  transform: translateX(6.8rem);
-//  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-//}
-//.tab3:checked ~ .overlay__color {
-//  transform: translateX(13.6rem);
-//  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-//}

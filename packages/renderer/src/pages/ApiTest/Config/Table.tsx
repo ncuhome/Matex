@@ -1,115 +1,63 @@
-import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import React, { Suspense } from 'react';
+import React from 'react';
 import styles from '/@/pages/ApiTest/Config/index.module.scss';
 import {
-  RawConfigValue,
-  RawTypeValue,
   ReqBodyType,
   ReqConfigType,
   SelReqType,
-  useConfigList
 } from '/@/store/ApiTest/config.store';
-import KVTable from '/@cmp/Table';
 import { useAtom, useAtomValue } from 'jotai';
-import { BodyRawTypes, KVConfig } from '/@/Model/ApiTest.model';
-import Loading from '/@cmp/Loading';
-import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
-import { Editor } from '/@cmp/MonacoEditor/type';
-import { columns } from '/@/pages/ApiTest/Config/utils';
-import MyDropDown from '/@cmp/DropDown';
-import { LanguageMapper } from '/@cmp/MonacoEditor/utils';
+import {BodyTypes, ConfigTableTitleMap} from '/@/Model/ApiTest.model';
 import UploadFile from '/@cmp/UploadFile';
 import { NotifyIllustration } from '/@cmp/Illustration/notify';
+import Tabs from '/@cmp/Tabs';
+import { RenderKVTable, RenderMonacoEditor } from '/@/pages/ApiTest/Config/ConfigDataTable/renderConfig';
 
-const MonacoEditor = React.lazy(() => import('/@/components/MonacoEditor'));
 const ConfigTable = () => {
-  const selConfig = useAtomValue(ReqConfigType);
-  const selReqType = useAtomValue(SelReqType);
-  const reqBodyType = useAtomValue(ReqBodyType);
-  const [rawTypeValue, setRawTypeValue] = useAtom(RawTypeValue);
-  const [rawConfigValue, setRawConfigValue] = useAtom(RawConfigValue);
-  const _accept = reqBodyType === 'form-data' || reqBodyType === 'urlencoded';
-  const { setValue, changeLanguage } = useEditorAction({ id: 'reqRawConfig', readOnly: false });
-  const editorRef = React.useRef<Editor | null>(null);
-
-  const language = LanguageMapper.get(rawTypeValue) ?? 'text/plain';
-
-  const { configList, updateConfig, deleteConfig } = useConfigList(
-    selConfig,
-    _accept ? reqBodyType : 'urlencoded'
-  );
-
-  const table = useReactTable<KVConfig>({
-    data: configList,
-    columns,
-    getCoreRowModel: getCoreRowModel()
-  });
-
-  const onChangeCell = (rowIndex, colIndex, value) => {
-    const prop: 'key' | 'value' = colIndex === 0 ? 'key' : 'value';
-    updateConfig(rowIndex, prop, value);
-  };
-
-  const onCreated = (editor) => {
-    editorRef.current = editor;
-    if (editor) {
-      setValue({
-        language: language,
-        editor,
-        value: rawConfigValue
-      });
-    }
-  };
-
-  const onChangeRawType = (changes, value) => {
-    setRawTypeValue(value);
-    editorRef.current && changeLanguage(editorRef.current, LanguageMapper.get(value) ?? 'text/plain');
-  };
+  const reqConfigType = useAtomValue(ReqConfigType);
+  const reqType = useAtomValue(SelReqType);
+  const [reqBodyType, setReqBodyType] = useAtom(ReqBodyType);
 
   const renderComponent = () => {
-    if (selReqType === 'get' && selConfig === 'body') {
+    if (reqType === 'get' && reqConfigType === 'body') {
       return <NotifyIllustration desc={'推荐使用params传递Get请求参数'} />;
     }
-    if ((selReqType === 'post' || selReqType === 'put') && selConfig === 'params') {
+    if ((reqType === 'post' || reqType === 'put') && reqConfigType === 'params') {
       return <NotifyIllustration desc={'推荐使用body传递Post|Put请求参数'} />;
     }
-    if (selConfig === 'body' && reqBodyType === 'raw') {
-      return (
-        <Suspense fallback={<Loading />}>
-          <MonacoEditor
-            onChange={(changes, value) => {
-              setRawConfigValue(value ?? '');
-            }}
-            onCreated={onCreated}
-            onDestroyed={() => (editorRef.current = null)}
-            shadow={true}
-            border={'1px solid var(--dart-color2)'}
-            readOnly={false}
-            language={language}
-            defaultVal={''}
-            height={130}
-            width={'100%'}
-          />
-          <div className={styles.dropDownBox}>
-            <MyDropDown menus={BodyRawTypes} selectedKey={rawTypeValue} onSelectionChange={onChangeRawType} />
-          </div>
-        </Suspense>
-      );
-    } else if (selConfig === 'body' && reqBodyType === 'binary') {
+    if (reqConfigType === 'body' && reqBodyType === 'raw') {
+      return <RenderMonacoEditor />;
+    } else if (reqConfigType === 'body' && reqBodyType === 'binary') {
       return <UploadFile />;
     } else {
-      return (
-        <KVTable
-          file={reqBodyType === 'form-data'}
-          type={selConfig}
-          table={table}
-          onChangeCell={onChangeCell}
-          onRightAction={(e, index) => configList.length !== 1 && deleteConfig(index)}
-        />
-      );
+      return <RenderKVTable />;
     }
   };
-  return <div className={styles.tableCon}>{renderComponent()}</div>;
+
+  const renderTitle = () => {
+    if ((reqType==='post'||reqType==='put')&&reqConfigType==='body'){
+      return (
+          <Tabs
+              width={6}
+              menus={BodyTypes}
+              selectedKey={reqBodyType}
+              onSelect={(_, sel) => setReqBodyType(sel)}
+          />
+      )
+    } else {
+      return ConfigTableTitleMap.get(reqType+'-' + reqConfigType)
+    }
+  }
+
+  return (
+    <div className={styles.configParamsCon}>
+      <div className={styles.title}>
+        {
+          renderTitle()
+        }
+      </div>
+      <div className={styles.tableCon}>{renderComponent()}</div>
+    </div>
+  );
 };
 
 export default ConfigTable;

@@ -2,12 +2,13 @@ import React, { Fragment } from 'react';
 import styles from './index.module.scss';
 
 interface TabsProps {
+  width?: number;
   menus: string[];
   selectedKey: string;
   onSelect?: (index, sel) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({ menus, selectedKey, onSelect = () => {} }) => {
+const Tabs: React.FC<TabsProps> = ({ width = 5.85, menus, selectedKey, onSelect = () => {} }) => {
   const _count = menus.findIndex((item) => {
     return item === selectedKey;
   });
@@ -26,8 +27,9 @@ const Tabs: React.FC<TabsProps> = ({ menus, selectedKey, onSelect = () => {} }) 
               checked={selectedKey === menu}
             />
             <label
+              style={{ width: `${width+0.3}rem` }}
               htmlFor={'tab-' + (index + 1)}
-              className={styles['label__' + (index + 1)]}
+              className={styles.label}
               onClick={() => onSelect(index, menu)}
             >
               <p>{menu}</p>
@@ -35,7 +37,10 @@ const Tabs: React.FC<TabsProps> = ({ menus, selectedKey, onSelect = () => {} }) 
           </Fragment>
         );
       })}
-      <div className={styles.overlay__color} style={{transform:`translateX(${_count*6}rem)`}}></div>
+      <div
+        className={styles.overlay__color}
+        style={{ transform: `translateX(${_count * (width+0.2)}rem)`, width: width + 'rem' }}
+      ></div>
     </div>
   );
 };

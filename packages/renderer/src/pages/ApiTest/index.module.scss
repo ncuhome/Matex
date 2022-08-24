@@ -3,8 +3,8 @@
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 250px 1fr;
-  grid-template-columns:1fr 250px;
+  grid-template-rows: 280px 1fr;
+  grid-template-columns:1fr 280px;
   padding: var(--card-space);
 
 
@@ -14,7 +14,6 @@
     background: var(--dark-bg2);
     border-radius: 10px;
     margin-bottom: var(--card-space);
-    //overflow: hidden;
   }
 
   .res{
