@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './index.module.scss';
 import TimeIcon from '/@cmp/svg/TimeIcon';
+import Popup from '/@cmp/Popup';
+import TimeCost from '/@/pages/ApiTest/Result/Header/TimeCost';
 
 interface Timer {
   key: string;
@@ -12,10 +14,12 @@ export const StatusCard = () => {
     <div className={styles.statusCard}>
       <div className={styles.statusCode}>{200}</div>
       <div className={styles.statusDesc}>{'Not Found'}</div>
-      <div className={styles.statusSize}>{'22kb'}</div>
       <div className={styles.statusTiming}>
-        <TimeIcon fill={'#2cb5ad'} transform={'scale(1.2)'}/>
+        <Popup trigger={<TimeIcon fill={'#2cb5ad'} transform={'scale(1.2)'} />}>
+          <TimeCost />
+        </Popup>
       </div>
+      <div className={styles.statusSize}>{'22kb'}</div>
     </div>
   );
 };

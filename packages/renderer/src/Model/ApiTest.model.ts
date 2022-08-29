@@ -42,7 +42,7 @@ export type ResDataType = '响应数据' | '响应头';
 export const ResDataTypeList = ['响应数据', '响应头'];
 
 export type ResDisplayType = 'Pretty' | 'Preview';
-export const ResDisplayTypeList = ['Pretty', 'Preview', 'Visualize'];
+export const ResDisplayTypeList = ['Pretty', 'Preview', 'Visual'];
 
-export type ResFormatType = 'json' | 'text' | 'html' | 'javascript' | 'xml';
-export const ResFormatTypeList = ['json', 'html', 'xml', 'text', 'javascript'];
+export type ResFormatType = 'json' | 'text' | 'html' | 'xml';
+export const ResFormatTypeList = ['json', 'html', 'xml', 'text'];

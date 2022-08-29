@@ -1,6 +1,10 @@
 .result {
   position: relative;
   padding: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   .header {
     line-height: 60px;
@@ -10,53 +14,10 @@
     align-items: center;
     position: relative;
   }
-}
 
-.statusCard {
-  position: absolute;
-  right: 15px;
-  top: 0;
-  height: 35px;
-  width: fit-content;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 13px;
-  color: #2cb5ad;
-  border: 1px solid var(--dark-color1);
-
-  .statusCode:hover,
-  .statusDesc:hover,
-  .statusTiming:hover {
-    cursor: pointer;
-  }
-
-  .statusTiming {
-    margin-top: 6px;
-  }
-
-  .statusSize {
-    margin: 0 12px 0 0;
-  }
-  .statusCopy {
-    margin: 0 10px;
-    border-left: 2px solid #e0e1e2;
-    height: 110%;
-  }
-
-  .statusDesc {
-    margin: 0 10px 0 10px;
-    line-height: 35px;
-    max-width: 125px;
-    overflow: hidden;
-    word-wrap: break-word;
-    white-space: nowrap;
-    /*当文本溢出包含元素时，以省略号表示超出的文本*/
-    text-overflow: ellipsis;
-    word-spacing: 5px;
-    -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
-    -webkit-box-orient: horizontal; /* 垂直排列 */
-    word-break: normal; /* 内容自动换行 */
+  .body {
+    flex: 1;
+    width: 100%;
+    margin-top: 8px;
   }
 }

@@ -28,7 +28,7 @@ const Tabs: React.FC<TabsProps> = ({ style,width = 5.85, menus, selectedKey, onS
               checked={selectedKey === menu}
             />
             <label
-              style={{ width: `${width+0.3}rem` }}
+              style={{ width: `${width}rem` }}
               htmlFor={'tab-' + (index + 1)}
               className={styles.label}
               onClick={() => onSelect(index, menu)}
@@ -40,7 +40,7 @@ const Tabs: React.FC<TabsProps> = ({ style,width = 5.85, menus, selectedKey, onS
       })}
       <div
         className={styles.overlay__color}
-        style={{ transform: `translateX(${_count * (width+0.2)}rem)`, width: width + 'rem' }}
+        style={{ transform: `translateX(${_count * width}rem)`, width: (width-0.6) + 'rem' }}
       ></div>
     </div>
   );

@@ -14,7 +14,7 @@ import SpeedDial from '/@cmp/SpeedDial';
 import CopyIcon from '/@cmp/svg/CopyIcon';
 import SearchIcon from '/@cmp/svg/SearchIcon';
 import SaveIcon from '/@cmp/svg/SaveIcon';
-import {StatusCard} from "/@/pages/ApiTest/Result/StatusCard";
+import {StatusCard} from "/@/pages/ApiTest/Result/Header/StatusCard";
 
 const icons = [
   <CopyIcon fill={'var(--light-text1)'} />,
@@ -39,7 +39,7 @@ const ResultHeader = () => {
       </div>
       <div style={{ marginRight: 10 }}>
         <Tabs
-          width={5.4}
+          width={6}
           menus={ResDisplayTypeList}
           selectedKey={resDisplayType}
           onSelect={(_, sel) => setResDisplayType(sel)}
@@ -55,10 +55,10 @@ const ResultHeader = () => {
           onSelectionChange={(_, sel) => setResFormatType(sel as ResFormatType)}
         />
       </div>
-      <div style={{ marginLeft: 15 }}>
+      <div style={{ marginLeft: 15,marginRight:10 }}>
         <SpeedDial icons={icons} />
       </div>
-      <div style={{ marginLeft: 45 }}>
+      <div>
         <StatusCard/>
       </div>
     </>

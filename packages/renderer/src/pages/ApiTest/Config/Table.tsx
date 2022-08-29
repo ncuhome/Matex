@@ -34,7 +34,7 @@ const ConfigTable = () => {
       return (
         <Tabs
           style={{ margin: '1px 0px 10px -2px' }}
-          width={6}
+          width={6.8}
           menus={BodyTypes}
           selectedKey={reqBodyType}
           onSelect={(_, sel) => setReqBodyType(sel)}

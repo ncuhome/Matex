@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Popup from "/@cmp/Popup";
 
 const SocketTest = () => {
   const [show, setShow] = React.useState(false);
@@ -11,7 +12,7 @@ const SocketTest = () => {
 
   return (
     <div style={{ margin: 'auto', width: 500 }}>
-      SocketTest
+      <Popup trigger={'点击'} content={'hello world'}/>
     </div>
   );
 };

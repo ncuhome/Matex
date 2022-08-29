@@ -2,9 +2,13 @@ import React from 'react';
 import styles from './index.module.scss';
 import clsx from 'clsx';
 
-const Loading = () => {
+interface LoadingProps {
+  bgColor?: string;
+}
+
+const Loading: React.FC<LoadingProps> = ({ bgColor = 'var(--dark-bg1)' }) => {
   return (
-    <div className={styles.con}>
+    <div className={styles.con} style={{ background: bgColor }}>
       <div className={styles.spinnerBox}>
         <div className={clsx([styles.blueOrbit, styles.leo])} />
         <div className={clsx([styles.greenOrbit, styles.leo])} />

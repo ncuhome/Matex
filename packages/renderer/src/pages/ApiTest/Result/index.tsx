@@ -1,14 +1,20 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { NotifyIllustration } from '/@cmp/Illustration/notify';
 import { ResDataTypeAtom, ResDisplayTypeAtom } from '/@/store/ApiTest/config.store';
-import { ResDataType, ResDataTypeList, ResDisplayTypeList, SelConfigs } from '/@/Model/ApiTest.model';
-import MyDropDown from '/@cmp/DropDown';
 import { useAtom } from 'jotai';
-import Tabs from '/@cmp/Tabs';
-import ResultHeader from '/@/pages/ApiTest/Result/Header';
+import ResultHeader from '/@/pages/ApiTest/Result/Header/Header';
+import Mask from '/@cmp/Mask';
+import idleIcon from '/@/assets/images/idle.svg';
+import ResultBody from "/@/pages/ApiTest/Result/Body";
 
-// const MonacoEditor = React.lazy(()=>import('/@/components/MonacoEditor'))
+
+const Idle = () => {
+  return (
+    <Mask>
+      <img src={idleIcon} style={{ width: 300, height: 250 }} />
+    </Mask>
+  );
+};
 
 const ReqResult = () => {
   const [resDataType, setResDataType] = useAtom(ResDataTypeAtom);
@@ -16,8 +22,15 @@ const ReqResult = () => {
 
   return (
     <div className={styles.result}>
+      {/*<Idle/>*/}
+      {/*<Mask>*/}
+      {/*  <Loading bgColor={'transparent'}/>*/}
+      {/*</Mask>*/}
       <div className={styles.header}>
         <ResultHeader />
+      </div>
+      <div className={styles.body}>
+        <ResultBody/>
       </div>
     </div>
   );
