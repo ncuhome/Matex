@@ -3,6 +3,7 @@ import { isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './utils/log';
 import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
+import {test} from "./utils/test";
 
 const os = getOsType();
 const isReload = isDev && process.env.RELOAD_MAIN === 'true';
@@ -63,6 +64,7 @@ if (!gotTheLock) {
 
 app.on('ready', async () => {
   await init();
+  test()
 });
 
 app.on('window-all-closed', function () {

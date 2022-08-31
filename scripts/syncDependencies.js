@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import {formatJson, readJson, writeJson} from './util.js';
+import {ColorLog} from "./colorLog.js";
 
 const rootFile = resolve(process.cwd(), './package.json');
 const appFile = resolve(process.cwd(), './release/app/package.json');
@@ -22,6 +23,8 @@ export const syncDependencies = async (deps) => {
   appJson['dependencies'] = usedDependencies;
   await writeJson(appFile, appJson);
   await formatJson(appFile);
+  console.log('\n')
+  ColorLog.success('依赖同步成功 √');
   return usedDependencies;
 };
 
