@@ -1,6 +1,6 @@
 .statusCard {
   position: absolute;
-  right: 0px;
+  right: 0;
   top: 0;
   height: 35px;
   width: fit-content;
@@ -76,6 +76,7 @@
       .rect{
         background: var(--light-text1);
         height: 30px;
+        border-radius: 0 1px 1px 0;
       }
     }
 

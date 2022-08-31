@@ -6,7 +6,7 @@ interface LoadingProps {
   bgColor?: string;
 }
 
-const Loading: React.FC<LoadingProps> = ({ bgColor = 'var(--dark-bg1)' }) => {
+const Loading: React.FC<LoadingProps> = ({ bgColor = 'var(--dark-bg2)' }) => {
   return (
     <div className={styles.con} style={{ background: bgColor }}>
       <div className={styles.spinnerBox}>

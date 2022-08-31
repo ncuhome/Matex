@@ -45,7 +45,7 @@ const TimeCost = () => {
       </div>
       {times.map((item, index) => {
         return (
-          <div className={styles.timeLine}>
+          <div className={styles.timeLine} key={item.key}>
             <div className={styles.timeTitle}>{item.key}</div>
             <div className={styles.timeRect}>
               <div
@@ -67,7 +67,7 @@ const TimeCost = () => {
           <div className={styles.rect} style={{ width: 0 }} />
         </div>
         <div className={styles.timeNumber} style={{ color: '#EB5298' }}>
-          {TotalTime}
+          {TotalTime}ms
         </div>
       </div>
     </div>

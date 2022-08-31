@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import Popup from "/@cmp/Popup";
+import Popup from '/@cmp/Popup';
+import AccordionMenu from '/@cmp/AccordionMenu';
 
 const SocketTest = () => {
   const [show, setShow] = React.useState(false);
@@ -12,7 +13,14 @@ const SocketTest = () => {
 
   return (
     <div style={{ margin: 'auto', width: 500 }}>
-      <Popup trigger={'点击'} content={'hello world'}/>
+      <AccordionMenu title={'宠物店1'}>
+        <div>11</div>
+        <div>11</div>
+      </AccordionMenu>
+      <AccordionMenu title={'宠物店2'}>
+        <div>11</div>
+        <div>11</div>
+      </AccordionMenu>
     </div>
   );
 };

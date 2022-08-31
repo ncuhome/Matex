@@ -1,6 +1,7 @@
 import * as React from "react"
+import {SVGProps} from "react";
 
-const EyesIcon = (props) => (
+const EyesIcon = (props: SVGProps<SVGSVGElement>) => (
 		<svg
 				className="icon"
 				viewBox="0 0 1024 1024"

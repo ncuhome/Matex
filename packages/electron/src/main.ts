@@ -3,7 +3,9 @@ import { isDev, loadingPath, mainPath } from './utils/path';
 import { MatexLog } from './utils/log';
 import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
-import {test} from "./utils/test";
+import { emitter } from './utils/Instance';
+import { getGotModule } from './request/utils';
+import {listenRequest} from "./request";
 
 const os = getOsType();
 const isReload = isDev && process.env.RELOAD_MAIN === 'true';
@@ -11,10 +13,9 @@ MatexLog.debug(`当前系统为:${os}`);
 MatexLog.debug(process.env.NODE_ENV ?? '环境未注入');
 
 let mainWindow: BrowserWindow | undefined;
-let loadWindow: undefined|BrowserWindow;
+let loadWindow: undefined | BrowserWindow;
 
 const gotTheLock = app.requestSingleInstanceLock();
-
 
 //创建窗口
 async function init() {
@@ -38,6 +39,7 @@ async function init() {
         loadWindow?.destroy();
       }
       mainWindow?.show();
+      await emitter.emit('main-page-showed');
     });
 
     await mainWindow?.loadURL(mainPath);
@@ -63,8 +65,12 @@ if (!gotTheLock) {
 }
 
 app.on('ready', async () => {
+  emitter.on('main-page-showed', async () => {
+    await getGotModule();
+    listenRequest()
+  });
+
   await init();
-  test()
 });
 
 app.on('window-all-closed', function () {

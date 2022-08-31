@@ -9,7 +9,7 @@ import {
 } from '/@/Model/ApiTest.model';
 import Tabs from '/@cmp/Tabs';
 import { useAtom } from 'jotai';
-import { ResDataTypeAtom, ResDisplayTypeAtom, ResFormatTypeAtom } from '/@/store/ApiTest/config.store';
+import { ResDataTypeAtom, ResDisplayTypeAtom, ResFormatTypeAtom } from '/@/store/ApiTest/result.store';
 import SpeedDial from '/@cmp/SpeedDial';
 import CopyIcon from '/@cmp/svg/CopyIcon';
 import SearchIcon from '/@cmp/svg/SearchIcon';

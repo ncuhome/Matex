@@ -1,0 +1,118 @@
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  .tab {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+    line-height: 45px;
+    border-radius: 8px;
+    position: relative;
+
+    input {
+      flex: 1;
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .actions {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      line-height: 40px;
+      margin-right: 10px;
+      display: none;
+    }
+
+    &:hover {
+      background: var(--dark-color1);
+      .actions {
+        display: flex;
+        width: 60px;
+        justify-content: space-around;
+      }
+    }
+
+    // :checked
+    input:checked {
+      + .tabLabel {
+        &::before {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    .tabLabel {
+      line-height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 0 0 0 30px;
+      background: transparent;
+      font-weight: bold;
+      width: 100%;
+      position: relative;
+
+      .title {
+        flex: 1;
+        color: var(--light-text1);
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .icon {
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      &::before {
+        content: '\276F';
+        color: var(--light-text1);
+        position: absolute;
+        left: 10px;
+        margin-top: 2px;
+        text-align: center;
+        transition: all 0.35s;
+        cursor: pointer;
+      }
+    }
+    .tabContent {
+      max-height: 0;
+      padding: 0 10px;
+      background: transparent;
+      color: var(--light-text1);
+    }
+  }
+}
+
+.show {
+  max-height: 100vh;
+  padding: 10px 15px;
+  animation: slideDown 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.hidden {
+  max-height: 0;
+  padding: 0 10px;
+}
+
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    padding: 0 10px;
+  }
+  to {
+    max-height: 100vh;
+    padding: 10px 15px;
+  }
+}

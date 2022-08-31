@@ -1,7 +1,7 @@
 import type { Menus } from '/@/Hooks/useContextMenu';
 
 // reqConfig
-export type ReqType = 'post' | 'get' | 'put';
+export type ReqType = 'post' | 'get' | 'put'|'delete';
 export const ReqMethods: ReqType[] = ['post', 'get', 'put'];
 
 export type ConfigType = 'params' | 'header' | 'body';
@@ -46,3 +46,8 @@ export const ResDisplayTypeList = ['Pretty', 'Preview', 'Visual'];
 
 export type ResFormatType = 'json' | 'text' | 'html' | 'xml';
 export const ResFormatTypeList = ['json', 'html', 'xml', 'text'];
+
+// sidebar
+export type SidebarMenuType = '项目接口' | '网络测速';
+export const SidebarMenus:SidebarMenuType[] = ['项目接口','网络测速'];
+

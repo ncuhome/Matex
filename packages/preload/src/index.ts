@@ -1,9 +1,8 @@
 import { ipcRenderer, clipboard } from 'electron';
 import * as os from 'os';
-import type {NodeApiProps} from "../../type/global";
+import type {NodeApiProps} from "../../common/global";
 
-
-console.log('preload--env--'+ process.env.NODE_ENV)
+console.log('preload--env:'+ process.env.NODE_ENV)
 const exposeThings: Omit<NodeApiProps, 'MessagePort'> = {
   NODE_ENV: process.env.NODE_ENV,
   OS:os.platform()==='darwin'?'mac':'win',

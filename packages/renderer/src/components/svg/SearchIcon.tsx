@@ -1,6 +1,7 @@
 import * as React from "react"
+import {SVGProps} from "react";
 
-const SearchIcon = (props) => (
+const SearchIcon = (props: SVGProps<SVGSVGElement>) => (
 		<svg
 				className="svgIcon"
 				viewBox="0 0 1057 1024"

@@ -1,6 +1,7 @@
 import * as React from "react"
+import {SVGProps} from "react";
 
-const CopyIcon = (props) => (
+const CopyIcon = (props: SVGProps<SVGSVGElement>) => (
 		<svg
 				className="svgIcon"
 				viewBox="0 0 1024 1024"

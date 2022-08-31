@@ -22,7 +22,7 @@ export default defineConfig({
     }
   },
   build: {
-    sourcemap: true,
+    sourcemap: false,
     outDir: resolve(APP_ROOT,'release/app/dist/render'),
     emptyOutDir: true,
     rollupOptions: {

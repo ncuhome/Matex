@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { ResDataTypeAtom, ResDisplayTypeAtom } from '/@/store/ApiTest/config.store';
+import { ResDataTypeAtom, ResDisplayTypeAtom } from '/@/store/ApiTest/result.store';
 import { useAtom } from 'jotai';
 import ResultHeader from '/@/pages/ApiTest/Result/Header/Header';
 import Mask from '/@cmp/Mask';

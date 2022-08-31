@@ -26,11 +26,6 @@ export const FormDataConfigs = atomWithImmer<KVConfig[]>([]);
 export const RawConfigValue = atomWithImmer<string>('');
 export const BinaryConfigs = atomWithImmer<FilePondFile[]>([]);
 
-//result Config
-export const ResDataTypeAtom = atom<ResDataType>('响应数据');
-export const ResDisplayTypeAtom = atom<ResDisplayType>('Pretty');
-export const ResFormatTypeAtom = atom<ResFormatType>('text');
-
 export const useConfigList = (configType: ConfigType, bodyType: Exclude<BodyType, 'raw' | 'binary'>) => {
   const [configList, setConfigList] = useAtom(getStore(configType, bodyType));
 

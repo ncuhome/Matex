@@ -26,12 +26,14 @@
   }
 
   .menu{
+    position: relative;
     margin-top: 5px;
     width: 35px;
     background: var(--dark-color1);
     box-shadow: 0 0 5px var(--dark-bg1);
     border-radius: 5px;
     color: var(--light-text1);
+    z-index: 888;
 
     .menuItem{
       @extend .iconBtn;
