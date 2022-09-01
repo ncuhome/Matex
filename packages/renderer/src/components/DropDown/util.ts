@@ -28,6 +28,7 @@ export const creatDropDown = ({ event, menus,large, selectedKey,onSelectionChang
     menus.forEach((item,index) => {
       const li = document.createElement('li');
       li.classList.add('dropDownItem');
+      li.classList.add('dropDownItem-'+(index+1));
       li.textContent = item;
       li.onclick=()=>{
         onSelectionChange?.(index,item);

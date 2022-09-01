@@ -5,12 +5,17 @@ import {
   ConfigType,
   DefaultHerderConfig,
   KVConfig,
-  ReqType, ResDataType, ResDisplayType, ResFormatType
+  ReqType,
+  ResDataType,
+  ResDisplayType,
+  ResFormatType
 } from '/@/Model/ApiTest.model';
 import { atomWithImmer } from 'jotai/immer';
 import { useEffect } from 'react';
 import { getStore } from '/@/store/ApiTest/utils';
 import type { FilePondFile } from 'filepond';
+import { nanoid } from 'nanoid';
+import {valueType} from "/@cmp/Table";
 
 //Header Config
 export const SelReqType = atom<ReqType>('get');
@@ -36,12 +41,14 @@ export const useConfigList = (configType: ConfigType, bodyType: Exclude<BodyType
     }
   }, [configList]);
 
-  const updateConfig = (index: number, type: 'key' | 'value', value: KVConfig['value']) => {
+  const updateConfig = (index: number, type: valueType, value: KVConfig['value']|boolean) => {
     setConfigList((draft) => {
       if (type === 'key') {
         draft[index].key = value as string;
-      } else {
+      } else if (type==='value'){
         draft[index].value = value as KVConfig['value'];
+      } else {
+        draft[index].selected = value as KVConfig['selected'];
       }
       return draft;
     });
@@ -49,7 +56,7 @@ export const useConfigList = (configType: ConfigType, bodyType: Exclude<BodyType
 
   const addConfig = () => {
     setConfigList((draft) => {
-      draft.push({ key: '', value: '' });
+      draft.push({ id: nanoid(), selected: true, key: '', value: '', opt: '' });
       return draft;
     });
   };

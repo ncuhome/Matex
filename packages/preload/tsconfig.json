@@ -9,7 +9,7 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "types": [],
     "baseUrl": "./src"
   },

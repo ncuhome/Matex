@@ -13,6 +13,9 @@ const ApiTestSideBar = () => {
     <div className={styles.sidebar}>
       <SidebarHeader />
       <div className={styles.body}>{sidebarMenuType === '项目接口' ? <ProjectList /> : <SpeedTest />}</div>
+    <div className={styles.footer}>
+
+    </div>
     </div>
   );
 };

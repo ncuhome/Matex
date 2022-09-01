@@ -1,7 +1,8 @@
 import type { Menus } from '/@/Hooks/useContextMenu';
+import {nanoid} from "nanoid";
 
 // reqConfig
-export type ReqType = 'post' | 'get' | 'put'|'delete';
+export type ReqType = 'post' | 'get' | 'put' | 'delete' | 'header';
 export const ReqMethods: ReqType[] = ['post', 'get', 'put'];
 
 export type ConfigType = 'params' | 'header' | 'body';
@@ -26,14 +27,16 @@ export const ConfigTableTitleMap = new Map<string, string>([
 ]);
 
 export interface KVConfig {
+  id:string;
+  selected: boolean;
   key: string;
   value: string | File;
   opt?: any;
 }
 export const DefaultHerderConfig: KVConfig[] = [
-  { key: 'Accept', value: '*/*' },
-  { key: 'Connection', value: 'keep-alive' },
-  { key: 'Accept-Encoding', value: 'gzip, deflate, br' }
+  { id:nanoid(),selected: true, key: 'Accept', value: '*/*' },
+  { id:nanoid(),selected: true, key: 'Connection', value: 'keep-alive' },
+  { id:nanoid(),selected: true, key: 'Accept-Encoding', value: 'gzip, deflate, br' }
 ];
 export const InputContextMenus: Menus = [{ key: '复制' }, { key: '粘贴' }, { key: '清除' }];
 
@@ -49,5 +52,4 @@ export const ResFormatTypeList = ['json', 'html', 'xml', 'text'];
 
 // sidebar
 export type SidebarMenuType = '项目接口' | '网络测速';
-export const SidebarMenus:SidebarMenuType[] = ['项目接口','网络测速'];
-
+export const SidebarMenus: SidebarMenuType[] = ['项目接口', '网络测速'];

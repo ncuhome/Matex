@@ -9,6 +9,7 @@ const exposeThings: Omit<NodeApiProps, 'MessagePort'> = {
   ipc: ipcRenderer,
   Clipboard: clipboard,
 };
+
 Object.entries(exposeThings).forEach(([key, value]) => {
   window[key] = value;
 });

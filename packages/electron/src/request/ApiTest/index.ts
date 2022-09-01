@@ -9,6 +9,7 @@ export class ApiTestIpc {
     ipcMain.on(IpcKey.ApiTestReq, (e, _req) => {
 			ApiTestIpc._ev = e;
       const req = _req as ApiTestReq;
+			console.log(req)
     });
 
   }

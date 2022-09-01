@@ -26,7 +26,7 @@ const SidebarHeader = () => {
           })}
           <div
               className={styles.overlayBox}
-              style={{ transform: `translateX(${sidebarMenuType === '项目接口' ? 18 : 87}px)` }}
+              style={{ transform: `translateX(${sidebarMenuType === '项目接口' ? 10 : 84}px)` }}
           ></div>
         </div>
       </div>

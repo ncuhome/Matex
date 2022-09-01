@@ -1,23 +1,20 @@
-import React from "react"
-import styles from "./index.module.scss";
+import React from 'react';
+import styles from './index.module.scss';
+import { ChangeCellFunc, valueType } from '/@cmp/Table/index';
 
 export interface CellInputProps {
-	rowIndex:number;
-	colIndex:number;
-	value:string|number;
-	onChange?:(rowIndex:number,colIndex:number,value:string)=>void
+  rowIndex: number;
+  valueKey: valueType;
+  value: string | number;
+  onChange?: ChangeCellFunc;
 }
 
+const CellInput: React.FC<CellInputProps> = ({ rowIndex, valueKey, value, onChange = () => {} }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(rowIndex, valueKey, e.target.value);
+  };
 
-const CellInput:React.FC<CellInputProps> = ({rowIndex,colIndex,value,onChange=()=>{}}) => {
+  return <input value={value} onChange={handleChange} className={styles.cellInput} />;
+};
 
-	const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-		onChange(rowIndex,colIndex,e.target.value)
-	}
-
-	return (
-			<input value={value} onChange={handleChange} className={styles.cellInput}/>
-	)
-}
-
-export default CellInput
+export default CellInput;

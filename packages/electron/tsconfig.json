@@ -9,6 +9,7 @@
     "strict": true,
     "noEmit": true,
     "allowJs": true,
+    "noImplicitAny": false,
     "isolatedModules": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

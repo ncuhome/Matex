@@ -6,19 +6,32 @@
   display: flex;
   flex-direction: column;
 
+  .tableRow{
+    display: grid;
+    grid-template-columns:1fr 3fr 6fr 3fr;
+    align-items: center;
+    gap: 0;
+  }
+
   .tableCol{
     text-align: left;
     color: var(--light-text1);
     font-size: 13px;
     line-height: 40px;
-    padding-left: 15px;
+    height: 40px;
   }
+
 
   .tableHeader{
     border-bottom: 1px solid var(--dark-color1);
 
     .tableCol{
       border-right: 1px solid var(--dark-color1);
+      padding-left: 15px;
+
+      &:first-child{
+        padding-left: 0;
+      }
 
       &:last-child{
         border-right: none;
@@ -37,6 +50,7 @@
         padding-left: 11px;
 
         &:last-child{
+          line-height: 40px;
           border-right: none;
           text-align: center;
         }
@@ -46,17 +60,16 @@
         border-bottom:none;
       }
     }
-  }
 
-  .tableRow{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    align-items: center;
+    .tableCol.checkbox{
+      padding-left: 0;
+    }
   }
 
 }
 
 .opt {
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;

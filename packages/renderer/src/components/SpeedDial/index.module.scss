@@ -50,7 +50,8 @@
 
 .show{
   display: block;
-  animation: scaleUp 0.3s cubic-bezier(0.85, 0, 0.15, 1);
+  transform-origin: top;
+  animation: scaleUp 0.3s cubic-bezier(0.42, 0, 0.58, 1.43);
 }
 
 .hidden{

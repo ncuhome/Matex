@@ -4,23 +4,24 @@ import styles from './index.module.scss';
 import CloseIcon from '/@cmp/svg/CloseIcon';
 import clsx from 'clsx';
 import { KVConfig } from '/@/Model/ApiTest.model';
+import {ChangeCellFunc, valueType} from "/@cmp/Table/index";
 
 interface FileInput {
   rowIndex: number;
-  colIndex: number;
+  key: valueType;
   value: KVConfig['value'];
-  onChange?: (rowIndex: number, colIndex: number, value: string | File) => void;
+  onChange?: ChangeCellFunc;
 }
 
-const FileInput: React.FC<FileInput> = ({ rowIndex, colIndex, value = '', onChange = () => {} }) => {
+const FileInput: React.FC<FileInput> = ({ rowIndex, key, value = '', onChange = () => {} }) => {
   const [file, setFile] = React.useState(false);
 
   const handleChange = (e) => {
     console.log('handleChange');
     if (file) {
-      onChange(rowIndex, colIndex, e.target.files?.[0] || new File([], ''));
+      onChange(rowIndex, key, e.target.files?.[0] || new File([], ''));
     } else {
-      onChange(rowIndex, colIndex, e.target.value);
+      onChange(rowIndex, key, e.target.value);
     }
   };
 
@@ -35,7 +36,7 @@ const FileInput: React.FC<FileInput> = ({ rowIndex, colIndex, value = '', onChan
       // @ts-ignore
       (inputEle as HTMLInputElement).value = null;
     }
-    onChange(rowIndex, colIndex, '');
+    onChange(rowIndex, key, '');
   };
 
   return (

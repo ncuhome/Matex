@@ -13,7 +13,7 @@ DotEnv.config({ path: resolve(process.cwd(), './dev.env'), debug: true });
 const parsed = new URL(import.meta.url);
 const isDebug = parsed.searchParams.get('debug'); // vscode
 const RootPath = resolve(process.cwd(), 'packages');
-const filterLog = /CoreText|Font/gi;
+const filterLog = /(CoreText)|(Font)|(Roman)/gi;
 
 /**
  *

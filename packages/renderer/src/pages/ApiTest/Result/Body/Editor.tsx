@@ -4,7 +4,7 @@ import {RawConfigValue, RawTypeValue} from "/@/store/ApiTest/config.store";
 import {useEditorAction} from "/@cmp/MonacoEditor/editorAction";
 import {Editor} from "/@cmp/MonacoEditor/type";
 import {LanguageMapper} from "/@cmp/MonacoEditor/utils";
-import Loading from "/@cmp/Loading";
+import CircleDotLoading from "/@cmp/Loading/CircleDotLoading";
 
 const MonacoEditor = React.lazy(()=>import('/@/components/MonacoEditor'))
 
@@ -34,7 +34,7 @@ const ResultBodyEditor = () => {
 	};
 
 	return (
-			<Suspense fallback={<Loading />}>
+			<Suspense fallback={<CircleDotLoading />}>
 				<MonacoEditor
 						onChange={(changes, value) => {
 							setRawConfigValue(value ?? '');

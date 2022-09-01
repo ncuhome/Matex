@@ -9,12 +9,12 @@
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 100%;
     background: var(--dark-bg2);
     border-radius: 10px;
     position: relative;
-    padding: 0 5px;
+    padding: 0 20px;
 
     .overlayBox{
       width: 42px;
@@ -57,7 +57,7 @@
   }
 
   .title {
-    width: 36%;
+    width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;

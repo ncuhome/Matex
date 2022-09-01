@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import Popup from '/@cmp/Popup';
-import AccordionMenu from '/@cmp/AccordionMenu';
+import Checkbox from "/@cmp/Checkbox";
 
 const SocketTest = () => {
   const [show, setShow] = React.useState(false);
@@ -12,15 +11,8 @@ const SocketTest = () => {
   }, []);
 
   return (
-    <div style={{ margin: 'auto', width: 500 }}>
-      <AccordionMenu title={'宠物店1'}>
-        <div>11</div>
-        <div>11</div>
-      </AccordionMenu>
-      <AccordionMenu title={'宠物店2'}>
-        <div>11</div>
-        <div>11</div>
-      </AccordionMenu>
+    <div style={{ margin: 20, width: 500 }}>
+      <Checkbox/>
     </div>
   );
 };
