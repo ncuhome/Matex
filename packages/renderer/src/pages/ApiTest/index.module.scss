@@ -21,7 +21,7 @@
     grid-column: 1/2;
     background: var(--dark-bg2);
     border-radius: 10px;
-    //margin-bottom: var(--card-space);
+    position: relative;
   }
   .side{
     grid-row: 1/3;

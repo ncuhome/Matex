@@ -1,37 +1,38 @@
-import React from 'react';
+import React, {useId} from 'react';
 import styles from './index.module.scss';
 import { ChangeCellFunc, valueType } from '/@cmp/Table';
 
 interface CheckboxProps {
+  all?: boolean;
+  selectAll?: () => void;
   rowIndex?: number;
   valueKey?: valueType;
   checked: boolean;
-  onClick?: () => void;
   onChange?: ChangeCellFunc;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
+  all = false,
+  selectAll = () => {},
   rowIndex,
   valueKey,
   checked,
-  onChange = () => {},
-  onClick = () => {}
+  onChange = () => {}
 }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (rowIndex && valueKey) {
-      onChange(rowIndex, valueKey, e.target.checked);
+  const id = useId();
+  const handleClick = (e) => {
+    e.stopPropagation();
+    if (!all) {
+      onChange(rowIndex!, valueKey!, !checked);
+    } else {
+      selectAll();
     }
   };
 
-  const handleClick = (e) => {
-    e.stopPropagation();
-    onClick();
-  };
-
   return (
-    <div className={styles.checkbox}>
-      <input type="checkbox" id="inputId" checked={checked} onChange={handleChange} />
-      <label onClick={handleClick} htmlFor="inputId"></label>
+    <div className={styles.checkbox} onClick={handleClick}>
+      <input type="checkbox" id={id} checked={checked} onChange={() => {}} />
+      <label htmlFor={id} />
     </div>
   );
 };

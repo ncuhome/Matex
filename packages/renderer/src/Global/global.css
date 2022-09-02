@@ -13,6 +13,11 @@
   src: url('../assets/font/JetBrainsMono-Regular.ttf');
 }
 
+html{
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
 body,
 html {
   background-color: transparent;
@@ -36,11 +41,13 @@ p {
 
 *::-webkit-scrollbar {
   width: 0;
+
 }
 
 * {
   user-select: none;
   font-family: 'JetBrains Mono Regular', sans-serif;
+  box-sizing: inherit;
 }
 
 :root {
@@ -59,6 +66,7 @@ p {
   /*other*/
   --dark-color1: #42538e;
   --dark-color2: #475998;
+  --light-color1:#6578B8;
 
   --error-color: #EB5298;
   --warning-color: #FA6C37;

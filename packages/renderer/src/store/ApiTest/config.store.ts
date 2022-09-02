@@ -56,7 +56,7 @@ export const useConfigList = (configType: ConfigType, bodyType: Exclude<BodyType
 
   const addConfig = () => {
     setConfigList((draft) => {
-      draft.push({ id: nanoid(), selected: true, key: '', value: '', opt: '' });
+      draft.push({ selected: true, key: '', value: '', opt: '' });
       return draft;
     });
   };

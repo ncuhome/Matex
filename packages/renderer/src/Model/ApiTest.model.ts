@@ -27,16 +27,15 @@ export const ConfigTableTitleMap = new Map<string, string>([
 ]);
 
 export interface KVConfig {
-  id:string;
   selected: boolean;
   key: string;
   value: string | File;
-  opt?: any;
+  opt: any;
 }
 export const DefaultHerderConfig: KVConfig[] = [
-  { id:nanoid(),selected: true, key: 'Accept', value: '*/*' },
-  { id:nanoid(),selected: true, key: 'Connection', value: 'keep-alive' },
-  { id:nanoid(),selected: true, key: 'Accept-Encoding', value: 'gzip, deflate, br' }
+  { selected: true, key: 'Accept', value: '*/*',opt:'' },
+  { selected: true, key: 'Connection', value: 'keep-alive',opt:'' },
+  { selected: true, key: 'Accept-Encoding', value: 'gzip, deflate, br',opt:'' }
 ];
 export const InputContextMenus: Menus = [{ key: '复制' }, { key: '粘贴' }, { key: '清除' }];
 

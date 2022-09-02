@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react';
 import KVTable from '/@cmp/Table';
-import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { BodyRawTypes, KVConfig } from '/@/Model/ApiTest.model';
-import { columns } from '/@/pages/ApiTest/Config/utils';
 import {
   RawConfigValue,
   RawTypeValue,
@@ -29,11 +27,6 @@ export const RenderKVTable = () => {
     selConfig,
     _accept ? reqBodyType : 'urlencoded'
   );
-  const table = useReactTable<KVConfig>({
-    data: configList,
-    columns,
-    getCoreRowModel: getCoreRowModel()
-  });
 
   const onChangeCell = (rowIndex, key, value) => {
     updateConfig(rowIndex, key, value);

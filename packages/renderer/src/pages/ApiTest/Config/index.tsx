@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.scss';
 import Header from './Header';
 import ConfigSide from '/@/pages/ApiTest/Config/Side';
-import ConfigTable from '/@/pages/ApiTest/Config/Table';
+import ConfigTable from '/@/pages/ApiTest/Config/ConfigDataTable/Table';
 
 const Config = () => {
   return (

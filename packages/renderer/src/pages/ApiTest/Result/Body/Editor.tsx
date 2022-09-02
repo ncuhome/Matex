@@ -10,9 +10,9 @@ const MonacoEditor = React.lazy(()=>import('/@/components/MonacoEditor'))
 
 const ResultBodyEditor = () => {
 	const [rawConfigValue, setRawConfigValue] = useAtom(RawConfigValue);
-	const [rawTypeValue, setRawTypeValue] = useAtom(RawTypeValue);
+	const [rawTypeValue] = useAtom(RawTypeValue);
 
-	const { setValue, changeLanguage } = useEditorAction({ id: 'reqRawConfig', readOnly: false });
+	const { setValue } = useEditorAction({ id: 'reqRawConfig', readOnly: false });
 	const editorRef = React.useRef<Editor | null>(null);
 
 	const language = LanguageMapper.get(rawTypeValue) ?? 'text/plain';
@@ -26,11 +26,6 @@ const ResultBodyEditor = () => {
 				value: rawConfigValue
 			});
 		}
-	};
-
-	const onChangeRawType = (changes, value) => {
-		setRawTypeValue(value);
-		editorRef.current && changeLanguage(editorRef.current, LanguageMapper.get(value) ?? 'text/plain');
 	};
 
 	return (

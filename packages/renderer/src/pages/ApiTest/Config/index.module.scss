@@ -60,9 +60,19 @@
 
   .clearIcon {
     position: absolute;
-    right: 10px;
-    top: 12px;
+    right: 8px;
+    top: 8px;
     transform: scale(1.2);
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover{
+      background: var(--dark-color1);
+    }
   }
 
   .input {
@@ -77,6 +87,7 @@
 
     &:focus {
       outline: none;
+      border-color: var(--light-color1);
     }
 
     &::placeholder {

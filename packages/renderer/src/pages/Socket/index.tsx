@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import Checkbox from "/@cmp/Checkbox";
+import PlayButton from "/@cmp/PlayButton";
+import CircleDotLoading from "/@cmp/Loading/CircleDotLoading";
 
 const SocketTest = () => {
   const [show, setShow] = React.useState(false);
@@ -12,7 +13,7 @@ const SocketTest = () => {
 
   return (
     <div style={{ margin: 20, width: 500 }}>
-      <Checkbox/>
+      <CircleDotLoading/>
     </div>
   );
 };

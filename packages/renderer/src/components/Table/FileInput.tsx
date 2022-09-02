@@ -8,20 +8,20 @@ import {ChangeCellFunc, valueType} from "/@cmp/Table/index";
 
 interface FileInput {
   rowIndex: number;
-  key: valueType;
+  valueKey: valueType;
   value: KVConfig['value'];
   onChange?: ChangeCellFunc;
 }
 
-const FileInput: React.FC<FileInput> = ({ rowIndex, key, value = '', onChange = () => {} }) => {
+const FileInput: React.FC<FileInput> = ({ rowIndex, valueKey, value = '', onChange = () => {} }) => {
   const [file, setFile] = React.useState(false);
 
   const handleChange = (e) => {
     console.log('handleChange');
     if (file) {
-      onChange(rowIndex, key, e.target.files?.[0] || new File([], ''));
+      onChange(rowIndex, valueKey, e.target.files?.[0] || new File([], ''));
     } else {
-      onChange(rowIndex, key, e.target.value);
+      onChange(rowIndex, valueKey, e.target.value);
     }
   };
 
@@ -36,7 +36,7 @@ const FileInput: React.FC<FileInput> = ({ rowIndex, key, value = '', onChange = 
       // @ts-ignore
       (inputEle as HTMLInputElement).value = null;
     }
-    onChange(rowIndex, key, '');
+    onChange(rowIndex, valueKey, '');
   };
 
   return (

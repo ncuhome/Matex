@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, {  useRef } from 'react';
 import styles from './index.module.scss';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { ReqConfigType, ReqUrl, SelReqType } from '/@/store/ApiTest/config.store';
 import { InputContextMenus, ReqMethods } from '/@/Model/ApiTest.model';
-import ClearIcon from '/@cmp/svg/ClearIcon';
 import MyDropDown from '/@cmp/DropDown';
 import { useContextMenu } from '/@/Hooks/useContextMenu';
 import clsx from 'clsx';
+import CloseIcon from "/@cmp/svg/CloseIcon";
 
 const Header = () => {
   const [reqType, setReqType] = useAtom(SelReqType);
@@ -45,7 +45,7 @@ const Header = () => {
           onChange={changeUrl}
         />
         <div className={styles.clearIcon} onClick={() => setReqUrl('')}>
-          <ClearIcon fill={'var(--light-text1)'} className={clsx(['svgIcon', 'hover'])} />
+          <CloseIcon fill={'var(--light-text1)'} className={clsx(['svgIcon', 'hover'])} />
         </div>
       </div>
     </div>

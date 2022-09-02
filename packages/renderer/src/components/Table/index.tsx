@@ -35,7 +35,7 @@ const KVTable: React.FC<MyTableProps<any>> = ({
   };
 
   const isBody = type === 'body';
-
+  console.log(file);
   const renderCol = (rowIndex, colIndex: number, key: string, colData: KVConfig) => {
     let _Ele: React.ReactNode = null;
     switch (key as keyof KVConfig) {
@@ -60,10 +60,10 @@ const KVTable: React.FC<MyTableProps<any>> = ({
         );
         break;
       case 'value':
-        if (file && colIndex === 1) {
+        if (file && colIndex === 2) {
           _Ele = (
             <FileInput
-              key={key as valueType}
+              valueKey={key as valueType}
               rowIndex={rowIndex}
               value={colData.value}
               onChange={handleChange}
@@ -102,10 +102,7 @@ const KVTable: React.FC<MyTableProps<any>> = ({
     return _Ele;
   };
 
-  console.log(data)
-
   const handleHeaderCheckbox = () => {
-    console.log('handleHeaderCheckbox')
     if (isAllChecked(data)) {
       data.forEach((row, rowIndex) => {
         onChangeCell(rowIndex, 'selected', false);
@@ -121,7 +118,7 @@ const KVTable: React.FC<MyTableProps<any>> = ({
     <div className={styles.table}>
       <div className={clsx([styles.tableRow, styles.tableHeader])}>
         <div className={clsx([styles.tableCol, styles.checkbox])}>
-          <Checkbox checked={isAllChecked(data)} onClick={handleHeaderCheckbox} />
+          <Checkbox all checked={isAllChecked(data)} selectAll={handleHeaderCheckbox} />
         </div>
         <div className={styles.tableCol}>键</div>
         <div className={styles.tableCol}>值</div>
@@ -130,7 +127,7 @@ const KVTable: React.FC<MyTableProps<any>> = ({
       <div className={clsx([styles.tableBody])}>
         {data.map((item, rowNumber) => {
           return (
-            <div className={clsx([styles.tableRow])} key={item.id}>
+            <div className={clsx([styles.tableRow])} key={rowNumber}>
               {Object.keys(item).map((key, colIndex) => {
                 if (key === ('id' as keyof KVConfig)) {
                   return null;

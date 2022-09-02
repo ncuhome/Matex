@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '/@/pages/ApiTest/Config/index.module.scss';
+import styles from '../index.module.scss';
 import { ReqBodyType, ReqConfigType, SelReqType } from '/@/store/ApiTest/config.store';
 import { useAtom, useAtomValue } from 'jotai';
 import { BodyTypes, ConfigTableTitleMap } from '/@/Model/ApiTest.model';
