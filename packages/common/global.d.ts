@@ -1,33 +1,30 @@
 import { IpcRenderer } from 'electron';
 import { Headers,Response,Request } from 'got';
-import { BodyRawType, BodyType, ReqType } from '../renderer/src/Model/ApiTest.model';
+import {BodyRawType, BodyType, KVConfig, ReqType} from '../renderer/src/Model/ApiTest.model';
 
 export interface NodeApiProps {
+  nodeV:string;
+  chromeV:string;
+  electronV:string;
   NODE_ENV: 'development' | 'production' | string | undefined;
-  ipc: IpcRenderer | null;
+  ipc: {
+    sendReq:(args: ApiTestReq)=>void
+    on:(args: any)=>void
+  };
   OS: 'mac' | 'win';
   Clipboard: Electron.Clipboard;
 }
 
+type KVList = Omit<KVConfig, 'selected'|'opt'>;
+
 export interface ApiTestReq {
   url: string;
   method: ReqType;
-  headers: {
-    [key: string]: string;
-  };
-  params?: {
-    [key: string]: string;
-  };
+  headers: KVList[];
+  params?: KVList[];
   bodyType?: BodyType;
-  rawType: BodyRawType;
-  body?: {
-    formData?: { isFile: boolean; key: string; value: string };
-    rawValue?: string;
-    binary?: string;
-    urlencoded?: {
-      [key: string]: string;
-    };
-  };
+  rawType?: BodyRawType;
+  body?: KVList[]|File|string;
 }
 
 export interface ApiTestRes extends Response{

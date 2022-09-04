@@ -1,17 +1,23 @@
-import { ipcRenderer, clipboard } from 'electron';
-import * as os from 'os';
-import type {NodeApiProps} from "../../common/global";
+import { ipcRenderer, clipboard, contextBridge } from 'electron';
+import type { NodeApiProps } from '../../common/global';
+import {ApiTestReq} from "../../common/global";
+import {IpcKey} from "../../common/globalKey";
 
-console.log('preload--env:'+ process.env.NODE_ENV)
-const exposeThings: Omit<NodeApiProps, 'MessagePort'> = {
+const nodeApi: NodeApiProps = {
+  nodeV: process.versions.node,
+  chromeV: process.versions.chrome,
+  electronV: process.versions.electron,
   NODE_ENV: process.env.NODE_ENV,
-  OS:os.platform()==='darwin'?'mac':'win',
-  ipc: ipcRenderer,
   Clipboard: clipboard,
+  OS: process.platform === 'darwin' ? 'mac' : 'win',
+  ipc: {
+    sendReq: (args: ApiTestReq) => {
+      ipcRenderer.invoke(IpcKey.ApiTestReq, args)
+    },
+    on: (args: any) => ipcRenderer.on('ipc', args)
+  }
 };
 
-Object.entries(exposeThings).forEach(([key, value]) => {
-  window[key] = value;
-});
+contextBridge.exposeInMainWorld('NodeApi', nodeApi);
 
-
+console.log('preload--env:' + process.env.NODE_ENV);

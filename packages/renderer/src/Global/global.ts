@@ -1,7 +1,7 @@
+import { NodeApiProps } from '/@common/global';
 
-
-interface MatexWindow extends Window {
-	NODE_ENV:string
+interface MatexWindow {
+	NodeApi:NodeApiProps
 }
 
 export const MatexWin: MatexWindow = window as any as MatexWindow;

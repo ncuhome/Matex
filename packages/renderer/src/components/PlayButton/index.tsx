@@ -1,57 +1,84 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useId } from 'react';
 import './index.scss';
 import { emittery } from '/@/utils/instance';
 
-interface PlayButtonProps {
+export type PlayStatus = 'idle' | 'processing' | 'completed';
+export interface PlayButtonProps {
+  id: string;
   onClick?: () => void;
 }
 
-const PlayButton: React.FC<PlayButtonProps> = ({ onClick = () => {} }) => {
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
+export const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick = () => {} }) => {
+  const timerRef = React.useRef<NodeJS.Timeout | null>();
 
   useEffect(() => {
-    emittery.on('closePlayBtn', () => {
-      let button: HTMLButtonElement;
-      if (buttonRef.current) {
-        button = buttonRef.current;
-      } else {
-        button = document.querySelector('#startButton') as HTMLButtonElement;
+    emittery.on('playButton:' + id, (data: PlayStatus) => {
+      if (data === 'processing') {
+        startProcessing();
+      } else if (data === 'completed') {
+        completeProcession();
       }
-      button.classList.remove('animate');
     });
   }, []);
+
+  const getNodes = () => {
+    const button = document.querySelector(`#${id + '-button'}`) as HTMLButtonElement;
+    const drone = document.querySelector(`#${id + '-drone'}`) as HTMLDivElement;
+    const box = document.querySelector(`#${id + '-box'}`) as HTMLDivElement;
+    const successText = document.querySelector(`#${id + '-success'}`) as HTMLSpanElement;
+    return {
+      button,
+      drone,
+      box,
+      successText
+    };
+  };
+
+  const startProcessing = () => {
+    const { button, drone, box } = getNodes();
+    if (button) {
+      button.classList.add('animate');
+      drone.style.animation = 'move 5s ease forwards';
+      box.style.animation = 'box 5s ease forwards';
+    }
+  };
+
+  const completeProcession = () => {
+    const { button, drone, box, successText } = getNodes();
+    drone.style.animation = 'droneHidden 3s ease forwards';
+    box.style.animation = 'boxHidden 3s ease forwards';
+    successText.classList.add('show');
+
+    if (timerRef.current) {
+      timerRef.current = null;
+    } else {
+      timerRef.current = setTimeout(() => {
+        if (button.classList.contains('animate')) {
+          button.classList.remove('animate');
+          successText.classList.remove('show');
+          timerRef.current = null;
+        }
+      }, 5500);
+    }
+  };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     onClick();
-    let button: HTMLButtonElement;
-    if (buttonRef.current) {
-      button = buttonRef.current;
-    } else {
-      button = document.querySelector('#startButton') as HTMLButtonElement;
-    }
-    if (!button.classList.contains('animate')) {
-      button.classList.add('animate');
-      setTimeout(() => {
-       const  drone = document.querySelector('#drone') as HTMLDivElement;
-        // button.classList.remove('animate');
-        // drone.style.animationPlayState='paused';
-      }, 2500);
-    }
   };
 
   return (
-    <div className={'con'}>
-      <button className="order" ref={buttonRef} id={'startButton'} onClick={handleClick}>
-        <span className="default">发送请求</span>
-        <span className="success">
+    <div className={'PlayButtonCon'}>
+      <button className="order" id={id + '-button'} onClick={handleClick}>
+        <span className="defaultText">发送请求</span>
+        <span className="successText" id={id + '-success'}>
           请求成功
           <svg viewBox="0 0 12 10">
             <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
           </svg>
         </span>
-        <div className="box"></div>
-        <div className="drone" id={'drone'}>
+        <div className="box" id={id + '-box'}></div>
+        <div className="drone" id={id + '-drone'}>
           <svg className="wing left">
             <use xlinkHref="#droneWing"></use>
           </svg>
@@ -104,4 +131,17 @@ const PlayButton: React.FC<PlayButtonProps> = ({ onClick = () => {} }) => {
   );
 };
 
-export default PlayButton;
+export const usePlayButton = (key: string) => {
+  const startProcessing = () => {
+    emittery.emit('playButton:' + key, 'processing');
+  };
+
+  const completed = () => {
+    emittery.emit('playButton:' + key, 'completed');
+  };
+
+  return {
+    startProcessing,
+    completed
+  };
+};

@@ -35,7 +35,7 @@ const KVTable: React.FC<MyTableProps<any>> = ({
   };
 
   const isBody = type === 'body';
-  console.log(file);
+
   const renderCol = (rowIndex, colIndex: number, key: string, colData: KVConfig) => {
     let _Ele: React.ReactNode = null;
     switch (key as keyof KVConfig) {

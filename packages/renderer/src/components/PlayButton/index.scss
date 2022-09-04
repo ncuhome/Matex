@@ -1,173 +1,173 @@
-.con{
-  --primary: #275EFE;
-  --primary-dark: #2850C4;
-  --primary-light: #668DFF;
-  --dark: #1C212E;
-  --white: #FFF;
-  --green: #16BF78;
-  --sand: #DCB773;
+.PlayButtonCon {
+  --primary: #275efe;
+  --primary-dark: #2850c4;
+  --primary-light: #668dff;
+  --dark: #1c212e;
+  --white: #fff;
+  --green: #16bf78;
+  --sand: #dcb773;
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.order {
-  appearance: none;
-  border: 0;
-  background: var(--dark-bg2);
-  position: relative;
-  height: 78px;
-  width: 260px;
-  padding: 0;
-  cursor: pointer;
-  border-radius: 10px;
-  overflow: hidden;
-  mask-image: -webkit-radial-gradient(white, black);
-  transition: transform .3s ease;
+  .order {
+    appearance: none;
+    border: 0;
+    background: var(--dark-bg2);
+    position: relative;
+    height: 78px;
+    width: 260px;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    mask-image: -webkit-radial-gradient(white, black);
+    transition: transform 0.3s ease;
 
-  &:hover{
-    opacity: 0.8;
-  }
-
-  span {
-    --y: 10px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    top: 19px;
-    line-height: 24px;
-    color: var(--light-text1);
-    font-size: 20px;
-    font-weight: 500;
-    transform: translateY(var(--y));
-    &.default {
-      transition-delay: .3s;
-      transition: opacity .3s ease .3s;
+    &:hover {
+      opacity: 0.8;
     }
-    &.success {
-      --y: 60px;
-      transition: transform .5s ease;
-      svg {
-        width: 16px;
-        height: 18px;
-        display: inline-block;
-        vertical-align: top;
-        fill: none;
-        margin: 4px 0 0 6px;
-        stroke: var(--success-color);
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-dasharray: 16px;
-        stroke-dashoffset: 16px;
-        transition: stroke-dashoffset .3s ease;
-      }
-    }
-  }
-  &:active {
-    transform: scale(.94);
-  }
-  .box,
-  .drone {
-    position: absolute;
-  }
-  .box {
-    width: 20px;
-    height: 20px;
-    left: 50%;
-    margin-left: -10px;
-    top: 100%;
-    border-radius: 2px;
-    background: var(--sand);
-    &:before,
-    &:after {
-      content: '';
+
+    span {
+      --y: 10px;
       position: absolute;
-      display: block;
-      left: 5px;
-    }
-    &:before {
-      top: 0;
-      width: 4px;
-      height: 9px;
-      background: rgba(255, 255, 255, .3);
-    }
-    &:after {
-      z-index: 1;
-      top: 7px;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 2px 2px 2px;
-      border-color: transparent transparent var(--sand) transparent;
-    }
-  }
-  .drone {
-    width: 42px;
-    height: 14px;
-    z-index: 1;
-    top: 20px;
-    right: 100%;
-    transform: translateX(-7px);
-    svg {
-      display: block;
-      &.body {
-        width: 42px;
-        height: 14px;
-        position: relative;
-        z-index: 1;
-        color: var(--primary);
+      left: 0;
+      right: 0;
+      text-align: center;
+      top: 19px;
+      line-height: 24px;
+      color: var(--light-text1);
+      font-size: 20px;
+      font-weight: 500;
+      transform: translateY(var(--y));
+      &.defaultText {
+        transition-delay: 0.3s;
+        transition: opacity 0.3s ease 0.3s;
       }
-      &.wing {
-        position: absolute;
-        width: 21px;
-        height: 2px;
-        top: 1px;
-        color: var(--primary-light);
-        &.left {
-          left: -7px;
-        }
-        &.right {
-          right: -7px;
+      &.successText {
+        --y: 60px;
+        transition: transform 0.5s ease;
+        svg {
+          width: 16px;
+          height: 18px;
+          display: inline-block;
+          vertical-align: top;
+          fill: none;
+          margin: 4px 0 0 6px;
+          stroke: var(--success-color);
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-dasharray: 16px;
+          stroke-dashoffset: 16px;
+          transition: stroke-dashoffset 0.3s ease;
         }
       }
-      &.grab {
-        position: absolute;
-        width: 26px;
-        height: 14px;
-        left: 8px;
-        top: 10px;
-        color: var(--primary-dark);
-        stroke-dashoffset: 34px;
-        stroke-dasharray: 0 48px 19px 48px;
-      }
     }
-  }
-  &.animate {
-    .default {
-      opacity: 0;
-      transition-delay: 0s;
+    &:active {
+      transform: scale(0.94);
     }
-    //.success {
-    //  --y: 10px;
-    //  transition-delay: 3.85s;
-    //  svg {
-    //    transition-delay: 4.3s;
-    //    stroke-dashoffset: 0;
-    //  }
-    //}
+    .box,
     .drone {
-      animation: move 5s ease forwards;
-      .wing {
-        animation: wing 5s linear infinite;
-      }
-      .grab {
-        animation: grab .6s ease forwards 2.3s;
-      }
+      position: absolute;
     }
     .box {
-      animation: box 5s ease forwards;
+      width: 20px;
+      height: 20px;
+      left: 50%;
+      margin-left: -10px;
+      top: 100%;
+      border-radius: 2px;
+      background: var(--sand);
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        left: 5px;
+      }
+      &:before {
+        top: 0;
+        width: 4px;
+        height: 9px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+      &:after {
+        z-index: 1;
+        top: 7px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 2px 2px 2px;
+        border-color: transparent transparent var(--sand) transparent;
+      }
+    }
+    .drone {
+      width: 42px;
+      height: 14px;
+      z-index: 1;
+      top: 20px;
+      right: 100%;
+      transform: translateX(-7px);
+      svg {
+        display: block;
+        &.body {
+          width: 42px;
+          height: 14px;
+          position: relative;
+          z-index: 1;
+          color: var(--primary);
+        }
+        &.wing {
+          position: absolute;
+          width: 21px;
+          height: 2px;
+          top: 1px;
+          color: var(--primary-light);
+          &.left {
+            left: -7px;
+          }
+          &.right {
+            right: -7px;
+          }
+        }
+        &.grab {
+          position: absolute;
+          width: 26px;
+          height: 14px;
+          left: 8px;
+          top: 10px;
+          color: var(--primary-dark);
+          stroke-dashoffset: 34px;
+          stroke-dasharray: 0 48px 19px 48px;
+        }
+      }
+    }
+    &.animate {
+      .defaultText {
+        opacity: 0;
+        transition-delay: 0s;
+      }
+      .successText.show {
+        --y: 10px;
+        transition-delay: 2s;
+        svg {
+          transition-delay: 2.5s;
+          stroke-dashoffset: 0;
+        }
+      }
+      .drone {
+        animation: move 5s ease forwards;
+        .wing {
+          animation: wing 5s linear infinite;
+        }
+        .grab {
+          animation: grab 0.6s ease forwards 2.3s;
+        }
+      }
+      .box {
+        animation: box 5s ease forwards;
+      }
     }
   }
 }
@@ -181,7 +181,16 @@
     transform: translateX(151px) rotate(0deg);
   }
   100% {
-    transform: translateX(151px)   rotate(0deg);//translateY(-84px)
+    transform: translateX(151px) rotate(0deg); //translateY(-84px)
+  }
+}
+
+@keyframes droneHidden {
+  0% {
+    transform: translateX(151px) translateY(0px);
+  }
+  100% {
+    transform: translateX(151px) translateY(-84px); //translateY(-84px)
   }
 }
 
@@ -208,7 +217,15 @@
     transform: translateY(-36px);
   }
   100% {
-    transform: translateY(-36px);//translateY(-112px)
+    transform: translateY(-36px); //translateY(-112px)
   }
 }
 
+@keyframes boxHidden {
+  0% {
+    transform: translateY(-36px);
+  }
+  100% {
+    transform: translateY(-112px); //translateY(-112px)
+  }
+}

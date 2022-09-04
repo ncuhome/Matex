@@ -5,7 +5,7 @@ import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
 import { emitter } from './utils/Instance';
 import { getGotModule } from './request/utils';
-import {listenRequest} from "./request";
+import { IpcListener } from './request';
 
 const os = getOsType();
 const isReload = isDev && process.env.RELOAD_MAIN === 'true';
@@ -67,7 +67,7 @@ if (!gotTheLock) {
 app.on('ready', async () => {
   emitter.on('main-page-showed', async () => {
     await getGotModule();
-    listenRequest()
+    IpcListener.start(mainWindow as BrowserWindow);
   });
 
   await init();

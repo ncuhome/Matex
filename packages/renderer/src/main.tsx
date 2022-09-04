@@ -7,8 +7,7 @@ import './Global/global.css';
 import './Global/custom.scss';
 import './useWorker'
 
-
-const isDev = MatexWin.NODE_ENV === 'development';
+const isDev = MatexWin.NodeApi.NODE_ENV === 'development';
 console.log('isDev',isDev)
 //防止打包后导航失效
 function renderRoot(child: React.ReactNode) {
