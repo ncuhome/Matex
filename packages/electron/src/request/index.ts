@@ -1,6 +1,6 @@
 import { handleRequest } from './ApiTest';
 import { BrowserWindow } from 'electron';
-import { IpcKey } from '../../../common/globalKey';
+import { IpcKey } from '/@common/globalKey';
 
 export class IpcListener {
   static mainWin: BrowserWindow;

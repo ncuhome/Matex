@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './index.module.scss';
 import SidebarHeader from '/@/pages/ApiTest/SideBar/Header/Header';
 import ProjectList from '/@/pages/ApiTest/SideBar/ProjectList';
@@ -10,9 +10,15 @@ import { useSendReq } from '/@/Ipc/apiTest/apiTest.ipc';
 
 const ApiTestSideBar = () => {
   const sidebarMenuType = useAtomValue(SidebarMenuTypeAtom);
-  const sendReq = useSendReq();
+  const {sendReq,onResponse} = useSendReq();
   const [status, setStatus] = useState<PlayStatus>('idle');
   const { startProcessing, completed } = usePlayButton('apiTestBtn');
+
+  useEffect(()=>{
+    onResponse((e,res)=>{
+      console.log(res)
+    })
+  },[])
 
   const handleSend = () => {
     if (status === 'idle') {

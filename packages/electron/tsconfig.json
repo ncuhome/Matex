@@ -15,14 +15,11 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "types": [],
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "/@common/*": ["../common/*"]
+    }
   },
-  "include": [
-    "src/**/*.ts",
-    "../../types/**/*.d.ts"
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*.ts", "../../types/**/*.d.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
 }

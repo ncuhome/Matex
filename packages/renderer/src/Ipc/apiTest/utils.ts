@@ -1,19 +1,32 @@
-import {BodyType, KVConfig, ReqType} from '/@/Model/ApiTest.model';
-import {useAtomValue} from 'jotai';
+import { BodyRawType, BodyType, KVConfig, ReqType } from '/@/Model/ApiTest.model';
+import { useAtomValue } from 'jotai';
 import {
-	BinaryConfigs,
-	FormDataConfigs,
-	HeaderConfigs,
-	ParamsConfigs,
-	RawConfigValue,
-	RawTypeValue,
-	ReqBodyType,
-	ReqUrl,
-	UrlEncodeConfigs
+  BinaryConfigs,
+  FormDataConfigs,
+  HeaderConfigs,
+  ParamsConfigs,
+  RawConfigValue,
+  RawTypeValue,
+  ReqBodyType,
+  ReqUrl,
+  UrlEncodeConfigs
 } from '/@/store/ApiTest/config.store';
-import {ApiTestReq} from '/@common/global';
+import type { ApiTestReq } from '/@common/apiTest';
+import { FilePondFile } from 'filepond';
+type KVData = Omit<KVConfig, 'selected' | 'opt'>;
+interface ReqParams {
+  url: string;
+  bodyType: BodyType;
+  rawType: BodyRawType;
+  headers: KVData[];
+  params: KVData[];
+  urlencodedValue: KVData[];
+  formDataValue: KVData[];
+  rawValue: string;
+  binaryValue: FilePondFile[];
+}
 
-const useReqParams = () => {
+const useReqParams = (): ReqParams => {
   const url = useAtomValue(ReqUrl);
   const headers = useAtomValue(HeaderConfigs);
   const params = useAtomValue(ParamsConfigs);
@@ -37,8 +50,9 @@ const useReqParams = () => {
   };
 };
 
-export const getReqData = (method: ReqType): ApiTestReq => {
+export const useReqData = (method: ReqType): ApiTestReq => {
   const { url, headers, params, bodyType } = useReqParams();
+  const data = useReqParams();
   switch (method) {
     case 'get':
       return {
@@ -53,7 +67,7 @@ export const getReqData = (method: ReqType): ApiTestReq => {
         url,
         headers,
         bodyType,
-        body: getBodyValue(bodyType)
+        body: getBodyValue(bodyType, data)
       };
     case 'put':
       return {
@@ -61,7 +75,7 @@ export const getReqData = (method: ReqType): ApiTestReq => {
         url,
         headers,
         bodyType,
-        body: getBodyValue(bodyType)
+        body: getBodyValue(bodyType, data)
       };
     case 'delete':
       return {
@@ -69,7 +83,7 @@ export const getReqData = (method: ReqType): ApiTestReq => {
         url,
         headers,
         bodyType,
-        body: getBodyValue(bodyType)
+        body: getBodyValue(bodyType, data)
       };
     case 'header':
       return {
@@ -77,7 +91,7 @@ export const getReqData = (method: ReqType): ApiTestReq => {
         url,
         headers,
         bodyType,
-        body: getBodyValue(bodyType)
+        body: getBodyValue(bodyType, data)
       };
   }
 };
@@ -87,13 +101,13 @@ export const filterList = (list: KVConfig[]) => {
     return item.selected && item.key && item.value;
   });
 
-	return filteredList.map((item) => {
-		return {key: item.key, value: item.value};
-	});
+  return filteredList.map((item) => {
+    return { key: item.key, value: item.value };
+  });
 };
 
-const getBodyValue = (bodyType: BodyType) => {
-  const { urlencodedValue, formDataValue, rawValue, binaryValue } = useReqParams();
+const getBodyValue = (bodyType: BodyType, data: ReqParams) => {
+  const { urlencodedValue, formDataValue, rawValue, binaryValue } = data;
   switch (bodyType) {
     case 'urlencoded':
       return urlencodedValue;

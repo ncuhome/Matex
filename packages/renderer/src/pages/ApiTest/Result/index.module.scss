@@ -21,3 +21,17 @@
     margin-top: 8px;
   }
 }
+
+.idleCon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--dark-bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}

@@ -1,10 +1,10 @@
 import http from 'http';
-import type {Response} from 'got';
-import {Global} from "../utils/Instance";
-
+import type { Response } from 'got';
+import { Global } from '../utils/Instance';
+import { KVList } from '/@common/apiTest';
 
 export const getGotModule = async () => {
-  Global.Got= (await import('got')).default;
+  Global.Got = (await import('got')).default;
 };
 
 export const getHeaderSize = (res: Response) => {
@@ -14,4 +14,17 @@ export const getHeaderSize = (res: Response) => {
     rawHeaders += headerKey + ': ' + res.headers[headerKey] + '\r\n';
   });
   rawHeaders += '\r\n';
+};
+
+export const getParamsObj = (list: KVList): { [key: string]: string } => {
+  let _obj={};
+  if (list.length === 0) {
+    _obj = {};
+  }
+  list.forEach((item) => {
+    _obj = Object.assign(_obj, {
+      [item.key]: item.value
+    });
+  });
+  return _obj;
 };

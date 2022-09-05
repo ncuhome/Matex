@@ -1,14 +1,21 @@
 import { builtinModules } from 'module';
 import { defineConfig } from 'vite';
 import pkg from '../../package.json';
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 
 const isDev = process.env.MODE === 'development';
 const ROOT = process.cwd();
+const APP_ROOT = resolve(ROOT, 'packages');
 
 export default defineConfig({
   root: __dirname,
   logLevel: isDev ? 'error' : 'info',
+  resolve: {
+    alias: {
+      '/@/': join(APP_ROOT, './') + '/',
+      '/@common/': join(APP_ROOT, 'common') + '/'
+    }
+  },
   build: {
     outDir: resolve(ROOT, 'release/app/dist/main'),
     emptyOutDir: true,

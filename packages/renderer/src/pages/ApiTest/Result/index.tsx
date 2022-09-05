@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Mask from '/@cmp/Mask';
 import idleIcon from '/@/assets/images/idle.svg';
 import CircleDotLoading from '/@cmp/Loading/CircleDotLoading';
@@ -11,14 +11,14 @@ export type StatusType = 'Idle' | 'Processing' | 'Result';
 
 const Idle = () => {
   return (
-    <Mask>
-      <img src={idleIcon} style={{ width: 300, height: 250 }} alt={'Idle'} />
-    </Mask>
-  );
-};
+      <div className={styles.idleCon}>
+        <img src={idleIcon} style={{ width: 300, height: 250 }} alt={'Idle'} />
+      </div>
+  )
+}
 
 const ReqResult = () => {
-  const [status, SetStatus] = useState<StatusType>('Processing');
+  const [status, SetStatus] = useState<StatusType>('Idle');
 
   useEffect(() => {
     emittery.on('Result-Status', (data: StatusType) => {
@@ -27,22 +27,12 @@ const ReqResult = () => {
   }, []);
 
   const _render = () => {
-    if (status === 'Idle') {
-      return <Idle />;
-    } else if (status === 'Processing') {
-      return (
-        <>
-          <Mask>
-            <CircleDotLoading />
-          </Mask>
-          <ResultBodyEditor />
-        </>
-      );
-    } else if (status === 'Result') {
-      return <ResultBodyEditor />;
-    } else {
-      return null;
-    }
+    return (
+      <Mask overlayPanel={<CircleDotLoading />} isMask={status === 'Processing'}>
+        {status === 'Idle' && <Idle/>}
+        {status === 'Result' && <ResultBodyEditor />}
+      </Mask>
+    );
   };
 
   return (

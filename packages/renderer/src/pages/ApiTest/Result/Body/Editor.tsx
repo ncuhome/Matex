@@ -5,6 +5,7 @@ import {useEditorAction} from "/@cmp/MonacoEditor/editorAction";
 import {Editor} from "/@cmp/MonacoEditor/type";
 import {LanguageMapper} from "/@cmp/MonacoEditor/utils";
 import CircleDotLoading from "/@cmp/Loading/CircleDotLoading";
+import styles from './index.module.scss';
 
 const MonacoEditor = React.lazy(()=>import('/@/components/MonacoEditor'))
 
@@ -30,20 +31,23 @@ const ResultBodyEditor = () => {
 
 	return (
 			<Suspense fallback={<CircleDotLoading />}>
-				<MonacoEditor
-						onChange={(changes, value) => {
-							setRawConfigValue(value ?? '');
-						}}
-						onCreated={onCreated}
-						onDestroyed={() => (editorRef.current = null)}
-						shadow={true}
-						border={'1px solid var(--dark-color2)'}
-						readOnly={false}
-						language={language}
-						defaultVal={''}
-						height={250}
-						width={'100%'}
-				/>
+				<div className={styles.editorCon}>
+					<MonacoEditor
+							onChange={(changes, value) => {
+								setRawConfigValue(value ?? '');
+							}}
+							onCreated={onCreated}
+							onDestroyed={() => (editorRef.current = null)}
+							shadow={true}
+							border={'1px solid var(--dark-color2)'}
+							readOnly={false}
+							language={language}
+							defaultVal={''}
+							height={250}
+							width={'100%'}
+					/>
+				</div>
+
 			</Suspense>
 	)
 }

@@ -1,5 +1,5 @@
 import type { Menus } from '/@/Hooks/useContextMenu';
-import {nanoid} from "nanoid";
+import { nanoid } from 'nanoid';
 
 // reqConfig
 export type ReqType = 'post' | 'get' | 'put' | 'delete' | 'header';
@@ -33,9 +33,8 @@ export interface KVConfig {
   opt: any;
 }
 export const DefaultHerderConfig: KVConfig[] = [
-  { selected: true, key: 'Accept', value: '*/*',opt:'' },
-  { selected: true, key: 'Connection', value: 'keep-alive',opt:'' },
-  { selected: true, key: 'Accept-Encoding', value: 'gzip, deflate, br',opt:'' }
+  { selected: true, key: 'Accept', value: '*/*', opt: '' },
+  { selected: true, key: 'Connection', value: 'keep-alive', opt: '' }
 ];
 export const InputContextMenus: Menus = [{ key: '复制' }, { key: '粘贴' }, { key: '清除' }];
 

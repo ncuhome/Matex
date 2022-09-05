@@ -1,7 +1,7 @@
 import { ipcRenderer, clipboard, contextBridge } from 'electron';
 import type { NodeApiProps } from '../../common/global';
-import {ApiTestReq} from "../../common/global";
-import {IpcKey} from "../../common/globalKey";
+import type { ApiTestReq } from '../../common/apiTest';
+import { IpcKey } from '../../common/globalKey';
 
 const nodeApi: NodeApiProps = {
   nodeV: process.versions.node,
@@ -11,10 +11,8 @@ const nodeApi: NodeApiProps = {
   Clipboard: clipboard,
   OS: process.platform === 'darwin' ? 'mac' : 'win',
   ipc: {
-    sendReq: (args: ApiTestReq) => {
-      ipcRenderer.invoke(IpcKey.ApiTestReq, args)
-    },
-    on: (args: any) => ipcRenderer.on('ipc', args)
+    sendApiTestReq: (args: ApiTestReq) => ipcRenderer.invoke(IpcKey.ApiTestReq, args),
+    onApiTestRes: (callback) => ipcRenderer.on(IpcKey.ApiTestRes, callback)
   }
 };
 
