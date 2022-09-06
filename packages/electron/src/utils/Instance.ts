@@ -1,10 +1,6 @@
 import Emittery from 'emittery';
-import type { Got } from 'got';
+import _matexhttp from 'matexhttp';
+import { promisify } from 'util';
 
-interface ExtendGlobal extends Global {
-  Got: Got;
-}
-export const Global: ExtendGlobal = global as any;
-
+export const MatexHttp = promisify(_matexhttp);
 export const emitter = new Emittery();
-

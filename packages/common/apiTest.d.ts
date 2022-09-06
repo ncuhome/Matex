@@ -1,39 +1,45 @@
-import {BodyRawType, BodyType, KVConfig, ReqType} from "../renderer/src/Model/ApiTest.model";
-import {Response} from "got";
+import { BodyRawType, BodyType, KVConfig, ReqType } from '../renderer/src/Model/ApiTest.model';
+import { Response } from 'got';
+import { IncomingHttpHeaders } from 'http';
 
-
-export type KVList = Omit<KVConfig, 'selected'|'opt'>[];
+export type KVList = Omit<KVConfig, 'selected' | 'opt'>[];
 
 export interface ApiTestReq {
-	url: string;
-	method: ReqType;
-	headers: KVList;
-	params?: KVList;
-	bodyType?: BodyType;
-	rawType?: BodyRawType;
-	body?: KVList|File|string;
+  url: string;
+  method: ReqType;
+  headers: KVList;
+  params?: KVList;
+  bodyType?: BodyType;
+  rawType?: BodyRawType;
+  body?: KVList | File | string;
 }
 
-export interface ApiTestRes extends Response{
-	desc: string;
-	size:{
-		bodySize: string;
-		headerSize:string
-	}
-	timer: { key: string; time: string | number }[];
+export interface ApiTestRes {
+  type: string;
+  statusCode: number;
+  statusMassage: string;
+  body: any;
+  headers: IncomingHttpHeaders;
+  size: {
+    resBodySize: string;
+    resHeaderSize: string;
+  };
+  timer: {
+    [key: string]: string | number;
+  }[];
 }
 
 export interface CommonReqParams {
-	url: string;
-	headers?: ApiTestReq['headers'];
+  url: string;
+  headers?: ApiTestReq['headers'];
 }
 
 export interface GetReqParams extends CommonReqParams {
-	params: ApiTestReq['params'];
+  params: ApiTestReq['params'];
 }
 
 export interface PostReqParams extends CommonReqParams {
-	bodyType: ApiTestReq['bodyType'];
-	rawType?: ApiTestReq['rawType'];
-	body?: ApiTestReq['body'];
+  bodyType: ApiTestReq['bodyType'];
+  rawType?: ApiTestReq['rawType'];
+  body?: ApiTestReq['body'];
 }
