@@ -4,7 +4,6 @@ import { MatexLog } from './utils/log';
 import { getOsType } from './utils/system';
 import { createLoadWin, createMainWin } from './core/createWindows';
 import { emitter } from './utils/Instance';
-import { getGotModule } from './request/utils';
 import { IpcListener } from './request';
 
 const os = getOsType();
@@ -66,7 +65,6 @@ if (!gotTheLock) {
 
 app.on('ready', async () => {
   emitter.on('main-page-showed', async () => {
-    await getGotModule();
     IpcListener.start(mainWindow as BrowserWindow);
   });
 

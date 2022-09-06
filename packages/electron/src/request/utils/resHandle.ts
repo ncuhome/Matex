@@ -1,7 +1,7 @@
 import http from 'http';
 import { Response } from 'matexhttp';
 import { ApiTestRes } from '/@common/apiTest';
-import { getResponseType } from './contentType';
+import {getResponseType, RawTypes} from './contentType';
 import { Blob } from 'buffer';
 import {getStatusMassage} from "./statusMessage";
 import fileSize from 'filesize';
@@ -39,7 +39,7 @@ export const getResponse = (res: Response): ApiTestRes => {
 		statusCode:res.statusCode,
 		statusMassage:getStatusMassage(res.statusCode),
 		headers:res.headers,
-		body:res.body,
+		body:RawTypes.includes(resType) ? res.body : res.strBody,
 		size:{
 			resHeaderSize:fileSize(resHeaderSize),
 			resBodySize:fileSize(resBodySize),

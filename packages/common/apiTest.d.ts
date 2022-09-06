@@ -15,7 +15,7 @@ export interface ApiTestReq {
 }
 
 export interface ApiTestRes {
-  type: string;
+  type: string|'error'|'text'|'json'|'html'|'xml';
   statusCode: number;
   statusMassage: string;
   body: any;
@@ -27,6 +27,16 @@ export interface ApiTestRes {
   timer: {
     [key: string]: string | number;
   }[];
+}
+
+export interface ReqError {
+  type: 'error';
+  stack: string;
+  errno: number;
+  code: string;
+  syscall: string;
+  address: string;
+  port: number;
 }
 
 export interface CommonReqParams {

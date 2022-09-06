@@ -1,7 +1,7 @@
 import monaco from '/@cmp/MonacoEditor/monaco';
 
 export type Editor = monaco.editor.IStandaloneCodeEditor;
-export type EditorLanguage = 'json' | 'html' | 'text/plain'|'text/xml'| string
+export type EditorLanguage = 'json' | 'html' | 'text/plain' | 'text/xml' | 'javascript' | string;
 
 export interface SetValueProps {
   editor: Editor;
@@ -10,9 +10,9 @@ export interface SetValueProps {
 }
 
 export interface EditorActionProps {
-  id?:string;
+  id?: string;
   watch?: boolean;
-  readOnly?:boolean
+  readOnly?: boolean;
 }
 
 export interface MonacoEditorProps {
@@ -24,8 +24,8 @@ export interface MonacoEditorProps {
   language: EditorLanguage;
   readOnly?: boolean;
   enabledMinMap?: boolean;
-  onCreated?:(editor: monaco.editor.IStandaloneCodeEditor) => void;
-  onDestroyed?:() => void;
+  onCreated?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
+  onDestroyed?: () => void;
   onChange?: (changes: monaco.editor.IModelContentChangedEvent, value: string | undefined) => void;
   className?: string;
 }

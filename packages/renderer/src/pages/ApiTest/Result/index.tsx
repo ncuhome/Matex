@@ -3,9 +3,9 @@ import Mask from '/@cmp/Mask';
 import idleIcon from '/@/assets/images/idle.svg';
 import CircleDotLoading from '/@cmp/Loading/CircleDotLoading';
 import { emittery } from '/@/utils/instance';
-import ResultBodyEditor from '/@/pages/ApiTest/Result/Body/Editor';
 import ResultHeader from '/@/pages/ApiTest/Result/Header/Header';
 import styles from './index.module.scss';
+import PrettyView from "/@/pages/ApiTest/Result/Body/Pretty";
 
 export type StatusType = 'Idle' | 'Processing' | 'Result';
 
@@ -30,7 +30,7 @@ const ReqResult = () => {
     return (
       <Mask overlayPanel={<CircleDotLoading />} isMask={status === 'Processing'}>
         {status === 'Idle' && <Idle/>}
-        {status === 'Result' && <ResultBodyEditor />}
+        {status === 'Result' && <PrettyView />}
       </Mask>
     );
   };
