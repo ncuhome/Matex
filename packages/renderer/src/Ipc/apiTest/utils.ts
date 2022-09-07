@@ -51,8 +51,8 @@ const useReqParams = (): ReqParams => {
 };
 
 export const useReqData = (method: ReqType): ApiTestReq => {
-  const { url, headers, params, bodyType } = useReqParams();
   const data = useReqParams();
+  const { url, headers, params, bodyType } = data;
   switch (method) {
     case 'get':
       return {

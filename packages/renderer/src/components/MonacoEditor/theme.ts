@@ -4,7 +4,7 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   {
     token: '',
-    foreground: '#0ECCCC',
+    foreground: '#8896C8',
     fontStyle: 'italic'
   },
   {

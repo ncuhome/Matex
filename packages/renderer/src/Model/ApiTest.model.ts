@@ -39,8 +39,8 @@ export const DefaultHerderConfig: KVConfig[] = [
 export const InputContextMenus: Menus = [{ key: '复制' }, { key: '粘贴' }, { key: '清除' }];
 
 // result
-export type ResDataType = '响应数据' | '响应头';
-export const ResDataTypeList = ['响应数据', '响应头'];
+export type ResDataType = '响应数据' | '响应头' | 'Cookie';
+export const ResDataTypeList = ['响应数据', '响应头','Cookie'];
 
 export type ResDisplayType = 'Pretty' | 'Preview';
 export const ResDisplayTypeList = ['Pretty', 'Preview', 'Visual'];

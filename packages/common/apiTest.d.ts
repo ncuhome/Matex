@@ -16,6 +16,7 @@ export interface ApiTestReq {
 
 export interface ApiTestRes {
   type: string|'error'|'text'|'json'|'html'|'xml';
+  mimeType:string;
   statusCode: number;
   statusMassage: string;
   body: any;

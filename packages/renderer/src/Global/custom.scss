@@ -135,3 +135,9 @@
   border-radius: 5px;
   color: var(--light-text1);
 }
+
+.Toastify__close-button{
+  svg{
+    fill: var(--light-text1)!important;
+  }
+}

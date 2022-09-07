@@ -2,7 +2,6 @@ import monaco from './monaco';
 import { EditorActionProps, SetValueProps, Editor, EditorLanguage } from '/@cmp/MonacoEditor/type';
 
 export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
-
   //设置编辑器的值
   const setValue = async ({ editor, language, value }: SetValueProps) => {
     if (editor) {
@@ -13,7 +12,12 @@ export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
       }
       const model = editor.getModel();
       if (model) {
-        model.setValue(value);
+        const _language = editor.getModel()?.getLanguageId();
+        if (_language !== language) {
+          editor.setModel(monaco.editor.createModel(value, language));
+        } else {
+          model.setValue(value);
+        }
       } else {
         editor.setModel(monaco.editor.createModel(value, language));
       }
@@ -22,7 +26,7 @@ export const useEditorAction = ({ readOnly = false }: EditorActionProps) => {
         readOnly: readOnly
       });
     }
-  }
+  };
 
   //获取编辑器的值
   const getValue = (editor: Editor) => {

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './index.module.scss';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SideBar from "/@/pages/Home/SiderBar";
+import {ToastContainer} from "react-toastify";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,15 +17,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div className={styles.home}>
-      <div className={styles.header}></div>
-      <div className={styles.sidebar}>
-        <SideBar/>
-      </div>
-      <div className={styles.body}>
-        <Outlet />
-      </div>
-    </div>
+      <>
+        <ToastContainer/>
+        <div className={styles.home}>
+          <div className={styles.header}></div>
+          <div className={styles.sidebar}>
+            <SideBar/>
+          </div>
+          <div className={styles.body}>
+            <Outlet />
+          </div>
+        </div>
+      </>
+
   );
 };
 

@@ -1,7 +1,6 @@
 import { ApiTestRes } from '/@common/apiTest';
-import {EditAble, previewAble} from "/@/pages/ApiTest/Result/Body/utils";
 
-export const getPreviewSrc = (data: any, type: ApiTestRes['type']) => {
+export const getPreviewSrc = (data: any, type: ApiTestRes['mimeType']) => {
   const index = type.indexOf(';') > 0 ? type.indexOf(';') : type.length;
   let mimeType = type.slice(0, index);
   const renderJsonHtmlStr = (json: string) => {

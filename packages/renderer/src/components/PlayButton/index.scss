@@ -157,16 +157,16 @@
         }
       }
       .drone {
-        animation: move 5s ease forwards;
+        animation: move 3s ease forwards;
         .wing {
-          animation: wing 5s linear infinite;
+          animation: wing 3s linear infinite;
         }
         .grab {
           animation: grab 0.6s ease forwards 2.3s;
         }
       }
       .box {
-        animation: box 5s ease forwards;
+        animation: box 3s ease forwards;
       }
     }
   }

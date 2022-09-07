@@ -68,10 +68,13 @@ p {
   --dark-color2: #475998;
   --light-color1:#6578B8;
 
-  --error-color: #EB5298;
+  --error-color: #FA6585;
   --warning-color: #FA6C37;
   --success-color: #3DDF6E;
   --normal-color: var(--dark-color1);
 
   --card-space: 18px;
+
+  --toastify-color-error:var(--error-color)!important;
+  --toastify-color-progress-error:var(--error-color)!important;
 }

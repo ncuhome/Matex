@@ -27,6 +27,7 @@
     "release": "cross-env NODE_ENV=production USE_HARD_LINKS=false electron-builder build --config electron_builder.json5 --publish never"
   },
   "devDependencies": {
+    "@types/mime-types": "^2.1.1",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "@types/signale": "^1.4.4",
@@ -50,6 +51,7 @@
   "dependencies": {
     "@floating-ui/react-dom": "^1.0.0",
     "@tanstack/react-table": "^8.5.11",
+    "@types/validator": "^13.7.6",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.4",
     "dotenv": "^16.0.1",
@@ -59,7 +61,6 @@
     "filepond-plugin-image-preview": "^4.6.11",
     "filesize": "^9.0.11",
     "got": "^12.3.1",
-    "gsap": "^3.11.0",
     "immer": "^9.0.15",
     "jotai": "^1.7.8",
     "jsonfile": "^6.1.0",
@@ -72,9 +73,11 @@
     "react-dom": "^18.2.0",
     "react-filepond": "^7.1.2",
     "react-router-dom": "^6.3.0",
+    "react-toastify": "^9.0.8",
     "react-use": "^17.4.0",
     "request-progress": "^3.0.0",
     "signale": "^1.4.0",
+    "validator": "^13.7.0",
     "validator-js": "^0.2.1",
     "winston": "^3.8.1"
   }

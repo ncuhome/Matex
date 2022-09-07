@@ -4,6 +4,7 @@ import { useReqData} from '/@/Ipc/apiTest/utils';
 import { MatexWin } from '/@/Global/global';
 import { useRef } from 'react';
 import { emittery } from '/@/utils/instance';
+import {checkSendData} from "/@/Ipc/apiTest/check";
 
 export const useSendReq = () => {
   const method = useAtomValue(SelReqType);
@@ -11,8 +12,13 @@ export const useSendReq = () => {
   const listenerRef = useRef<boolean>(false);
 
   const sendReq = () => {
-    MatexWin.NodeApi.ipc.sendApiTestReq(sendData);
-    emittery.emit('Result-Status', 'Processing');
+    if (checkSendData(sendData)){
+      MatexWin.NodeApi.ipc.sendApiTestReq(sendData);
+      emittery.emit('Result-Status', 'Processing');
+      return true;
+    } else {
+      return false
+    }
   };
 
   const onResponse = (callback: (e, args: any) => void) => {

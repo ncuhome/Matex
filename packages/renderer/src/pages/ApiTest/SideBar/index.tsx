@@ -17,10 +17,12 @@ const ApiTestSideBar = () => {
   const setResultError = useUpdateAtom(ResultErrorAtom);
   const { sendReq, onResponse } = useSendReq();
   const [status, setStatus] = useState<PlayStatus>('idle');
-  const { startProcessing, completed } = usePlayButton('apiTestBtn');
+  const { startProcessing,reset, completed } = usePlayButton('apiTestBtn');
 
   useEffect(() => {
     onResponse((e, res: ApiTestRes | ReqError) => {
+      completed();
+      setStatus('idle');
       if (res.type === 'error') {
         setResultError(res as ReqError);
       } else {
@@ -31,15 +33,13 @@ const ApiTestSideBar = () => {
 
   const handleSend = () => {
     if (status === 'idle') {
-      sendReq();
-      startProcessing();
-      setStatus('processing');
-      setTimeout(() => {
-        completed();
-        setStatus('idle');
-      }, 5000);
+      const success = sendReq();
+      if (success){
+        startProcessing();
+        setStatus('processing');
+      }
     } else {
-      completed();
+      reset();
       setStatus('idle');
     }
   };

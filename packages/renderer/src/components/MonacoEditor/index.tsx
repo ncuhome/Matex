@@ -55,7 +55,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({
     <div className={clsx([styles.con])} style={{ border }}>
       <div
         id={'monacoEditor'}
-        style={{ height }}
+        style={{ height:height-17 }}
         className={clsx([styles.editor, className])}
         ref={monacoEl}
       />

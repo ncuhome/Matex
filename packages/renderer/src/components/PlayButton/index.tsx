@@ -16,7 +16,9 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick = () => {} }
       if (data === 'processing') {
         startProcessing();
       } else if (data === 'completed') {
-        completeProcession();
+        completeProcession(false);
+      } else {
+        completeProcession(true);
       }
     });
   }, []);
@@ -38,27 +40,30 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick = () => {} }
     const { button, drone, box } = getNodes();
     if (button) {
       button.classList.add('animate');
-      drone.style.animation = 'move 5s ease forwards';
-      box.style.animation = 'box 5s ease forwards';
+      drone.style.animation = 'move 3s ease forwards';
+      box.style.animation = 'box 3s ease forwards';
     }
   };
 
-  const completeProcession = () => {
+  const completeProcession = (reset: boolean) => {
     const { button, drone, box, successText } = getNodes();
-    drone.style.animation = 'droneHidden 3s ease forwards';
-    box.style.animation = 'boxHidden 3s ease forwards';
-    successText.classList.add('show');
+    drone.style.animation = `droneHidden ${reset ? 0.01 : 3}s ease forwards`;
+    box.style.animation = `boxHidden ${reset ? 0.01 : 3}s ease forwards`;
+    !reset && successText.classList.add('show');
 
     if (timerRef.current) {
       timerRef.current = null;
     } else {
-      timerRef.current = setTimeout(() => {
-        if (button.classList.contains('animate')) {
-          button.classList.remove('animate');
-          successText.classList.remove('show');
-          timerRef.current = null;
-        }
-      }, 5500);
+      timerRef.current = setTimeout(
+        () => {
+          if (button.classList.contains('animate')) {
+            button.classList.remove('animate');
+            successText.classList.remove('show');
+            timerRef.current = null;
+          }
+        },
+        reset ? 0.03 : 5500
+      );
     }
   };
 
@@ -140,8 +145,13 @@ export const usePlayButton = (key: string) => {
     emittery.emit('playButton:' + key, 'completed');
   };
 
+  const reset = () => {
+    emittery.emit('playButton:' + key, 'reset');
+  };
+
   return {
     startProcessing,
+    reset,
     completed
   };
 };
