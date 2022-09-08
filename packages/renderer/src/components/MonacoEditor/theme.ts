@@ -4,13 +4,19 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   {
     token: '',
-    foreground: '#8896C8',
-    fontStyle: 'italic'
+    foreground: '#5164E8',
+  },
+  {
+    token:'other.json',
+    foreground: '#0ECCCC',
   },
   {
     token: 'number.json',
     foreground: '#0ECCCC',
-    fontStyle: 'italic'
+  },
+  {
+    token: 'keyword.json',
+    foreground: '#7595E1'
   },
   {
     token: 'delimiter.bracket.json',
@@ -28,7 +34,7 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'delimiter.comma.json',
-    foreground: '#3C878A'
+    foreground: '#6578B8'
   },
   {
     token: 'string.key.json',
@@ -36,7 +42,7 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   },
   {
     token: 'string.value.json',
-    foreground: '#4ED26D'
+    foreground: '#6DCE66'
   },
   {
     token: 'custom-highlight',
@@ -46,27 +52,31 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
 
 export const htmlRules: monaco.editor.ITokenThemeRule[] = [
   {
+    token: '',
+    foreground: '#ABB2BF',
+  },
+  {
     token: 'tag.html',
-    foreground: '#F27293'
+    foreground: '#E06C75'
   },
   {
     token: 'metatag.content.html',
-    foreground: '#3FDA0D'
+    foreground: '#C477DA'
   },
   {
     token: 'metatag.html',
-    foreground: '#2CB6AD'
+    foreground: '#6C75E0'
   },
   {
     token: 'delimiter.html',
-    foreground: '#2185D0'
+    foreground: '#ABB2BF'
   },
   {
     token: 'attribute.name.html',
-    foreground: '#8ADDFF'
+    foreground: '#E09D6C'
   },
   {
     token: 'attribute.value.html',
-    foreground: '#2CB6AD'
+    foreground: '#3DCC6E'
   }
 ];

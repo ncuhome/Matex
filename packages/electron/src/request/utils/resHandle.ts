@@ -5,7 +5,6 @@ import { getResponseType, RawTypes } from './contentType';
 import { Blob } from 'buffer';
 import { getStatusMassage } from './statusMessage';
 import fileSize from 'filesize';
-import mime from 'mime-types';
 
 export const getHeaderSize = (res: Response) => {
   let rawHeaders =
@@ -36,6 +35,7 @@ export const getResponse = (res: Response): ApiTestRes => {
 
   return {
     type: resType,
+    success: res.statusCode < 400 && res.statusCode >= 100,
     mimeType: res.headers['content-type'] ?? 'text/plain',
     timer,
     statusCode: res.statusCode,
@@ -49,13 +49,13 @@ export const getResponse = (res: Response): ApiTestRes => {
   };
 };
 
-const getTimings = (timings: Response['timingPhases']): { [key: string]: string | number }[] => {
+const getTimings = (timings: Response['timingPhases']): { key: string; time: string | number }[] => {
   return [
-    { 'init-socket': parseFloat(timings!.wait?.toFixed(2) ?? '') },
-    { 'dns-lookup': parseFloat(timings!.dns?.toFixed(2) ?? '') },
-    { 'tcp-conn': parseFloat(timings!.tcp?.toFixed(2) ?? '') },
-    { 'first-byte': parseFloat(timings!.firstByte?.toFixed(2) ?? '') },
-    { download: parseFloat(timings!.download?.toFixed(2) ?? '') },
-    { total: parseFloat(timings!.total?.toFixed(2) ?? '') }
+    { key: 'init-socket', time: parseFloat(timings!.wait?.toFixed(2) ?? '') },
+    { key: 'dns-lookup', time: parseFloat(timings!.dns?.toFixed(2) ?? '') },
+    { key: 'tcp-conn', time: parseFloat(timings!.tcp?.toFixed(2) ?? '') },
+    { key: 'first-byte', time: parseFloat(timings!.firstByte?.toFixed(2) ?? '') },
+    { key: 'download', time: parseFloat(timings!.download?.toFixed(2) ?? '') },
+    { key: 'total', time: parseFloat(timings!.total?.toFixed(2) ?? '') }
   ];
 };

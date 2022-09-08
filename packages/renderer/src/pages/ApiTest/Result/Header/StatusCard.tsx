@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.module.scss';
+import styles from './statusCard.module.scss';
 import TimeIcon from '/@cmp/svg/TimeIcon';
 import Popup from '/@cmp/Popup';
 import TimeCost from '/@/pages/ApiTest/Result/Header/TimeCost';

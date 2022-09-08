@@ -13,11 +13,13 @@ import type { ApiTestRes, ReqError } from '/@common/apiTest';
 
 const ApiTestSideBar = () => {
   const sidebarMenuType = useAtomValue(SidebarMenuTypeAtom);
-  const setResult = useUpdateAtom(ResultAtom);
+  const [result, setResult] = useAtom(ResultAtom);
   const setResultError = useUpdateAtom(ResultErrorAtom);
   const { sendReq, onResponse } = useSendReq();
   const [status, setStatus] = useState<PlayStatus>('idle');
-  const { startProcessing,reset, completed } = usePlayButton('apiTestBtn');
+  const { startProcessing, reset, completed } = usePlayButton('apiTestBtn');
+  let success = false;
+  success = !!(result && result.success);
 
   useEffect(() => {
     onResponse((e, res: ApiTestRes | ReqError) => {
@@ -34,7 +36,7 @@ const ApiTestSideBar = () => {
   const handleSend = () => {
     if (status === 'idle') {
       const success = sendReq();
-      if (success){
+      if (success) {
         startProcessing();
         setStatus('processing');
       }
@@ -49,7 +51,7 @@ const ApiTestSideBar = () => {
       <SidebarHeader />
       <div className={styles.body}>{sidebarMenuType === '项目接口' ? <ProjectList /> : <SpeedTest />}</div>
       <div className={styles.footer}>
-        <PlayButton id={'apiTestBtn'} onClick={handleSend} />
+        <PlayButton id={'apiTestBtn'} onClick={handleSend} success={success} />
       </div>
     </div>
   );

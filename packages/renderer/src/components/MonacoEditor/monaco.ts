@@ -16,16 +16,18 @@ monaco.editor.defineTheme('my-theme', {
   inherit: true,
   colors: {
     'editor.lineHighlightBorder': '#00000000',
-    'editorLineNumber.foreground': '#A491B8',
-    'editorLineNumber.activeForeground': '#237893',
+    'editorLineNumber.foreground': '#5B6CA9',
+    'editorLineNumber.activeForeground': '#57CFFF',
     'editor.background': '#00000000',
-    'editorCursor.foreground': '#8ADDFF',
+    'editorCursor.foreground': '#57CFFF',
     'scrollbar.shadow': '#00000000',
     'scrollbarSlider.background': '#00000000',
     'scrollbarSlider.hoverBackground': '#00000000',
     'scrollbarSlider.activeBackground': '#00000000',
     'editorWidget.border': '#00000000',
-    'editorOverviewRuler.border': '#00000000'
+    'editorOverviewRuler.border': '#00000000',
+    'editorIndentGuide.background':'#00000000',
+    'editorIndentGuide.activeBackground':'#6578D0',
   },
   rules: [...jsonRules, ...htmlRules]
 });

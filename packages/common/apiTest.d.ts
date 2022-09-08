@@ -15,8 +15,9 @@ export interface ApiTestReq {
 }
 
 export interface ApiTestRes {
-  type: string|'error'|'text'|'json'|'html'|'xml';
-  mimeType:string;
+  type: string | 'error' | 'text' | 'json' | 'html' | 'xml';
+  success: boolean;
+  mimeType: string;
   statusCode: number;
   statusMassage: string;
   body: any;
@@ -25,9 +26,7 @@ export interface ApiTestRes {
     resBodySize: string;
     resHeaderSize: string;
   };
-  timer: {
-    [key: string]: string | number;
-  }[];
+  timer: { key: string; time: string | number }[];
 }
 
 export interface ReqError {

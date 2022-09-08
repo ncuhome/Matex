@@ -21,12 +21,15 @@ const PrettyView = () => {
     }
   }, [res]);
 
+
   if (!res) {
     return null;
   } else {
     if (resDataType === '响应数据') {
       if (res.type === 'error') {
-        return <ReqError />;
+        return <ReqError type={'reqError'} />;
+      } else if (!res.success){
+        return <ReqError type={'resError'} msg={res.statusMassage} statusCode={res.statusCode}/>;
       } else if (EditAble.includes(res.type)) {
         return <ResultBodyEditor value={res.body} language={LanguageMapper.get(res.type) ?? 'text/plain'} />;
       } else if (previewAble.includes(res.type)) {

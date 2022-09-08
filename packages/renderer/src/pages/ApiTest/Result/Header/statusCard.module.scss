@@ -1,0 +1,89 @@
+.statusCard {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 35px;
+  width: fit-content;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 13px;
+  color: #2cb5ad;
+  border: 1px solid var(--dark-color1);
+
+  .statusCode:hover,
+  .statusDesc:hover,
+  .statusTiming:hover {
+    cursor: pointer;
+  }
+
+  .statusTiming {
+    margin-top: 6px;
+  }
+
+  .statusSize {
+    margin: 0 0 0 12px;
+  }
+  .statusCopy {
+    margin: 0 10px;
+    border-left: 2px solid #e0e1e2;
+    height: 110%;
+  }
+
+  .statusDesc {
+    margin: 0 10px 0 10px;
+    line-height: 35px;
+    max-width: 125px;
+    overflow: hidden;
+    word-spacing: 0;
+    word-wrap: break-word;
+    white-space: nowrap;
+    /*当文本溢出包含元素时，以省略号表示超出的文本*/
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
+    -webkit-box-orient: horizontal; /* 垂直排列 */
+    word-break: normal; /* 内容自动换行 */
+  }
+}
+
+.timeCost {
+  display: flex;
+  height: 300px;
+  width: 500px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 10px;
+
+  .timeLine {
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+
+    .timeTitle {
+      width: 130px;
+      border-right: var(--dark-bg1) 1px solid;
+      color: var(--light-text1);
+    }
+
+    .timeRect {
+      flex: 1;
+      line-height: 40px;
+      border-right: var(--dark-bg1) 1px solid;
+
+      .rect{
+        background: var(--light-text1);
+        height: 30px;
+        border-radius: 0 1px 1px 0;
+      }
+    }
+
+    .timeNumber {
+      width: 100px;
+      text-align: right;
+      color: var(--light-text1);
+    }
+  }
+}

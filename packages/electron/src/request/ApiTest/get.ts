@@ -6,7 +6,6 @@ import {getResponse} from "../utils/resHandle";
 export const doGet = async ({ url, params, headers }: GetReqParams) => {
   const paramObj = getParamsObj(params as KVList);
   const headerObj = getParamsObj(headers as KVList);
-  console.log(url);
   try {
     const res = await MatexHttp({
       method: 'Get',
@@ -16,6 +15,10 @@ export const doGet = async ({ url, params, headers }: GetReqParams) => {
       headers: headerObj,
       qs: paramObj
     });
+    console.log(res.body);
+    console.log(res.statusMessage);
+    console.log(res.statusCode);
+    console.log(res.headers);
     return getResponse(res)
   } catch (e:any) {
     console.log(e);

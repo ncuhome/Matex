@@ -6,9 +6,10 @@ export type PlayStatus = 'idle' | 'processing' | 'completed';
 export interface PlayButtonProps {
   id: string;
   onClick?: () => void;
+  success: boolean;
 }
 
-export const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick = () => {} }) => {
+export const PlayButton: React.FC<PlayButtonProps> = ({ id, success, onClick = () => {} }) => {
   const timerRef = React.useRef<NodeJS.Timeout | null>();
 
   useEffect(() => {
@@ -77,10 +78,29 @@ export const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick = () => {} }
       <button className="order" id={id + '-button'} onClick={handleClick}>
         <span className="defaultText">发送请求</span>
         <span className="successText" id={id + '-success'}>
-          请求成功
-          <svg viewBox="0 0 12 10">
-            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-          </svg>
+          请求{success ? '成功' : '失败'}
+          {success ? (
+            <svg viewBox="0 0 12 10">
+              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg>
+          ) : (
+            <svg
+              style={{ transform: 'scale(1.4)' }}
+              d="1662651082915"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2507"
+              width="200"
+              height="200"
+            >
+              <path
+                d="M220.8 812.8l22.4 22.4 272-272 272 272 48-44.8-275.2-272 275.2-272-48-48-272 275.2-272-275.2-22.4 25.6-22.4 22.4 272 272-272 272z"
+                fill={'var(--error-color)'}
+                p-id="2508"
+              ></path>
+            </svg>
+          )}
         </span>
         <div className="box" id={id + '-box'}></div>
         <div className="drone" id={id + '-drone'}>
