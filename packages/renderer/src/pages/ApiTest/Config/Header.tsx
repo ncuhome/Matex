@@ -7,6 +7,7 @@ import MyDropDown from '/@cmp/DropDown';
 import { useContextMenu } from '/@/Hooks/useContextMenu';
 import clsx from 'clsx';
 import CloseIcon from "/@cmp/svg/CloseIcon";
+import {emittery} from "/@/utils/instance";
 
 const Header = () => {
   const [reqType, setReqType] = useAtom(SelReqType);
@@ -32,12 +33,18 @@ const Header = () => {
     }
     setReqType(sel);
   };
+  const handleKeyDown = (e) => {
+    if (e.key==='Enter'){
+      emittery.emit('keyDown:sendReq','')
+    }
+  }
 
   return (
     <div className={styles.header}>
       <MyDropDown menus={ReqMethods} width={98} selectedKey={reqType} onSelectionChange={changeReqType} />
       <div className={styles.url}>
         <input
+            onKeyDown={handleKeyDown}
           ref={inputRef}
           className={styles.input}
           placeholder={'请输入测试接口地址'}

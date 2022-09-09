@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import SidebarHeader from '/@/pages/ApiTest/SideBar/Header/Header';
 import ProjectList from '/@/pages/ApiTest/SideBar/ProjectList';
@@ -10,6 +10,8 @@ import { useSendReq } from '/@/Ipc/apiTest/apiTest.ipc';
 import { ResultAtom, ResultErrorAtom } from '/@/store/ApiTest/result.store';
 import { useUpdateAtom } from 'jotai/utils';
 import type { ApiTestRes, ReqError } from '/@common/apiTest';
+import { emittery } from '/@/utils/instance';
+import Emittery from 'emittery';
 
 const ApiTestSideBar = () => {
   const sidebarMenuType = useAtomValue(SidebarMenuTypeAtom);
@@ -18,6 +20,8 @@ const ApiTestSideBar = () => {
   const { sendReq, onResponse } = useSendReq();
   const [status, setStatus] = useState<PlayStatus>('idle');
   const { startProcessing, reset, completed } = usePlayButton('apiTestBtn');
+  const timeRef = useRef<Emittery.UnsubscribeFn>();
+
   let success = false;
   success = !!(result && result.success);
 
@@ -32,6 +36,16 @@ const ApiTestSideBar = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    timeRef.current?.();
+    timeRef.current = emittery.on('keyDown:sendReq', () => {
+      handleSend();
+    });
+    return () => {
+      timeRef.current?.();
+    };
+  }, [sendReq]);
 
   const handleSend = () => {
     if (status === 'idle') {
