@@ -20,6 +20,7 @@ export interface ApiTestRes {
   mimeType: string;
   statusCode: number;
   statusMassage: string;
+  cookie:Object[]
   body: any;
   headers: IncomingHttpHeaders;
   size: {

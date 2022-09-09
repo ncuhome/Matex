@@ -15,10 +15,6 @@ export const doGet = async ({ url, params, headers }: GetReqParams) => {
       headers: headerObj,
       qs: paramObj
     });
-    console.log(res.body);
-    console.log(res.statusMessage);
-    console.log(res.statusCode);
-    console.log(res.headers);
     return getResponse(res)
   } catch (e:any) {
     console.log(e);

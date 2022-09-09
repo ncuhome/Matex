@@ -6,7 +6,7 @@ export const getPreviewSrc = (data: any, type: ApiTestRes['mimeType']) => {
 
   const renderJsonHtmlStr = (json: string) => {
     return `<!DOCTYPE html><html lang="en"><head><title>json</title></head>
-    <body><pre style="word-wrap: break-word; white-space: pre-wrap;">${json}</pre>
+    <body><pre style="word-wrap: break-word; white-space: pre-wrap;color: #57cfff">${json}</pre>
     </body></html>`;
   };
 
@@ -21,7 +21,7 @@ export const getPreviewSrc = (data: any, type: ApiTestRes['mimeType']) => {
     const url =  URL.createObjectURL(blob);
     return `<!DOCTYPE html><html lang="en"><head><title>text</title></head>
     <body>
-    <img src="${url}" style="height: 210px">
+    <img src="${url}" style="height: 210px" alt="">
     </body></html>`;
   };
 

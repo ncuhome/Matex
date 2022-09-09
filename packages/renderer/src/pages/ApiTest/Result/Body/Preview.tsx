@@ -6,7 +6,6 @@ import PreviewResponse from '/@cmp/PreviewResponse';
 
 const Preview = () => {
   const res = useAtomValue(ResultAtom);
-
   if (!res) {
     return null;
   }

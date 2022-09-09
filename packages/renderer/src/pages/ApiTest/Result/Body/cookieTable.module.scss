@@ -1,0 +1,65 @@
+.cookieTable {
+  width: 100%;
+  height: 230px;
+  overflow: auto;
+  margin: 5px 10px;
+
+  .header {
+    line-height: 30px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding-bottom: 2px;
+    border-bottom: var(--dark-color1) 1px solid;
+
+    .title {
+      text-align: center;
+      color: var(--warning-color);
+    }
+  }
+
+  .body {
+    width: 100%;
+
+    .itemLine {
+      line-height: 38px;
+      border-radius: 5px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding-bottom: 2px;
+      border-bottom: var(--dark-color1) 1px solid;
+
+      .value {
+        text-align: center;
+        color: var(--light-text1);
+      }
+    }
+
+    .bg{
+      &:nth-of-type(2n){
+        background: var(--dark-color1);
+      }
+    }
+  }
+}
+
+.empty{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .emptyIcon{
+    height: 150px;
+  }
+
+  .desc{
+    width: 200px;
+    text-align: center;
+    position: absolute;
+    bottom: -40px;
+    color: var(--light-text1);
+    background: var(--dark-color1);
+    padding: 5px 0;
+    border-radius: 5px;
+  }
+}
