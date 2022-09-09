@@ -16,8 +16,8 @@ import SearchIcon from '/@cmp/svg/SearchIcon';
 import SaveIcon from '/@cmp/svg/SaveIcon';
 import { StatusCard } from '/@/pages/ApiTest/Result/Header/StatusCard';
 import { emittery } from '/@/utils/instance';
-import styles from './index.module.scss'
-import clsx from "clsx";
+import styles from './index.module.scss';
+import clsx from 'clsx';
 
 const icons = [
   <CopyIcon fill={'var(--light-text1)'} />,
@@ -29,6 +29,13 @@ const ResultHeader = () => {
   const [resDataType, setResDataType] = useAtom(ResDataTypeAtom);
   const [resDisplayType, setResDisplayType] = useAtom(ResDisplayTypeAtom);
   const [resFormatType, setResFormatType] = useAtom(ResFormatTypeAtom);
+
+  const changeDataType = (type: ResDataType) => {
+    if (resDisplayType !== 'Pretty') {
+      setResDisplayType('Pretty');
+    }
+    setResDataType(type);
+  };
 
   const changeFormat = (type: ResFormatType) => {
     setResFormatType(type);
@@ -43,27 +50,27 @@ const ResultHeader = () => {
           width={100}
           menus={ResDataTypeList}
           selectedKey={resDataType}
-          onSelectionChange={(_, sel) => setResDataType(sel as ResDataType)}
+          onSelectionChange={(_, sel) => changeDataType(sel as ResDataType)}
         />
       </div>
-      <div className={clsx([styles.displayFormat,resDataType!=='响应数据'&&styles.hidden])}>
+      <div className={clsx([styles.displayFormat, resDataType !== '响应数据' && styles.hidden])}>
         <div style={{ marginRight: 10 }}>
           <Tabs
-              width={6}
-              menus={ResDisplayTypeList}
-              selectedKey={resDisplayType}
-              onSelect={(_, sel) => setResDisplayType(sel)}
+            width={6}
+            menus={ResDisplayTypeList}
+            selectedKey={resDisplayType}
+            onSelect={(_, sel) => setResDisplayType(sel)}
           />
         </div>
         <div style={{ border: '1px solid var(--dark-color1)', borderRadius: 7 }}>
           <MyDropDown
-              textTransform={'none'}
-              fontSize={13}
-              width={102}
-              large
-              menus={ResFormatTypeList}
-              selectedKey={resFormatType}
-              onSelectionChange={(_, sel) => changeFormat(sel as ResFormatType)}
+            textTransform={'none'}
+            fontSize={13}
+            width={102}
+            large
+            menus={ResFormatTypeList}
+            selectedKey={resFormatType}
+            onSelectionChange={(_, sel) => changeFormat(sel as ResFormatType)}
           />
         </div>
       </div>

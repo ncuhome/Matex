@@ -6,4 +6,8 @@
   outline: none;
   border-radius: 5px;
   margin: 3px;
+
+  &::-webkit-scrollbar{
+    width: 0!important;
+  }
 }

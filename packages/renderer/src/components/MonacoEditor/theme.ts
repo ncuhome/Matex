@@ -4,15 +4,15 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 export const jsonRules: monaco.editor.ITokenThemeRule[] = [
   {
     token: '',
-    foreground: '#5164E8',
+    foreground: '#5164E8'
   },
   {
-    token:'other.json',
-    foreground: '#0ECCCC',
+    token: 'other.json',
+    foreground: '#0ECCCC'
   },
   {
     token: 'number.json',
-    foreground: '#0ECCCC',
+    foreground: '#0ECCCC'
   },
   {
     token: 'keyword.json',
@@ -53,7 +53,7 @@ export const jsonRules: monaco.editor.ITokenThemeRule[] = [
 export const htmlRules: monaco.editor.ITokenThemeRule[] = [
   {
     token: '',
-    foreground: '#ABB2BF',
+    foreground: '#ABB2BF'
   },
   {
     token: 'tag.html',
@@ -78,5 +78,40 @@ export const htmlRules: monaco.editor.ITokenThemeRule[] = [
   {
     token: 'attribute.value.html',
     foreground: '#3DCC6E'
+  }
+];
+
+export const cssRules: monaco.editor.ITokenThemeRule[] = [
+  {
+    token: 'tag.css',
+    foreground: '#F2731B'
+  },
+  {
+    token: 'keyword.css',
+    foreground: '#F2731B'
+  },
+  {
+    token:'delimiter.bracket.css',
+    foreground:'#6C75E0'
+  },
+  {
+    token:'attribute.value.css',
+    foreground:'#6C75E0'
+  },
+  {
+    token:'attribute.name.css',
+    foreground:'#D73E4A'
+  },
+  {
+    token:'attribute.value.hex.css',
+    foreground:'#4BA9D7'
+  },
+  {
+    token:'attribute.value.number.css',
+    foreground:'#4BA9D7'
+  },
+  {
+    token:'attribute.value.unit.css',
+    foreground:'#4BA9D7'
   }
 ];

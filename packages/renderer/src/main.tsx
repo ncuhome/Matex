@@ -6,7 +6,9 @@ import { createRoot } from 'react-dom/client';
 import './Global/global.css';
 import './Global/custom.scss';
 import 'react-toastify/dist/ReactToastify.min.css'
-import './useWorker'
+import './useWorker';
+import 'highlight.js/styles/atom-one-dark.css';
+import 'highlight.js/styles/default.css';
 
 const isDev = MatexWin.NodeApi.NODE_ENV === 'development';
 console.log('isDev',isDev)

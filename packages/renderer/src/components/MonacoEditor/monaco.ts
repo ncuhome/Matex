@@ -1,6 +1,6 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { suggestions } from '/@cmp/MonacoEditor/suggestions';
-import { htmlRules, jsonRules } from '/@cmp/MonacoEditor/theme';
+import {cssRules, htmlRules, jsonRules} from '/@cmp/MonacoEditor/theme';
 import { defaultSchema } from '/@cmp/MonacoEditor/schema';
 import { languages } from 'monaco-editor/esm/vs/editor/editor.api';
 import ProviderResult = languages.ProviderResult;
@@ -29,7 +29,7 @@ monaco.editor.defineTheme('my-theme', {
     'editorIndentGuide.background':'#00000000',
     'editorIndentGuide.activeBackground':'#6578D0',
   },
-  rules: [...jsonRules, ...htmlRules]
+  rules: [...jsonRules, ...htmlRules,...cssRules]
 });
 monaco.editor.setTheme('my-theme');
 const modelUri = monaco.Uri.parse('a://b/foo.json'); // a made up unique URI for our model

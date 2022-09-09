@@ -5,17 +5,17 @@ import CircleDotLoading from '/@cmp/Loading/CircleDotLoading';
 import { emittery } from '/@/utils/instance';
 import ResultHeader from '/@/pages/ApiTest/Result/Header/Header';
 import styles from './index.module.scss';
-import PrettyView from "/@/pages/ApiTest/Result/Body/Pretty";
+import ResultBodyView from '/@/pages/ApiTest/Result/Body';
 
 export type StatusType = 'Idle' | 'Processing' | 'Result';
 
 const Idle = () => {
   return (
-      <div className={styles.idleCon}>
-        <img src={idleIcon} style={{ width: 300, height: 250 }} alt={'Idle'} />
-      </div>
-  )
-}
+    <div className={styles.idleCon}>
+      <img src={idleIcon} style={{ width: 300, height: 250 }} alt={'Idle'} />
+    </div>
+  );
+};
 
 const ReqResult = () => {
   const [status, SetStatus] = useState<StatusType>('Idle');
@@ -29,8 +29,8 @@ const ReqResult = () => {
   const _render = () => {
     return (
       <Mask overlayPanel={<CircleDotLoading />} isMask={status === 'Processing'}>
-        {status === 'Idle' && <Idle/>}
-        {status === 'Result' && <PrettyView />}
+        {status === 'Idle' && <Idle />}
+        {status === 'Result' && <ResultBodyView />}
       </Mask>
     );
   };

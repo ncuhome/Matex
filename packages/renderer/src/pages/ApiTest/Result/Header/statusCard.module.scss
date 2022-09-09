@@ -10,7 +10,7 @@
   justify-content: space-between;
   padding: 0 13px;
   color: #2cb5ad;
-  border: 1px solid var(--dark-color1);
+  border: 1px solid transparent;
 
   .statusCode:hover,
   .statusDesc:hover,
@@ -24,6 +24,32 @@
 
   .statusSize {
     margin: 0 0 0 12px;
+
+    .sizeCon{
+      margin: 8px;
+      height: 70px;
+      width: 150px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      .sizeItem{
+        height: 30px;
+        width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        div:first-child{
+          color: var(--light-text1);
+        }
+        div:last-child{
+          color: #F2731B;
+        }
+      }
+    }
   }
   .statusCopy {
     margin: 0 10px;

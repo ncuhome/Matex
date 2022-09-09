@@ -42,7 +42,7 @@ export const InputContextMenus: Menus = [{ key: '复制' }, { key: '粘贴' }, {
 export type ResDataType = '响应数据' | '响应头' | 'Cookie';
 export const ResDataTypeList = ['响应数据', '响应头','Cookie'];
 
-export type ResDisplayType = 'Pretty' | 'Preview';
+export type ResDisplayType = 'Pretty' | 'Preview'|'Visual';
 export const ResDisplayTypeList = ['Pretty', 'Preview', 'Visual'];
 
 export type ResFormatType = 'json' | 'text' | 'html' | 'xml';
