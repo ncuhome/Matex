@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { ReqBodyType, ReqConfigType, SelReqType } from '/@/store/ApiTest/config.store';
-import AuthTable from '/@/pages/ApiTest/Config/ConfigDataTable/AuthTable';
+import AuthTable from '/@/pages/ApiTest/Config/Authorization';
 import { NotifyIllustration } from '/@cmp/Illustration/notify';
 import RenderMonacoEditor from '/@/pages/ApiTest/Config/ConfigDataTable/renderMonacoEditor';
 import UploadFile from '/@cmp/UploadFile';

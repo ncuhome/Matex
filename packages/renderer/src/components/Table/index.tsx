@@ -6,7 +6,7 @@ import EyesIcon from '/@cmp/svg/EyesIcon';
 import DeleteIcon from '/@cmp/svg/DeleteIcon';
 import type { ConfigType } from '/@/Model/ApiTest.model';
 import FileInput from '/@cmp/Table/FileInput';
-import Checkbox from '/@cmp/Checkbox';
+import Checkbox from './CheckBox';
 import { KVConfig } from '/@/Model/ApiTest.model';
 import { isAllChecked } from '/@cmp/Table/utils';
 

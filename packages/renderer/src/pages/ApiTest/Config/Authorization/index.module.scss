@@ -1,0 +1,92 @@
+.auth {
+  display: flex;
+  border: var(--dark-color1) 1px solid;
+  border-radius: 8px;
+  margin: 5px 20px 15px 0;
+  overflow: hidden;
+
+  .type {
+    padding-top: 10px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: var(--dark-color1) 1px solid;
+    overflow: auto;
+
+    .selection {
+      width: 100%;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .typeText {
+        color: var(--light-text1);
+        font-size: 14px;
+      }
+    }
+
+    .desc {
+      padding: 0 5px;
+      width: 180px;
+      color: #5368af;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+  }
+  .form {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    padding:20px;
+  }
+}
+
+.authLine{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  color: var(--light-text1);
+  font-size: 14px;
+}
+
+.authCon{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: auto;
+  position: relative;
+
+  .apiKeyItem{
+    @extend .authLine;
+  }
+}
+
+.basicAuth{
+
+  .showPwd{
+    width: 290px;
+
+    display: flex;
+    align-items: center;
+    right: 20px;
+    justify-content: right;
+
+    .checkBox{
+      width: 40px;
+    }
+
+    .text{
+      width: 100px;
+      color: #5368af;
+    }
+  }
+}
+
+.digestAuth{
+  @extend .basicAuth;
+}
