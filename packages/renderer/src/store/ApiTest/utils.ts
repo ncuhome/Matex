@@ -7,7 +7,7 @@ import {
 } from '/@/store/ApiTest/config.store';
 import { BodyType, ConfigType } from '/@/Model/ApiTest.model';
 
-export const getStore = (configType: ConfigType, bodyType: Exclude<BodyType, 'raw'|'binary'>) => {
+export const getStore = (configType:Exclude<ConfigType,'auth'> , bodyType: Exclude<BodyType, 'raw'|'binary'>) => {
   switch (configType) {
     case 'header':
       return HeaderConfigs;

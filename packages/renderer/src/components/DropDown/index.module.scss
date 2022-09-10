@@ -22,10 +22,11 @@
     text-transform: none;
     overflow: hidden;
     text-wrap: none;
-    white-space: pre-wrap;
     padding-left: 15px;
     color: var(--light-text1);
     font-size: 14px;
+    word-wrap: break-word;
+    white-space: nowrap;
   }
 
   .trigger{

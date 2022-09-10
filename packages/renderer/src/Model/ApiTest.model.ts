@@ -5,14 +5,17 @@ import { nanoid } from 'nanoid';
 export type ReqType = 'post' | 'get' | 'put' | 'delete' | 'header';
 export const ReqMethods: ReqType[] = ['post', 'get', 'put'];
 
-export type ConfigType = 'params' | 'header' | 'body';
-export const SelConfigs: ConfigType[] = ['params', 'header', 'body'];
+export type ConfigType = 'params' | 'header' | 'body' | 'auth';
+export const SelConfigs: ConfigType[] = ['params', 'header', 'body', 'auth'];
 
 export type BodyType = 'form-data' | 'raw' | 'binary' | 'urlencoded';
 export const BodyTypes: BodyType[] = ['urlencoded', 'form-data', 'raw', 'binary'];
 
+export type AuthType = 'None' | 'ApiKey' | 'Bearer' | 'Basic';
+export const AuthTypeList: AuthType[] = ['None', 'ApiKey', 'Bearer', 'Basic'];
+
 export type BodyRawType = 'json' | 'text' | 'html' | 'javascript';
-export const BodyRawTypes = ['json', 'text', 'html', 'javascript'];
+export const BodyRawTypes: BodyRawType[] = ['json', 'text', 'html', 'javascript'];
 
 export const ConfigTableTitleMap = new Map<string, string>([
   ['get-params', 'Get查询参数'],
@@ -40,9 +43,9 @@ export const InputContextMenus: Menus = [{ key: '复制' }, { key: '粘贴' }, {
 
 // result
 export type ResDataType = '响应数据' | '响应头' | 'Cookie';
-export const ResDataTypeList = ['响应数据', '响应头','Cookie'];
+export const ResDataTypeList = ['响应数据', '响应头', 'Cookie'];
 
-export type ResDisplayType = 'Pretty' | 'Preview'|'Visual';
+export type ResDisplayType = 'Pretty' | 'Preview' | 'Visual';
 export const ResDisplayTypeList = ['Pretty', 'Preview', 'Visual'];
 
 export type ResFormatType = 'json' | 'text' | 'html' | 'xml';

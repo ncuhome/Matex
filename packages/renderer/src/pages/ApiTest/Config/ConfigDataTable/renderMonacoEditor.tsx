@@ -1,14 +1,10 @@
 import React, { Suspense } from 'react';
-import KVTable from '/@cmp/Table';
-import { BodyRawTypes, KVConfig } from '/@/Model/ApiTest.model';
+import { BodyRawTypes } from '/@/Model/ApiTest.model';
 import {
   RawConfigValue,
-  RawTypeValue,
-  ReqBodyType,
-  ReqConfigType,
-  useConfigList
+  RawTypeValue
 } from '/@/store/ApiTest/config.store';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import styles from '../index.module.scss';
 import MyDropDown from '/@cmp/DropDown';
 import { useEditorAction } from '/@cmp/MonacoEditor/editorAction';
@@ -18,32 +14,7 @@ import CircleDotLoading from '/@cmp/Loading/CircleDotLoading';
 
 const MonacoEditor = React.lazy(() => import('/@/components/MonacoEditor'));
 
-export const RenderKVTable = () => {
-  const reqBodyType = useAtomValue(ReqBodyType);
-  const selConfig = useAtomValue(ReqConfigType);
-
-  const _accept = reqBodyType === 'form-data' || reqBodyType === 'urlencoded';
-  const { configList, updateConfig, deleteConfig } = useConfigList(
-    selConfig,
-    _accept ? reqBodyType : 'urlencoded'
-  );
-
-  const onChangeCell = (rowIndex, key, value) => {
-    updateConfig(rowIndex, key, value);
-  };
-
-  return (
-    <KVTable
-      file={reqBodyType === 'form-data'}
-      type={selConfig}
-      data={configList}
-      onChangeCell={onChangeCell}
-      onRightAction={(e, index) => configList.length !== 1 && deleteConfig(index)}
-    />
-  );
-};
-
-export const RenderMonacoEditor = () => {
+const RenderMonacoEditor = () => {
   const [rawConfigValue, setRawConfigValue] = useAtom(RawConfigValue);
   const [rawTypeValue, setRawTypeValue] = useAtom(RawTypeValue);
 
@@ -90,3 +61,4 @@ export const RenderMonacoEditor = () => {
     </Suspense>
   );
 };
+export default RenderMonacoEditor;

@@ -20,37 +20,6 @@
     grid-row: 2/3;
     padding-left: 5px;
   }
-
-  .configParamsCon {
-    grid-column: 2/3;
-    grid-row: 2/3;
-    margin-right: 18px;
-    margin-top: 5px;
-    margin-bottom: 6px;
-    overflow: auto;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    .text {
-      height: 30px;
-      width: fit-content;
-      display: block;
-      border-radius: 7px;
-      color: var(--light-text1);
-      font-size: 14px;
-      padding-left: 5px;
-    }
-
-    .tableCon {
-      flex: 1;
-      margin-right: 5px;
-      margin-bottom: 10px;
-      overflow: auto;
-      position: relative;
-    }
-  }
 }
 
 .url {
