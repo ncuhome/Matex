@@ -1,5 +1,4 @@
 import type { Menus } from '/@/Hooks/useContextMenu';
-import { nanoid } from 'nanoid';
 
 // reqConfig
 export type ReqType = 'post' | 'get' | 'put' | 'delete' | 'header';
@@ -11,11 +10,45 @@ export const SelConfigs: ConfigType[] = ['params', 'header', 'body', 'auth'];
 export type BodyType = 'form-data' | 'raw' | 'binary' | 'urlencoded';
 export const BodyTypes: BodyType[] = ['urlencoded', 'form-data', 'raw', 'binary'];
 
-export type AuthType = 'None' | 'ApiKey' | 'Bearer' | 'Basic';
-export const AuthTypeList: AuthType[] = ['None', 'ApiKey', 'Bearer', 'Basic'];
+export type AuthType = 'None' | 'ApiKey' | 'Bearer' | 'Basic' | 'Digest';
+export const AuthTypeList: AuthType[] = ['None', 'ApiKey', 'Bearer', 'Basic', 'Digest'];
 
 export type BodyRawType = 'json' | 'text' | 'html' | 'javascript';
 export const BodyRawTypes: BodyRawType[] = ['json', 'text', 'html', 'javascript'];
+
+export interface AuthValueType {
+  ApiKey: {
+    addTo: 'header' | 'param';
+    key: string;
+    value: string;
+  };
+  Bearer: string;
+  Basic: {
+    username: string;
+    password: string;
+  };
+  Digest: {
+    username: string;
+    password: string;
+  };
+}
+
+export const initAuthValue: AuthValueType = {
+  ApiKey: {
+    addTo: 'header',
+    key: '',
+    value: ''
+  },
+  Bearer: '',
+  Basic: {
+    username: 'string',
+    password: ''
+  },
+  Digest: {
+    username: '',
+    password: ''
+  }
+};
 
 export const ConfigTableTitleMap = new Map<string, string>([
   ['get-params', 'Get查询参数'],

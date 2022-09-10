@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { ReqBodyType, ReqConfigType, SelReqType } from '/@/store/ApiTest/config.store';
-import AuthTable from '/@/pages/ApiTest/Config/Authorization';
 import { NotifyIllustration } from '/@cmp/Illustration/notify';
 import RenderMonacoEditor from '/@/pages/ApiTest/Config/ConfigDataTable/renderMonacoEditor';
 import UploadFile from '/@cmp/UploadFile';
@@ -9,6 +8,7 @@ import { RenderKVTable } from '/@/pages/ApiTest/Config/ConfigDataTable/KVTable';
 import Tabs from '/@cmp/Tabs';
 import { BodyTypes, ConfigTableTitleMap } from '/@/Model/ApiTest.model';
 import styles from './index.module.scss';
+import Authorization from '/@/pages/ApiTest/Config/Authorization';
 
 const ConfigTable = () => {
   const reqType = useAtomValue(SelReqType);
@@ -16,7 +16,7 @@ const ConfigTable = () => {
   const [reqBodyType, setReqBodyType] = useAtom(ReqBodyType);
 
   if (reqConfigType === 'auth') {
-    return <AuthTable />;
+    return <Authorization />;
   }
 
   const renderComponent = () => {

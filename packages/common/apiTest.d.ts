@@ -1,4 +1,11 @@
-import { BodyRawType, BodyType, KVConfig, ReqType } from '../renderer/src/Model/ApiTest.model';
+import {
+  AuthType,
+  AuthValueType,
+  BodyRawType,
+  BodyType,
+  KVConfig,
+  ReqType
+} from '../renderer/src/Model/ApiTest.model';
 import { Response } from 'got';
 import { IncomingHttpHeaders } from 'http';
 
@@ -8,6 +15,10 @@ export interface ApiTestReq {
   url: string;
   method: ReqType;
   headers: KVList;
+  auth?: {
+    type: AuthType;
+    value: AuthValueType;
+  };
   params?: KVList;
   bodyType?: BodyType;
   rawType?: BodyRawType;
@@ -20,7 +31,7 @@ export interface ApiTestRes {
   mimeType: string;
   statusCode: number;
   statusMassage: string;
-  cookie:Object[]
+  cookie: Object[];
   body: any;
   headers: IncomingHttpHeaders;
   size: {
@@ -43,6 +54,7 @@ export interface ReqError {
 export interface CommonReqParams {
   url: string;
   headers?: ApiTestReq['headers'];
+  auth: ApiTestReq['auth'];
 }
 
 export interface GetReqParams extends CommonReqParams {

@@ -1,21 +1,19 @@
 import { atom, useAtom } from 'jotai';
 import {
   AuthType,
+  AuthValueType,
   BodyRawType,
   BodyType,
   ConfigType,
   DefaultHerderConfig,
+  initAuthValue,
   KVConfig,
-  ReqType,
-  ResDataType,
-  ResDisplayType,
-  ResFormatType
+  ReqType
 } from '/@/Model/ApiTest.model';
 import { atomWithImmer } from 'jotai/immer';
 import { useEffect } from 'react';
 import { getStore } from '/@/store/ApiTest/utils';
 import type { FilePondFile } from 'filepond';
-import { nanoid } from 'nanoid';
 import { valueType } from '/@cmp/Table';
 
 //Header Config
@@ -25,6 +23,7 @@ export const ReqConfigType = atom<ConfigType>('params');
 export const ReqBodyType = atom<BodyType>('urlencoded');
 export const RawTypeValue = atom<BodyRawType>('text');
 export const AuthTypeAtom = atom<AuthType>('None');
+export const AuthValueAtom = atomWithImmer<AuthValueType>(initAuthValue);
 
 export const HeaderConfigs = atomWithImmer<KVConfig[]>(DefaultHerderConfig);
 export const ParamsConfigs = atomWithImmer<KVConfig[]>([]);

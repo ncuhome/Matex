@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { AuthTypeList, SelConfigs } from '/@/Model/ApiTest.model';
+import { AuthType, AuthTypeList, SelConfigs } from '/@/Model/ApiTest.model';
 import MyDropDown from '/@cmp/DropDown';
 import { useAtom } from 'jotai';
 import { AuthTypeAtom } from '/@/store/ApiTest/config.store';
@@ -10,9 +10,17 @@ import {
   BearerAuth,
   DigestAuth,
   NoneAuth
-} from "/@/pages/ApiTest/Config/Authorization/NormalAuth";
+} from '/@/pages/ApiTest/Config/Authorization/NormalAuth';
 
-const Index = () => {
+const AuthCompMap = new Map<AuthType, React.ReactNode>([
+  ['None', <NoneAuth />],
+  ['ApiKey', <ApiKeyAuth />],
+  ['Bearer', <BearerAuth />],
+  ['Basic', <BasicAuth />],
+  ['Digest', <DigestAuth />]
+]);
+
+const Authorization = () => {
   const [authType, setAuthType] = useAtom(AuthTypeAtom);
   return (
     <div className={styles.auth}>
@@ -29,15 +37,11 @@ const Index = () => {
             />
           </div>
         </div>
-        <div className={styles.desc}>
-          摘要：电子信息产业是我国的支柱产业之一，其具有丰富的内涵
-        </div>
+        <div className={styles.desc}>摘要：电子信息产业是我国的支柱产业之一，其具有丰富的内涵</div>
       </div>
-      <div className={styles.form}>
-        <DigestAuth/>
-      </div>
+      <div className={styles.form}>{AuthCompMap.get(authType)}</div>
     </div>
   );
 };
 
-export default Index;
+export default Authorization;
