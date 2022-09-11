@@ -1,21 +1,20 @@
-import { GetReqParams, KVList } from '/@common/apiTest';
-import { getParamsObj, getReqAuthOptions } from '../utils/reqHandle';
+import { PostReqParams } from '/@common/apiTest';
+import { getReqAuthOptions } from '../utils/reqHandle';
 import { MatexHttp } from '../../utils/Instance';
 import { getResponse } from '../utils/resHandle';
+import { handleBody } from '../utils/handleBody';
 
-export const doGet = async (props: GetReqParams) => {
-  const { url, params } = props;
-  const options = getReqAuthOptions(props);
-  const paramObj = getParamsObj(params as KVList);
-  if (options.qs) {
-    options.qs = Object.assign(options.qs, paramObj);
-  }
+export const doPost = async (props: PostReqParams) => {
   try {
+    const { url } = props;
+    const authOptions = getReqAuthOptions(props);
+    const options = handleBody(props);
     const res = await MatexHttp({
-      method: 'Get',
+      method: 'Post',
       url,
       time: true,
       timeout: 10000,
+      ...authOptions,
       ...options
     });
     return getResponse(res);

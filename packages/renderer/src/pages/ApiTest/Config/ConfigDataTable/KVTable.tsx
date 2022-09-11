@@ -2,6 +2,7 @@ import { useAtomValue } from 'jotai';
 import { ReqBodyType, ReqConfigType, useConfigList } from '/@/store/ApiTest/config.store';
 import KVTable from '/@cmp/Table';
 import React from 'react';
+import { ConfigType } from '/@/Model/ApiTest.model';
 
 export const RenderKVTable = () => {
   const reqBodyType = useAtomValue(ReqBodyType);
@@ -9,7 +10,7 @@ export const RenderKVTable = () => {
 
   const _accept = reqBodyType === 'form-data' || reqBodyType === 'urlencoded';
   const { configList, updateConfig, deleteConfig } = useConfigList(
-    selConfig,
+    selConfig as Exclude<ConfigType, 'auth'>,
     _accept ? reqBodyType : 'urlencoded'
   );
 

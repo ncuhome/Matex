@@ -11,7 +11,7 @@ import { KVConfig } from '/@/Model/ApiTest.model';
 import { isAllChecked } from '/@cmp/Table/utils';
 
 export type valueType = Exclude<keyof KVConfig, 'id' | 'opt'>;
-export type ChangeCellFunc = (rowIndex: number, type: valueType, value: string | File | boolean) => void;
+export type ChangeCellFunc = (rowIndex: number, type: valueType, value: string | boolean) => void;
 
 export interface MyTableProps<T> {
   type: ConfigType;

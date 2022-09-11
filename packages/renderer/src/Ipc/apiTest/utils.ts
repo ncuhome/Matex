@@ -14,6 +14,11 @@ import {
 import type { ApiTestReq } from '/@common/apiTest';
 import { FilePondFile } from 'filepond';
 type KVData = Omit<KVConfig, 'selected' | 'opt'>;
+
+interface FileKVData extends KVData {
+  isFile?: boolean;
+}
+
 interface ReqParams {
   url: string;
   bodyType: BodyType;
@@ -112,10 +117,27 @@ const getBodyValue = (bodyType: BodyType, data: ReqParams) => {
     case 'urlencoded':
       return urlencodedValue;
     case 'form-data':
-      return formDataValue;
+      return handleFileForm(formDataValue);
     case 'raw':
       return rawValue;
     case 'binary':
-      return binaryValue[0].file.name;
+      if (binaryValue.length) {
+        console.log(binaryValue)
+        return (binaryValue[0].file as any).path;
+      }
+      return '';
   }
+};
+
+const handleFileForm = (data: KVData[]) => {
+  const temp: FileKVData[] = [];
+
+  data.forEach((item) => {
+    if (typeof item.value === 'object') {
+      temp.push({ key: item.key, value: (item.value as any).path, isFile: true });
+    } else {
+      temp.push({ key: item.key, value: item.value });
+    }
+  });
+  return temp;
 };

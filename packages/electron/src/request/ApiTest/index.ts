@@ -7,11 +7,15 @@ import { RequestServers } from './servers';
 export const handleRequest = () => {
   ipcMain.removeHandler(IpcKey.ApiTestReq);
   ipcMain.handle(IpcKey.ApiTestReq, async (e, args) => {
-    const { method, url, params, headers,auth} = args as ApiTestReq;
+    const { method, url, params, headers, auth, body, bodyType } = args as ApiTestReq;
     let res;
     switch (method) {
       case 'get':
-        res = await RequestServers.Get({ url, params, headers,auth });
+        res = await RequestServers.Get({ url, params, headers, auth });
+        break;
+      case 'post':
+        res = await RequestServers.Post({ url, body, headers, bodyType, auth });
+        break;
     }
     IpcListener.sendResponse(res);
   });

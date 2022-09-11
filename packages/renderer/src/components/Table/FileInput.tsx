@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 import CloseIcon from '/@cmp/svg/CloseIcon';
 import clsx from 'clsx';
 import { KVConfig } from '/@/Model/ApiTest.model';
-import {ChangeCellFunc, valueType} from "/@cmp/Table/index";
+import { ChangeCellFunc, valueType } from '/@cmp/Table/index';
 
 interface FileInput {
   rowIndex: number;
@@ -17,9 +17,8 @@ const FileInput: React.FC<FileInput> = ({ rowIndex, valueKey, value = '', onChan
   const [file, setFile] = React.useState(false);
 
   const handleChange = (e) => {
-    console.log('handleChange');
     if (file) {
-      onChange(rowIndex, valueKey, e.target.files?.[0] || new File([], ''));
+      onChange(rowIndex, valueKey, e.target.files?.[0] || '');
     } else {
       onChange(rowIndex, valueKey, e.target.value);
     }

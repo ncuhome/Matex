@@ -1,4 +1,4 @@
-import { GetReqParams, KVList } from '/@common/apiTest';
+import { CommonReqParams, GetReqParams, KVList } from '/@common/apiTest';
 import type { AuthType, AuthValueType } from '../../../../renderer/src/Model/ApiTest.model';
 import matexhttp from 'matexhttp';
 
@@ -15,20 +15,18 @@ export const getParamsObj = (list: KVList): { [key: string]: string } => {
   return _obj;
 };
 
-export const getReqOptions = (props: GetReqParams): Partial<matexhttp.CoreOptions> => {
-  const { params, headers, auth } = props;
-  const paramObj = getParamsObj(params as KVList);
+export const getReqAuthOptions = (props: CommonReqParams): Partial<matexhttp.CoreOptions> => {
+  const { headers, auth } = props;
   const headerObj = getParamsObj(headers as KVList);
-  const commonOptions = { headers: headerObj, qs: paramObj };
+  const commonOptions = { headers: headerObj };
   const _auth = auth as { type: AuthType; value: AuthValueType };
-
   if (_auth.type === 'ApiKey') {
     const _obj = _auth.value.ApiKey;
     if (_auth.value.ApiKey.addTo === 'header') {
       const _headers = Object.assign(headerObj, { [_obj.key]: _obj.value });
-      return { headers: _headers, qs: paramObj };
+      return { headers: _headers };
     } else {
-      const _params = Object.assign(paramObj, { [_obj.key]: _obj.value });
+      const _params = Object.assign({}, { [_obj.key]: _obj.value });
       return { headers: headerObj, qs: _params };
     }
   }
@@ -60,6 +58,5 @@ export const getReqOptions = (props: GetReqParams): Partial<matexhttp.CoreOption
       }
     });
   }
-
   return commonOptions;
 };

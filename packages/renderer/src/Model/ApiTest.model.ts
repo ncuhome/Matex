@@ -65,7 +65,7 @@ export const ConfigTableTitleMap = new Map<string, string>([
 export interface KVConfig {
   selected: boolean;
   key: string;
-  value: string | File;
+  value: string|File;
   opt: any;
 }
 export const DefaultHerderConfig: KVConfig[] = [

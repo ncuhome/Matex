@@ -14,7 +14,9 @@ export const useSendReq = () => {
   const listenerRef = useRef<boolean>(false);
 
   const sendReq = () => {
+    console.log(sendData);
     if (checkSendData(sendData)) {
+
       MatexWin.NodeApi.ipc.sendApiTestReq(
         Object.assign(sendData, {
           auth: {

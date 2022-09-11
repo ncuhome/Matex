@@ -11,7 +11,9 @@ const nodeApi: NodeApiProps = {
   Clipboard: clipboard,
   OS: process.platform === 'darwin' ? 'mac' : 'win',
   ipc: {
-    sendApiTestReq: (args: ApiTestReq) => ipcRenderer.invoke(IpcKey.ApiTestReq, args),
+    sendApiTestReq: (args: ApiTestReq) => {
+      ipcRenderer.invoke(IpcKey.ApiTestReq, args)
+    },
     onApiTestRes: (callback) => ipcRenderer.on(IpcKey.ApiTestRes, callback)
   }
 };

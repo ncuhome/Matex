@@ -6,7 +6,6 @@ import {
   KVConfig,
   ReqType
 } from '../renderer/src/Model/ApiTest.model';
-import { Response } from 'got';
 import { IncomingHttpHeaders } from 'http';
 
 export type KVList = Omit<KVConfig, 'selected' | 'opt'>[];
@@ -22,7 +21,7 @@ export interface ApiTestReq {
   params?: KVList;
   bodyType?: BodyType;
   rawType?: BodyRawType;
-  body?: KVList | File | string;
+  body?: KVList | File | string|string[];
 }
 
 export interface ApiTestRes {
@@ -65,4 +64,8 @@ export interface PostReqParams extends CommonReqParams {
   bodyType: ApiTestReq['bodyType'];
   rawType?: ApiTestReq['rawType'];
   body?: ApiTestReq['body'];
+}
+
+export interface FileKVData extends Omit<KVConfig, 'selected' | 'opt'>{
+  isFile?:boolean
 }
