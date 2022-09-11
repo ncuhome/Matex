@@ -122,7 +122,7 @@ const getBodyValue = (bodyType: BodyType, data: ReqParams) => {
       return rawValue;
     case 'binary':
       if (binaryValue.length) {
-        console.log(binaryValue)
+        console.log(binaryValue);
         return (binaryValue[0].file as any).path;
       }
       return '';

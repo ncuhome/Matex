@@ -7,8 +7,7 @@ import { SidebarMenuTypeAtom } from '/@/store/ApiTest/sidebar.store';
 import SpeedTest from '/@/pages/ApiTest/SideBar/SpeedTest';
 import { PlayButton, PlayStatus, usePlayButton } from '/@cmp/PlayButton';
 import { useSendReq } from '/@/Ipc/apiTest/apiTest.ipc';
-import { ResultAtom, ResultErrorAtom } from '/@/store/ApiTest/result.store';
-import { useUpdateAtom } from 'jotai/utils';
+import { ResultAtom } from '/@/store/ApiTest/result.store';
 import type { ApiTestRes, ReqError } from '/@common/apiTest';
 import { emittery } from '/@/utils/instance';
 import Emittery from 'emittery';
@@ -16,24 +15,19 @@ import Emittery from 'emittery';
 const ApiTestSideBar = () => {
   const sidebarMenuType = useAtomValue(SidebarMenuTypeAtom);
   const [result, setResult] = useAtom(ResultAtom);
-  const setResultError = useUpdateAtom(ResultErrorAtom);
   const { sendReq, onResponse } = useSendReq();
   const [status, setStatus] = useState<PlayStatus>('idle');
   const { startProcessing, reset, completed } = usePlayButton('apiTestBtn');
   const timeRef = useRef<Emittery.UnsubscribeFn>();
 
   let success = false;
-  success = !!(result && result.success);
+  success = !!(result && !result.isError);
 
   useEffect(() => {
-    onResponse((e, res: ApiTestRes | ReqError) => {
+    onResponse((e, res: ApiTestRes) => {
       completed();
       setStatus('idle');
-      if (res.type === 'error') {
-        setResultError(res as ReqError);
-      } else {
-        setResult(res as ApiTestRes);
-      }
+      setResult(res as ApiTestRes);
     });
   }, []);
 

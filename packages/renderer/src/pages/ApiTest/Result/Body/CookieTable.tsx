@@ -4,6 +4,7 @@ import { useAtomValue } from 'jotai';
 import { ResultAtom } from '/@/store/ApiTest/result.store';
 import clsx from "clsx";
 import EmptyIcon from '/@/assets/images/empty.svg';
+import {ApiTestRes, ExactRes} from "/@common/apiTest";
 
 const titles = ['name', 'value', 'domain', 'path', 'expires', 'httponly', 'secure'];
 
@@ -12,8 +13,8 @@ const CookieTable = () => {
   if (!res) {
     return null;
   }
-
-  if (!res.cookie.length){
+  const exactRes = (res as ApiTestRes).result as ExactRes;
+  if (!exactRes.cookie.length){
     return (
         <div className={styles.empty}>
           <img className={styles.emptyIcon} src={EmptyIcon} alt={''}/>
@@ -34,9 +35,9 @@ const CookieTable = () => {
         })}
       </div>
       <div className={styles.body}>
-        {res.cookie.map((cookie,index) => {
+        {exactRes.cookie.map((cookie,index) => {
           return (
-              <div key={index} className={clsx([styles.itemLine,res.cookie.length>2&&styles.bg])}>
+              <div key={index} className={clsx([styles.itemLine,exactRes.cookie.length>2&&styles.bg])}>
                 {
                   titles.map((key)=>{
                     return <div key={key} className={styles.value}>{cookie[key]}</div>

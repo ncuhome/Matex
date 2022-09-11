@@ -1,9 +1,14 @@
-import { FileKVData, KVList, PostReqParams } from '/@common/apiTest';
+import { FileKVData, KVList, PostReqParams, ReqError } from '/@common/apiTest';
 import { getParamsObj } from './reqHandle';
 import fs from 'fs';
 import matexhttp from 'matexhttp';
 
-export const handleBody = (props: PostReqParams): matexhttp.CoreOptions => {
+export interface HandleBodyRes {
+  error?: ReqError;
+  value?: matexhttp.CoreOptions;
+}
+
+export const handleBody = (props: PostReqParams): HandleBodyRes => {
   const { body, bodyType, rawType } = props;
 
   if (!body) {
@@ -13,7 +18,7 @@ export const handleBody = (props: PostReqParams): matexhttp.CoreOptions => {
   switch (bodyType) {
     case 'urlencoded': {
       const urlencoded = getParamsObj(body as KVList);
-      return { form: urlencoded };
+      return { value: { form: urlencoded } };
     }
     case 'form-data': {
       const formData = {};
@@ -24,19 +29,26 @@ export const handleBody = (props: PostReqParams): matexhttp.CoreOptions => {
           formData[item.key] = item.value;
         }
       });
-      return { formData };
+      return { value: { formData } };
     }
     case 'raw': {
       const isJson = rawType === 'json';
-      return { json: isJson, body: isJson ? JSON.parse(body as string) : body };
+      return { value: { json: isJson, body: isJson ? JSON.parse(body as string) : body } };
     }
     case 'binary': {
       if (body) {
         try {
           const data = fs.readFileSync(body as string);
-          return { body: data };
-        } catch (e) {
-          console.log(e)
+          return { value: { body: data } };
+        } catch (e: any) {
+          const { stack, errno, code, syscall } = e;
+          return {
+            error: {
+              type: 'fs',
+              errorCode: code,
+              desc: syscall
+            }
+          };
         }
       } else {
         return {};

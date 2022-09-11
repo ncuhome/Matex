@@ -1,10 +1,6 @@
 import http from 'http';
 import {Response} from 'matexhttp';
-import {ApiTestRes} from '/@common/apiTest';
-import {getResponseType, RawTypes} from './contentType';
 import {Blob} from 'buffer';
-import {getStatusMassage} from './statusMessage';
-import fileSize from 'filesize';
 
 export const getHeaderSize = (res: Response) => {
   let rawHeaders =
@@ -27,29 +23,7 @@ export const getBodySize = (res: Response): number => {
   return size;
 };
 
-export const getResponse = (res: Response): ApiTestRes => {
-  const timer = getTimings(res.timingPhases);
-  const resType = getResponseType(res.headers['content-type'] ?? 'text');
-  const resBodySize = getBodySize(res);
-  const resHeaderSize = getHeaderSize(res);
-  return {
-    type: resType,
-    success: res.statusCode < 400 && res.statusCode >= 100,
-    mimeType: res.headers['content-type'] ?? 'text/plain',
-    timer,
-    cookie: getCookie(res),
-    statusCode: res.statusCode,
-    statusMassage: getStatusMassage(res.statusCode),
-    headers: res.headers,
-    body: RawTypes.includes(resType) ? res.body : res.strBody,
-    size: {
-      resHeaderSize: fileSize(resHeaderSize),
-      resBodySize: fileSize(resBodySize)
-    }
-  };
-};
-
-const getCookie = (res: Response) => {
+export const getCookie = (res: Response) => {
   const cookieStringList = res.headers['set-cookie'] ?? [];
   if (cookieStringList.length === 0) {
     return [];
@@ -95,7 +69,7 @@ const getCookie = (res: Response) => {
   });
 };
 
-const getTimings = (timings: Response['timingPhases']): { key: string; time: string | number }[] => {
+export const getTimings = (timings: Response['timingPhases']): { key: string; time: string | number }[] => {
   return [
     { key: 'init-socket', time: parseFloat(timings!.wait?.toFixed(2) ?? '') },
     { key: 'dns-lookup', time: parseFloat(timings!.dns?.toFixed(2) ?? '') },

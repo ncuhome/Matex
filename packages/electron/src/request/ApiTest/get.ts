@@ -1,9 +1,9 @@
-import { GetReqParams, KVList } from '/@common/apiTest';
-import { getParamsObj, getReqAuthOptions } from '../utils/reqHandle';
-import { MatexHttp } from '../../utils/Instance';
-import { getResponse } from '../utils/resHandle';
+import {GetReqParams, KVList, ReqError} from '/@common/apiTest';
+import {getParamsObj, getReqAuthOptions} from '../utils/reqHandle';
+import {MatexHttp} from '../../utils/Instance';
+import {Response} from "matexhttp";
 
-export const doGet = async (props: GetReqParams) => {
+export const doGet = async (props: GetReqParams):Promise<Response | ReqError>  => {
   const { url, params } = props;
   const options = getReqAuthOptions(props);
   const paramObj = getParamsObj(params as KVList);
@@ -11,25 +11,20 @@ export const doGet = async (props: GetReqParams) => {
     options.qs = Object.assign(options.qs, paramObj);
   }
   try {
-    const res = await MatexHttp({
+    return await MatexHttp({
       method: 'Get',
       url,
       time: true,
       timeout: 10000,
       ...options
     });
-    return getResponse(res);
   } catch (e: any) {
     console.log(e);
-    const { stack, errno, code, syscall, address, port } = e;
+    const { stack, errno, code, syscall } = e;
     return {
-      type: 'error',
-      errno,
-      code,
-      syscall,
-      address,
-      port,
-      stack
+      type: 'http',
+      errorCode:code,
+      desc:syscall
     };
   }
 };

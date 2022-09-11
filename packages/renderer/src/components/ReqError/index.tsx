@@ -4,13 +4,8 @@ import NotFoundErrImg from '/@/assets/images/4xx.svg';
 import reqErrorImg from '/@/assets/images/reqError.svg';
 import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
-import { ResultErrorAtom } from '/@/store/ApiTest/result.store';
-
-interface ReqErrorProps {
-  type: 'resError' | 'reqError';
-  statusCode?: number | string;
-  msg?: string;
-}
+import { ResultAtom } from '/@/store/ApiTest/result.store';
+import {ApiTestRes, ReqError} from '/@common/apiTest';
 
 const getImg = (statusCode: string | number) => {
   if (statusCode.toString().includes('4')) {
@@ -22,20 +17,16 @@ const getImg = (statusCode: string | number) => {
   }
 };
 
-const ReqError: React.FC<ReqErrorProps> = ({ type, msg, statusCode }) => {
-  let errorMessage = '';
-  if (type === 'reqError') {
-    const errorObj = useAtomValue(ResultErrorAtom);
-    const index = errorObj?.stack.indexOf('\n');
-    errorMessage = errorObj?.stack.slice(0, index) ?? '';
-  } else {
-    errorMessage = msg ?? '';
-  }
+const ReqErrorComp = () => {
+  const { error } = useAtomValue(ResultAtom) as ApiTestRes;
+  const isHttpErr = (error as ReqError).type==='http'
+  const errorMessage = error?.errorCode + ' ' + error?.desc;
+
 
   return (
     <div className={styles.reqError}>
       <img
-        src={type === 'reqError' ? reqErrorImg : getImg(statusCode ?? 0)}
+        src={!isHttpErr ? reqErrorImg : getImg(error!.errorCode ?? 0)}
         className={styles.img}
         alt={'error'}
       />
@@ -44,4 +35,4 @@ const ReqError: React.FC<ReqErrorProps> = ({ type, msg, statusCode }) => {
   );
 };
 
-export default ReqError;
+export default ReqErrorComp;

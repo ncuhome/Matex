@@ -10,35 +10,44 @@ import { getPreviewSrc } from '/@cmp/PreviewResponse/utils';
 import type { ResFormatType } from '/@/Model/ApiTest.model';
 import { useUpdateAtom } from 'jotai/utils';
 import CookieTable from '/@/pages/ApiTest/Result/Body/CookieTable';
+import { ApiTestRes, ExactRes } from '/@common/apiTest';
 
 const PrettyView = () => {
   const res = useAtomValue(ResultAtom);
   const resDataType = useAtomValue(ResDataTypeAtom);
   const setFormatType = useUpdateAtom(ResFormatTypeAtom);
   console.log(res);
+
   useEffect(() => {
-    if (res && res.type !== 'error') {
-      setFormatType(res.type as ResFormatType);
+    if (res && !res.isError) {
+      setFormatType(res.result!.type as ResFormatType);
     }
   }, [res]);
 
   if (!res) {
     return null;
   }
+  const _res = res as ApiTestRes;
+
+  if (_res.isError) {
+    return <ReqError />;
+  }
+  const exactRes = (res as ApiTestRes).result as ExactRes;
   if (resDataType === '响应数据') {
-    if (res.type === 'error') {
-      return <ReqError type={'reqError'} />;
-    } else if (!res.success) {
-      return <ReqError type={'resError'} msg={res.statusMassage} statusCode={res.statusCode} />;
-    } else if (EditAble.includes(res.type)) {
-      return <ResultBodyEditor value={res.body} language={LanguageMapper.get(res.type) ?? 'text/plain'} />;
-    } else if (previewAble.includes(res.type)) {
-      return <PreviewResponse src={getPreviewSrc(res.body, res.mimeType)} />;
+    if (EditAble.includes(exactRes.type)) {
+      return (
+        <ResultBodyEditor
+          value={exactRes.body}
+          language={LanguageMapper.get(exactRes.type) ?? 'text/plain'}
+        />
+      );
+    } else if (previewAble.includes(exactRes.type)) {
+      return <PreviewResponse src={getPreviewSrc(exactRes.body, exactRes.mimeType)} />;
     } else {
       return null;
     }
   } else if (resDataType === '响应头') {
-    return <ResultBodyEditor value={JSON.stringify(res.headers)} language={'json'} />;
+    return <ResultBodyEditor value={JSON.stringify(exactRes.headers)} language={'json'} />;
   } else if (resDataType === 'Cookie') {
     return <CookieTable />;
   } else {

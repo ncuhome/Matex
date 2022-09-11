@@ -21,12 +21,24 @@ export interface ApiTestReq {
   params?: KVList;
   bodyType?: BodyType;
   rawType?: BodyRawType;
-  body?: KVList | File | string|string[];
+  body?: KVList | File | string | string[];
 }
 
 export interface ApiTestRes {
-  type: string | 'error' | 'text' | 'json' | 'html' | 'xml';
-  success: boolean;
+  isError: boolean;
+  error?: ReqError;
+  result?: ExactRes;
+}
+
+export interface ReqError {
+  type: 'http' | 'fs' | 'other';
+  errorCode: string;
+  desc: string;
+  httpErrorObj?:Pick<ExactRes, 'headers'|'size'>;
+}
+
+export interface ExactRes {
+  type: string | 'text' | 'json' | 'html' | 'xml';
   mimeType: string;
   statusCode: number;
   statusMassage: string;
@@ -38,16 +50,6 @@ export interface ApiTestRes {
     resHeaderSize: string;
   };
   timer: { key: string; time: string | number }[];
-}
-
-export interface ReqError {
-  type: 'error';
-  stack: string;
-  errno: number;
-  code: string;
-  syscall: string;
-  address: string;
-  port: number;
 }
 
 export interface CommonReqParams {
@@ -66,6 +68,6 @@ export interface PostReqParams extends CommonReqParams {
   body?: ApiTestReq['body'];
 }
 
-export interface FileKVData extends Omit<KVConfig, 'selected' | 'opt'>{
-  isFile?:boolean
+export interface FileKVData extends Omit<KVConfig, 'selected' | 'opt'> {
+  isFile?: boolean;
 }

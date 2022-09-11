@@ -3,6 +3,8 @@ import { IpcKey } from '/@common/globalKey';
 import { IpcListener } from '../index';
 import type { ApiTestReq } from '/@common/apiTest';
 import { RequestServers } from './servers';
+import { Response } from 'matexhttp';
+import { ApiTestRes, ReqError } from '/@common/apiTest';
 
 export const handleRequest = () => {
   ipcMain.removeHandler(IpcKey.ApiTestReq);

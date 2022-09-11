@@ -1,34 +1,32 @@
-import { PostReqParams } from '/@common/apiTest';
-import { getReqAuthOptions } from '../utils/reqHandle';
-import { MatexHttp } from '../../utils/Instance';
-import { getResponse } from '../utils/resHandle';
-import { handleBody } from '../utils/handleBody';
+import {PostReqParams, ReqError} from '/@common/apiTest';
+import {getReqAuthOptions} from '../utils/reqHandle';
+import {MatexHttp} from '../../utils/Instance';
+import {handleBody} from '../utils/handleBody';
+import {Response} from "matexhttp";
 
-export const doPost = async (props: PostReqParams) => {
+export const doPost = async (props: PostReqParams):Promise<Response | ReqError> => {
+  const { url } = props;
+  const authOptions = getReqAuthOptions(props);
+  const options = handleBody(props);
+  if (options.error) {
+    return options.error;
+  }
   try {
-    const { url } = props;
-    const authOptions = getReqAuthOptions(props);
-    const options = handleBody(props);
-    const res = await MatexHttp({
+    return await MatexHttp({
       method: 'Post',
       url,
       time: true,
       timeout: 10000,
       ...authOptions,
-      ...options
+      ...options.value
     });
-    return getResponse(res);
   } catch (e: any) {
     console.log(e);
-    const { stack, errno, code, syscall, address, port } = e;
+    const { stack, errno, code, syscall } = e;
     return {
-      type: 'error',
-      errno,
-      code,
-      syscall,
-      address,
-      port,
-      stack
+      type: 'http',
+      errorCode:code,
+      desc:syscall
     };
   }
 };
