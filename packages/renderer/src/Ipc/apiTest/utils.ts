@@ -42,6 +42,7 @@ const useReqParams = (): ReqParams => {
   const rawValue = useAtomValue(RawConfigValue);
   const binaryValue = useAtomValue(BinaryConfigs);
 
+
   return {
     url,
     bodyType,
@@ -84,19 +85,17 @@ export const useReqData = (method: ReqType): ApiTestReq => {
       };
     case 'delete':
       return {
-        method: 'post',
+        method: 'delete',
         url,
         headers,
-        bodyType,
-        body: getBodyValue(bodyType, data)
+        params
       };
-    case 'header':
+    case 'head':
       return {
-        method: 'post',
+        method: 'head',
         url,
         headers,
-        bodyType,
-        body: getBodyValue(bodyType, data)
+        params
       };
   }
 };

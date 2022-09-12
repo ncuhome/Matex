@@ -5,7 +5,7 @@ import {handleBody} from '../utils/handleBody';
 import {Response} from "matexhttp";
 import {VError} from "verror";
 
-export const doPost = async (props: PostReqParams):Promise<Response | ReqError> => {
+export const doPut = async (props: PostReqParams):Promise<Response | ReqError> => {
   const { url } = props;
   const authOptions = getReqAuthOptions(props);
   const options = handleBody(props);
@@ -14,7 +14,7 @@ export const doPost = async (props: PostReqParams):Promise<Response | ReqError> 
   }
   try {
     return await MatexHttp({
-      method: 'Post',
+      method: 'Put',
       url,
       time: true,
       timeout: 10000,

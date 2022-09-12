@@ -1,6 +1,5 @@
-import { exec, spawn } from 'child_process';
+import { exec } from 'child_process';
 import { createServer, build } from 'vite';
-import electron from 'electron';
 import { join, resolve } from 'path';
 import * as DotEnv from 'dotenv';
 import { getDevPath } from './util.js';
@@ -122,7 +121,7 @@ const spinner = ora('启动开发服务器').start();
 const server = await createServer({ configFile: join(RootPath, 'renderer/vite.config.ts') });
 await server.listen();
 
-spinner.succeed('启动开发服务器成功\n');
+spinner.succeed('启动开发服务器成功\n· 地址: '+ getDevPath(server)+'\n');
 spinner.start('打包主进程和preload文件\n');
 //打包监听主进程和preload文件
 await watchPreload(server);

@@ -5,7 +5,7 @@ import reqErrorImg from '/@/assets/images/reqError.svg';
 import styles from './index.module.scss';
 import { useAtomValue } from 'jotai/utils';
 import { ResultAtom } from '/@/store/ApiTest/result.store';
-import {ApiTestRes, ReqError} from '/@common/apiTest';
+import { ApiTestRes, ReqError } from '/@common/apiTest';
 
 const getImg = (statusCode: string | number) => {
   if (statusCode.toString().includes('4')) {
@@ -19,9 +19,8 @@ const getImg = (statusCode: string | number) => {
 
 const ReqErrorComp = () => {
   const { error } = useAtomValue(ResultAtom) as ApiTestRes;
-  const isHttpErr = (error as ReqError).type==='http'
-  const errorMessage = error?.errorCode + ' ' + error?.desc;
-
+  const isHttpErr = (error as ReqError).type === 'http';
+  const errorMessage = error!.desc;
 
   return (
     <div className={styles.reqError}>

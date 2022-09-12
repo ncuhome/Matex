@@ -2,6 +2,7 @@ import { FileKVData, KVList, PostReqParams, ReqError } from '/@common/apiTest';
 import { getParamsObj } from './reqHandle';
 import fs from 'fs';
 import matexhttp from 'matexhttp';
+import {VError} from 'verror'
 
 export interface HandleBodyRes {
   error?: ReqError;
@@ -24,7 +25,20 @@ export const handleBody = (props: PostReqParams): HandleBodyRes => {
       const formData = {};
       (body as FileKVData[]).forEach((item: FileKVData) => {
         if (item.isFile) {
-          formData[item.key] = fs.createReadStream(item.value as string);
+          try {
+            formData[item.key] = fs.createReadStream(item.value as string);
+          } catch (e:any) {
+            const { code } = e;
+            const err = new VError(e, 'read "%s"',item.value);
+            console.log(e)
+            return {
+              error: {
+                type: 'fs',
+                errorCode: code,
+                desc: err.message
+              }
+            };
+          }
         } else {
           formData[item.key] = item.value;
         }
@@ -41,12 +55,14 @@ export const handleBody = (props: PostReqParams): HandleBodyRes => {
           const data = fs.readFileSync(body as string);
           return { value: { body: data } };
         } catch (e: any) {
-          const { stack, errno, code, syscall } = e;
+          const { code } = e;
+          const err = new VError(e, 'read "%s"',body);
+          console.log(e)
           return {
             error: {
               type: 'fs',
               errorCode: code,
-              desc: syscall
+              desc: err.message
             }
           };
         }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -19,6 +19,14 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const UploadFile = () => {
   const [files, setBinaryFiles] = useAtom(BinaryConfigs);
+
+  useEffect(()=>{
+    return ()=>{
+      setBinaryFiles([])
+    }
+  },[])
+
+  console.log(files)
 
   const filePond = files.map((item) => {
     return item.file;

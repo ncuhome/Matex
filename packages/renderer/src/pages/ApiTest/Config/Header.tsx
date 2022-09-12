@@ -2,12 +2,13 @@ import React, { useRef } from 'react';
 import styles from './index.module.scss';
 import { useAtom } from 'jotai';
 import { ReqConfigType, ReqUrl, SelReqType } from '/@/store/ApiTest/config.store';
-import { InputContextMenus, ReqMethods } from '/@/Model/ApiTest.model';
+import { InputContextMenus, ReqMethods, ReqType } from '/@/Model/ApiTest.model';
 import MyDropDown from '/@cmp/DropDown';
 import { useContextMenu } from '/@/Hooks/useContextMenu';
 import clsx from 'clsx';
 import CloseIcon from '/@cmp/svg/CloseIcon';
 import { emittery } from '/@/utils/instance';
+import { includeOneOf } from '/@/utils/include';
 
 const Header = () => {
   const [reqType, setReqType] = useAtom(SelReqType);
@@ -26,9 +27,9 @@ const Header = () => {
   };
 
   const changeReqType = (_, sel) => {
-    if (sel === 'get' && reqConfigType === 'body') {
+    if (includeOneOf<ReqType>(sel, ['get', 'delete', 'head']) && reqConfigType === 'body') {
       setReqConfigType('params');
-    } else if ((sel === 'post' || sel === 'put') && reqConfigType === 'params') {
+    } else if (includeOneOf<ReqType>(sel, ['post', 'put']) && reqConfigType === 'params') {
       setReqConfigType('body');
     }
     setReqType(sel);

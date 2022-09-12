@@ -30,12 +30,22 @@ export interface ApiTestRes {
   result?: ExactRes;
 }
 
+export interface HttpError {
+  url:string;
+  headers: IncomingHttpHeaders;
+  size: {
+    resBodySize: string;
+    resHeaderSize: string;
+  };
+}
+
 export interface ReqError {
   type: 'http' | 'fs' | 'other';
   errorCode: string;
   desc: string;
-  httpErrorObj?:Pick<ExactRes, 'headers'|'size'>;
+  httpErrorObj?:HttpError;
 }
+
 
 export interface ExactRes {
   type: string | 'text' | 'json' | 'html' | 'xml';

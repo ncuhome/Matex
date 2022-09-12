@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai';
 import { ResultAtom } from '/@/store/ApiTest/result.store';
 import { ApiTestRes, ExactRes } from '/@common/apiTest';
 
-const FullWidth = 270;
+const FullWidth = 250;
 
 const getWidth = (time: number, total: number) => {
   return FullWidth * (time / total);

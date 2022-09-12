@@ -18,6 +18,15 @@ export const handleRequest = () => {
       case 'post':
         res = await RequestServers.Post({ url, body, headers, bodyType, auth });
         break;
+      case 'put':
+        res = await RequestServers.Put({ url, body, headers, bodyType, auth });
+        break;
+      case 'delete':
+        res = await RequestServers.Delete({ url, params, headers, auth });
+        break;
+      case 'head':
+        res = await RequestServers.Head({ url, params, headers, auth });
+        break;
     }
     IpcListener.sendResponse(res);
   });

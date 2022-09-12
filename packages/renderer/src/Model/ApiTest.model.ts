@@ -1,8 +1,8 @@
 import type { Menus } from '/@/Hooks/useContextMenu';
 
 // reqConfig
-export type ReqType = 'post' | 'get' | 'put' | 'delete' | 'header';
-export const ReqMethods: ReqType[] = ['post', 'get', 'put'];
+export type ReqType = 'get' | 'post' | 'put' | 'delete' | 'head';
+export const ReqMethods: ReqType[] = ['get', 'post', 'put', 'delete', 'head'];
 
 export type ConfigType = 'params' | 'header' | 'body' | 'auth';
 export const SelConfigs: ConfigType[] = ['params', 'header', 'body', 'auth'];
@@ -65,7 +65,7 @@ export const ConfigTableTitleMap = new Map<string, string>([
 export interface KVConfig {
   selected: boolean;
   key: string;
-  value: string|File;
+  value: string | File;
   opt: any;
 }
 export const DefaultHerderConfig: KVConfig[] = [
